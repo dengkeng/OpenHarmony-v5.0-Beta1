@@ -1,0 +1,128 @@
+{
+  "name": "@ohos/storage_service",
+  "description": "Storage service provides basic storage inquiry and management for the system and apps.",
+  "version": "3.1",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "foundation/filemanagement/storage_service"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "storage_service",
+    "subsystem": "filemanagement",
+    "syscap": [
+      "SystemCapability.FileManagement.StorageService.SpatialStatistics",
+      "SystemCapability.FileManagement.StorageService.Volume",
+      "SystemCapability.FileManagement.StorageService.Encryption"
+    ],
+    "features": [
+      "storage_service_fstools",
+      "storage_service_graphic",
+      "storage_service_user_file_sharing",
+      "storage_service_user_crypto_manager",
+      "storage_service_external_storage_manager",
+      "storage_service_storage_statistics_manager",
+      "storage_service_crypto_test"
+    ],
+    "adapted_system_type": [ "small", "standard" ],
+    "rom": "4096KB",
+    "ram": "10240KB",
+    "deps": {
+      "components": [
+        "ability_base",
+        "ability_runtime",
+        "access_token",
+        "bounds_checking_function",
+        "bundle_framework",
+        "c_utils",
+        "common_event_service",
+        "data_share",
+        "dfs_service",
+        "file_api",
+        "hilog",
+        "hitrace",
+        "huks",
+        "init",
+        "ipc",
+        "media_library",
+        "napi",
+        "relational_store",
+        "safwk",
+        "samgr",
+        "selinux_adapter",
+        "app_file_service",
+        "os_account",
+        "openssl"
+      ],
+      "third_party": [
+        "e2fsprogs",
+        "f2fs-tools"
+      ]
+    },
+    "build": {
+      "group_type": {
+        "base_group": [],
+        "fwk_group": [
+          "//foundation/filemanagement/storage_service/interfaces/kits/js/storage_manager:storage_js"
+        ],
+        "service_group": [
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon",
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon_cfg",
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon_disk_config",
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon_usb_param",
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon_third_party",
+          "//foundation/filemanagement/storage_service/services/storage_manager/sa_profile:storage_manager_sa_profile",
+          "//foundation/filemanagement/storage_service/services/storage_manager/sa_profile:storage_manager_cfg",
+          "//foundation/filemanagement/storage_service/services/storage_manager:storage_manager"
+        ]
+      },
+      "inner_kits": [
+          {
+              "name": "//foundation/filemanagement/storage_service/interfaces/innerkits/storage_manager/native:storage_manager_sa_proxy",
+              "header": {
+                "header_files": [
+                  "istorage_manager.h",
+                  "storage_manager_proxy.h",
+                  "bundle_stats.h",
+                  "storage_stats.h",
+                  "disk.h",
+                  "volume_core.h",
+                  "volume_external.h"
+                ],
+                "header_base": "//foundation/filemanagement/storage_service/interfaces/innerkits/storage_manager/native"
+              }
+            },
+            {
+              "name": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native:storage_manager_acl",
+              "header": {
+                "header_files": [
+                  "storage_acl.h"
+                ],
+                "header_base": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native"
+              }
+            },
+            {
+              "name": "//foundation/filemanagement/storage_service/services/storage_daemon/libfscrypt:libfscryptutils_static",
+              "header": {
+                "header_files": [
+                  "fscrypt_control.h",
+                  "fscrypt_log.h",
+                  "fscrypt_sysparam.h",
+                  "fscrypt_uapi.h",
+                  "fscrypt_utils.h",
+                  "key_control.h"
+                ],
+                "header_base": "//foundation/filemanagement/storage_service/services/storage_daemon/include/libfscrypt"
+              }
+            }
+      ],
+      "test": [
+          "//foundation/filemanagement/storage_service/services/storage_daemon:storage_daemon_unit_test",
+          "//foundation/filemanagement/storage_service/services/storage_manager:storage_manager_unit_test",
+          "//foundation/filemanagement/storage_service/test/fuzztest:storage_service_fuzztest"
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+
+group("fuzztest") {
+  testonly = true
+  deps = [
+    "cardemulation_test/hcesessionstub:hcesessionstub_fuzztest",
+    "controller_test/nfccontroller:nfccontroller_fuzztest",
+    "services_test/btconnectionmanager_test/btconnectionmanager:btconnectionmanager_fuzztest",
+    "services_test/cardemulation_test/hceservice:hceservice_fuzztest",
+    "services_test/controller_test/nfccontrollerstub:nfccontrollerstub_fuzztest",
+    "services_test/external_deps_test/externaldepsproxy:externaldepsproxy_fuzztest",
+    "services_test/hcecmdcallback_test/hcecmdcallbackstub:hcecmdcallbackstub_fuzztest",
+    "services_test/nci_adapter_test/ncitagproxy:ncitagproxy_fuzztest",
+    "services_test/ndefmsgcallback_test/ndefmsgcallbackstub:ndefmsgcallbackstub_fuzztest",
+    "services_test/tagdispatcher_test/tagdispatcher:tagdispatcher_fuzztest",
+    "services_test/tags_test/tagsessionstub:tagsessionstub_fuzztest",
+    "services_test/utils_test/nfctimer:nfctimer_fuzztest",
+    "services_test/wificonnectionmanager_test/wificonnectionmanager:wificonnectionmanager_fuzztest",
+    "tags_test/basictagsession:basictagsession_fuzztest",
+    "tags_test/iso15693tag:iso15693tag_fuzztest",
+    "tags_test/isodeptag:isodeptag_fuzztest",
+    "tags_test/mifareclassictag:mifareclassictag_fuzztest",
+    "tags_test/mifareultralighttag:mifareultralighttag_fuzztest",
+    "tags_test/ndefmessage:ndefmessage_fuzztest",
+    "tags_test/ndeftag:ndeftag_fuzztest",
+    "tags_test/nfca_tag:nfca_tag_fuzztest",
+    "tags_test/nfcsdkcommon:nfcsdkcommon_fuzztest",
+    "tags_test/taginfo:taginfo_fuzztest",
+  ]
+}

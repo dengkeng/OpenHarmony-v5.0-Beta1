@@ -1,0 +1,111 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/data_object/data_object.gni")
+config("objectstore_config") {
+  visibility = [ ":*" ]
+
+  cflags = [ "-DHILOG_ENABLE" ]
+
+  include_dirs = [
+    "../../frameworks/innerkitsimpl/include/adaptor",
+    "../../frameworks/innerkitsimpl/include/common",
+    "../../frameworks/innerkitsimpl/include/communicator",
+    "../../frameworks/innerkitsimpl/include",
+    "../../interfaces/innerkits",
+    "${kvstore_path}/common",
+    "${relational_store_path}/interfaces/inner_api/common_type/include",
+  ]
+
+  ldflags = [ "-Wl,--exclude-libs,ALL" ]
+}
+
+config("objectstore_public_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [ "." ]
+}
+
+object_source_config = [
+  "../../frameworks/innerkitsimpl/src/adaptor/client_adaptor.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/distributed_object_impl.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/distributed_object_store_impl.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/flat_object_storage_engine.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/flat_object_store.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/asset_change_timer.cpp",
+  "../../frameworks/innerkitsimpl/src/adaptor/object_callback_impl.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/app_device_handler.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/app_pipe_handler.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/app_pipe_mgr.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/ark_communication_provider.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/communication_provider.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/communication_provider_impl.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/dev_manager.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/process_communicator_impl.cpp",
+  "../../frameworks/innerkitsimpl/src/communicator/softbus_adapter_standard.cpp",
+  "../../frameworks/innerkitsimpl/src/object_callback_stub.cpp",
+  "../../frameworks/innerkitsimpl/src/object_service_proxy.cpp",
+  "../../frameworks/innerkitsimpl/src/object_types_util.cpp",
+]
+object_deps_config = [
+  "//third_party/bounds_checking_function:libsec_shared",
+  "//third_party/libuv:uv",
+]
+object_external_deps_config = [
+  "c_utils:utils",
+  "device_manager:devicemanagersdk",
+  "dmsfwk:distributed_sdk",
+  "dsoftbus:softbus_client",
+  "hitrace:hitrace_meter",
+  "hitrace:libhitracechain",
+  "hilog:libhilog",
+  "ipc:ipc_core",
+  "kv_store:distributeddata_inner",
+  "kv_store:distributeddb",
+  "samgr:samgr_proxy",
+]
+ohos_shared_library("distributeddataobject_impl") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  part_name = "data_object"
+  sources = object_source_config
+
+  configs = [ ":objectstore_config" ]
+  deps = object_deps_config
+  external_deps = object_external_deps_config
+  public_configs = [ ":objectstore_public_config" ]
+  version_script = "libnative_dataobject.versionscript"
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "distributeddatamgr"
+}
+
+ohos_static_library("distributeddataobject_static") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  part_name = "data_object"
+  sources = object_source_config
+
+  configs = [ ":objectstore_config" ]
+  deps = object_deps_config
+  external_deps = object_external_deps_config
+  public_configs = [ ":objectstore_public_config" ]
+  subsystem_name = "distributeddatamgr"
+}

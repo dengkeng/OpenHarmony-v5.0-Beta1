@@ -1,0 +1,121 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+
+module_output_path = "ai_intelligent_voice_framework/intell_voice"
+
+ohos_unittest("client_unit_test") {
+  testonly = true
+  module_out_path = module_output_path
+  sources = [
+    "src/client_unit_test.cpp",
+    "src/engine_event_callback.cpp",
+    "src/wait_for_result.cpp",
+  ]
+
+  include_dirs = [
+    "include",
+    "../../../services/intell_voice_engine",
+    "../../../services/intell_voice_engine/server/base",
+    "../../../services/intell_voice_engine/proxy",
+    "../../../interfaces/inner_api/native",
+    "../../../utils",
+  ]
+
+  cflags_cc = [
+    "-Wno-error=unused-parameter",
+    "-DHILOG_ENABLE",
+    "-DENABLE_DEBUG",
+  ]
+
+  deps = [
+    "../../../frameworks/native:intellvoice_native",
+    "../../../services:intell_voice_proxy",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_intelligent_voice:intell_voice_engine_idl_headers",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  resource_config_file = "resource/ohos_test.xml"
+}
+
+ohos_unittest("trigger_unit_test") {
+  testonly = true
+  module_out_path = module_output_path
+  sources = [ "src/trigger_unit_test.cpp" ]
+
+  include_dirs = [
+    "../../../services/intell_voice_trigger/server",
+    "../../../services/intell_voice_trigger/server/connector_mgr",
+    "../../../utils",
+  ]
+
+  cflags_cc = [
+    "-Wno-error=unused-parameter",
+    "-DHILOG_ENABLE",
+    "-DENABLE_DEBUG",
+  ]
+
+  deps = [ "../../../services:intell_voice_server" ]
+
+  external_deps = [
+    "audio_framework:audio_client",
+    "c_utils:utils",
+    "call_manager:tel_call_manager_api",
+    "core_service:tel_core_service_api",
+    "drivers_interface_intelligent_voice:intell_voice_trigger_idl_headers",
+    "hilog:libhilog",
+    "relational_store:native_rdb",
+    "state_registry:tel_state_registry_api",
+  ]
+}
+
+ohos_unittest("trigger_manager_test") {
+  testonly = true
+  module_out_path = module_output_path
+  sources = [ "src/trigger_manager_test.cpp" ]
+
+  include_dirs = [
+    "../../../services/intell_voice_trigger/server",
+    "../../../services/intell_voice_trigger/server/connector_mgr",
+    "../../../utils",
+  ]
+
+  cflags_cc = [
+    "-Wno-error=unused-parameter",
+    "-DHILOG_ENABLE",
+    "-DENABLE_DEBUG",
+  ]
+
+  deps = [ "../../../services:intell_voice_server" ]
+
+  external_deps = [
+    "audio_framework:audio_client",
+    "c_utils:utils",
+    "call_manager:tel_call_manager_api",
+    "core_service:tel_core_service_api",
+    "drivers_interface_intelligent_voice:intell_voice_trigger_idl_headers",
+    "hilog:libhilog",
+    "relational_store:native_rdb",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "state_registry:tel_state_registry_api",
+  ]
+}

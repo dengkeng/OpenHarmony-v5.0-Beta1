@@ -1,0 +1,81 @@
+{
+    "name": "@ohos/user_file_service",
+    "description": "filemanagement is the module of OpenHarmony that provides storage and file management.",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/filemanagement/user_file_service"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "user_file_service",
+        "subsystem": "filemanagement",
+        "syscap": [
+            "SystemCapability.FileManagement.UserFileService",
+            "SystemCapability.FileManagement.UserFileService.FolderSelection"
+        ],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "4096KB",
+        "ram": "5120KB",
+        "deps": {
+            "components": [
+                "ability_base",
+                "ability_runtime",
+                "ace_engine",
+                "app_file_service",
+                "ipc",
+                "init",
+                "samgr",
+                "safwk",
+                "napi",
+                "file_api",
+                "bundle_framework",
+                "hilog",
+                "hitrace",
+                "access_token",
+                "os_account",
+                "c_utils",
+                "image_framework",
+                "common_event_service"
+            ]
+        },
+        "build": {
+            "group_type":{
+                "fwk_group": [
+                    "//foundation/filemanagement/user_file_service/interfaces/kits/picker:picker",
+                    "//foundation/filemanagement/user_file_service/interfaces/kits/native/recent:recent",
+                    "//foundation/filemanagement/user_file_service/interfaces/kits/native/trash:trash"
+                ],
+                "service_group": [
+                    "//foundation/filemanagement/user_file_service/services:user_file_managers",
+                    "//foundation/filemanagement/user_file_service/interfaces/inner_api/file_access:file_access_extension_ability_module",
+                    "//foundation/filemanagement/user_file_service/frameworks/js/napi/file_access_module:fileaccess",
+                    "//foundation/filemanagement/user_file_service/frameworks/js/napi/file_access_ext_ability:fileaccessextensionability_napi",
+                    "//foundation/filemanagement/user_file_service/frameworks/js/napi/file_extension_info_module:fileextensioninfo"
+                ],
+                "base_group": []
+            } ,
+            "inner_kits": [
+                {
+                  "name": "//foundation/filemanagement/user_file_service/interfaces/inner_api/file_access:file_access_extension_ability_kit",
+                  "header": {
+                    "header_files": [
+                      "file_access_ext_ability.h",
+                      "file_access_extension_info.h",
+                      "file_access_ext_stub_impl.h"
+                    ],
+                    "header_base": "//foundation/filemanagement/user_file_service/interfaces/inner_api/file_access/include"
+                  }
+                }
+            ],
+            "test": [
+              "//foundation/filemanagement/user_file_service/test/unittest:user_file_service_unit_test",
+              "//foundation/filemanagement/user_file_service/test/fuzztest:user_file_service_fuzz_test"
+            ]
+        }
+    }
+}

@@ -1,0 +1,76 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//foundation/distributeddatamgr/datamgr_service/datamgr_service.gni")
+
+config("distributeddata_adapter_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = []
+
+  cflags = [ "-Wno-multichar" ]
+
+  cflags_cc = [ "-fvisibility=hidden" ]
+  defines = [ "OPENSSL_SUPPRESS_DEPRECATED" ]
+}
+
+config("distributeddata_adapter_public_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "include/log",
+    "include/dfx",
+    "include/communicator",
+    "include/autils",
+    "include/utils",
+    "include",
+    "${kv_store_path}/interfaces/innerkits/distributeddata/include/",
+    "${kv_store_common_path}",
+    "${data_service_path}/framework/include",
+  ]
+}
+
+ohos_shared_library("distributeddata_adapter") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    boundary_sanitize = true
+    integer_overflow = true
+    ubsan = true
+  }
+  sources = []
+
+  configs = [ ":distributeddata_adapter_private_config" ]
+  deps = [
+    "${data_service_path}/framework:distributeddatasvcfwk",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/account:distributeddata_account_static",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/communicator:distributeddata_communicator_static",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/dfx:distributeddata_dfx_static",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/permission:distributeddata_permission_static",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+  ]
+
+  public_configs = [ ":distributeddata_adapter_public_config" ]
+
+  subsystem_name = "distributeddatamgr"
+  part_name = "datamgr_service"
+}

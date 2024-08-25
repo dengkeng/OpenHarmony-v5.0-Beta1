@@ -1,0 +1,389 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//build/test.gni")
+import("//foundation/deviceprofile/device_info_manager/deviceprofile.gni")
+
+module_output_path = "device_info_manager/deviceprofiletest"
+
+config("device_profile_test_config") {
+  cflags = [
+    "-Dprivate=public",
+    "-Dprotected=public",
+  ]
+}
+
+device_profile_configs = [
+  "${device_profile_service}:device_info_manager_config",
+  ":device_profile_test_config",
+]
+
+device_profile_deps = [
+  "${device_profile_common}:distributed_device_profile_common",
+  "${device_profile_innerkits}:distributed_device_profile_sdk",
+  "${device_profile_service}:distributed_device_profile_svr",
+  "//third_party/googletest:gtest_main",
+]
+
+device_profile_external_deps = [
+  "access_token:libaccesstoken_sdk",
+  "access_token:libnativetoken",
+  "access_token:libtoken_setproc",
+  "cJSON:cjson",
+  "c_utils:utils",
+  "device_auth:deviceauth_sdk",
+  "device_manager:devicemanagersdk",
+  "dmsfwk:common_sdk",
+  "eventhandler:libeventhandler",
+  "hilog:libhilog",
+  "hisysevent:libhisysevent",
+  "hitrace:hitrace_meter",
+  "init:libbegetutil",
+  "ipc:ipc_core",
+  "kv_store:distributeddata_inner",
+  "relational_store:native_rdb",
+  "safwk:system_ability_fwk",
+  "samgr:samgr_proxy",
+  "syscap_codec:syscap_interface_shared",
+]
+
+ohos_unittest("rdb_adapter_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/rdb_adapter_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("TrustProfileManagerTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/trust_profile_manager_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("distributed_device_profile_client_kv_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/distributed_device_profile_client_kv_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("device_profile_manager_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/device_profile_manager_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("ClientRdbTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/distributed_device_profile_client_rdb_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("dp_dumper_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/dp_dumper_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("profile_cache_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/profile_cache_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("profile_utils_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/profile_utils_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("kv_adapter_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/kv_adapter_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("event_handler_factory_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/event_handler_factory_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("sync_options_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/sync_options_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("DPSubscribeInfoTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/dp_subscribe_info_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("PermissionManagerTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/permission_manager_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("IpcUtilsTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/ipc_utils_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("content_sensor_manager_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/content_sensor_manager_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("content_sensor_pasteboard_info_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/content_sensor_pasteboard_info_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("kv_data_change_listener_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/kv_data_change_listener_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("kv_store_death_recipient_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/kv_store_death_recipient_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("kv_sync_completed_listener_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/kv_sync_completed_listener_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("sync_subscriber_death_recipient_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/sync_subscriber_death_recipient_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("dp_content_sensor_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/dp_content_sensor_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("ProfileChangeListenerProxyTest") {
+  module_out_path = module_output_path
+  sources = [ "unittest/profile_change_listener_proxy_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("device_profile_locd_callback_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/device_profile_locd_callback_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("subscribe_profile_manager_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/subscribe_profile_manager_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("sync_completed_callback_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/sync_completed_callback_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("dp_profile_service_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/dp_profile_service_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("dp_dm_adapter_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/dm_adapter_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+ohos_unittest("distributed_device_profile_stub_new_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/distributed_device_profile_stub_new_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+  cflags = [
+    "-Dprivate=public",
+    "-Dprotected=public",
+  ]
+}
+
+ohos_unittest("content_sensor_manager_utils_test") {
+  module_out_path = module_output_path
+  sources = [ "unittest/content_sensor_manager_utils_test.cpp" ]
+  configs = device_profile_configs
+  deps = device_profile_deps
+  external_deps = device_profile_external_deps
+  part_name = "device_info_manager"
+  subsystem_name = "deviceprofile"
+}
+
+group("unittest") {
+  testonly = true
+  deps = [
+    ":ClientRdbTest",
+    ":DPSubscribeInfoTest",
+    ":IpcUtilsTest",
+    ":PermissionManagerTest",
+    ":ProfileChangeListenerProxyTest",
+    ":TrustProfileManagerTest",
+    ":content_sensor_manager_test",
+    ":content_sensor_manager_utils_test",
+    ":content_sensor_pasteboard_info_test",
+    ":device_profile_locd_callback_test",
+    ":device_profile_manager_new_test",
+    ":distributed_device_profile_client_kv_new_test",
+    ":distributed_device_profile_stub_new_test",
+    ":dp_content_sensor_test",
+    ":dp_dm_adapter_test",
+    ":dp_dumper_new_test",
+    ":dp_profile_service_new_test",
+    ":event_handler_factory_new_test",
+    ":kv_adapter_new_test",
+    ":kv_data_change_listener_test",
+    ":kv_store_death_recipient_test",
+    ":kv_sync_completed_listener_test",
+    ":profile_cache_new_test",
+    ":profile_utils_new_test",
+    ":rdb_adapter_new_test",
+    ":subscribe_profile_manager_test",
+    ":sync_completed_callback_test",
+    ":sync_options_new_test",
+    ":sync_subscriber_death_recipient_test",
+  ]
+}

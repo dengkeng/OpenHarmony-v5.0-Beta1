@@ -1,0 +1,146 @@
+{
+    "name": "@ohos/form_fwk",
+    "description": "提供卡片创建、卡片删除、卡片释放等能力，包含接口和服务",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/ability/form_fwk"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "form_fwk",
+        "subsystem": "ability",
+        "syscap": [
+          "SystemCapability.Ability.Form"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "hisysevent_config": [
+          "//foundation/ability/form_fwk/hisysevent.yaml"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+          "components": [
+              "ability_runtime",
+              "distributed_notification_service",
+              "bundle_framework",
+              "common_event_service",
+              "faultloggerd",
+              "ffrt",
+              "hilog",
+              "ipc",
+              "napi",
+              "relational_store",
+              "os_account",
+              "power_manager",
+              "safwk",
+              "samgr",
+              "c_utils",
+              "ability_base",
+              "ets_runtime",
+              "eventhandler",
+              "hitrace",
+              "access_token",
+              "data_share",
+              "hicollie",
+              "hisysevent",
+              "kv_store",
+              "resource_management",
+              "time_service",
+              "device_usage_statistics",
+              "ace_engine",
+              "memmgr_override",
+              "memmgr",
+              "init",
+              "resource_schedule_service",
+              "theme_mgr"
+          ],
+          "third_party": [
+              "node",
+              "jsoncpp",
+              "json",
+              "libxml2"
+          ]
+        },
+        "build": {
+            "group_type": {
+              "fwk_group": [
+                "//foundation/ability/form_fwk:fms_innerkits_target",
+                "//foundation/ability/form_fwk:fmskit_native",
+                "//foundation/ability/form_fwk:fmskit_provider_client",
+                "//foundation/ability/form_fwk:form_napi_packages"
+              ],
+              "service_group": [
+                "//foundation/ability/form_fwk/sa_profile:form_sa_profile",
+                "//foundation/ability/form_fwk:fms_services_target"
+              ],
+              "base_group": []
+            },
+            "inner_kits": [
+              {
+                "header": {
+                  "header_base": "//foundation/ability/form_fwk/interfaces/inner_api/include",
+                  "header_files": [
+                    "form_death_callback.h",
+                    "form_host_interface.h",
+                    "form_host_stub.h",
+                    "form_js_info.h",
+                    "form_mgr_interface.h",
+                    "form_mgr_stub.h",
+                    "form_provider_data.h",
+                    "form_provider_interface.h",
+                    "form_provider_stub.h",
+                    "form_publish_interceptor_interface.h",
+                    "form_publish_interceptor_stub.h",
+                    "form_render_stub.h",
+                    "form_supply_interface.h",
+                    "form_supply_stub.h",
+                    "provider_connect_stub.h",
+                    "form_constants.h",
+                    "form_share_info.h"
+                  ]
+                },
+                "name": "//foundation/ability/form_fwk:form_manager"
+              },
+              {
+                "header": {
+                  "header_base": "//foundation/ability/form_fwk/interfaces/kits/native/include",
+                  "header_files": [
+                    "form_callback_interface.h",
+                    "form_host_client.h",
+                    "form_mgr.h"
+                  ]
+                },
+                "name": "//foundation/ability/form_fwk:fmskit_native"
+              },
+              {
+                "header": {
+                  "header_base": "//foundation/ability/form_fwk/interfaces/kits/native/include",
+                  "header_files": [
+                    "form_provider_client.h"
+                  ]
+                },
+                "name": "//foundation/ability/form_fwk:fmskit_provider_client"
+              },
+              {
+                "header": {
+                  "header_base": "//foundation/ability/form_fwk/frameworks/js/napi/formUtil",
+                  "header_files": [
+                  ]
+                },
+                "name": "//foundation/ability/form_fwk/frameworks/js/napi:formutil_napi"
+              }
+          ],
+          "test": [
+              "//foundation/ability/form_fwk/test:benchmarktest",
+              "//foundation/ability/form_fwk/test:unittest",
+              "//foundation/ability/form_fwk/test/fuzztest:fuzztest"
+          ]
+        }
+    }
+}

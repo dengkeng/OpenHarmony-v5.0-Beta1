@@ -1,0 +1,283 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+import("../../cgroup_sched/cgroup_sched.gni")
+import("../ressched.gni")
+
+config("ressched_config") {
+  include_dirs = [
+    "${ressched_common}/include",
+    "resschedmgr/resschedfwk/include",
+    "resschedmgr/pluginbase/include",
+  ]
+}
+
+config("resschedsvc_public_config") {
+  include_dirs = [
+    "${ressched_common}/include",
+    "resschedmgr/resschedfwk/include",
+    "resschedmgr/pluginbase/include",
+  ]
+}
+
+config("resschedsvc_private_config") {
+  include_dirs = [
+    "resschedservice/include",
+    "../sched_controller/common_event/include",
+    "../sched_controller/observer/include",
+  ]
+}
+
+ohos_shared_library("resschedsvc") {
+  configs = [ ":resschedsvc_private_config" ]
+
+  public_configs = [ ":resschedsvc_public_config" ]
+
+  defines = []
+  include_dirs = [
+    "${cgroup_sched_framework}/sched_controller/include",
+    "${cgroup_sched_framework}/process_group/include",
+    "${cgroup_sched_framework}/utils/include/",
+    "../common/include",
+  ]
+
+  sources = [
+    "../sched_controller/common_event/src/event_controller.cpp",
+    "../sched_controller/observer/src/audio_observer.cpp",
+    "../sched_controller/observer/src/connection_subscriber.cpp",
+    "../sched_controller/observer/src/download_upload_observer.cpp",
+    "../sched_controller/observer/src/fold_display_mode_observer.cpp",
+    "../sched_controller/observer/src/hisysevent_observer.cpp",
+    "../sched_controller/observer/src/mmi_observer.cpp",
+    "../sched_controller/observer/src/observer_manager.cpp",
+    "resschedmgr/resschedfwk/src/config_reader.cpp",
+    "resschedmgr/resschedfwk/src/kill_process.cpp",
+    "resschedmgr/resschedfwk/src/notifier_mgr.cpp",
+    "resschedmgr/resschedfwk/src/plugin_mgr.cpp",
+    "resschedmgr/resschedfwk/src/plugin_switch.cpp",
+    "resschedmgr/resschedfwk/src/res_sched_mgr.cpp",
+    "resschedservice/src/res_sched_service.cpp",
+    "resschedservice/src/res_sched_service_ability.cpp",
+    "resschedservice/src/res_sched_service_stub.cpp",
+  ]
+
+  deps = [
+    "${cgroup_sched_framework}:cgroup_sched",
+    "${ressched_interfaces}/innerkits/ressched_client:ressched_client",
+    "${resschedexe_interfaces}/innerkits/ressched_executor_client:resschedexe_client",
+    "../common:ressched_common_utils",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "ability_runtime:connection_obs_manager",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "eventhandler:libeventhandler",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hisysevent:libhisyseventmanager",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "libxml2:libxml2",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+  ]
+
+  if (device_movement_perception_enable) {
+    defines += [ "DEVICE_MOVEMENT_PERCEPTION_ENABLE" ]
+    external_deps += [ "movement:movement_client" ]
+    sources +=
+        [ "../sched_controller/observer/src/device_movement_observer.cpp" ]
+  }
+  if (ressched_with_telephony_state_registry_enable) {
+    defines += [ "RESSCHED_TELEPHONY_STATE_REGISTRY_ENABLE" ]
+    external_deps += [
+      "core_service:tel_core_service_api",
+      "state_registry:tel_state_registry_api",
+    ]
+    sources +=
+        [ "../sched_controller/observer/src/sched_telephony_observer.cpp" ]
+  }
+  if (communication_bluetooth_perception_enable) {
+    defines += [ "RESSCHED_COMMUNICATION_BLUETOOTH_ENABLE" ]
+    external_deps += [ "bluetooth:btframework" ]
+  }
+  if (ressched_with_resourceschedule_multimedia_av_session_enable) {
+    defines += [ "RESSCHED_MULTIMEDIA_AV_SESSION_ENABLE" ]
+    sources +=
+        [ "../sched_controller/observer/src/av_session_state_listener.cpp" ]
+    external_deps += [ "av_session:avsession_client" ]
+  }
+  if (ressched_with_resourceschedule_multimedia_audio_framework_enable) {
+    defines += [ "RESSCHED_AUDIO_FRAMEWORK_ENABLE" ]
+    external_deps += [ "audio_framework:audio_client" ]
+  }
+  if (resource_schedule_service_with_ffrt_enable) {
+    defines += [ "RESOURCE_SCHEDULE_SERVICE_WITH_FFRT_ENABLE" ]
+  }
+  if (resource_schedule_service_with_ext_res_enable) {
+    defines += [ "RESOURCE_SCHEDULE_SERVICE_WITH_EXT_RES_ENABLE" ]
+  }
+  if (rss_request_enable) {
+    defines += [ "RESOURCE_REQUEST_REQUEST" ]
+    external_deps += [ "request:request_native" ]
+  }
+
+  version_script = "libresschedsvc.versionscript"
+  shlib_type = "sa"
+  subsystem_name = "resourceschedule"
+  part_name = "resource_schedule_service"
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+}
+
+# for unittest
+ohos_static_library("resschedsvc_static") {
+  configs = []
+
+  public_configs = [
+    ":resschedsvc_private_config",
+    ":resschedsvc_public_config",
+  ]
+
+  defines = []
+
+  include_dirs = [
+    "../common/include",
+    "//foundation/resourceschedule/resource_schedule_service/cgroup_sched/framework/utils/include/",
+    "//foundation/resourceschedule/resource_schedule_service/cgroup_sched/framework/sched_controller/include/",
+    "//foundation/resourceschedule/resource_schedule_service/cgroup_sched/framework/process_group/include/",
+  ]
+
+  sources = [
+    "../sched_controller/common_event/src/event_controller.cpp",
+    "../sched_controller/observer/src/audio_observer.cpp",
+    "../sched_controller/observer/src/connection_subscriber.cpp",
+    "../sched_controller/observer/src/download_upload_observer.cpp",
+    "../sched_controller/observer/src/fold_display_mode_observer.cpp",
+    "../sched_controller/observer/src/hisysevent_observer.cpp",
+    "../sched_controller/observer/src/mmi_observer.cpp",
+    "../sched_controller/observer/src/observer_manager.cpp",
+    "resschedmgr/resschedfwk/src/config_reader.cpp",
+    "resschedmgr/resschedfwk/src/kill_process.cpp",
+    "resschedmgr/resschedfwk/src/notifier_mgr.cpp",
+    "resschedmgr/resschedfwk/src/plugin_mgr.cpp",
+    "resschedmgr/resschedfwk/src/plugin_switch.cpp",
+    "resschedmgr/resschedfwk/src/res_sched_mgr.cpp",
+    "resschedservice/src/res_sched_service.cpp",
+    "resschedservice/src/res_sched_service_ability.cpp",
+    "resschedservice/src/res_sched_service_stub.cpp",
+  ]
+
+  deps = [
+    "${cgroup_sched_framework}:cgroup_sched",
+    "${ressched_interfaces}/innerkits/ressched_client:ressched_client",
+    "${resschedexe_interfaces}/innerkits/ressched_executor_client:resschedexe_client",
+    "../common:ressched_common_utils",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:app_manager",
+    "ability_runtime:connection_obs_manager",
+    "ability_runtime:dataobs_manager",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "eventhandler:libeventhandler",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hisysevent:libhisyseventmanager",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "libxml2:libxml2",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+  ]
+
+  if (device_movement_perception_enable) {
+    defines += [ "DEVICE_MOVEMENT_PERCEPTION_ENABLE" ]
+    external_deps += [ "movement:movement_client" ]
+    sources +=
+        [ "../sched_controller/observer/src/device_movement_observer.cpp" ]
+  }
+  if (ressched_with_telephony_state_registry_enable) {
+    defines += [ "RESSCHED_TELEPHONY_STATE_REGISTRY_ENABLE" ]
+    external_deps += [
+      "core_service:tel_core_service_api",
+      "state_registry:tel_state_registry_api",
+    ]
+    sources +=
+        [ "../sched_controller/observer/src/sched_telephony_observer.cpp" ]
+  }
+  if (communication_bluetooth_perception_enable) {
+    defines += [ "RESSCHED_COMMUNICATION_BLUETOOTH_ENABLE" ]
+    external_deps += [ "bluetooth:btframework" ]
+  }
+  if (ressched_with_resourceschedule_multimedia_av_session_enable) {
+    defines += [ "RESSCHED_MULTIMEDIA_AV_SESSION_ENABLE" ]
+    sources +=
+        [ "../sched_controller/observer/src/av_session_state_listener.cpp" ]
+    external_deps += [ "av_session:avsession_client" ]
+  }
+  if (ressched_with_resourceschedule_multimedia_audio_framework_enable) {
+    defines += [ "RESSCHED_AUDIO_FRAMEWORK_ENABLE" ]
+    external_deps += [ "audio_framework:audio_client" ]
+  }
+  if (resource_schedule_service_with_ext_res_enable) {
+    defines += [ "RESOURCE_SCHEDULE_SERVICE_WITH_EXT_RES_ENABLE" ]
+  }
+  if (rss_request_enable) {
+    defines += [ "RESOURCE_REQUEST_REQUEST" ]
+    external_deps += [ "request:request_native" ]
+  }
+
+  subsystem_name = "resourceschedule"
+  part_name = "resource_schedule_service"
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+}

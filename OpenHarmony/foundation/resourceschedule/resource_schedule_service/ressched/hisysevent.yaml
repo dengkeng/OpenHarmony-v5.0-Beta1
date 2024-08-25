@@ -1,0 +1,35 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+domain: RSS
+
+PLUGIN_DISABLE:
+  __BASE: {type: FAULT, level: MINOR, desc: sched plugin disable}
+  PLUGIN_NAME: {type: STRING, desc: plugin name}
+
+INIT_FAULT:
+  __BASE: {type: FAULT, level: CRITICAL, desc: acritical error during initlization}
+  COMPONENT_NAME: {type: STRING, desc: the name of component}
+  ERR_TYPE: {type: STRING, desc: the type of error}
+  ERR_MSG: {type: STRING, desc: error information}
+
+LIMIT_BOOST:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: power or thermal limit status}
+  CLIENT_ID: {type: INT32, desc: 1 means power 2 means thermal}
+  ON_OFF_TAG: {type: BOOL, desc: can boost over max value or not}
+
+LIMIT_REQUEST:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: limit max to xx}
+  CLIENT_ID: {type: INT32, desc: 1 means power 2 means thermal}
+  RES_ID: {type: INT32, desc: number of node path config in socperf_resource_config}
+  CONFIG: {type: INT64, desc: limit max to xx}

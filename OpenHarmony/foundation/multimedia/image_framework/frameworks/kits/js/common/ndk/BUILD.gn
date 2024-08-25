@@ -1,0 +1,190 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/multimedia/image_framework/ide/image_decode_config.gni")
+
+SEPARATOR = "/"
+BASE_DIR = "$SEPARATOR/foundation"
+
+config("native_public_config") {
+  include_dirs = [
+    "include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include/image",
+    "$BASE_DIR/multimedia/image_framework/interfaces/innerkits/include",
+    "$BASE_DIR/multimedia/image_framework/frameworks/kits/js/common/pixelmap_ndk",
+  ]
+}
+
+ohos_shared_library("image_ndk") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [ "image_mdk.cpp" ]
+  public_configs = [ ":native_public_config" ]
+  deps = [ "$image_subsystem/interfaces/kits/js/common:image" ]
+  external_deps = [
+    "graphic_surface:surface",
+    "napi:ace_napi",
+  ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}
+
+ohos_shared_library("image_receiver_ndk") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [ "image_receiver_mdk.cpp" ]
+  public_configs = [ ":native_public_config" ]
+  deps = [ "$image_subsystem/interfaces/kits/js/common:image" ]
+  external_deps = [
+    "drivers_peripheral_display:hdi_gralloc_client",
+    "graphic_2d:color_manager",
+    "graphic_surface:surface",
+    "napi:ace_napi",
+  ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}
+
+ohos_shared_library("image_source_ndk") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [ "image_source_mdk.cpp" ]
+  public_configs = [ ":native_public_config" ]
+  deps = [ "$image_subsystem/interfaces/kits/js/common:image" ]
+
+  external_deps = [
+    "napi:ace_napi",
+    "resource_management:librawfile",
+  ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}
+
+ohos_shared_library("image_packer_ndk") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [ "image_packer_mdk.cpp" ]
+  public_configs = [ ":native_public_config" ]
+  deps = [ "$image_subsystem/interfaces/kits/js/common:image" ]
+
+  external_deps = [ "napi:ace_napi" ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}
+
+ohos_shared_library("image_source") {
+  output_extension = "so"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [
+    "image_source_native.cpp",
+    "image_source_native_impl.cpp",
+  ]
+
+  include_dirs = [
+    "include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include/image",
+    "$BASE_DIR/multimedia/image_framework/interfaces/innerkits/include",
+    "$BASE_DIR/multimedia/image_framework/frameworks/kits/js/common/pixelmap_ndk",
+  ]
+
+  deps = [
+    "$image_subsystem/frameworks/kits/js/common/pixelmap_ndk:pixelmap",
+    "$image_subsystem/interfaces/innerkits:image_native",
+    "$image_subsystem/interfaces/kits/js/common:image",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "resource_management:librawfile",
+  ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}
+
+ohos_shared_library("image_packer") {
+  output_extension = "so"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  sources = [
+    "image_packer_native.cpp",
+    "image_packer_native_impl.cpp",
+  ]
+
+  include_dirs = [
+    "include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include",
+    "$BASE_DIR/multimedia/image_framework/interfaces/kits/native/include/image",
+    "$BASE_DIR/multimedia/image_framework/interfaces/innerkits/include",
+    "$BASE_DIR/multimedia/image_framework/frameworks/kits/js/common/pixelmap_ndk",
+  ]
+
+  deps = [
+    "$image_subsystem/frameworks/kits/js/common/ndk:image_source",
+    "$image_subsystem/frameworks/kits/js/common/pixelmap_ndk:pixelmap",
+    "$image_subsystem/interfaces/innerkits:image_native",
+    "$image_subsystem/interfaces/kits/js/common:image",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "resource_management:librawfile",
+  ]
+
+  innerapi_tags = [ "ndk" ]
+  subsystem_name = "multimedia"
+  part_name = "image_framework"
+}

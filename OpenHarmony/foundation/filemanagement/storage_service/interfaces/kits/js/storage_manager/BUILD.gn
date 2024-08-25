@@ -1,0 +1,118 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/filemanagement/storage_service/storage_service_aafwk.gni")
+
+ohos_shared_library("storagestatistics") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  relative_install_dir = "module/file"
+  subsystem_name = "filemanagement"
+  part_name = "storage_service"
+
+  defines = [
+    "STORAGE_LOG_TAG = \"StorageManager\"",
+    "LOG_DOMAIN = 0xD004300",
+  ]
+
+  include_dirs = [
+    "include",
+    "${storage_service_path}/services/storage_manager/include",
+    "${storage_service_path}/interfaces/innerkits/storage_manager/native",
+    "${storage_service_path}/services/common/include",
+  ]
+
+  sources = [
+    "${storage_service_path}/services/storage_manager/kits_impl/src/storage_manager_connect.cpp",
+    "${storage_service_path}/services/storage_manager/kits_impl/src/storage_statistics_n_exporter.cpp",
+    "${storage_service_path}/services/storage_manager/kits_impl/src/storage_statistics_napi.cpp",
+  ]
+
+  deps = [ "${storage_interface_path}/innerkits/storage_manager/native:storage_manager_sa_proxy" ]
+
+  external_deps = [
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "file_api:filemgmt_libhilog",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_shared_library("volumemanager") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  relative_install_dir = "module/file"
+  subsystem_name = "filemanagement"
+  part_name = "storage_service"
+
+  include_dirs = [
+    "include",
+    "${storage_service_path}/services/storage_manager/include",
+    "${storage_service_path}/interfaces/innerkits/storage_manager/native",
+    "${storage_service_path}/services/common/include",
+  ]
+
+  sources = [
+    "${storage_service_path}/services/storage_manager/kits_impl/src/storage_manager_connect.cpp",
+    "${storage_service_path}/services/storage_manager/kits_impl/src/volumemanager_n_exporter.cpp",
+    "${storage_service_path}/services/storage_manager/kits_impl/src/volumemanager_napi.cpp",
+  ]
+
+  defines = [
+    "STORAGE_LOG_TAG = \"StorageManager\"",
+    "LOG_DOMAIN = 0xD004300",
+  ]
+
+  deps = [ "${storage_interface_path}/innerkits/storage_manager/native:storage_manager_sa_proxy" ]
+
+  external_deps = [
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "file_api:filemgmt_libhilog",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+group("storage_js") {
+  deps = [
+    ":storagestatistics",
+    ":volumemanager",
+  ]
+}

@@ -1,0 +1,68 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/resourceschedule/background_task_mgr/bgtaskmgr.gni")
+
+config("bgtaskmgr_innerkits_public_config") {
+  include_dirs = [
+    "include",
+    "${bgtaskmgr_frameworks_path}/common/include",
+    "${bgtaskmgr_frameworks_path}/include",
+  ]
+}
+
+ohos_shared_library("bgtaskmgr_innerkits") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = [
+    "${bgtaskmgr_frameworks_path}/src/background_task_manager.cpp",
+    "${bgtaskmgr_frameworks_path}/src/background_task_mgr_proxy.cpp",
+    "${bgtaskmgr_frameworks_path}/src/background_task_subscriber_proxy.cpp",
+    "${bgtaskmgr_frameworks_path}/src/background_task_subscriber_stub.cpp",
+    "${bgtaskmgr_frameworks_path}/src/expired_callback_stub.cpp",
+    "src/background_task_mgr_helper.cpp",
+    "src/background_task_subscriber.cpp",
+    "src/continuous_task_callback_info.cpp",
+    "src/continuous_task_param.cpp",
+    "src/delay_suspend_info.cpp",
+    "src/efficiency_resource_info.cpp",
+    "src/expired_callback.cpp",
+    "src/resource_callback_info.cpp",
+    "src/resource_type.cpp",
+    "src/transient_task_app_info.cpp",
+  ]
+
+  public_configs = [ ":bgtaskmgr_innerkits_public_config" ]
+
+  external_deps = [
+    "ability_runtime:wantagent_innerkits",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_single",
+    "samgr:samgr_proxy",
+  ]
+
+  public_external_deps = [ "json:nlohmann_json_static" ]
+
+  subsystem_name = "resourceschedule"
+  part_name = "background_task_mgr"
+  innerapi_tags = [ "platformsdk" ]
+  version_script = "libbgtaskmgr_innerkits.versionscript"
+}

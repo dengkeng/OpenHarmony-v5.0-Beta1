@@ -1,0 +1,167 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//foundation/distributeddatamgr/datamgr_service/datamgr_service.gni")
+
+group("build_module") {
+  deps = [ ":distributeddatasvc" ]
+
+  if (datamgr_service_udmf) {
+    deps += [ "${data_service_path}/service/udmf:udmf_server" ]
+  }
+}
+config("module_public_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "backup/include",
+    "bootstrap/include",
+    "cloud",
+    "common",
+    "config/include",
+    "crypto/include",
+    "dumper/include",
+    "kvdb",
+    "matrix/include",
+    "object",
+    "permission/include",
+    "rdb",
+    "waterversion",
+    "//third_party/json/single_include",
+    "${data_service_path}/adapter/include",
+    "${data_service_path}/app/src",
+    "${data_service_path}/framework/include",
+    "${datashare_path}/frameworks/native/common/include",
+    "${datashare_path}/interfaces/inner_api/common/include",
+    "${datashare_path}/interfaces/inner_api/consumer/include",
+    "${kv_store_common_path}",
+    "${kv_store_path}/frameworks/innerkitsimpl/distributeddatafwk/include",
+    "${kv_store_path}/frameworks/innerkitsimpl/kvdb/include",
+    "${kv_store_distributeddb_path}/include/",
+    "${kv_store_distributeddb_path}/interfaces/include/",
+    "${kv_store_distributeddb_path}/interfaces/include/relational",
+    "${dataobject_path}/interfaces/innerkits",
+  ]
+}
+
+ohos_shared_library("distributeddatasvc") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "${dataobject_path}/frameworks/innerkitsimpl/include",
+    "${dataobject_path}/frameworks/innerkitsimpl/include/common",
+    "${dataobject_path}/interfaces/innerkits",
+    "../../../../relational_store/interfaces/inner_api/cloud_data/include",
+    "../../../../relational_store/interfaces/inner_api/common_type/include",
+    "../../../../relational_store/interfaces/inner_api/rdb/include",
+    "${kv_store_distributeddb_path}",
+  ]
+  sources = [
+    "backup/src/backup_manager.cpp",
+    "bootstrap/src/bootstrap.cpp",
+    "cloud/cloud_service_impl.cpp",
+    "cloud/cloud_service_stub.cpp",
+    "cloud/cloud_types_util.cpp",
+    "cloud/cloud_value_util.cpp",
+    "cloud/sync_manager.cpp",
+    "cloud/sync_strategies/network_sync_strategy.cpp",
+    "common/common_types_utils.cpp",
+    "common/value_proxy.cpp",
+    "config/src/config_factory.cpp",
+    "config/src/model/backup_config.cpp",
+    "config/src/model/checker_config.cpp",
+    "config/src/model/cloud_config.cpp",
+    "config/src/model/component_config.cpp",
+    "config/src/model/directory_config.cpp",
+    "config/src/model/global_config.cpp",
+    "config/src/model/network_config.cpp",
+    "config/src/model/protocol_config.cpp",
+    "crypto/src/crypto_manager.cpp",
+    "dumper/src/dump_helper.cpp",
+    "kvdb/auth_delegate.cpp",
+    "kvdb/kvdb_exporter.cpp",
+    "kvdb/kvdb_general_store.cpp",
+    "kvdb/kvdb_notifier_proxy.cpp",
+    "kvdb/kvdb_service_impl.cpp",
+    "kvdb/kvdb_service_stub.cpp",
+    "kvdb/kvdb_watcher.cpp",
+    "kvdb/kvstore_sync_manager.cpp",
+    "kvdb/query_helper.cpp",
+    "kvdb/upgrade.cpp",
+    "kvdb/user_delegate.cpp",
+    "matrix/src/auto_sync_matrix.cpp",
+    "matrix/src/device_matrix.cpp",
+    "matrix/src/matrix_event.cpp",
+    "object/object_asset_loader.cpp",
+    "object/object_asset_machine.cpp",
+    "object/object_callback_proxy.cpp",
+    "object/object_data_listener.cpp",
+    "object/object_manager.cpp",
+    "object/object_service_impl.cpp",
+    "object/object_service_stub.cpp",
+    "object/object_snapshot.cpp",
+    "object/object_types_utils.cpp",
+    "permission/src/permit_delegate.cpp",
+    "rdb/cache_cursor.cpp",
+    "rdb/rdb_asset_loader.cpp",
+    "rdb/rdb_cloud.cpp",
+    "rdb/rdb_cloud_data_translate.cpp",
+    "rdb/rdb_cursor.cpp",
+    "rdb/rdb_general_store.cpp",
+    "rdb/rdb_notifier_proxy.cpp",
+    "rdb/rdb_query.cpp",
+    "rdb/rdb_result_set_impl.cpp",
+    "rdb/rdb_result_set_stub.cpp",
+    "rdb/rdb_service_impl.cpp",
+    "rdb/rdb_service_stub.cpp",
+    "rdb/rdb_watcher.cpp",
+    "waterversion/water_version_manager.cpp",
+  ]
+  cflags = [
+    "-Wno-multichar",
+    "-Wno-c99-designator",
+  ]
+
+  cflags_cc = [ "-fvisibility=hidden" ]
+
+  configs = [ ":module_public_config" ]
+
+  deps = [
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/utils:distributeddata_utils_static",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/framework:distributeddatasvcfwk",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "device_auth:deviceauth_sdk",
+    "device_manager:devicemanagersdk",
+    "dfs_service:cloudsync_asset_kit_inner",
+    "hilog:libhilog",
+    "huks:libhukssdk",
+    "ipc:ipc_core",
+    "kv_store:distributeddata_inner",
+    "kv_store:distributeddb",
+    "relational_store:native_rdb",
+  ]
+  subsystem_name = "distributeddatamgr"
+
+  part_name = "datamgr_service"
+  defines = [ "OPENSSL_SUPPRESS_DEPRECATED" ]
+}

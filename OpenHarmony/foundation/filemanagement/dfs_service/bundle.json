@@ -1,0 +1,142 @@
+{
+    "name": "@ohos/dfs_service",
+    "version": "3.1",
+    "description": "The dfs_service module belongs to the filemanagement subsystem of OpenHarmony. It provides the ability of accessing distributed files.",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/filemanagement/dfs_service"
+    },
+    "dirs": {},
+    "scripts": {},
+    "author": {},
+    "repository": "",
+    "component": {
+      "name": "dfs_service",
+      "subsystem": "filemanagement",
+      "syscap": [
+        "SystemCapability.FileManagement.DistributedFileService.CloudSync.Core",
+        "SystemCapability.FileManagement.DistributedFileService.CloudSyncManager"
+      ],
+      "features": [
+        "dfs_service_feature_enable_cloud_adapter"
+      ],
+      "adapted_system_type": [
+        "small",
+        "standard"
+      ],
+      "rom": "2048KB",
+      "ram": "4096KB",
+      "deps": {
+        "components": [
+          "ability_base",
+          "ability_runtime",
+          "access_token",
+          "app_file_service",
+          "battery_manager",
+          "c_utils",
+          "common_event_service",
+          "dataclassification",
+          "device_auth",
+          "device_manager",
+          "drivekit_native",
+          "dsoftbus",
+          "eventhandler",
+          "ffrt",
+          "file_api",
+          "hicollie",
+          "hilog",
+          "hisysevent",
+          "hitrace",
+          "init",
+          "ipc",
+          "json",
+          "napi",
+          "preferences",
+          "media_library",
+          "netmanager_base",
+          "relational_store",
+          "safwk",
+          "samgr",
+          "ability_runtime",
+          "os_account",
+          "power_manager",
+          "app_file_service",
+          "resource_schedule_service",
+          "libfuse"
+        ],
+        "third_party": [
+          "e2fsprogs"
+        ]
+      },
+      "build": {
+        "group_type": {
+          "base_group": [],
+          "fwk_group": [],
+          "service_group": [
+            "//foundation/filemanagement/dfs_service:services_target",
+            "//foundation/filemanagement/dfs_service:cloudsync_kit_inner_target",
+            "//foundation/filemanagement/dfs_service:cloud_daemon_kit_inner_target",
+            "//foundation/filemanagement/dfs_service:cloudsync_asset_kit_inner_target",
+            "//foundation/filemanagement/dfs_service:distributed_file_daemon_kit_inner_target",
+            "//foundation/filemanagement/dfs_service/interfaces/kits/js/cloudsyncmanager:cloudsyncmanager",
+            "//foundation/filemanagement/dfs_service/interfaces/kits/js/cloudfilesync:cloudsync"
+          ]
+        },
+        "inner_kits": [
+          {
+            "name": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloudsync_kit_inner:cloudsync_kit_inner",
+            "header": {
+              "header_files": [
+                "cloud_sync_callback.h",
+                "cloud_sync_manager.h",
+                "i_cloud_sync_callback.h",
+                "i_cloud_sync_service.h",
+                "svc_death_recipient.h",
+                "cloud_sync_constants.h",
+                "cloud_sync_common.h"
+              ],
+              "header_base": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloudsync_kit_inner"
+            }
+          },
+          {
+            "name": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloudsync_kit_inner:cloudsync_asset_kit_inner",
+            "header": {
+              "header_files": [
+                "cloud_sync_asset_manager.h"
+              ],
+              "header_base": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloudsync_kit_inner"
+            }
+          },
+          {
+            "name": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloud_daemon_kit_inner:cloud_daemon_kit_inner",
+            "header": {
+              "header_files": [
+                "cloud_daemon_manager.h",
+                "i_cloud_daemon.h",
+                "svc_death_recipient.h"
+		],
+              "header_base": "//foundation/filemanagement/dfs_service/interfaces/inner_api/native/cloud_daemon_kit_inner"
+            }
+          },
+          {
+            "name": "//foundation/filemanagement/dfs_service/services/distributedfiledaemon:distributed_file_daemon_kit_inner",
+            "header": {
+              "header_files": [
+                "distributed_file_daemon_manager.h",
+                "hmdfs_info.h",
+                "i_daemon.h"
+              ],
+              "header_base": "//foundation/filemanagement/dfs_service/services/distributedfiledaemon/include/ipc"
+            }
+          }
+        ],
+        "test": [
+          "//foundation/filemanagement/dfs_service:dfs_test_moudule",
+          "//foundation/filemanagement/dfs_service:cloudsync_test_module",
+          "//foundation/filemanagement/dfs_service:distributedfile_test_module",
+          "//foundation/filemanagement/dfs_service/test/fuzztest:dfs_service_fuzztest"
+        ]
+      }
+    }
+}

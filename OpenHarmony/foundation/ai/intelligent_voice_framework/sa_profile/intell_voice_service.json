@@ -1,0 +1,20 @@
+{
+    "process": "intell_voice_service",
+    "systemability": [
+        {
+            "name": 312,
+            "libpath": "libintell_voice_server.z.so",
+            "run-on-create": false,
+            "auto-restart": true,
+            "distributed": false,
+            "dump_level": 1,
+            "start-on-demand":{
+                "commonevent":[
+                    {
+                        "name":"usual.event.BOOT_COMPLETED"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2022 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration ver="2.0">
+    <target name="remote_file_share_test">
+        <preparer>
+            <option name="push" value="remote_file_share_test.txt -> /data/test" src="res"/>
+        </preparer>
+    </target>
+    <target name="file_share_test">
+        <preparer>
+            <option name="push" value="filesharea.hap -> /data/test/" src="res"/>
+            <option name="push" value="fileshareb.hap -> /data/test/" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/filesharea.hap"/>
+            <option name="shell" value="bm install -r -p /data/test/fileshareb.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.filesharea"/>
+            <option name="shell" value="bm uninstall -n com.example.fileshareb"/>
+        </cleaner>
+    </target>
+    <target name="file_uri_test">
+        <preparer>
+            <option name="push" value="remote_file_share_test.txt -> /data/test" src="res"/>
+            <option name="push" value="filesharea.hap -> /data/test/" src="res"/>
+            <option name="push" value="fileshareb.hap -> /data/test/" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/filesharea.hap"/>
+            <option name="shell" value="bm install -r -p /data/test/fileshareb.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.filesharea"/>
+            <option name="shell" value="bm uninstall -n com.example.fileshareb"/>
+        </cleaner>
+    </target>
+    <target name="file_permission_test">
+        <preparer>
+            <option name="push" value="filesharea.hap -> /data/test/" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/filesharea.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.filesharea"/>
+        </cleaner>
+    </target>
+    <target name="file_uri_ndk_test">
+        <preparer>
+            <option name="push" value="file_uri_test.txt -> /data/test" src="res"/>
+        </preparer>
+    </target>
+    <target name="file_share_permission_ndk_test">
+        <preparer>
+            <option name="push" value="ActivatePermission.txt -> /data/storage/el2/base/" src="res"/>
+            <option name="push" value="CheckPersistentPermission.txt -> /data/storage/el2/base/" src="res"/>
+            <option name="push" value="DeactivatePermission.txt -> /data/storage/el2/base/" src="res"/>
+            <option name="push" value="PersistPermission.txt -> /data/storage/el2/base/" src="res"/>
+            <option name="push" value="RevokePermission.txt -> /data/storage/el2/base/" src="res"/>
+        </preparer>
+    </target>
+</configuration>

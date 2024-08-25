@@ -1,0 +1,175 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//build/test.gni")
+import("//foundation/ability/dmsfwk/dmsfwk.gni")
+
+module_output_path = "dmsfwk/distributed_ability_manager_svr_test"
+
+distributed_service = "//foundation/ability/dmsfwk/services"
+
+dtbabilitymgr_configs = [
+  "${distributed_service}/dtbabilitymgr:distributed_ability_manager_config",
+]
+
+config("test_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/include",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/unittest",
+    "${dms_path}/common/include",
+    "${dms_path}/interfaces/innerkits/distributed_event/include",
+    "${dms_path}/interfaces/innerkits/tests",
+  ]
+}
+
+dtbabilitymgr_external_deps = [
+  "ability_base:want",
+  "ability_runtime:ability_manager",
+  "access_token:libaccesstoken_sdk",
+  "access_token:libnativetoken",
+  "access_token:libtoken_setproc",
+  "bundle_framework:appexecfwk_base",
+  "bundle_framework:appexecfwk_core",
+  "c_utils:utils",
+  "device_auth:deviceauth_sdk",
+  "device_manager:devicemanagersdk",
+  "dmsfwk:common_sdk",
+  "dmsfwk:continuation_manager",
+  "eventhandler:libeventhandler",
+  "ffrt:libffrt",
+  "hilog:libhilog",
+  "init:libbegetutil",
+  "ipc:ipc_core",
+  "kv_store:distributeddata_inner",
+  "safwk:system_ability_fwk",
+  "samgr:samgr_proxy",
+]
+if (os_account_part) {
+  dtbabilitymgr_external_deps += [ "os_account:os_account_innerkits" ]
+}
+
+dtbabilitymgr_public_deps = [
+  "//foundation/ability/dmsfwk/services/dtbschedmgr:distributedschedsvr",
+  "//third_party/googletest:gmock_main",
+  "//third_party/googletest:gtest_main",
+]
+
+dtbabilitymgr_sources = [
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/app_connection_stub.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/app_device_callback_stub.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/connect_status_info.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/continuation_extra_params.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/continuation_result.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/device_selection_notifier_proxy.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/device_selection_notifier_stub.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/notifier_death_recipient.cpp",
+  "${distributed_service}/dtbabilitymgr/src/continuation_manager/notifier_info.cpp",
+  "${distributed_service}/dtbabilitymgr/src/distributed_ability_manager_client.cpp",
+  "${distributed_service}/dtbabilitymgr/src/distributed_ability_manager_dumper.cpp",
+  "${distributed_service}/dtbabilitymgr/src/distributed_ability_manager_proxy.cpp",
+  "${distributed_service}/dtbabilitymgr/src/distributed_ability_manager_service.cpp",
+  "${distributed_service}/dtbabilitymgr/src/distributed_ability_manager_stub.cpp",
+  "${dms_path}/interfaces/innerkits/distributed_event/src/dms_client.cpp",
+  "${dms_path}/interfaces/innerkits/distributed_event/src/dms_handler.cpp",
+  "${dms_path}/interfaces/innerkits/distributed_event/src/dms_listener_stub.cpp",
+  "${dms_path}/interfaces/innerkits/distributed_event/src/dms_sa_client.cpp",
+]
+
+ohos_unittest("continuationmanagertest") {
+  module_out_path = module_output_path
+  sources = [
+    "${distributed_service}/dtbschedmgr/test/unittest/distributed_sched_util.cpp",
+    "unittest/continuation_manager/app_connection_stub_test.cpp",
+    "unittest/continuation_manager/continuation_manager_test.cpp",
+  ]
+  sources += dtbabilitymgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dtbabilitymgr_configs
+  deps =
+      [ "${distributed_service}/dtbabilitymgr:distributed_ability_manager_svr" ]
+  if (is_standard_system) {
+    external_deps = dtbabilitymgr_external_deps
+    public_deps = dtbabilitymgr_public_deps
+  }
+  part_name = "dmsfwk"
+}
+
+ohos_unittest("distributedabilitymanagerservicetest") {
+  cflags = [ "-Dprivate=public" ]
+  module_out_path = module_output_path
+  sources = [
+    "${distributed_service}/dtbschedmgr/test/unittest/distributed_sched_util.cpp",
+    "unittest/distributed_ability_manager_dumper_test.cpp",
+    "unittest/distributed_ability_manager_service_test.cpp",
+    "unittest/distributed_ability_manager_stub_test.cpp",
+  ]
+  sources += dtbabilitymgr_sources
+  configs = [
+    ":test_config",
+    "${distributed_service}/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  ldflags = [ "-rdynamic" ]
+  configs += dtbabilitymgr_configs
+  if (is_standard_system) {
+    external_deps = dtbabilitymgr_external_deps
+    public_deps = dtbabilitymgr_public_deps
+  }
+  part_name = "dmsfwk"
+}
+
+ohos_unittest("distributedeventtest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  cflags = [ "-Dprivate=public" ]
+  module_out_path = module_output_path
+  sources = [
+    "${distributed_service}/dtbschedmgr/test/unittest/distributed_sched_util.cpp",
+    "unittest/dms_client_test.cpp",
+    "unittest/dms_handler_test.cpp",
+    "unittest/dms_listener_stub_test.cpp",
+    "unittest/dms_sa_cilent_test.cpp",
+  ]
+  sources += dtbabilitymgr_sources
+  configs = [
+    ":test_config",
+    "${dms_path}/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dtbabilitymgr_configs
+  deps = [
+    "${dms_path}/interfaces/innerkits/distributed_event:distributed_sdk",
+    "${dms_path}/interfaces/innerkits/tests:dms_sdk_demo",
+  ]
+  if (is_standard_system) {
+    external_deps = dtbabilitymgr_external_deps
+    public_deps = dtbabilitymgr_public_deps
+  }
+  part_name = "dmsfwk"
+}
+
+group("unittest") {
+  testonly = true
+  deps = [
+    ":continuationmanagertest",
+    ":distributedabilitymanagerservicetest",
+    ":distributedeventtest",
+  ]
+}

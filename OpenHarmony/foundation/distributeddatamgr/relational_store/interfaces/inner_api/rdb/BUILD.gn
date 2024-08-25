@@ -1,0 +1,587 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/relational_store/relational_store.gni")
+
+base_sources = [
+  "${relational_store_native_path}/dfx/src/rdb_radar_reporter.cpp",
+  "${relational_store_native_path}/rdb/src/abs_predicates.cpp",
+  "${relational_store_native_path}/rdb/src/abs_rdb_predicates.cpp",
+  "${relational_store_native_path}/rdb/src/abs_result_set.cpp",
+  "${relational_store_native_path}/rdb/src/base_transaction.cpp",
+  "${relational_store_native_path}/rdb/src/big_integer.cpp",
+  "${relational_store_native_path}/rdb/src/cache_result_set.cpp",
+  "${relational_store_native_path}/rdb/src/connection.cpp",
+  "${relational_store_native_path}/rdb/src/raw_data_parser.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_helper.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_local_db_observer.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_predicates.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_sql_utils.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_store_config.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_store_impl.cpp",
+  "${relational_store_native_path}/rdb/src/rdb_store_manager.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_connection.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_connection_pool.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_global_config.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_sql_builder.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_statement.cpp",
+  "${relational_store_native_path}/rdb/src/sqlite_utils.cpp",
+  "${relational_store_native_path}/rdb/src/step_result_set.cpp",
+  "${relational_store_native_path}/rdb/src/string_utils.cpp",
+  "${relational_store_native_path}/rdb/src/value_object.cpp",
+  "${relational_store_native_path}/rdb/src/values_bucket.cpp",
+]
+
+if (!is_ohos) {
+  base_sources +=
+      [ "${relational_store_mock_path}/frameworks/native/rdb/mock.cpp" ]
+}
+
+if (is_ohos && !build_ohos_sdk) {
+  config("native_rdb_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "include",
+      "${relational_store_common_path}/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+      "${relational_store_native_path}/rdb_device_manager_adapter/include",
+    ]
+
+    defines = [
+      "RELATIONAL_STORE",
+      "SQLITE_HAS_CODEC",
+    ]
+
+    if (relational_store_rdb_support_icu) {
+      include_dirs += [
+        "//third_party/icu/icu4c/source",
+        "//third_party/icu/icu4c/source/i18n",
+        "//third_party/icu/icu4c/source/common",
+      ]
+      defines += [ "RDB_SUPPORT_ICU" ]
+    }
+
+    defines += [ "SQLITE_DISTRIBUTE_RELATIONAL" ]
+    include_dirs += [
+      "${kvstore_path}/common",
+      "${kvstore_interface_path}",
+      "${distributedfile_path}/mod_securitylabel",
+    ]
+  }
+
+  config("native_rdb_public_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+      "../cloud_data/include",
+      "../common_type/include",
+    ]
+  }
+
+  base_deps = [
+    "//third_party/icu/icu4c:shared_icui18n",
+    "//third_party/icu/icu4c:shared_icuuc",
+  ]
+
+  ohos_shared_library("native_rdb") {
+    branch_protector_ret = "pac_ret"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+
+    part_name = "relational_store"
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    deps += [ "//third_party/sqlite:sqlite" ]
+    ldflags = [ "-Wl,--exclude-libs,ALL" ]
+    cflags_cc = [ "-fvisibility=hidden" ]
+    sources += [
+      "${relational_store_native_path}/rdb/src/abs_shared_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/delay_notify.cpp",
+      "${relational_store_native_path}/rdb/src/grd_api_manager.cpp",
+      "${relational_store_native_path}/rdb/src/rd_connection.cpp",
+      "${relational_store_native_path}/rdb/src/rd_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/rd_statement.cpp",
+      "${relational_store_native_path}/rdb/src/rd_utils.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_connection.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_connection_pool.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_manager_impl.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_notifier_stub.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_security_manager.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_service_proxy.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_statement.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_types_util.cpp",
+      "${relational_store_native_path}/rdb/src/result_set_proxy.cpp",
+      "${relational_store_native_path}/rdb/src/security_policy.cpp",
+      "${relational_store_native_path}/rdb/src/share_block.cpp",
+      "${relational_store_native_path}/rdb/src/shared_block_serializer_info.cpp",
+      "${relational_store_native_path}/rdb/src/sqlite_shared_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/task_executor.cpp",
+      "${relational_store_native_path}/rdb/src/vdb_store_impl.cpp",
+      "${relational_store_native_path}/rdb_device_manager_adapter/src/rdb_device_manager_adapter.cpp",
+    ]
+
+    public_deps = [
+      "${relational_store_innerapi_path}/appdatafwk:native_appdatafwk",
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+    ]
+
+    external_deps = [
+      "ability_base:zuri",
+      "ability_runtime:dataobs_manager",
+      "c_utils:utils",
+      "device_manager:devicemanagersdk",
+      "hilog:libhilog",
+      "hisysevent:libhisysevent",
+      "hitrace:hitrace_meter",
+      "huks:libhukssdk",
+      "ipc:ipc_core",
+      "kv_store:database_utils",
+      "kv_store:distributeddb",
+      "samgr:samgr_proxy",
+    ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+    innerapi_tags = [
+      "platformsdk",
+      "sasdk",
+    ]
+    subsystem_name = "distributeddatamgr"
+  }
+
+  ohos_static_library("native_rdb_static") {
+    branch_protector_ret = "pac_ret"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    deps += [ "//third_party/sqlite:sqlite" ]
+    ldflags = [ "-Wl,--exclude-libs,ALL" ]
+
+    sources += [
+      "${relational_store_native_path}/rdb/src/abs_shared_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/delay_notify.cpp",
+      "${relational_store_native_path}/rdb/src/grd_api_manager.cpp",
+      "${relational_store_native_path}/rdb/src/rd_connection.cpp",
+      "${relational_store_native_path}/rdb/src/rd_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/rd_statement.cpp",
+      "${relational_store_native_path}/rdb/src/rd_utils.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_connection.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_connection_pool.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_manager_impl.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_notifier_stub.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_security_manager.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_service_proxy.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_statement.cpp",
+      "${relational_store_native_path}/rdb/src/rdb_types_util.cpp",
+      "${relational_store_native_path}/rdb/src/result_set_proxy.cpp",
+      "${relational_store_native_path}/rdb/src/security_policy.cpp",
+      "${relational_store_native_path}/rdb/src/share_block.cpp",
+      "${relational_store_native_path}/rdb/src/shared_block_serializer_info.cpp",
+      "${relational_store_native_path}/rdb/src/sqlite_shared_result_set.cpp",
+      "${relational_store_native_path}/rdb/src/task_executor.cpp",
+      "${relational_store_native_path}/rdb/src/vdb_store_impl.cpp",
+      "${relational_store_native_path}/rdb_device_manager_adapter/src/rdb_device_manager_adapter.cpp",
+    ]
+
+    public_deps = [
+      "${relational_store_innerapi_path}/appdatafwk:native_appdatafwk",
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+    ]
+
+    external_deps = [
+      "ability_base:zuri",
+      "ability_runtime:dataobs_manager",
+      "c_utils:utils",
+      "device_manager:devicemanagersdk",
+      "hilog:libhilog",
+      "hisysevent:libhisysevent",
+      "hitrace:hitrace_meter",
+      "huks:libhukssdk",
+      "ipc:ipc_core",
+      "kv_store:database_utils",
+      "kv_store:distributeddb",
+      "samgr:samgr_proxy",
+    ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+
+    subsystem_name = "distributeddatamgr"
+    part_name = "relational_store"
+  }
+} else if (is_mingw) {
+  config("native_rdb_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "${relational_store_mock_path}/frameworks/native/rdb",
+      "mock/include",
+      "${relational_store_common_path}/include",
+      "${relational_store_native_path}/rdb/mock/include",
+      "//commonlibrary/c_utils/base/include",
+      "include",
+      "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+      "//third_party/libuv/src/win",
+    ]
+
+    cflags = [ "-includemock.h" ]
+    defines = [
+      "RELATIONAL_STORE",
+      "SQLITE_HAS_CODEC",
+    ]
+
+    if (relational_store_rdb_support_icu) {
+      include_dirs += [
+        "//third_party/icu/icu4c/source",
+        "//third_party/icu/icu4c/source/i18n",
+        "//third_party/icu/icu4c/source/common",
+      ]
+      defines += [ "RDB_SUPPORT_ICU" ]
+    }
+
+    defines += [ "WINDOWS_PLATFORM" ]
+    include_dirs += [
+      "//foundation/distributeddatamgr/kv_store/frameworks/common",
+      "//third_party/sqlite/include",
+    ]
+    libs = [ "//prebuilts/mingw-w64/ohos/linux-x86_64/clang-mingw/x86_64-w64-mingw32/lib/libws2_32.a" ]
+  }
+
+  config("native_rdb_public_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "mock/include",
+      "include",
+      "//third_party/libuv/src/win",
+      "../cloud_data/include",
+      "../common_type/include",
+    ]
+  }
+
+  base_deps = [
+    "//third_party/icu/icu4c:shared_icui18n",
+    "//third_party/icu/icu4c:shared_icuuc",
+  ]
+
+  ohos_shared_library("native_rdb") {
+    part_name = "relational_store"
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources +=
+        [ "${relational_store_native_path}/rdb/mock/src/task_executor.cpp" ]
+
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_windows",
+      "//third_party/sqlite:sqlite_sdk",
+    ]
+
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+    innerapi_tags = [ "platformsdk" ]
+    subsystem_name = "distributeddatamgr"
+  }
+
+  ohos_static_library("native_rdb_static") {
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources +=
+        [ "${relational_store_native_path}/rdb/mock/src/task_executor.cpp" ]
+
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_windows",
+      "//third_party/sqlite:sqlite_sdk",
+    ]
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+
+    subsystem_name = "distributeddatamgr"
+    part_name = "relational_store"
+  }
+} else if (is_mac) {
+  config("native_rdb_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "${relational_store_mock_path}/frameworks/native/rdb",
+      "mock/include",
+      "${relational_store_common_path}/include",
+      "${relational_store_native_path}/rdb/mock/include",
+      "//commonlibrary/c_utils/base/include",
+      "include",
+      "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+    ]
+
+    cflags = [ "-includemock.h" ]
+    defines = [
+      "RELATIONAL_STORE",
+      "SQLITE_HAS_CODEC",
+    ]
+
+    if (relational_store_rdb_support_icu) {
+      include_dirs += [
+        "//third_party/icu/icu4c/source",
+        "//third_party/icu/icu4c/source/i18n",
+        "//third_party/icu/icu4c/source/common",
+      ]
+      defines += [ "RDB_SUPPORT_ICU" ]
+    }
+
+    defines += [ "MAC_PLATFORM" ]
+    include_dirs += [
+      "//foundation/distributeddatamgr/kv_store/frameworks/common",
+      "//third_party/sqlite/include",
+    ]
+  }
+
+  config("native_rdb_public_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "mock/include",
+      "include",
+      "../cloud_data/include",
+      "../common_type/include",
+    ]
+  }
+
+  base_deps = [
+    "//third_party/icu/icu4c:shared_icui18n",
+    "//third_party/icu/icu4c:shared_icuuc",
+  ]
+
+  ohos_shared_library("native_rdb") {
+    part_name = "relational_store"
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources +=
+        [ "${relational_store_native_path}/rdb/mock/src/task_executor.cpp" ]
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_mac",
+      "//third_party/sqlite:sqlite_sdk",
+    ]
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+    innerapi_tags = [ "platformsdk" ]
+    subsystem_name = "distributeddatamgr"
+  }
+
+  ohos_static_library("native_rdb_static") {
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources +=
+        [ "${relational_store_native_path}/rdb/mock/src/task_executor.cpp" ]
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_mac",
+      "//third_party/sqlite:sqlite_sdk",
+    ]
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+
+    subsystem_name = "distributeddatamgr"
+    part_name = "relational_store"
+  }
+} else if (is_android) {
+  config("native_rdb_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "${relational_store_mock_path}/frameworks/native/rdb",
+      "${distributedfile_path}/mod_securitylabel",
+      "${relational_store_common_path}/include",
+      "${relational_store_innerapi_path}/rdb/mock/include",
+      "${relational_store_native_path}/rdb/mock/include",
+      "${relational_store_innerapi_path}/rdb/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+    ]
+
+    cflags = [ "-includemock.h" ]
+    defines = [
+      "RELATIONAL_STORE",
+      "SQLITE_HAS_CODEC",
+    ]
+
+    if (relational_store_rdb_support_icu) {
+      include_dirs += [
+        "//third_party/icu/icu4c/source",
+        "//third_party/icu/icu4c/source/i18n",
+        "//third_party/icu/icu4c/source/common",
+      ]
+      defines += [ "RDB_SUPPORT_ICU" ]
+    }
+  }
+
+  config("native_rdb_public_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "mock/include",
+      "include",
+      "${relational_store_native_path}/mock/rdb/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+      "../cloud_data/include",
+      "../common_type/include",
+    ]
+  }
+
+  base_deps = [ "${plugins_path}/libs/icu:icu_android" ]
+
+  ohos_source_set("native_rdb") {
+    defines = [ "ANDROID_PLATFORM" ]
+
+    part_name = "relational_store"
+
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources += [
+      "${relational_store_native_path}/rdb/mock/src/task_executor.cpp",
+      "${relational_store_native_path}/rdb/src/security_policy.cpp",
+    ]
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_android",
+      "//commonlibrary/c_utils/base:utils",
+      "//third_party/sqlite:sqlite_static",
+    ]
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+    subsystem_name = "distributeddatamgr"
+  }
+} else if (is_ios) {
+  config("native_rdb_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "${relational_store_mock_path}/frameworks/native/rdb",
+      "${distributedfile_path}/mod_securitylabel",
+      "${relational_store_common_path}/include",
+      "${relational_store_innerapi_path}/rdb/mock/include",
+      "${relational_store_native_path}/rdb/mock/include",
+      "${relational_store_innerapi_path}/rdb/include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+    ]
+
+    cflags = [ "-includemock.h" ]
+    defines = [
+      "RELATIONAL_STORE",
+      "SQLITE_HAS_CODEC",
+    ]
+
+    if (relational_store_rdb_support_icu) {
+      include_dirs += [
+        "//third_party/icu/icu4c/source",
+        "//third_party/icu/icu4c/source/i18n",
+        "//third_party/icu/icu4c/source/common",
+      ]
+      defines += [ "RDB_SUPPORT_ICU" ]
+    }
+  }
+
+  config("native_rdb_public_config") {
+    visibility = [ ":*" ]
+
+    include_dirs = [
+      "mock/include",
+      "include",
+      "${relational_store_native_path}/rdb/include",
+      "${relational_store_native_path}/dfx/include",
+      "../cloud_data/include",
+      "../common_type/include",
+    ]
+  }
+
+  base_deps = [ "${plugins_path}/libs/icu:icu_ios" ]
+
+  ohos_source_set("native_rdb") {
+    defines = [ "IOS_PLATFORM" ]
+
+    part_name = "relational_store"
+    sources = base_sources
+
+    configs = [ ":native_rdb_config" ]
+
+    deps = base_deps
+
+    sources += [
+      "${relational_store_native_path}/rdb/mock/src/task_executor.cpp",
+      "${relational_store_native_path}/rdb/src/security_policy.cpp",
+    ]
+    deps += [
+      "${relational_store_innerapi_path}/appdatafwk:relational_common_base",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_ios",
+      "//commonlibrary/c_utils/base:utilsbase",
+      "//third_party/sqlite:sqlite_static",
+    ]
+    cflags_cc = [ "-std=c++17" ]
+
+    public_configs = [ ":native_rdb_public_config" ]
+    subsystem_name = "distributeddatamgr"
+  }
+} else {
+  not_needed([ "base_sources" ])
+}

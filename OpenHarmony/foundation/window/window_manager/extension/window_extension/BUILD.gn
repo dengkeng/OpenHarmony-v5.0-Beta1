@@ -1,0 +1,124 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../windowmanager_aafwk.gni")
+
+config("libwindow_extension_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "include",
+    "include/zidl",
+    "../extension_connection/include",
+    "../extension_connection/include/zidl",
+    "../../interfaces/kits/napi/window_runtime/window_napi",
+    "../../interfaces/innerkits/extension",
+    "../../interfaces/innerkits/wm",
+    "../../window_scene/interfaces/innerkits/include",
+  ]
+}
+
+## Build libwindow_extension.so
+ohos_shared_library("libwindow_extension") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+  sources = [
+    "../extension_connection/src/zidl/window_extension_client_proxy.cpp",
+    "src/js_window_extension.cpp",
+    "src/js_window_extension_context.cpp",
+    "src/window_extension.cpp",
+    "src/window_extension_context.cpp",
+    "src/window_extension_stub_impl.cpp",
+    "src/zidl/window_extension_stub.cpp",
+  ]
+
+  configs = [
+    ":libwindow_extension_private_config",
+    "../../resources/config/build:coverage_flags",
+  ]
+
+  deps = [
+    "../../interfaces/kits/napi/window_runtime:window_native_kit",
+    "../../window_scene/interfaces/innerkits:libwsutils",
+    "../../wm:libwm",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_context",
+    "ability_runtime:extensionkit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "graphic_2d:librender_service_client",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+
+  part_name = "window_manager"
+  subsystem_name = "window"
+}
+
+config("window_extension_module_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [ "include" ]
+}
+
+## Build libwindow_extension_module.so
+ohos_shared_library("window_extension_module") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+  sources = [ "src/window_extension_module_loader.cpp" ]
+
+  configs = [
+    ":window_extension_module_private_config",
+    "../../resources/config/build:coverage_flags",
+  ]
+
+  deps = [ ":libwindow_extension" ]
+
+  external_deps = [
+    "ability_runtime:ability_context_native",
+    "ability_runtime:abilitykit_native",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  relative_install_dir = "extensionability/"
+  subsystem_name = "window"
+  part_name = "window_manager"
+}
+
+group("test") {
+  testonly = true
+  deps = [ "test:test" ]
+}

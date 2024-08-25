@@ -1,0 +1,260 @@
+#  Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+#####################################################
+#     below is the format of defining event         #
+#####################################################
+#domain: domain name.  [Only one domain name can be defined at the top]
+#
+#author: the author name who defined this event.
+#date: the date when this event was defined, format is YYYY-MM-DD.
+#logged: source file which refer to this event.
+#usage: the usage of this event.
+#//Define event name and event properties.
+#@EVENT_NAME: the event definition part begin.
+#  // __BASE is used for defining the basic info of the event.
+#  // "type" optional values are: FAULT, STATISTICS, SECURITY, BEHAVIOR.
+#  // "level" optional values are: CRITICAL, MINOR.
+#  // "tag" set tags with may be used by subscriber of this event, multiple tags divided by space.
+#  // "desc" full description of this event.
+#  @PARAMETER: {type: parameter type, arrsize: array length(optional), desc: parameter description}.
+#  // follow the __BASE block, each line defines a parameter of this event.
+#  // "type" optional values are: INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, FLOAT, DOUBLE, STRING.
+#  // "arrsize" of the parameter is an array, set a non-zero value.
+#  // "desc" full description of this parameter.
+
+#####################################################
+#   Example of some hiviewdfx events definition     #
+#####################################################
+
+domain: MULTIMODALINPUT
+
+APPLICATION_BLOCK_INPUT:
+  __BASE: {type: FAULT, level: CRITICAL, desc: The event is not consumed }
+  PID: {type: INT32, desc: session pid}
+  UID: {type: INT32, desc: session uid}
+  PACKAGE_NAME: {type: STRING, desc: package name}
+  PROCESS_NAME: {type: STRING, desc: process name}
+  MSG: {type: STRING, desc: multimodalinput event message}
+
+INPUT_DEV_CONNECTION_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: input device connection success}
+  DEVICE_ID: {type: INT32, desc: device id}
+  DEVICE_PHYS: {type: STRING, desc: device physics}
+  DEVICE_NAME: {type: STRING, desc: device name}
+  DEVICE_TYPE: {type: INT32, desc: device type}
+  MSG: {type: STRING, desc: message}
+
+INPUT_DEV_CONNECTION_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: input device connection failure}
+  DEVICE_ID: {type: INT32, desc: device id}
+  DEVICE_PHYS: {type: STRING, desc: device physics}
+  DEVICE_NAME: {type: STRING, desc: device name}
+  DEVICE_TYPE: {type: INT32, desc: device type}
+  MSG: {type: STRING, desc: message}
+
+INPUT_DEV_DISCONNECTION_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: input device disconnection success}
+  DEVICE_ID: {type: INT32, desc: device id}
+  DEVICE_PHYS: {type: STRING, desc: device physics}
+  DEVICE_NAME: {type: STRING, desc: device name}
+  DEVICE_TYPE: {type: INT32, desc: device type}
+  MSG: {type: STRING, desc: message}
+
+FINGERSENSE_KNOCK_EVENT_INFO:
+  __BASE: {type: STATISTIC, level: MINOR, desc: report fingersense knuckle knock event info}
+  DKF_D_I: {type: INT32, desc: fs dk fail time interval}
+  DKF_T_I: {type: INT32, desc: fs Double knuckle double knock fail time interval}
+  DKS_D_I: {type: INT32, desc: fs Single knuckle double knock succ distance interval}
+  DKS_T_I: {type: INT32, desc: fs Double knuckle double knock succ time interval}
+  DK_F_T: {type: INT32, desc: Double knuckle double knock fail times}
+  DK_S_T: {type: INT32, desc: Double knuckle double knock succ times}
+  FSF_1S_2F_C: {type: INT32, desc: fs 1 knock succ 2 knock fail times}
+  FSF_C_C: {type: INT32, desc: fs consecutive knock count fail times}
+  FSF_D_C: {type: INT32, desc: fs knock distance interval fail times}
+  FSF_T_C: {type: INT32, desc: fs knock time interval fail times}
+  FS_K_PN: {type: STRING, desc: Fingersense knuckle application package name}
+  FS_S_A_I: {type: INT32, desc: fs sensitivity adjust info}
+  LCD_INFO: {type: STRING, desc: lcd vendor information}
+  LG_F_T: {type: INT32, desc: Letter or region gesture detected fail times}
+  LG_S_T: {type: INT32, desc: Letter gesture detected succ times}
+  L_C_S_T: {type: INT32, desc: fs letter c gesture succ times}
+  L_E_S_T: {type: INT32, desc: fs letter e gesture succ times}
+  L_L_S_T: {type: INT32, desc: fs draw line succ times}
+  L_M_S_T: {type: INT32, desc: fs letter m gesture succ times}
+  L_S_S_T: {type: INT32, desc: fs letter s gesture succ times}
+  L_W_S_T: {type: INT32, desc: fs letter w gesture succ times}
+  RG_F_S_TIME_DIFF: {type: INT32, desc: region gesture fail then success time diff}
+  RG_S_F_TIME_DIFF: {type: STRING, desc: region gesture success then fail time diff}
+  RG_S_T: {type: INT32, desc: Region gesture succ times}
+  RG_TRACK_LENGTH: {type: INT32, desc: region gesture track length}
+  RG_TRACK_TIME: {type: INT32, desc: region gesture track time}
+  SCR_ORIENTATION: {type: INT32, desc: screen orientation portrait or landscape}
+  SKF_T_I: {type: INT32, desc: fs Single knuckle double knock fail time interval}
+  SKS_T_I: {type: INT32, desc: fs Single knuckle double knock succ time interval ms}
+  SK_F_T: {type: INT32, desc: Single knuckle double knock fail times}
+  SK_S_T: {type: INT32, desc: Single knuckle double knock succ times}
+  S_INFO: {type: STRING, desc: sensor information}
+  TP_INFO: {type: STRING, desc: touch information}
+
+INPUT_DEV_DISCONNECTION_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: input device disconnection failure}
+  MSG: {type: STRING, desc: message}
+
+CLIENT_CONNECTION_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: client connection event success}
+  PID: {type: INT32, desc: session pid}
+  UID: {type: INT32, desc: session uid}
+  MODULE_TYPE: {type: INT32, desc: module type}
+  FD: {type: INT32, desc: server fd}
+  PROGRAMNAME: {type: STRING, desc: program name}
+  MSG: {type: STRING, desc: message}
+
+CLIENT_CONNECTION_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: client connection event failure}
+  PID: {type: INT32, desc: session pid}
+  UID: {type: INT32, desc: session uid}
+  MODULE_TYPE: {type: INT32, desc: module type}
+  PROGRAMNAME: {type: STRING, desc: program name}
+  MSG: {type: STRING, desc: message}
+
+CLIENT_DISCONNECTION_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: client disconnection event success}
+  PID: {type: INT32, desc: session pid}
+  UID: {type: INT32, desc: session uid}
+  MODULE_TYPE: {type: INT32, desc: module type}
+  FD: {type: INT32, desc: server fd}
+  PROGRAMNAME: {type: STRING, desc: program name}
+  MSG: {type: STRING, desc: message}
+
+CLIENT_DISCONNECTION_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: client disconnection event failure}
+  MSG: {type: STRING, desc: message}
+
+TARGET_POINTER_EVENT_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: target pointer event success}
+  EVENTTYPE: {type: INT32, desc: event type}
+  AGENT_WINDOWID: {type: INT32, desc: agent windowid}
+  TARGET_WINDOWID: {type: INT32, desc: target windowid}
+  PID: {type: INT32, desc: session pid}
+  FD: {type: INT32, desc: target fd}
+  MSG: {type: STRING, desc: message}
+
+TARGET_POINTER_EVENT_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: target pointer event failure}
+  EVENTTYPE: {type: INT32, desc: event type}
+  MSG: {type: STRING, desc: message}
+
+TARGET_KEY_EVENT_SUCCESS:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: target key event success}
+  EVENTTYPE: {type: INT32, desc: event type}
+  KEYCODE: {type: INT32, desc: key code}
+  ACTION: {type: INT32, desc: key action}
+  ACTION_TIME: {type: UINT64, desc: action time}
+  ACTION_STARTTIME: {type: UINT64, desc: action start time}
+  FLAG: {type: INT32, desc: key flag}
+  KEYACTION: {type: INT32, desc: key action}
+  FD: {type: INT32, desc: target fd}
+  AGENT_WINDOWID: {type: INT32, desc: agent windowid}
+  TARGET_WINDOWID: {type: INT32, desc: target windowid}
+  PID: {type: INT32, desc: session pid}
+  MSG: {type: STRING, desc: message}
+
+TARGET_KEY_EVENT_FAILURE:
+  __BASE: {type: FAULT, level: MINOR, tag: PowerStats, desc: target key event failure}
+  EVENTTYPE: {type: INT32, desc: event type}
+  KEYCODE: {type: INT32, desc: key code}
+  ACTION: {type: INT32, desc: key action}
+  ACTION_TIME: {type: UINT64, desc: action time}
+  ACTION_STARTTIME: {type: UINT64, desc: action start time}
+  FLAG: {type: INT32, desc: key flag}
+  KEYACTION: {type: INT32, desc: key action}
+  MSG: {type: STRING, desc: message}
+
+FOCUS_WINDOW_CHANGE:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: focus window change}
+  OLD_FOCUS_WINDOWID: {type: INT32, desc: old focus windowid}
+  NEW_FOCUS_WINDOWID: {type: INT32, desc: new focus windowid}
+  OLD_FOCUS_WINDOWPID: {type: INT32, desc: old focus windowpid}
+  NEW_FOCUS_WINDOWPID: {type: INT32, desc: new focus windowpid}
+  MSG: {type: STRING, desc: message}
+
+Z_ORDER_WINDOW_CHANGE:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: zorder window change}
+  OLD_ZORDER_FIRST_WINDOWID: {type: INT32, desc: old zorder first windowid}
+  NEW_ZORDER_FIRST_WINDOWID: {type: INT32, desc: new zorder first windowid}
+  OLD_ZORDER_FIRST_WINDOWPID: {type: INT32, desc: old zorder first windowpid}
+  NEW_ZORDER_FIRST_WINDOWPID: {type: INT32, desc: new zorder first windowpid}
+  MSG: {type: STRING, desc: message}
+
+INPUT_DISPATCH_TIME:
+  __BASE: {type: STATISTIC, level: MINOR, desc: input dispatch time}
+  BELOW10MS: {type: UINT32, desc: times below 10ms}
+  BELOW25MS: {type: UINT32, desc: times below 25ms}
+  BELOW50MS: {type: UINT32, desc: times below 50ms}
+  ABOVE50MS: {type: UINT32, desc: times above 50ms}
+  MSG: {type: STRING, desc: message}
+
+COMBO_START_TIME:
+  __BASE: {type: STATISTIC, level: MINOR, desc: combo start time}
+  BELOW10MS: {type: UINT32, desc: times below 10ms}
+  BELOW30MS: {type: UINT32, desc: times below 30ms}
+  BELOW50MS: {type: UINT32, desc: times below 50ms}
+  ABOVE50MS: {type: UINT32, desc: times above 50ms}
+  MSG: {type: STRING, desc: message}
+
+INPUT_POWER_UP:
+  __BASE: {type: STATISTIC, level: CRITICAL, desc: power input up}
+
+INPUT_POWER_DOWN:
+  __BASE: {type: STATISTIC, level: CRITICAL, desc: power input down}
+
+LID_SWITCH:
+  __BASE: {type: BEHAVIOR, level: MINOR, tag: PowerStats, desc: lid switch}
+  SWITCH: {type: INT32, desc: lid switch}
+
+TOUCHPAD_PINCH:
+  __BASE: {type: STATISTIC, level: MINOR, desc: touchpad pinch}
+  FINGER_COUNT: {type: INT32, desc: pinch finger statistic}
+
+TOUCHPAD_SWIPE:
+  __BASE: {type: STATISTIC, level: MINOR, desc: touchpad swipe}
+  FINGER_COUNT: {type: INT32, desc: swipe finger statistic}
+
+TOUCHPAD_SCROLL_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad scroll setting}
+  SWITCH_STATE: {type: BOOL, desc: touchpad scroll setting}
+
+TOUCHPAD_SCROLL_DIR_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad scroll direction setting}
+  SWITCH_STATE: {type: BOOL, desc: touchpad scroll direction setting}
+
+TOUCHPAD_TAP_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad tap setting}
+  SWITCH_STATE: {type: BOOL, desc: touchpad tap setting}
+
+TOUCHPAD_SWIPE_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad swipe setting}
+  SWITCH_STATE: {type: BOOL, desc: touchpad swipe setting}
+
+TOUCHPAD_PINCH_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad pinch setting}
+  SWITCH_STATE: {type: BOOL, desc: touchpad pinch setting}
+
+TOUCHPAD_POINTER_SPEED_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad pointer speed setting}
+  SWITCH_VALUE: {type: INT32, desc: touchpad pointer speed setting}
+
+TOUCHPAD_RIGHT_CLICK_SETTING:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: touchpad right click setting}
+  SWITCH_VALUE: {type: INT32, desc: touchpad right click setting}

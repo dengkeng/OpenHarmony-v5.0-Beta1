@@ -1,0 +1,347 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.-
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//build/test.gni")
+import("../memmgr.gni")
+
+module_output_path = "memmgrtest/"
+
+memmgr_service_configs = [ "${memmgr_service_path}:memory_memmgr_config" ]
+
+memmgr_deps = [ "${memmgr_service_path}:memmgrservice" ]
+
+memmgr_external_deps = [
+  "c_utils:utils",
+  "eventhandler:libeventhandler",
+  "hilog:libhilog",
+  "ipc:ipc_core",
+  "libxml2:libxml2",
+  "memmgr:memmgrclient",
+  "os_account:os_account_innerkits",
+]
+
+memmgr_public_deps = [ "//third_party/googletest:gtest_main" ]
+
+ohos_unittest("reclaim_priority_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/reclaim_priority_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("kernel_interface_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/kernel_interface_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("memcg_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/memcg_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("user_memcg_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/user_memcg_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("memcg_mgr_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/memcg_mgr_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("multi_account_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/multi_account_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("nandlife_controller_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/nandlife_controller_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("reclaim_strategy_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/reclaim_strategy_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("innerkits_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/innerkits_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("avail_buffer_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/avail_buffer_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("memmgr_config_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/memmgr_config_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("default_multi_account_strategy_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/default_multi_account_strategy_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("oom_score_adj_utils_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/oom_score_adj_utils_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("xml_helper_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/xml_helper_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("system_memory_level_config_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/system_memory_level_config_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("memory_level_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/memory_level_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("low_memory_killer_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/low_memory_killer_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+ohos_unittest("purgeable_memory_manager_test") {
+  module_out_path = module_output_path
+  configs = memmgr_service_configs
+
+  sources = [ "unittest/phone/purgeable_memory_manager_test.cpp" ]
+
+  deps = memmgr_deps
+  if (is_standard_system) {
+    external_deps = memmgr_external_deps
+    public_deps = memmgr_public_deps
+  }
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}
+
+group("memmgr_unittest") {
+  testonly = true
+  deps = [
+    ":avail_buffer_manager_test",
+    ":default_multi_account_strategy_test",
+    ":innerkits_test",
+    ":kernel_interface_test",
+    ":low_memory_killer_test",
+    ":memcg_mgr_test",
+    ":memcg_test",
+    ":memmgr_config_manager_test",
+    ":memory_level_manager_test",
+    ":multi_account_manager_test",
+    ":nandlife_controller_test",
+    ":oom_score_adj_utils_test",
+    ":purgeable_memory_manager_test",
+    ":reclaim_priority_manager_test",
+    ":reclaim_strategy_manager_test",
+    ":system_memory_level_config_test",
+    ":user_memcg_test",
+    ":xml_helper_test",
+  ]
+}

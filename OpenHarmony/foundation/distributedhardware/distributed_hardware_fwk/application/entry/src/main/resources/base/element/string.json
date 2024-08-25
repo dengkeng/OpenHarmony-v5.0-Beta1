@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "DHardwareUI"
+    },
+    {
+      "name": "connected_to",
+      "value": "Connected to %1$s"
+    },
+    {
+      "name": "stop_device",
+      "value": "Disconnect to stop using this device's %1$s."
+    },
+    {
+      "name": "pause",
+      "value": "Pause"
+    },
+    {
+      "name": "continue",
+      "value": "Resume"
+    },
+    {
+      "name": "DHTypeName_Camera",
+      "value": "camera"
+    },
+    {
+      "name": "DHTypeName_Mic",
+      "value": "microphone"
+    },
+    {
+      "name": "disconnect",
+      "value": "Disconnect"
+    },
+    {
+      "name": "ContinueSwitchAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "ContinueSwitchAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "continue_title",
+      "value": "Continuation"
+    },
+    {
+      "name": "continue_desc",
+      "value": "Browse or edit on one device, then continue on another nearby device logged in with the same Huawei ID. This function requires that both devices have enabled \"Application connection,\" Wifi, and Bluetooth."
+    }
+  ]
+}

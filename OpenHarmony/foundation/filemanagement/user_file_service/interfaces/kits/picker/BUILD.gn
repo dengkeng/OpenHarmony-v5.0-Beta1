@@ -1,0 +1,105 @@
+# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos/ace/ace.gni")
+import("../../../../../../arkcompiler/ets_frontend/es2panda/es2abc_config.gni")
+import("../../../filemanagement_aafwk.gni")
+
+# compile .js to .abc.
+action("gen_picker_abc") {
+  visibility = [ ":*" ]
+  script = "../../../../../../arkcompiler/ets_frontend/es2panda/scripts/generate_js_bytecode.py"
+
+  args = [
+    "--src-js",
+    rebase_path("picker.js"),
+    "--dst-file",
+    rebase_path(target_out_dir + "/picker.abc"),
+    "--frontend-tool-path",
+    rebase_path("${es2abc_build_path}"),
+    "--module",
+  ]
+  deps =
+      [ "../../../../../../arkcompiler/ets_frontend/es2panda:es2panda_build" ]
+  inputs = [ "picker.js" ]
+  outputs = [ target_out_dir + "/picker.abc" ]
+}
+
+base_output_path = get_label_info(":picker_js", "target_out_dir")
+picker_obj_path = base_output_path + "/picker.o"
+gen_js_obj("picker_js") {
+  input = "picker.js"
+  output = picker_obj_path
+  dep = ":gen_picker_abc"
+}
+
+abc_output_path = get_label_info(":picker_abc", "target_out_dir")
+picker_abc_obj_path = abc_output_path + "/picker_abc.o"
+gen_js_obj("picker_abc") {
+  input = "$target_out_dir/picker.abc"
+  output = picker_abc_obj_path
+  dep = ":gen_picker_abc"
+}
+
+ohos_shared_library("picker") {
+  branch_protector_ret = "pac_ret"
+  ldflags = [ "-Wl" ]
+
+  include_dirs = [ "include" ]
+
+  sources = [
+    "native_module_ohos_picker.cpp",
+    "src/modal_ui_callback.cpp",
+    "src/picker_n_exporter.cpp",
+    "src/picker_napi_utils.cpp",
+  ]
+
+  deps = [
+    ":picker_abc",
+    ":picker_js",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:app_context",
+    "ability_runtime:dataobs_manager",
+    "ability_runtime:napi_base_context",
+    "ability_runtime:runtime",
+    "ability_runtime:service_extension",
+    "ability_runtime:ui_extension",
+    "ace_engine:ace_uicontent",
+    "file_api:filemgmt_libhilog",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  relative_install_dir = "module/file"
+  subsystem_name = "filemanagement"
+  part_name = "user_file_service"
+}

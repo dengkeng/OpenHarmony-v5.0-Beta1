@@ -1,0 +1,159 @@
+#  Copyright (c) 2022 Huawei Device Co., Ltd.
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+domain: MULTIMEDIA
+
+PLAYER_ERR:
+  __BASE: {type: FAULT, level: CRITICAL, desc: player error}
+  PID: {type: INT32, desc: The pid of the PLAYER_ERR event}
+  UID: {type: INT32, desc: The uid of the PLAYER_ERR event}
+  MODULE: {type: STRING, desc: module name}
+  MSG: {type: STRING, desc: message}
+
+PLAYER_STATE:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: state change}
+  PID: {type: INT32, desc: The pid of the PLAYER_STATE event}
+  UID: {type: INT32, desc: The uid of the PLAYER_STATE event}
+  MODULE: {type: STRING, desc: module name}
+  MSG: {type: STRING, desc: message}
+
+PLAYER_STATISTICS:
+  __BASE: {type: STATISTIC, level: MINOR, desc: function call frequency}
+  PID: {type: INT32, desc: The pid of the PLAYER_STATISTICS event}
+  UID: {type: INT32, desc: The uid of the PLAYER_STATISTICS event}
+  MODULE: {type: STRING, desc: module name}
+  MSG: {type: STRING, desc: message}
+
+SOURCE_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: Source fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  CALLER_TYPE: {type: STRING, desc: Caller is App or pplayer_framework}
+  SOURCE_TYPE: {type: INT8, desc: Enum of source type}
+  SOURCE_URI: {type: STRING, desc: URI of source}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+RECORD_AUDIO_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: Recorder fau1t}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct recorder id}
+  AUDIO_SOURCE_TYPE: {type: INT32, desc: Audio source type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+SCREEN_CAPTURE_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: Screen capturefault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct screen capture id}
+  CAPTURE_MODE: {type: INT32, desc: Screen capture mode}
+  DATA_MODE: {type: INT8, desc: Datamode}
+  ERROR_CODE: {type: INT32, desc: Enum of error type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+DRM_DECRYPTION_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: DRM decryption fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  ERROR_CODE: {type: INT32, desc: Enum of error type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+  DECRYPT_ALGO: {type: STRING, desc: Decryption algorithm}
+  DECRYPT_KEYID: {type: STRING, desc: Decryption KEY_ID}
+  DECRYPT_IV: {type: STRING, desc: Decryption IV}
+
+DRM_COMMON_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: DRM common fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  ERROR_CODE: {type: INT32, desc: Enum of error type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+  EXTRA_MESG: {type: STRING, desc: Extra associated DRM response info}
+
+AUDIO_CODEC_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: AudioCodec fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  CALLER_TYPE: {type: STRING, desc: Caller is App or player_framework}
+  AUDIO_CODEC: {type: STRING, desc: Audio mime type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+VIDEO_CODEC_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: VideoCodec fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  CALLER_TYPE: {type: STRING, desc: Caller is App or player_framework}
+  VIDEO_CODEC: {type: STRING, desc: Video mime type}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+MUXER_FAILURE:
+  __BASE: {type: FAULT, level: CRITICAL, desc: Muxer fault}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  CALLER_TYPE: {type: STRING, desc: Caller is App or player_framework}
+  VIDEO_CODEC: {type: STRING, desc: Video mime type}
+  AUDIO_CODEC: {type: STRING, desc: Audio mime type}
+  CONTAINER_FORMAT: {type: STRING, desc: Container format}
+  ERROR_MESG: {type: STRING, desc: Fault description}
+
+DRM_SERVICE_INFO:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: DRM service start or end information}
+  MODULE: {type: STRING, desc: Module name}
+  TIME: {type: UINT32, desc: Service start or end time us}
+  SERVICE_NAME: {type: STRING, desc: Service name}
+  ACTION: {type: STRING, desc: Start or end}
+  MEMORY: {type: UINT32, desc: Service used memory kb}
+
+DRM_LICENSE_DOWNLOAD_INFO:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: DRM system provision}
+  MODULE: {type: STRING, desc: Module name}
+  TIME: {type: UINT32, desc: Service start or end time us}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  DRM_NAME: {type: STRING, desc: DRM schema name}
+  DRM_UUID: {type: STRING, desc: DRM universial unique identifier}
+  CLIENT_VERSION: {type: STRING, desc: DRM client version}
+  LICENSE_TYPE: {type: STRING, desc: Online of offline}
+  GENERATION_DURATION: {type: UINT32, desc: License request generation costs ms}
+  GENERATION_RESULT: {type: STRING, desc: Success or fail}
+  PROCESS_DURATION: {type: UINT32, desc: License process costs ms}
+  PROCESS_RESULT: {type: STRING, desc: License process result}
+
+DRM_CERTIFICATE_DOWNLOAD_INFO:
+  __BASE: {type: BEHAVIOR, level: MINOR, desc: DRM system provision}
+  MODULE: {type: STRING, desc: Module name}
+  TIME: {type: UINT32, desc: Service start or end time us}
+  APP_NAME: {type: STRING, desc: Caller app name}
+  INSTANCE_ID: {type: STRING, desc: Distinct player id}
+  DRM_NAME: {type: STRING, desc: DRM schema name}
+  DRM_UUID: {type: STRING, desc: DRM universial unique identifier}
+  CLIENT_VERSION: {type: STRING, desc: DRM client version}
+  GENERATION_DURATION: {type: UINT32, desc: License request generation costs ms}
+  GENERATION_RESULT: {type: STRING, desc: Success or fail}
+  PROCESS_DURATION: {type: UINT32, desc: License process costs ms}
+  PROCESS_RESULT: {type: STRING, desc: License process result}
+  CALL_SERVER_TIME: {type: UINT32, desc: Call time}
+  SERVER_COST_DURATION: {type: UINT32, desc: Processing time of the server}
+  SERVER_RESULT: {type: STRING, desc: Result}
+PLAYER_COMMON_STATISTICS:
+  __BASE: {type: STATISTIC, level: MINOR, desc: Player all info statistics}
+  EVENTS: {type: STRING, arrsize: 100, desc: Group of player events}
+
+RECORDER_STATISTICS:
+  __BASE: {type: STATISTIC, level: MINOR, desc: Recorder statistics}
+  EVENTS: {type: STRING, arrsize: 100, desc: Group of recorder events}
+
+SCREEN_CAPTURE_STATISTICS:
+  __BASE: {type: STATISTIC, level: MINOR, desc: Screen capture statistics}
+  EVENTS: {type: STRING, arrsize: 100, desc: Group of screen capture events}
+
+DRM_STATISTICS:
+  __BASE: {type: STATISTIC, level: MINOR, desc: DRM common statistics}
+  EVENTS: {type: STRING, arrsize: 100, desc: Group of DRM common events}

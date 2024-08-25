@@ -1,0 +1,58 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../ressched.gni")
+
+config("device_standby_plugin_config") {
+  include_dirs = [
+    "include",
+    "${ressched_common}/include",
+    "${ressched_interfaces}/innerkits/ressched_client/include",
+  ]
+}
+
+ohos_shared_library("device_standby_plugin") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  configs = [ ":device_standby_plugin_config" ]
+
+  sources = [ "src/device_standby_plugin.cpp" ]
+
+  deps = [ "${ressched_services}:resschedsvc" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+  ]
+
+  defines = []
+  if (rss_device_standby_enable) {
+    external_deps += [
+      "device_standby:standby_innerkits",
+      "device_standby:standby_utils_common",
+      "ipc:ipc_single",
+    ]
+    defines += [ "RSS_DEVICE_STANDBY_ENABLE" ]
+  }
+
+  subsystem_name = "resourceschedule"
+  part_name = "resource_schedule_service"
+}

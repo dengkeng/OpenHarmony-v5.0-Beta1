@@ -1,0 +1,77 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#import("//build/config/ohos/rules.gni")
+import("//build/ohos.gni")
+import("//foundation/multimedia/image_framework/ide/image_decode_config.gni")
+group("image_framework") {
+  if (use_clang_ios) {
+    defines = image_decode_ios_defines
+    deps = [
+      "frameworks/innerkitsimpl/utils:image_utils",
+      "interfaces/innerkits:image_native",
+      "interfaces/kits/js/common:image",
+    ]
+  } else if (use_clang_android) {
+    defines = image_decode_android_defines
+    deps = [
+      "frameworks/innerkitsimpl/utils:image_utils",
+      "interfaces/innerkits:image_native",
+      "interfaces/kits/js/common:multimedia_image",
+    ]
+  } else {
+    deps = [
+      "frameworks/innerkitsimpl/utils:image_utils",
+      "frameworks/kits/js/common/ndk:image_ndk",
+      "frameworks/kits/js/common/ndk:image_receiver_ndk",
+      "frameworks/kits/js/common/pixelmap_ndk:pixelmap_ndk",
+      "frameworks/kits/native/common/ndk:image_receiver",
+      "frameworks/kits/native/common/ndk:ohimage",
+      "interfaces/innerkits:image_native",
+      "interfaces/kits/js/common:image",
+      "interfaces/kits/js/common:image_napi",
+      "interfaces/kits/js/common:sendableimage",
+    ]
+  }
+}
+
+group("plugins") {
+  deps = [ "plugins/manager:pluginmanager" ]
+
+  if (!use_clang_android && !use_clang_ios) {
+    deps += [ "plugins/common/libs:multimediaplugin" ]
+    if (enable_jpeg_hw_decode) {
+      deps += [ "frameworks/innerkitsimpl/test/unittest/jpeg_hw_decode/demo:jpeg_hw_decoder_demo" ]
+    }
+  }
+}
+
+group("image_test_list") {
+  testonly = true
+
+  # image
+  if (!use_clang_android && !use_clang_ios) {
+    deps = [
+      "frameworks/innerkitsimpl/test:unittest",
+      "frameworks/innerkitsimpl/test/fuzztest:fuzztest",
+    ]
+  }
+}
+
+config("media_config") {
+  defines = []
+
+  if (current_cpu == "arm64" || current_cpu == "arm") {
+    defines += [ "USE_NEON" ]
+  }
+}

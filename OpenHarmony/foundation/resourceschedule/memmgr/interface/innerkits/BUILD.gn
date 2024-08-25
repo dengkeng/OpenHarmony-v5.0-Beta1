@@ -1,0 +1,69 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("../../memmgr.gni")
+
+config("memmgr_client_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${memmgr_common_path}/include",
+    "${memmgr_service_path}/include/memory_level_manager/",
+  ]
+  defines = []
+  if (memmgr_purgeable_memory) {
+    defines += [ "USE_PURGEABLE_MEMORY" ]
+    include_dirs += [ "${memmgr_service_path}/include/purgeable_mem_manager/" ]
+  }
+}
+
+ohos_shared_library("memmgrclient") {
+  install_enable = true
+  sources = [
+    "src/app_state_subscriber.cpp",
+    "src/bundle_priority_list.cpp",
+    "src/mem_mgr_client.cpp",
+    "src/mem_mgr_constant.cpp",
+    "src/mem_mgr_process_state_info.cpp",
+    "src/mem_mgr_proxy.cpp",
+    "src/mem_mgr_window_info.cpp",
+  ]
+
+  public_configs = [ ":memmgr_client_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  if (memmgr_purgeable_memory) {
+    sources += [
+      "${memmgr_service_path}/src/purgeable_mem_manager/app_state_subscriber_proxy.cpp",
+      "${memmgr_service_path}/src/purgeable_mem_manager/app_state_subscriber_stub.cpp",
+    ]
+  }
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  part_name = "memmgr"
+  subsystem_name = "resourceschedule"
+}

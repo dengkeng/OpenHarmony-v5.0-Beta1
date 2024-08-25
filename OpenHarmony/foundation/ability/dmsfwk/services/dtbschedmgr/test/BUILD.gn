@@ -1,0 +1,700 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//build/test.gni")
+import("//foundation/ability/dmsfwk/dmsfwk.gni")
+import("../../../dmsfwk.gni")
+
+module_output_path = "dmsfwk/distributedschedsvrtest"
+
+distributed_service = "//foundation/ability/dmsfwk/services"
+
+dsched_configs =
+    [ "${distributed_service}/dtbschedmgr:distributed_sched_config" ]
+
+config("test_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/unittest",
+    "${distributed_service}/dtbschedmgr/include/continue",
+    "${distributed_service}/dtbschedmgr/include/continue/state",
+    "${distributed_service}/dtbschedmgr/include/continue/state/source_state",
+    "${distributed_service}/dtbschedmgr/include/continue/state/sink_state",
+    "${distributed_service}/dtbschedmgr/include/distributedWant",
+    "${distributed_service}/dtbschedmgr/include/softbus_adapter/transport",
+    "${dms_path}/common/include",
+  ]
+}
+
+dsched_external_deps = [
+  "ability_base:base",
+  "ability_base:want",
+  "ability_base:zuri",
+  "ability_runtime:ability_manager",
+  "ability_runtime:app_manager",
+  "ability_runtime:dataobs_manager",
+  "ability_runtime:mission_info",
+  "access_token:libaccesstoken_sdk",
+  "access_token:libnativetoken",
+  "access_token:libtoken_setproc",
+  "bundle_framework:appexecfwk_base",
+  "bundle_framework:appexecfwk_core",
+  "cJSON:cjson",
+  "c_utils:utils",
+  "data_share:datashare_consumer",
+  "device_auth:deviceauth_sdk",
+  "device_info_manager:distributed_device_profile_common",
+  "device_info_manager:distributed_device_profile_sdk",
+  "device_manager:devicemanagersdk",
+  "device_security_level:dslm_sdk",
+  "distributed_bundle_framework:dbms_fwk",
+  "dmsfwk:continuation_manager",
+  "dsoftbus:softbus_client",
+  "eventhandler:libeventhandler",
+  "ffrt:libffrt",
+  "hilog:libhilog",
+  "hisysevent:libhisysevent",
+  "hitrace:hitrace_meter",
+  "hitrace:libhitracechain",
+  "init:libbegetutil",
+  "ipc:ipc_core",
+  "kv_store:distributeddata_inner",
+  "safwk:system_ability_fwk",
+  "samgr:samgr_proxy",
+  "window_manager:libwsutils",
+  "window_manager:scene_session",
+  "window_manager:session_manager_lite",
+]
+if (os_account_part) {
+  dsched_external_deps += [ "os_account:os_account_innerkits" ]
+}
+
+if (dmsfwk_report_memmgr) {
+  dsched_external_deps += [ "memmgr:memmgrclient" ]
+}
+
+if (dmsfwk_report_memmgr_plugins) {
+  dsched_external_deps += [ "memmgr_override:memmgrclient" ]
+}
+
+if (dmsfwk_standard_form_share) {
+  dsched_external_deps += [ "form_fwk:form_manager" ]
+}
+
+if (dmsfwk_mission_manager) {
+  dsched_external_deps += [ "image_framework:image_native" ]
+}
+
+if (efficiency_manager_service_enable) {
+  dsched_external_deps += [ "resource_schedule_service:ressched_client" ]
+}
+
+if (dmsfwk_ces_listener) {
+  dsched_external_deps += [ "common_event_service:cesfwk_innerkits" ]
+}
+
+if (dmsfwk_mmi_listener) {
+  dsched_external_deps += [ "input:libmmi-client" ]
+}
+
+dsched_public_deps = [
+  "${dms_path}/common:distributed_sched_utils",
+  "//third_party/googletest:gmock_main",
+  "//third_party/googletest:gtest_main",
+]
+
+dtbschedmgr_sources = [
+  "${distributed_service}/dtbschedmgr/src/ability_connection_wrapper_proxy.cpp",
+  "${distributed_service}/dtbschedmgr/src/ability_connection_wrapper_stub.cpp",
+  "${distributed_service}/dtbschedmgr/src/adapter/dnetwork_adapter.cpp",
+  "${distributed_service}/dtbschedmgr/src/app_state_observer.cpp",
+  "${distributed_service}/dtbschedmgr/src/bundle/bundle_manager_callback_stub.cpp",
+  "${distributed_service}/dtbschedmgr/src/bundle/bundle_manager_internal.cpp",
+  "${distributed_service}/dtbschedmgr/src/connect_death_recipient.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/dsched_continue.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/dsched_continue_event.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/dsched_continue_event_handler.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/dsched_continue_manager.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/dsched_continue_state_machine.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/sink_state/dsched_continue_data_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/sink_state/dsched_continue_sink_end_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/sink_state/dsched_continue_sink_start_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/sink_state/dsched_continue_sink_wait_end_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/source_state/dsched_continue_ability_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/source_state/dsched_continue_source_end_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/source_state/dsched_continue_source_start_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue/state/source_state/dsched_continue_source_wait_end_state.cpp",
+  "${distributed_service}/dtbschedmgr/src/continue_scene_session_handler.cpp",
+  "${distributed_service}/dtbschedmgr/src/datashare_manager.cpp",
+  "${distributed_service}/dtbschedmgr/src/deviceManager/dms_device_info.cpp",
+  "${distributed_service}/dtbschedmgr/src/dfx/dms_continue_time_dumper.cpp",
+  "${distributed_service}/dtbschedmgr/src/dfx/dms_hisysevent_report.cpp",
+  "${distributed_service}/dtbschedmgr/src/dfx/dms_hitrace_chain.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributedWant/distributed_operation.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributedWant/distributed_operation_builder.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributedWant/distributed_want.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributedWant/distributed_want_params.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributedWant/distributed_want_params_wrapper.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_device_node_listener.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_event_died_listener.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_radar.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_adapter.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_continuation.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_dumper.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_permission.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_proxy.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_service.cpp",
+  "${distributed_service}/dtbschedmgr/src/distributed_sched_stub.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_callback_task.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_free_install_callback.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_free_install_callback_proxy.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_free_install_callback_stub.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_token_callback.cpp",
+  "${distributed_service}/dtbschedmgr/src/dms_version_manager.cpp",
+  "${distributed_service}/dtbschedmgr/src/dtbschedmgr_device_info_storage.cpp",
+  "${distributed_service}/dtbschedmgr/src/softbus_adapter/softbus_adapter_common.cpp",
+  "${distributed_service}/dtbschedmgr/src/softbus_adapter/transport/dsched_data_buffer.cpp",
+  "${distributed_service}/dtbschedmgr/src/softbus_adapter/transport/dsched_softbus_session.cpp",
+  "${distributed_service}/dtbschedmgr/src/softbus_adapter/transport/dsched_transport_softbus_adapter.cpp",
+  "${distributed_service}/dtbschedmgr/src/switch_status_dependency.cpp",
+  "unittest/distributed_sched_util.cpp",
+]
+
+if (dmsfwk_mission_manager) {
+  dtbschedmgr_sources += [
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_bm_storage.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_bundle_info.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_data_change_listener.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_data_storage.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_mission_broadcast_listener.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_mission_change_listener.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_mission_died_listener.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_mission_focused_listener.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_mission_info.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/distributed_sched_mission_manager.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/dms_continue_recv_manager.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/dms_continue_send_manager.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/kvstore_death_recipient.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/mission_changed_notify.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/mission_info_converter.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/snapshot.cpp",
+    "${distributed_service}/dtbschedmgr/src/mission/snapshot_converter.cpp",
+  ]
+}
+
+if (dmsfwk_standard_form_share) {
+  dtbschedmgr_sources +=
+      [ "${distributed_service}/dtbschedmgr/src/form_mgr_death_recipient.cpp" ]
+}
+
+if (dmsfwk_ces_listener) {
+  dtbschedmgr_sources +=
+      [ "${distributed_service}/dtbschedmgr/src/common_event_listener.cpp" ]
+}
+
+if (dmsfwk_mmi_listener) {
+  dtbschedmgr_sources +=
+      [ "${distributed_service}/dtbschedmgr/src/adapter/mmi_adapter.cpp" ]
+} else {
+  dtbschedmgr_sources += [
+    "${distributed_service}/dtbschedmgr/src/adapter/mmi_adapter_common.cpp",
+  ]
+}
+
+ohos_unittest("distributedschedsvrtest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  deps = [
+    "${dms_path}/test/sceneProject/unittest/bundle_dependencies/bmsThirdBundle:bmsThirdBundle",
+    "${dms_path}/test/sceneProject/unittest/ohos_test:copy_ohos_test",
+  ]
+
+  sources = [
+    "unittest/continue_scene_session_handler_test.cpp",
+    "unittest/distributed_radar_test.cpp",
+    "unittest/distributed_sched_adapter_test.cpp",
+    "unittest/distributed_sched_dumper_test.cpp",
+    "unittest/distributed_sched_service_first_test.cpp",
+    "unittest/distributed_sched_service_second_test.cpp",
+    "unittest/distributed_sched_stub_test.cpp",
+    "unittest/dms_callback_task_test.cpp",
+    "unittest/dms_token_callback_test.cpp",
+    "unittest/mock_distributed_sched.cpp",
+    "unittest/mock_remote_stub.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+
+  if (dmsfwk_report_memmgr || dmsfwk_report_memmgr_plugins) {
+    defines = [ "SUPPORT_DISTRIBUTEDCOMPONENT_TO_MEMMGR" ]
+  }
+
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("distributedcalltest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "unittest/app_state_observer_test.cpp",
+    "unittest/distributed_sched_call_test.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dmsfreeinstallcbtest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "unittest/dms_free_install_callback_test.cpp",
+    "unittest/mock_remote_stub.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedcontinuetest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [
+    "unittest/distributed_sched_continuation_test.cpp",
+    "unittest/dms_version_manager_test.cpp",
+    "unittest/mock_distributed_sched.cpp",
+    "unittest/mock_remote_stub.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+
+  deps = [
+    "${dms_path}/test/sceneProject/unittest/bundle_dependencies/bmsThirdBundle:bmsThirdBundle",
+    "${dms_path}/test/sceneProject/unittest/ohos_test:copy_ohos_test",
+  ]
+
+  if (dmsfwk_mission_manager) {
+    defines = [ "SUPPORT_DISTRIBUTED_MISSION_MANAGER" ]
+  }
+
+  if (dmsfwk_standard_form_share) {
+    defines += [ "SUPPORT_DISTRIBUTED_FORM_SHARE" ]
+  }
+
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedconnecttest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "unittest/distributed_sched_connect_test.cpp",
+    "unittest/mock_remote_stub.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedpermissiontest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "unittest/distributed_sched_permission_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  if (token_sync_enable) {
+    cflags_cc = [ "-DTOKEN_SYNC_ENABLE" ]
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedmissionmanagertest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [
+    "unittest/mission/distributed_bm_storage_test.cpp",
+    "unittest/mission/distributed_data_storage_test.cpp",
+    "unittest/mission/distributed_mission_info_test.cpp",
+    "unittest/mission/dms_continue_manager_test.cpp",
+    "unittest/mission/dms_mission_manager_test.cpp",
+    "unittest/mission/mission_info_converter_test.cpp",
+    "unittest/mission/snapshot_test.cpp",
+    "unittest/mock_remote_stub.cpp",
+  ]
+  if (dmsfwk_mmi_listener) {
+    sources += [ "unittest/adapter/mmi_adapter_test.cpp" ]
+  }
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [ "${distributed_service}/dtbschedmgr:distributedschedsvr" ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("bundlemanagerinternaltest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [ "unittest/bundle_manager_internal_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [
+    "${distributed_service}/dtbschedmgr:distributedschedsvr",
+    "${dms_path}/test/sceneProject/unittest/bundle_dependencies/bmsThirdBundle:bmsThirdBundle",
+    "${dms_path}/test/sceneProject/unittest/ohos_test:copy_ohos_test",
+  ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("softbusadaptertest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [ "unittest/softbus_adapter/softbus_adapter_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "${dms_path}/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [
+    "${distributed_service}/dtbschedmgr:distributedschedsvr",
+    "${dms_path}/test/sceneProject/unittest/bundle_dependencies/bmsThirdBundle:bmsThirdBundle",
+    "${dms_path}/test/sceneProject/unittest/ohos_test:copy_ohos_test",
+  ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("hisyseventreporttest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [ "unittest/dms_hisysevent_report_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [ "${distributed_service}/dtbschedmgr:distributedschedsvr" ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("distributeduidtest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "unittest/distributed_sched_uid_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("distributedwanttest") {
+  sanitize = {
+    blocklist = "./cfi_blocklist.txt"
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "unittest/distributedWant/distributed_operation_test.cpp",
+    "unittest/distributedWant/distributed_want_params_test.cpp",
+    "unittest/distributedWant/distributed_want_params_wrapper_test.cpp",
+    "unittest/distributedWant/distributed_want_test.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "${distributed_service}/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dmsbasetest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  sources = [
+    "unittest/deviceManager/dms_device_info_test.cpp",
+    "unittest/dfx/dms_continue_time_dumper_test.cpp",
+    "unittest/dfx/dms_hisysevent_report_test.cpp",
+    "unittest/dms_network_adapter_test.cpp",
+    "unittest/dtbschedmgr_device_info_storage_test.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "./resource:coverage_flags",
+  ]
+  deps = []
+  configs += dsched_configs
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedswitchstatustest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "unittest/switch_status_dependency_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "${dms_path}/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [ "${distributed_service}/dtbschedmgr:distributedschedsvr" ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("datasharemanagertest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "unittest/datashare_manager_test.cpp" ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "${dms_path}/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [ "${distributed_service}/dtbschedmgr:distributedschedsvr" ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+ohos_unittest("dschedcontinuestatetest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+  cflags = [ "-Dprivate=public" ]
+  sources = [
+    "unittest/continue/dsched_continue_manager_test.cpp",
+    "unittest/continue/dsched_continue_state_test.cpp",
+    "unittest/continue/dsched_continue_test.cpp",
+    "unittest/mock_distributed_sched.cpp",
+  ]
+  sources += dtbschedmgr_sources
+  configs = [
+    ":test_config",
+    "${dms_path}/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+  configs += dsched_configs
+  deps = [ "${distributed_service}/dtbschedmgr:distributedschedsvr" ]
+  if (is_standard_system) {
+    external_deps = dsched_external_deps
+    public_deps = dsched_public_deps
+  }
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}
+
+group("unittest") {
+  testonly = true
+  deps = [
+    ":bundlemanagerinternaltest",
+    ":datasharemanagertest",
+    ":distributedcalltest",
+    ":distributedschedsvrtest",
+    ":distributeduidtest",
+    ":distributedwanttest",
+    ":dmsbasetest",
+    ":dmsfreeinstallcbtest",
+    ":dschedconnecttest",
+    ":dschedcontinuestatetest",
+    ":dschedcontinuetest",
+    ":dschedswitchstatustest",
+    ":softbusadaptertest",
+    "${dms_path}/common/test/unittest:distributed_sched_utils_test",
+  ]
+  if (dmsfwk_mission_manager) {
+    deps += [
+      ":dschedmissionmanagertest",
+      ":dschedpermissiontest",
+    ]
+  }
+}

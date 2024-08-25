@@ -1,0 +1,101 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("//foundation/distributeddatamgr/pasteboard/pasteboard.gni")
+
+config("module_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "${pasteboard_innerkits_path}/include",
+    "//foundation/distributeddatamgr/pasteboard/framework/framework/include",
+    "//foundation/distributeddatamgr/pasteboard/framework/tlv",
+    "${pasteboard_root_path}/framework/framework/include/serializable",
+    "${pasteboard_service_path}/load/include",
+    "include",
+    "test/include",
+  ]
+}
+
+module_output_path = "pasteboard/pasteboard_service"
+
+ohos_unittest("PasteboardFrameworkTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "./cfi_blocklist.txt"
+  }
+  resource_config_file = "//foundation/distributeddatamgr/pasteboard/framework/test/resource/ohos_test.xml"
+  module_out_path = module_output_path
+
+  sources = [
+    "${pasteboard_root_path}/framework/framework/serializable/serializable.cpp",
+    "${pasteboard_service_path}/load/src/config.cpp",
+    "src/dm_adapter_test.cpp",
+    "src/paste_data_test.cpp",
+    "src/pasteboard_client_test.cpp",
+    "src/pasteboard_client_udmf_delay_test.cpp",
+    "src/pasteboard_unified_data_test.cpp",
+    "src/pasteboard_utils_test.cpp",
+    "src/serializable_test.cpp",
+    "src/tlv_object_test.cpp",
+    "src/web_controller_test.cpp",
+  ]
+  configs = [
+    "//commonlibrary/c_utils/base:utils_config",
+    ":module_private_config",
+  ]
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "app_file_service:remote_file_share_native",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "image_framework:image_native",
+    "init:libbeget_proxy",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "udmf:udmf_client",
+  ]
+
+  deps = [
+    "${pasteboard_framework_path}:pasteboard_framework",
+    "${pasteboard_innerkits_path}:pasteboard_client",
+    "//foundation/distributeddatamgr/pasteboard/framework/uri:pasteboard_uri",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  defines = []
+
+  if (pb_device_info_manager_part_enabled) {
+    external_deps += [
+      "device_info_manager:distributed_device_profile_common",
+      "device_info_manager:distributed_device_profile_sdk",
+    ]
+    defines += [ "PB_DEVICE_INFO_MANAGER_ENABLE" ]
+  }
+
+  if (pb_device_manager_part_enabled) {
+    external_deps += [ "device_manager:devicemanagersdk" ]
+    defines += [ "PB_DEVICE_MANAGER_ENABLE" ]
+  }
+
+  configs += [ "//third_party/cJSON:cJSON_config" ]
+
+  deps += [ "//third_party/cJSON:cjson" ]
+}

@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef OHOS_ROSEN_WINDOW_SCENE_SESSION_MANAGER_STUB_H
+#define OHOS_ROSEN_WINDOW_SCENE_SESSION_MANAGER_STUB_H
+
+#include <map>
+#include <iremote_stub.h>
+
+#include "session_manager/include/zidl/scene_session_manager_interface.h"
+
+namespace OHOS::Rosen {
+class SceneSessionManagerStub;
+using SceneSessionManagerStubFunc = int (SceneSessionManagerStub::*)(MessageParcel &data, MessageParcel &reply);
+
+class SceneSessionManagerStub : public IRemoteStub<ISceneSessionManager> {
+public:
+    SceneSessionManagerStub() = default;
+    virtual ~SceneSessionManagerStub() = default;
+
+    int OnRemoteRequest(uint32_t code, MessageParcel &data, MessageParcel &reply, MessageOption &option) override;
+
+private:
+    static const std::map<uint32_t, SceneSessionManagerStubFunc> stubFuncMap_;
+
+    int HandleGetAccessibilityWindowInfo(MessageParcel &data, MessageParcel &reply);
+    int HandleUpdateProperty(MessageParcel &data, MessageParcel &reply);
+    int HandleRequestFocusStatus(MessageParcel &data, MessageParcel &reply);
+    int HandleCreateAndConnectSpecificSession(MessageParcel &data, MessageParcel &reply);
+    int HandleRecoverAndConnectSpecificSession(MessageParcel &data, MessageParcel &reply);
+    int HandleRecoverAndReconnectSceneSession(MessageParcel &data, MessageParcel &reply);
+    int HandleDestroyAndDisconnectSpcificSession(MessageParcel &data, MessageParcel &reply);
+    int HandleDestroyAndDisconnectSpcificSessionWithDetachCallback(MessageParcel& data, MessageParcel& reply);
+    int HandleRegisterWindowManagerAgent(MessageParcel &data, MessageParcel &reply);
+    int HandleUnregisterWindowManagerAgent(MessageParcel &data, MessageParcel &reply);
+    int HandleGetFocusSessionInfo(MessageParcel &data, MessageParcel &reply);
+    int HandleSetSessionLabel(MessageParcel &data, MessageParcel &reply);
+    int HandleSetSessionIcon(MessageParcel &data, MessageParcel &reply);
+    int HandleIsValidSessionIds(MessageParcel &data, MessageParcel &reply);
+    int HandleRegisterSessionChangeListener(MessageParcel &data, MessageParcel &reply);
+    int HandleUnRegisterSessionChangeListener(MessageParcel &data, MessageParcel &reply);
+    int HandlePendingSessionToForeground(MessageParcel &data, MessageParcel &reply);
+    int HandlePendingSessionToBackgroundForDelegator(MessageParcel &data, MessageParcel &reply);
+    int HandleGetFocusSessionToken(MessageParcel &data, MessageParcel &reply);
+    int HandleGetFocusSessionElement(MessageParcel& data, MessageParcel& reply);
+    int HandleSetGestureNavigationEnabled(MessageParcel &data, MessageParcel &reply);
+    int HandleCheckWindowId(MessageParcel &data, MessageParcel &reply);
+
+    int HandleRegisterSessionListener(MessageParcel& data, MessageParcel& reply);
+    int HandleUnRegisterSessionListener(MessageParcel& data, MessageParcel& reply);
+    int HandleGetSessionInfos(MessageParcel& data, MessageParcel& reply);
+    int HandleGetSessionInfo(MessageParcel& data, MessageParcel& reply);
+    int HandleGetSessionInfoByContinueSessionId(MessageParcel& data, MessageParcel& reply);
+
+    int HandleDumpSessionAll(MessageParcel& data, MessageParcel& reply);
+    int HandleDumpSessionWithId(MessageParcel& data, MessageParcel& reply);
+    int HandleSetSessionContinueState(MessageParcel &data, MessageParcel &reply);
+    int HandleTerminateSessionNew(MessageParcel& data, MessageParcel& reply);
+    int HandleGetSessionDump(MessageParcel &data, MessageParcel &reply);
+    int HandleUpdateSessionAvoidAreaListener(MessageParcel& data, MessageParcel& reply);
+    int HandleGetSessionSnapshot(MessageParcel &data, MessageParcel &reply);
+    int HandleBindDialogTarget(MessageParcel &data, MessageParcel &reply);
+    int HandleNotifyDumpInfoResult(MessageParcel &data, MessageParcel &reply);
+    int HandleClearSession(MessageParcel &data, MessageParcel &reply);
+    int HandleClearAllSessions(MessageParcel &data, MessageParcel &reply);
+    int HandleLockSession(MessageParcel &data, MessageParcel &reply);
+    int HandleUnlockSession(MessageParcel &data, MessageParcel &reply);
+    int HandleMoveSessionsToForeground(MessageParcel &data, MessageParcel &reply);
+    int HandleMoveSessionsToBackground(MessageParcel &data, MessageParcel &reply);
+    int HandleRegisterCollaborator(MessageParcel &data, MessageParcel &reply);
+    int HandleUnregisterCollaborator(MessageParcel &data, MessageParcel &reply);
+    int HandleUpdateSessionTouchOutsideListener(MessageParcel& data, MessageParcel& reply);
+    int HandleRaiseWindowToTop(MessageParcel& data, MessageParcel& reply);
+    int HandleNotifyWindowExtensionVisibilityChange(MessageParcel& data, MessageParcel& reply);
+    int HandleGetTopWindowId(MessageParcel& data, MessageParcel& reply);
+    int HandleUpdateSessionWindowVisibilityListener(MessageParcel& data, MessageParcel& reply);
+    int HandleShiftAppWindowFocus(MessageParcel& data, MessageParcel& reply);
+    int HandleGetVisibilityWindowInfo(MessageParcel& data, MessageParcel& reply);
+    int HandleAddExtensionWindowStageToSCB(MessageParcel& data, MessageParcel& reply);
+    int HandleAddOrRemoveSecureSession(MessageParcel& data, MessageParcel& reply);
+    int HandleUpdateExtWindowFlags(MessageParcel& data, MessageParcel& reply);
+    int HandleGetHostWindowRect(MessageParcel& data, MessageParcel& reply);
+    int HandleGetCallingWindowWindowStatus(MessageParcel& data, MessageParcel& reply);
+    int HandleGetCallingWindowRect(MessageParcel& data, MessageParcel& reply);
+    int HandleGetWindowModeType(MessageParcel& data, MessageParcel& reply);
+};
+} // namespace OHOS::Rosen
+#endif // OHOS_ROSEN_WINDOW_SCENE_SESSION_MANAGER_STUB_H

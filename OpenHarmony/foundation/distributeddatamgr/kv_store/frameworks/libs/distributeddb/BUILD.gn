@@ -1,0 +1,130 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("distributeddb.gni")
+
+config("distrdb_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "interfaces/include",
+    "interfaces/include/cloud",
+    "interfaces/src",
+    "interfaces/src/relational",
+    "common/include",
+    "common/include/cloud",
+    "common/include/relational",
+    "common/src/cloud",
+    "communicator/include",
+    "storage/include",
+    "storage/src",
+    "storage/src/multiver",
+    "storage/src/operation",
+    "storage/src/gaussdb_rd",
+    "storage/src/sqlite",
+    "storage/src/sqlite/kv",
+    "storage/src/sqlite/relational",
+    "storage/src/upgrader",
+    "storage/src/cloud",
+    "storage/src/kv",
+    "storage/src/relational",
+    "syncer/include",
+    "syncer/src",
+    "syncer/src/cloud",
+    "syncer/src/device",
+    "syncer/src/device/multiver",
+    "syncer/src/device/singlever",
+    "//third_party/openssl/include/",
+  ]
+
+  defines = [
+    "_LARGEFILE64_SOURCE",
+    "_FILE_OFFSET_BITS=64",
+    "SQLITE_HAS_CODEC",
+    "SQLITE_ENABLE_JSON1",
+    "USING_HILOG_LOGGER",
+    "USE_SQLITE_SYMBOLS",
+    "USING_DB_JSON_EXTRACT_AUTOMATICALLY",
+    "JSONCPP_USE_BUILDER",
+    "OMIT_FLATBUFFER",
+    "OMIT_MULTI_VER",
+    "RELATIONAL_STORE",
+    "SQLITE_DISTRIBUTE_RELATIONAL",
+    "USE_DFX_ABILITY",
+    "SQLITE_ENABLE_DROPTABLE_CALLBACK",
+    "OPENSSL_SUPPRESS_DEPRECATED",
+    "MAX_UPLOAD_COUNT=30",
+  ]
+  if (is_debug) {
+    defines += [ "TRACE_SQLITE_EXECUTE" ]
+  }
+  if (is_ohos) {
+    defines += [ "USE_FFRT" ]
+  }
+}
+
+config("distrdb_public_config") {
+  visibility = [ "*:*" ]
+  include_dirs = [
+    "interfaces/include",
+    "interfaces/include/relational",
+    "include",
+    "gaussdb_rd/include",
+    "gaussdb_rd/include/grd_base",
+    "gaussdb_rd/include/grd_document",
+    "gaussdb_rd/include/grd_kv",
+  ]
+}
+
+group("build_module") {
+  deps = [ ":distributeddb" ]
+}
+
+ohos_shared_library("distributeddb") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "./cfi_blocklist.txt"
+  }
+  sources = distributeddb_src
+
+  configs = [ ":distrdb_config" ]
+  public_configs = [ ":distrdb_public_config" ]
+
+  deps = [
+    "//third_party/sqlite:sqlite",
+    "//third_party/zlib:shared_libz",
+  ]
+
+  configs += [ "//third_party/jsoncpp:jsoncpp_config" ]
+  cflags_cc = [ "-fvisibility=hidden" ]
+  deps += [
+    "gaussdb_rd:gaussdb_rd",
+    "//third_party/jsoncpp:jsoncpp",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+  ]
+
+  subsystem_name = "distributeddatamgr"
+  innerapi_tags = [ "platformsdk_indirect" ]
+  part_name = "kv_store"
+}

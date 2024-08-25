@@ -1,0 +1,130 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//foundation/ability/form_fwk/form_fwk.gni")
+
+config("formmgr_test_config") {
+  include_dirs = [ "mock/include" ]
+
+  configs = [ "${form_fwk_path}:formmgr_config" ]
+}
+
+public_configs = [
+  ":formmgr_test_config",
+  "${c_utils_base_path}:utils_config",
+]
+
+public_deps = [
+  "${c_utils_base_path}:utils",
+  "//third_party/googletest:gmock_main",
+  "//third_party/googletest:gtest_main",
+]
+
+group("unittest") {
+  testonly = true
+
+  deps = [
+    "unittest/fms_form_ashmem_test:unittest",
+    "unittest/fms_form_batch_delete_connection_test:unittest",
+    "unittest/fms_form_bms_helper_test:unittest",
+    "unittest/fms_form_cache_mgr_test:unittest",
+    "unittest/fms_form_caller_mgr_test:unittest",
+    "unittest/fms_form_data_mgr_test:unittest",
+    "unittest/fms_form_data_proxy_mgr_test:unittest",
+    "unittest/fms_form_data_proxy_record_test:unittest",
+    "unittest/fms_form_db_record_test:unittest",
+    "unittest/fms_form_distributed_client_test:unittest",
+    "unittest/fms_form_event_report_test:unittest",
+    "unittest/fms_form_event_util_test:unittest",
+    "unittest/fms_form_host_callback_test:unittest",
+    "unittest/fms_form_host_client_test:unittest",
+    "unittest/fms_form_host_proxy_test:unittest",
+    "unittest/fms_form_host_record_test:unittest",
+    "unittest/fms_form_host_stub_test:unittest",
+    "unittest/fms_form_info_mgr_test:unittest",
+    "unittest/fms_form_info_rdb_storage_mgr_test:unittest",
+    "unittest/fms_form_info_storage_test:unittest",
+    "unittest/fms_form_instance_test:unittest",
+    "unittest/fms_form_js_info_base_test:unittest",
+    "unittest/fms_form_js_info_test:unittest",
+    "unittest/fms_form_memmgr_client_test:unittest",
+    "unittest/fms_form_mgr_adapter_test:unittest",
+    "unittest/fms_form_mgr_add_form_test:unittest",
+    "unittest/fms_form_mgr_cast_temp_form_test:unittest",
+    "unittest/fms_form_mgr_death_callback_test:unittest",
+    "unittest/fms_form_mgr_delete_form_test:unittest",
+    "unittest/fms_form_mgr_dump_test:unittest",
+    "unittest/fms_form_mgr_lifecycle_update_test:unittest",
+    "unittest/fms_form_mgr_message_event_test:unittest",
+    "unittest/fms_form_mgr_notify_forms_privacy_protected_test:unittest",
+    "unittest/fms_form_mgr_notify_invisible_forms_test:unittest",
+    "unittest/fms_form_mgr_notify_visible_forms_test:unittest",
+    "unittest/fms_form_mgr_proxy_test:unittest",
+    "unittest/fms_form_mgr_publish_form_test:unittest",
+    "unittest/fms_form_mgr_release_form_test:unittest",
+    "unittest/fms_form_mgr_request_form_test:unittest",
+    "unittest/fms_form_mgr_service_test:unittest",
+    "unittest/fms_form_mgr_update_form_test:unittest",
+    "unittest/fms_form_provider_client_test:unittest",
+    "unittest/fms_form_provider_data_new_leg_test:unittest",
+    "unittest/fms_form_provider_data_test:unittest",
+    "unittest/fms_form_provider_mgr_test:unittest",
+    "unittest/fms_form_provider_stub_test:unittest",
+    "unittest/fms_form_publish_interceptor_stub_test:unittest",
+    "unittest/fms_form_rdb_data_mgr_test:unittest",
+    "unittest/fms_form_refresh_connection_test:unittest",
+    "unittest/fms_form_render_connection_test:unittest",
+    "unittest/fms_form_render_impl_test:unittest",
+    "unittest/fms_form_render_mgr_inner_test:unittest",
+    "unittest/fms_form_render_mgr_test:unittest",
+    "unittest/fms_form_render_proxy_test:unittest",
+    "unittest/fms_form_render_service_extension_test:unittest",
+    "unittest/fms_form_render_stub_test:unittest",
+    "unittest/fms_form_router_proxy_mgr_test:unittest",
+    "unittest/fms_form_serial_queue_test:unittest",
+    "unittest/fms_form_set_next_refresh_test:unittest",
+    "unittest/fms_form_share_mgr_test:unittest",
+    "unittest/fms_form_supply_callback_test:unittest",
+    "unittest/fms_form_supply_proxy_test:unittest",
+    "unittest/fms_form_supply_stub_test:unittest",
+    "unittest/fms_form_sys_event_receiver_test:unittest",
+    "unittest/fms_form_systemload_listener_test:unittest",
+    "unittest/fms_form_timer_mgr_new_test:unittest",
+    "unittest/fms_form_timer_mgr_test:unittest",
+    "unittest/fms_form_util_permission_verify_test:unittest",
+    "unittest/fms_form_util_test:unittest",
+    "unittest/fms_form_xml_parser_test:unittest",
+    "unittest/fms_free_install_status_callback_proxy_test:unittest",
+    "unittest/fms_observer_record_test:unittest",
+    "unittest/fms_provider_connect_proxy_test:unittest",
+    "unittest/fms_provider_connect_stub_test:unittest",
+    "unittest/fms_running_form_info_test:unittest",
+    "unittest/form_errors_test:unittest",
+    "unittest/form_info_mgr_test:unittest",
+    "unittest/form_mgr_proxy_test:unittest",
+    "unittest/form_mgr_stub_test:unittest",
+    "unittest/form_mgr_test:unittest",
+    "unittest/form_napi_util_test:unittest",
+    "unittest/form_provider_caller_test:unittest",
+    "unittest/form_provider_info_test:unittest",
+    "unittest/frs_form_module_checker_test:unittest",
+    "unittest/frs_form_render_event_report_test:unittest",
+    "unittest/frs_form_render_record_test:unittest",
+  ]
+}
+
+group("benchmarktest") {
+  testonly = true
+
+  deps = [ "benchmarktest:benchmarktest" ]
+}

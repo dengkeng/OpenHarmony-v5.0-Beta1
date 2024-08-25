@@ -1,0 +1,229 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/filemanagement/dfs_service/distributedfile.gni")
+
+config("compiler_configs") {
+  visibility = [ ":*" ]
+  visibility += [
+    "${distributedfile_path}/services/*",
+    "${distributedfile_path}/test/moduletest/*",
+  ]
+
+  cflags = [
+    "-Wall",
+    "-Werror",
+    "-Wdate-time",
+    "-Wfloat-equal",
+    "-Wshadow",
+    "-Wformat=2",
+    "-fvisibility=hidden",
+    "-ffunction-sections",
+    "-Os",
+  ]
+  configs = [ "//build/config/compiler:exceptions" ]
+
+  cflags_cc = [
+    "-fvisibility-inlines-hidden",
+    "-Os",
+  ]
+
+  defines = [
+    "LOG_DOMAIN=0xD001600",
+    "LOG_LEVEL=INFO",
+  ]
+}
+
+config("utils_public_config") {
+  include_dirs = [
+    "cloud_disk/include",
+    "dfx/include",
+    "work/include",
+    "log/include",
+    "preference/include",
+    "system/include",
+  ]
+}
+
+ohos_shared_library("libdistributedfileutils") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = [
+    "cloud_disk/src/cloud_file_utils.cpp",
+    "dfx/src/xcollie_helper.cpp",
+    "log/src/dfs_error.cpp",
+    "log/src/utils_log.cpp",
+    "preference/src/cloud_pref_impl.cpp",
+    "system/src/dfsu_access_token_helper.cpp",
+    "system/src/dfsu_fd_guard.cpp",
+    "system/src/dfsu_memory_guard.cpp",
+    "system/src/dfsu_mount_argument_descriptors.cpp",
+    "system/src/dfsu_timer.cpp",
+    "system/src/utils_directory.cpp",
+    "work/src/async_work.cpp",
+  ]
+
+  configs = [ "//build/config/compiler:exceptions" ]
+  public_configs = [ ":utils_public_config" ]
+
+  defines = [
+    "LOG_DOMAIN=0xD004308",
+    "LOG_TAG=\"distributedfile_utils\"",
+  ]
+
+  if (use_musl) {
+    if (use_jemalloc && use_jemalloc_dfx_intf) {
+      defines += [ "CONFIG_USE_JEMALLOC_DFX_INTF" ]
+    }
+  }
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:uri_permission_mgr",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "c_utils:utilsbase",
+    "file_api:filemgmt_libhilog",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "preferences:native_preferences",
+  ]
+
+  if (cloudsync_service_hicollie_enable) {
+    external_deps += [ "hicollie:libhicollie" ]
+    defines += [ "HICOLLIE_ENABLE" ]
+  }
+
+  part_name = "dfs_service"
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "filemanagement"
+}
+
+config("dentry_public_config") {
+  include_dirs = [ "dentry/include" ]
+}
+
+ohos_shared_library("libdistributedfiledentry") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "dentry/include",
+    "log/include",
+  ]
+  sources = [
+    "dentry/src/file_utils.cpp",
+    "dentry/src/meta_file.cpp",
+    "dentry/src/meta_file_clouddisk.cpp",
+  ]
+
+  public_configs = [ ":dentry_public_config" ]
+
+  deps = [ "${utils_path}:libdistributedfileutils" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  defines = [
+    "LOG_DOMAIN=0xD004307",
+    "LOG_TAG=\"CLOUDSYNC_SA\"",
+  ]
+
+  if (cloudsync_service_hicollie_enable) {
+    external_deps += [ "hicollie:libhicollie" ]
+    defines += [ "HICOLLIE_ENABLE" ]
+  }
+
+  part_name = "dfs_service"
+  subsystem_name = "filemanagement"
+}
+
+ohos_shared_library("libdistributedfileutils_lite") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "cloud_disk/include",
+    "dentry/include",
+    "dfx/include",
+    "log/include",
+    "system/include",
+  ]
+  sources = [
+    "cloud_disk/src/cloud_file_utils.cpp",
+    "dentry/src/file_utils.cpp",
+    "dentry/src/meta_file.cpp",
+    "dentry/src/meta_file_clouddisk.cpp",
+    "dfx/src/xcollie_helper.cpp",
+    "log/src/dfs_error.cpp",
+    "log/src/utils_log.cpp",
+    "system/src/dfsu_memory_guard.cpp",
+    "system/src/utils_directory.cpp",
+  ]
+
+  configs = [ "//build/config/compiler:exceptions" ]
+
+  defines = [
+    "LOG_DOMAIN=0xD004308",
+    "LOG_TAG=\"CloudFileDaemon\"",
+  ]
+
+  deps = []
+
+  external_deps = [
+    "c_utils:utils",
+    "c_utils:utilsbase",
+    "hilog:libhilog",
+  ]
+
+  if (use_musl) {
+    if (use_jemalloc && use_jemalloc_dfx_intf) {
+      defines += [ "CONFIG_USE_JEMALLOC_DFX_INTF" ]
+    }
+  }
+
+  if (cloudsync_service_hicollie_enable) {
+    external_deps += [ "hicollie:libhicollie" ]
+    defines += [ "HICOLLIE_ENABLE" ]
+  }
+
+  part_name = "dfs_service"
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "filemanagement"
+}

@@ -1,0 +1,153 @@
+{
+    "name": "@ohos/ability_base",
+    "description": "ability子系统中的基础库,want,base等",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/ability/ability_base"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "ability_base",
+        "subsystem": "ability",
+        "syscap": [
+          "SystemCapability.Ability.AbilityBase"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [
+                "ability_runtime",
+                "c_utils",
+                "hilog",
+                "hitrace",
+                "ipc",
+                "resource_management"
+            ],
+            "third_party": [
+                "json",
+                "jsoncpp",
+                "zlib"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/ability/ability_base:base_innerkits_target"
+            ],
+            "inner_kits": [
+                {
+                    "header": {
+                      "header_base": "//foundation/ability/ability_base/interfaces/inner_api/base/include/",
+                      "header_files": [
+                        "base_def.h",
+                        "base_interfaces.h",
+                        "base_object.h",
+                        "base_types.h",
+                        "bool_wrapper.h",
+                        "byte_wrapper.h",
+                        "double_wrapper.h",
+                        "float_wrapper.h",
+                        "int_wrapper.h",
+                        "light_refbase.h",
+                        "long_wrapper.h",
+                        "short_wrapper.h",
+                        "string_wrapper.h"
+                      ]
+                    },
+                    "name": "//foundation/ability/ability_base:base"
+                },
+                {
+                    "header": {
+                      "header_base": "//foundation/ability/ability_base/interfaces/kits/native/want/include/",
+                      "header_files": [
+                        "element_name.h",
+                        "want.h",
+                        "skills.h",
+                        "want_params.h",
+                        "match_type.h",
+                        "operation.h",
+                        "patterns_matcher.h",
+                        "pac_map.h"
+                      ]
+                    },
+                    "name": "//foundation/ability/ability_base:want"
+                },
+                {
+                    "header": {
+                      "header_base": "//foundation/ability/ability_base/interfaces/kits/native/configuration/include",
+                      "header_files": [
+                        "configuration.h",
+                        "global_configuration_key.h"
+                      ]
+                    },
+                    "name": "//foundation/ability/ability_base:configuration"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/uri/include",
+                    "header_files": [
+                      "uri.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:zuri"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/extractortool/include",
+                    "header_files": [
+                      "extractor.h",
+                      "zip_file.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:extractortool"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/extractortool/include",
+                    "header_files": [
+                      "file_path_utils.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:string_utils"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/extractortool/include",
+                    "header_files": [
+                      "extract_resource_manager.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:extractresourcemanager"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/session_info/include",
+                    "header_files": [
+                      "session_info.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:session_info"
+                },
+                {
+                  "header": {
+                    "header_base": "//foundation/ability/ability_base/interfaces/kits/native/view_data/include",
+                    "header_files": [
+                      "view_data.h"
+                    ]
+                  },
+                  "name": "//foundation/ability/ability_base:view_data"
+                }
+            ],
+            "test": [
+              "//foundation/ability/ability_base/test/unittest:unittest",
+              "//foundation/ability/ability_base/test/fuzztest:fuzztest"
+            ]
+        }
+    }
+}

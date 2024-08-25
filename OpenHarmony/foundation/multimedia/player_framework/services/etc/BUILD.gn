@@ -1,0 +1,63 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+ohos_prebuilt_etc("media_service.cfg") {
+  source = "media_service.cfg"
+  relative_install_dir = "init"
+  part_name = "player_framework"
+  subsystem_name = "multimedia"
+}
+
+ohos_prebuilt_etc("screen_capture_capsule_image") {
+  source = "image/capsule.svg"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}
+
+ohos_prebuilt_etc("screen_capture_mic_image") {
+  source = "image/mic.svg"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}
+
+ohos_prebuilt_etc("screen_capture_mic_off_image") {
+  source = "image/mic_off.svg"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}
+
+ohos_prebuilt_etc("screen_capture_notification_image") {
+  source = "image/notification.png"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}
+
+ohos_prebuilt_etc("screen_capture_stop_dark_image") {
+  source = "image/stop_dark.png"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}
+
+ohos_prebuilt_etc("screen_capture_stop_image") {
+  source = "image/stop.png"
+  subsystem_name = "multimedia"
+  relative_install_dir = "screencapture"
+  part_name = "player_framework"
+}

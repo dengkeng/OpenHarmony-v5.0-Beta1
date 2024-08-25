@@ -1,0 +1,35 @@
+{
+    "app": {
+        "bundleName": "com.ohos.backgroundtaskmgr.resources",
+        "singleton": true,
+        "vendor": "ohos",
+        "version": {
+            "code": 2,
+            "name": "1.0.0.2"
+        },
+        "apiVersion": {
+            "compatible": 3,
+            "target": 3
+        }
+    },
+    "deviceConfig": {
+        "default": {
+        }
+    },
+    "module": {
+        "package": "com.ohos.backgroundtaskmgr.resources",
+        "deviceType": [
+            "tablet",
+            "default",
+            "tv",
+            "car",
+            "wearable",
+            "2in1"
+        ],
+        "distro": {
+            "deliveryWithInstall": true,
+            "moduleName": "entry",
+            "moduleType": "entry"
+        }
+    }
+}

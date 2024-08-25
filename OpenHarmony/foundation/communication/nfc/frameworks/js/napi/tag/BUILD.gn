@@ -1,0 +1,70 @@
+# Copyright (c) 2022 Shenzhen Kaihong Digital Industry Development Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("../../../../nfc.gni")
+
+ohos_shared_library("tag") {
+  sanitize = {
+    cfi = true
+    boundary_sanitize = true
+    integer_overflow = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  defines = [ "DEBUG" ]
+  install_enable = true
+  include_dirs = [
+    "$NFC_DIR/interfaces/inner_api/common",
+    "$NFC_DIR/interfaces/inner_api/tags",
+    "$NFC_DIR/frameworks/js/napi/common",
+  ]
+
+  sources = [
+    "$NFC_DIR/frameworks/js/napi/common/nfc_napi_common_utils.cpp",
+    "nfc_napi_foreground_dispatch.cpp",
+    "nfc_napi_ndef_message.cpp",
+    "nfc_napi_tag.cpp",
+    "nfc_napi_tag_isodep.cpp",
+    "nfc_napi_tag_mifare_classic.cpp",
+    "nfc_napi_tag_mifare_ul.cpp",
+    "nfc_napi_tag_ndef.cpp",
+    "nfc_napi_tag_ndef_formatable.cpp",
+    "nfc_napi_tag_sesstion.cpp",
+    "nfc_napi_taga.cpp",
+    "nfc_napi_tagb.cpp",
+    "nfc_napi_tagf.cpp",
+    "nfc_napi_tagv.cpp",
+  ]
+
+  deps = [
+    "$NFC_DIR/interfaces/inner_api/common:nfc_inner_kits_common",
+    "$NFC_DIR/interfaces/inner_api/tags:nfc_inner_kits_tags",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "ipc:ipc_napi",
+    "napi:ace_napi",
+    "samgr:samgr_proxy",
+  ]
+
+  relative_install_dir = "module/nfc"
+  part_name = "nfc"
+  subsystem_name = "communication"
+}

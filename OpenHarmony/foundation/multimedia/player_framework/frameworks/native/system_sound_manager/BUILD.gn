@@ -1,0 +1,93 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/multimedia/player_framework/config.gni")
+import("./../../../multimedia_player_framework_aafwk.gni")
+
+config("system_sound_client_public_config") {
+  visibility = [ ":*" ]
+  include_dirs =
+      [ "./../../../interfaces/inner_api/native/system_sound_manager/include" ]
+}
+
+ohos_shared_library("system_sound_client") {
+  stack_protector_ret = true
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  install_enable = true
+  sources = [
+    "./ringtone_player/ringtone_player_impl.cpp",
+    "./system_sound_vibrator/system_sound_vibrator.cpp",
+    "./system_tone_player/system_tone_player_impl.cpp",
+    "system_sound_manager_impl.cpp",
+  ]
+
+  include_dirs = [
+    "./",
+    "./ringtone_player",
+    "./system_sound_vibrator",
+    "./system_tone_player",
+    "./../../../interfaces/inner_api/native/audio_haptic/include",
+    "./../../../interfaces/inner_api/native/soundpool/include",
+    "./../../../interfaces/inner_api/native/system_sound_manager/include",
+    "./../../../services/utils/include",
+  ]
+
+  deps = [
+    "./../../../interfaces/inner_api/native:media_client",
+    "./../audio_haptic:audio_haptic",
+    "./../soundpool:soundpool_client",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:appkit_native",
+    "ability_runtime:data_ability_helper",
+    "audio_framework:audio_client",
+    "bundle_framework:appexecfwk_base",
+    "config_policy:configpolicy_util",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "qos_manager:qos",
+    "relational_store:native_dataability",
+    "relational_store:native_rdb",
+  ]
+
+  if (multimedia_player_framework_support_vibrator) {
+    external_deps += [ "miscdevice:vibrator_interface_native" ]
+  }
+
+  cflags = [
+    "-Wall",
+    "-Werror",
+  ]
+
+  public_configs = [ ":system_sound_client_public_config" ]
+
+  defines = []
+  defines += player_framework_defines
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "multimedia"
+  part_name = "player_framework"
+}

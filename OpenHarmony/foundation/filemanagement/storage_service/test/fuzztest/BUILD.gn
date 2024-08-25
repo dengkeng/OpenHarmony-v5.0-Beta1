@@ -1,0 +1,39 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//foundation/filemanagement/storage_service/storage_service_aafwk.gni")
+
+group("storage_service_fuzztest") {
+  testonly = true
+  deps = [
+    # deps file
+    "${storage_service_path}/test/fuzztest/bundlestats_fuzzer:BundleStatsFuzzTest",
+    "${storage_service_path}/test/fuzztest/disk_fuzzer:DiskFuzzTest",
+    "${storage_service_path}/test/fuzztest/filesystemcrypto_fuzzer:FileSystemCryptoFuzzTest",
+    "${storage_service_path}/test/fuzztest/fileutils_fuzzer:FileUtilsFuzzTest",
+    "${storage_service_path}/test/fuzztest/fscryptutils_fuzzer:FscryptUtilsFuzzTest",
+    "${storage_service_path}/test/fuzztest/keycontrol_fuzzer:KeyControlFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagedaemon_fuzzer:StorageDaemonFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagedaemoncreatesharefile_fuzzer:StorageDaemonCreateShareFileFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagedaemondeletesharefile_fuzzer:StorageDaemonDeleteShareFileFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagemanager_fuzzer:StorageManagerFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagemanagerproxy_fuzzer:StorageManagerProxyFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagestats_fuzzer:StorageStatsFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagestatusservice_fuzzer:StorageStatusServiceFuzzTest",
+    "${storage_service_path}/test/fuzztest/storagetotalstatusservice_fuzzer:StorageTotalStatusServiceFuzzTest",
+    "${storage_service_path}/test/fuzztest/stringutils_fuzzer:StringUtilsFuzzTest",
+    "${storage_service_path}/test/fuzztest/sysparamdynamic_fuzzer:SysparamDynamicFuzzTest",
+    "${storage_service_path}/test/fuzztest/sysparamstatic_fuzzer:SysparamStaticFuzzTest",
+    "${storage_service_path}/test/fuzztest/volumecore_fuzzer:VolumeCoreFuzzTest",
+    "${storage_service_path}/test/fuzztest/volumeexternal_fuzzer:VolumeExternalFuzzTest",
+  ]
+}

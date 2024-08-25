@@ -1,0 +1,163 @@
+{
+    "name": "@ohos/app_file_service",
+    "description": "App file service provides sharing and file management for apps",
+    "optional": "false",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/filemanagement/app_file_service"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "app_file_service",
+        "subsystem": "filemanagement",
+        "syscap": [
+            "SystemCapability.FileManagement.AppFileService",
+            "SystemCapability.FileManagement.StorageService.Backup",
+            "SystemCapability.FileManagement.AppFileService.FolderAuthorization"
+        ],
+        "deps": {
+            "components": [
+                "ability_base",
+                "ability_runtime",
+                "access_token",
+                "bundle_framework",
+                "common_event_service",
+                "cJSON",
+                "c_utils",
+                "data_share",
+                "device_manager",
+                "faultloggerd",
+                "file_api",
+                "hitrace",
+                "hilog",
+                "hisysevent",
+                "ipc",
+                "init",
+                "napi",
+                "safwk",
+                "samgr",
+                "storage_service",
+                "sandbox_manager"
+            ],
+            "third_party": [
+                "bounds_checking_function",
+                "jsoncpp",
+                "openssl",
+                "bounds_checking_function"
+            ]
+        },
+        "adapted_system_type": [
+            "small",
+            "standard"
+        ],
+        "rom": "1024KB",
+        "ram": "1024KB",
+        "hisysevent_config": [
+            "//foundation/filemanagement/app_file_service/hisysevent.yaml"
+        ],
+        "build": {
+            "group_type": {
+                "base_group": [],
+                "fwk_group": [
+                    "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:etc_files",
+                    "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:app_file_service_native",
+                    "//foundation/filemanagement/app_file_service/interfaces/kits/js:fileshare",
+                    "//foundation/filemanagement/app_file_service/interfaces/kits/js:fileuri",
+                    "//foundation/filemanagement/app_file_service/interfaces/kits/js:backup",
+                    "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileuri/src:ohfileuri",
+                    "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileshare/src:ohfileshare"
+                ],
+                "service_group": [
+                    "//foundation/filemanagement/app_file_service:tgt_backup_extension",
+                    "//foundation/filemanagement/app_file_service:tgt_backup_kit_inner",
+                    "//foundation/filemanagement/app_file_service:tgt_backup_sa"
+                ]
+            },
+            "inner_kits": [
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileshare/src:ohfileshare",
+                    "header": {
+                        "header_files": [
+                            "oh_file_share.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileshare/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:fileshare_native",
+                    "header": {
+                        "header_files": [
+                            "file_share.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native/file_share/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:fileuri_native",
+                    "header": {
+                        "header_files": [
+                            "file_uri.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native/file_uri/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileuri/src:ohfileuri",
+                    "header": {
+                        "header_files": [
+                            "oh_file_uri.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/kits/ndk/fileuri/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:remote_file_share_native",
+                    "header": {
+                        "header_files": [
+                            "remote_file_share.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native/remote_file_share/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/innerkits/native:sandbox_helper_native",
+                    "header": {
+                        "header_files": [
+                            "sandbox_helper.h"
+                        ],
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/common/include"
+                    }
+                },
+                {
+                    "name": "//foundation/filemanagement/app_file_service/interfaces/inner_api/native/backup_kit_inner:backup_kit_inner",
+                    "header": {
+                        "header_base": "//foundation/filemanagement/app_file_service/interfaces/inner_api/native/backup_kit_inner",
+                        "header_files": [
+                            "backup_kit_inner.h",
+                            "impl/b_incremental_backup_session.h",
+                            "impl/b_incremental_data.h",
+                            "impl/b_incremental_restore_session.h",
+                            "impl/b_session_restore.h",
+                            "impl/b_session_restore_async.h",
+                            "impl/b_file_info.h",
+                            "impl/service_proxy.h",
+                            "impl/b_session_backup.h",
+                            "impl/i_service_ipc_interface_code.h",
+                            "impl/i_service_reverse_ipc_interface_code.h",
+                            "impl/i_service.h",
+                            "impl/i_service_reverse.h"
+                        ]
+                    }
+                }
+            ],
+            "test": [
+                "//foundation/filemanagement/app_file_service/test/fuzztest:fuzztest",
+                "//foundation/filemanagement/app_file_service/test/unittest:unittest",
+                "//foundation/filemanagement/app_file_service:tgt_backup_tests"
+            ]
+        }
+    }
+}

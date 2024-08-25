@@ -1,0 +1,404 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/ability/ability_runtime/ability_runtime.gni")
+import("//foundation/ability/form_fwk/form_fwk.gni")
+
+################################### libfms ########################################
+config("formmgr_log_config") {
+  defines = [ "FMS_LOG_TAG = \"FormManagerService\"" ]
+}
+
+config("formmgr_config") {
+  include_dirs = [
+    "services/config",
+    "services/include",
+    "//third_party/json/include",
+  ]
+}
+
+ohos_shared_library("libfms") {
+  shlib_type = "sa"
+  version_script = "libfms.map"
+  cflags_cc = []
+  include_dirs = [
+    "${ability_runtime_path}/services/common/include",
+    "${ability_runtime_native_path}/appkit/ability_runtime",
+    "${form_fwk_napi_path}/form_host/form_state_observer/include",
+    "${init_path}/interfaces/innerkits/include/syspara/",
+  ]
+
+  sources = [
+    "services/config/form_xml_parser.cpp",
+    "services/src/form_ability_connection.cpp",
+    "services/src/form_ability_connection_reporter.cpp",
+    "services/src/form_acquire_connection.cpp",
+    "services/src/form_acquire_data_connection.cpp",
+    "services/src/form_acquire_state_connection.cpp",
+    "services/src/form_ams_helper.cpp",
+    "services/src/form_background_connection.cpp",
+    "services/src/form_batch_delete_connection.cpp",
+    "services/src/form_bms_helper.cpp",
+    "services/src/form_bundle_event_callback.cpp",
+    "services/src/form_cache_mgr.cpp",
+    "services/src/form_cast_temp_connection.cpp",
+    "services/src/form_data_mgr.cpp",
+    "services/src/form_data_proxy_mgr.cpp",
+    "services/src/form_data_proxy_record.cpp",
+    "services/src/form_db_cache.cpp",
+    "services/src/form_db_info.cpp",
+    "services/src/form_delete_connection.cpp",
+    "services/src/form_distributed_client.cpp",
+    "services/src/form_dump_mgr.cpp",
+    "services/src/form_ecological_rule_service.cpp",
+    "services/src/form_event_handler.cpp",
+    "services/src/form_event_notify_connection.cpp",
+    "services/src/form_event_report.cpp",
+    "services/src/form_event_util.cpp",
+    "services/src/form_free_install_operator.cpp",
+    "services/src/form_host_callback.cpp",
+    "services/src/form_host_record.cpp",
+    "services/src/form_info_mgr.cpp",
+    "services/src/form_info_rdb_storage_mgr.cpp",
+    "services/src/form_info_storage.cpp",
+    "services/src/form_item_info.cpp",
+    "services/src/form_mgr_adapter.cpp",
+    "services/src/form_mgr_service.cpp",
+    "services/src/form_msg_event_connection.cpp",
+    "services/src/form_observer_record.cpp",
+    "services/src/form_provider_mgr.cpp",
+    "services/src/form_rdb_data_mgr.cpp",
+    "services/src/form_refresh_connection.cpp",
+    "services/src/form_refresh_limiter.cpp",
+    "services/src/form_render_connection.cpp",
+    "services/src/form_render_mgr.cpp",
+    "services/src/form_render_mgr_inner.cpp",
+    "services/src/form_router_proxy_mgr.cpp",
+    "services/src/form_sandbox_render_mgr_inner.cpp",
+    "services/src/form_serial_queue.cpp",
+    "services/src/form_share_connection.cpp",
+    "services/src/form_share_mgr.cpp",
+    "services/src/form_supply_callback.cpp",
+    "services/src/form_sys_event_receiver.cpp",
+    "services/src/form_systemload_listener.cpp",
+    "services/src/form_task_mgr.cpp",
+    "services/src/form_timer_mgr.cpp",
+    "services/src/form_trust_mgr.cpp",
+    "services/src/form_util.cpp",
+    "services/src/free_install_status_callback_proxy.cpp",
+    "services/src/free_install_status_callback_stub.cpp",
+    "services/src/mem_status_listener.cpp",
+  ]
+
+  configs = [
+    ":formmgr_config",
+    ":formmgr_log_config",
+    ":formmgr_sdk_config",
+  ]
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  deps = [
+    "${form_fwk_path}:form_config",
+    "${form_fwk_path}:form_manager",
+    "//third_party/libxml2:libxml2",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_deps_wrapper",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_core",
+    "common_event_service:cesfwk_innerkits",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "eventhandler:libeventhandler",
+    "faultloggerd:libbacktrace_local",
+    "faultloggerd:libdfx_dumpcatcher",
+    "ffrt:libffrt",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "kv_store:distributeddata_inner",
+    "os_account:os_account_innerkits",
+    "relational_store:native_rdb",
+    "resource_management:global_resmgr",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "time_service:time_client",
+  ]
+
+  if (cite_memmgr_plugin) {
+    external_deps += [ "memmgr_override:memmgrclient" ]
+  } else if (cite_memmgr) {
+    external_deps += [ "memmgr:memmgrclient" ]
+  }
+
+  if (theme_mgr_enable) {
+    external_deps += [ "theme_mgr:theme_manager_client" ]
+    cflags_cc += [ "-DTHEME_MGR_ENABLE" ]
+  }
+
+  defines = []
+  if (ability_runtime_power) {
+    defines = [ "SUPPORT_POWER" ]
+    external_deps += [ "power_manager:powermgr_client" ]
+  }
+
+  if (device_usage_statistics) {
+    external_deps += [ "device_usage_statistics:usagestatsinner" ]
+    defines += [ "DEVICE_USAGE_STATISTICS_ENABLE" ]
+  }
+
+  if (res_schedule_service) {
+    external_deps += [ "resource_schedule_service:ressched_client" ]
+    defines += [ "RES_SCHEDULE_ENABLE" ]
+  }
+
+  if (build_variant == "root") {
+    defines += [ "FORM_EVENT_FOR_TEST" ]
+  }
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### fmskit_native ########################################
+config("fmskit_config") {
+  defines = [ "FMS_LOG_TAG = \"FmskitNative\"" ]
+}
+
+config("fmskit_public_config") {
+  include_dirs = [
+    "interfaces/kits/native/include",
+    "${ability_runtime_path}/services/common/include",
+    "${form_fwk_path}/interfaces/inner_api/include",
+    "${bundlefwk_inner_api_path}/appexecfwk_base/include",
+  ]
+}
+
+ohos_shared_library("fmskit_native") {
+  configs = [ ":fmskit_config" ]
+  public_configs = [ ":fmskit_public_config" ]
+  sources = [
+    "interfaces/kits/native/src/form_caller_mgr.cpp",
+    "interfaces/kits/native/src/form_errors.cpp",
+    "interfaces/kits/native/src/form_host_caller.cpp",
+    "interfaces/kits/native/src/form_host_client.cpp",
+    "interfaces/kits/native/src/form_mgr.cpp",
+    "interfaces/kits/native/src/form_provider_caller.cpp",
+  ]
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  deps = [ ":form_manager" ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  subsystem_name = "ability"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "form_fwk"
+}
+
+################################### fmskit_provider_client ########################################
+config("fmskit_provider_config") {
+  defines = [ "FMS_LOG_TAG = \"FmskitNative\"" ]
+}
+
+config("fmskit_provider_public_config") {
+  include_dirs = [
+    "interfaces/kits/native/include",
+    "${form_fwk_path}/interfaces/inner_api/include",
+  ]
+}
+
+ohos_shared_library("fmskit_provider_client") {
+  configs = [ ":fmskit_provider_config" ]
+  public_configs = [ ":fmskit_provider_public_config" ]
+  sources = [ "interfaces/kits/native/src/form_provider_client.cpp" ]
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  deps = [
+    ":fmskit_native",
+    ":form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "samgr:samgr_proxy",
+  ]
+
+  subsystem_name = "ability"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "form_fwk"
+}
+
+################################### form_manager ########################################
+config("formmgr_sdk_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "interfaces/inner_api/include/",
+    "//third_party/json/include",
+    "${ability_base_kits_path}/configuration/include",
+    "${ability_runtime_path}/interfaces/kits/native/ability/native",
+    "${ability_runtime_innerapi_path}/ability_manager/include",
+    "${ability_runtime_innerapi_path}/app_manager/include/appmgr",
+    "${ability_runtime_path}/services/common/include",
+  ]
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+}
+
+ohos_shared_library("form_manager") {
+  include_dirs = [ "${ability_runtime_innerapi_path}/runtime/include" ]
+
+  sources = [
+    "interfaces/inner_api/src/form_ashmem.cpp",
+    "interfaces/inner_api/src/form_ecological_rule_param.cpp",
+    "interfaces/inner_api/src/form_host_delegate_proxy.cpp",
+    "interfaces/inner_api/src/form_host_delegate_stub.cpp",
+    "interfaces/inner_api/src/form_host_proxy.cpp",
+    "interfaces/inner_api/src/form_host_stub.cpp",
+    "interfaces/inner_api/src/form_info_filter.cpp",
+    "interfaces/inner_api/src/form_instance.cpp",
+    "interfaces/inner_api/src/form_instances_filter.cpp",
+    "interfaces/inner_api/src/form_js_info.cpp",
+    "interfaces/inner_api/src/form_mgr_proxy.cpp",
+    "interfaces/inner_api/src/form_mgr_stub.cpp",
+    "interfaces/inner_api/src/form_provider_data.cpp",
+    "interfaces/inner_api/src/form_provider_info.cpp",
+    "interfaces/inner_api/src/form_provider_proxy.cpp",
+    "interfaces/inner_api/src/form_provider_stub.cpp",
+    "interfaces/inner_api/src/form_publish_interceptor_proxy.cpp",
+    "interfaces/inner_api/src/form_publish_interceptor_stub.cpp",
+    "interfaces/inner_api/src/form_render_proxy.cpp",
+    "interfaces/inner_api/src/form_render_stub.cpp",
+    "interfaces/inner_api/src/form_share_info.cpp",
+    "interfaces/inner_api/src/form_supply_proxy.cpp",
+    "interfaces/inner_api/src/form_supply_stub.cpp",
+    "interfaces/inner_api/src/js_form_state_observer_proxy.cpp",
+    "interfaces/inner_api/src/js_form_state_observer_stub.cpp",
+    "interfaces/inner_api/src/provider_connect_proxy.cpp",
+    "interfaces/inner_api/src/provider_connect_stub.cpp",
+    "interfaces/inner_api/src/running_form_info.cpp",
+  ]
+
+  configs = [ ":formmgr_log_config" ]
+
+  public_configs = [
+    ":formmgr_sdk_config",
+    "${form_fwk_path}:formmgr_config",
+  ]
+
+  deps = [ "//third_party/jsoncpp:jsoncpp" ]
+
+  external_deps = [
+    "ability_base:want",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  subsystem_name = "ability"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "form_fwk"
+}
+
+ohos_prebuilt_etc("form_config") {
+  source = "services/config/form_config.xml"
+  module_install_dir = "etc/form"
+  part_name = "form_fwk"
+  subsystem_name = "ability"
+}
+
+group("form_napi_packages") {
+  if (ability_runtime_graphics) {
+    deps = [
+      "${form_fwk_napi_path}:formagent",
+      "${form_fwk_napi_path}:formbindingdata",
+      "${form_fwk_napi_path}:formbindingdata_napi",
+      "${form_fwk_napi_path}:formerror_napi",
+      "${form_fwk_napi_path}:formextension_napi",
+      "${form_fwk_napi_path}:formextensionability",
+      "${form_fwk_napi_path}:formextensioncontext_napi",
+      "${form_fwk_napi_path}:formhost",
+      "${form_fwk_napi_path}:formhost_napi",
+      "${form_fwk_napi_path}:forminfo",
+      "${form_fwk_napi_path}:forminfo_napi",
+      "${form_fwk_napi_path}:formobserver",
+      "${form_fwk_napi_path}:formprovider",
+      "${form_fwk_napi_path}:formprovider_napi",
+      "${form_fwk_napi_path}:formutil_napi",
+    ]
+  }
+}
+
+group("fms_innerkits_target") {
+  if (ability_runtime_graphics) {
+    deps = [ ":form_manager" ]
+  }
+}
+
+group("fms_target") {
+  deps = [
+    ":libfms",
+    "services/form_render_service:formrender_service_hap",
+  ]
+}
+
+group("fms_services_target") {
+  if (ability_runtime_graphics) {
+    deps = [ ":fms_target" ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+    "name": "@ohos/preferences",
+    "version": "3.1.0",
+    "description": "Local Data Management",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache V2",
+    "repository": "https://gitee.com/openharmony/distributeddatamgr_preferences",
+    "domain": "ohos",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "foundation"
+    ],
+    "keywords": [
+        "distributeddatamgr",
+        "preferences"
+    ],
+    "envs": [],
+    "dirs": {},
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "contributors": [
+        {
+            "name": "",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "segment": {
+        "destPath": "foundation/distributeddatamgr/preferences"
+    },
+    "component": {
+        "name": "preferences",
+        "subsystem": "distributeddatamgr",
+        "syscap": [
+            "SystemCapability.DistributedDataManager.Preferences.Core",
+            "SystemCapability.DistributedDataManager.Preferences.Core.Lite"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "512KB",
+        "ram": "1024KB",
+        "deps": {
+            "components": [
+                "ability_runtime",
+                "napi",
+                "hilog",
+                "c_utils",
+                "ability_base",
+                "common_event_service",
+                "hitrace",
+                "ipc"
+            ],
+            "third_party": [
+                "libxml2"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/distributeddatamgr/preferences/interfaces/inner_api:native_preferences",
+                "//foundation/distributeddatamgr/preferences/frameworks/js/napi/preferences:preferences",
+                "//foundation/distributeddatamgr/preferences/frameworks/js/napi/sendable_preferences:sendablepreferences",
+                "//foundation/distributeddatamgr/preferences/frameworks/js/napi/storage:storage",
+                "//foundation/distributeddatamgr/preferences/frameworks/js/napi/system_storage:storage_napi"
+            ],
+            "inner_kits": [
+                {
+                    "name": "//foundation/distributeddatamgr/preferences/interfaces/inner_api:native_preferences",
+                    "header": {
+                        "header_files": [
+                            "preferences.h",
+                            "preferences_observer.h",
+                            "preferences_helper.h",
+                            "preferences_errno.h",
+                            "preferences_value.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/preferences/interfaces/inner_api/include"
+                    }
+                }
+            ],
+            "test": [
+                "//foundation/distributeddatamgr/preferences/test/native:unittest",
+                "//foundation/distributeddatamgr/preferences/test/js:unittest",
+                "//foundation/distributeddatamgr/preferences/test/js:performancetest",
+                "//foundation/distributeddatamgr/preferences/test/js:stage_unittest",
+                "//foundation/distributeddatamgr/preferences/test/native/fuzztest/preferences_fuzzer:PreferencesFuzzTest"
+            ]
+        }
+    }
+}

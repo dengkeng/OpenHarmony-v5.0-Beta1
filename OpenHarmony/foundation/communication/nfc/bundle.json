@@ -1,0 +1,153 @@
+{
+    "name": "@ohos/nfc",
+    "version": "3.1",
+    "description": "nfc service",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache License 2.0",
+    "repository": "https://gitee.com/openharmony/communication_nfc",
+    "domain": "os",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "foundation"
+    ],
+    "keywords": [
+        "communication",
+        "nfc"
+    ],
+    "envs": [],
+    "dirs": [],
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "contributors": [
+        {
+            "name": "",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "segment": {
+        "destPath": "foundation/communication/nfc"
+    },
+    "component": {
+        "name": "nfc",
+        "subsystem": "communication",
+        "syscap": [
+            "SystemCapability.Communication.NFC.Core",
+            "SystemCapability.Communication.NFC.Tag",
+            "SystemCapability.Communication.NFC.CardEmulation"
+        ],
+        "features": [
+            "nfc_use_vendor_nci_native",
+            "nfc_service_feature_vendor_applications_enabled",
+            "nfc_sim_feature"
+        ],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [
+                "ipc",
+                "hilog",
+                "bundle_framework",
+                "c_utils",
+                "napi",
+                "ability_base",
+                "samgr",
+                "ability_runtime",
+                "access_token",
+                "common_event_service",
+                "eventhandler",
+                "miscdevice",
+                "preferences",
+                "safwk",
+                "drivers_interface_nfc",
+                "init",
+                "hisysevent",
+                "data_share",
+                "screenlock_mgr",
+                "power_manager",
+                "distributed_notification_service",
+                "wifi",
+                "i18n",
+                "bluetooth",
+                "image_framework"
+            ],
+            "third_party": [
+                "cJSON",
+                "libnfc-nci",
+                "zlib"
+            ]
+        },
+        "build": {
+            "group_type": {
+                "base_group": [],
+                "fwk_group": [
+                    "//foundation/communication/nfc/interfaces/inner_api/cardEmulation:nfc_inner_kits_card_emulation",
+                    "//foundation/communication/nfc/interfaces/inner_api/controller:nfc_inner_kits_controller",
+                    "//foundation/communication/nfc/interfaces/inner_api/tags:nfc_inner_kits_tags",
+                    "//foundation/communication/nfc/frameworks/js/napi/controller:controller",
+                    "//foundation/communication/nfc/frameworks/js/napi/cardEmulation:cardemulation",
+                    "//foundation/communication/nfc/frameworks/js/napi/tag:tag"
+                ],
+                "service_group": [
+                    "//foundation/communication/nfc/sa_profile:nfc_profile",
+                    "//foundation/communication/nfc/services:nfc_service"
+                ]
+            },
+            "inner_kits": [
+                {
+                    "type": "so",
+                    "name":
+                    "//foundation/communication/nfc/interfaces/inner_api/cardEmulation:nfc_inner_kits_card_emulation",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//foundation/communication/nfc/interfaces/inner_api/cardEmulation"
+                    }
+                },
+                {
+                    "type": "so",
+                    "name": "//foundation/communication/nfc/interfaces/inner_api/common:nfc_inner_kits_common",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//foundation/communication/nfc/interfaces/inner_api/common"
+                    }
+                },
+                {
+                    "type": "so",
+                    "name": "//foundation/communication/nfc/interfaces/inner_api/controller:nfc_inner_kits_controller",
+                    "header": {
+                        "header_files": [
+                            "nfc_controller.h"
+                        ],
+                        "header_base": "//foundation/communication/nfc/interfaces/inner_api/controller"
+                    }
+                },
+                {
+                    "type": "so",
+                    "name": "//foundation/communication/nfc/interfaces/inner_api/tags:nfc_inner_kits_tags",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//foundation/communication/nfc/interfaces/inner_api/tags"
+                    }
+                }
+            ],
+            "test": [
+                "//foundation/communication/nfc/test:test_nfc_service"
+            ]
+        },
+        "hisysevent_config": [
+            "//foundation/communication/nfc/hisysevent.yaml"
+        ]
+    }
+}

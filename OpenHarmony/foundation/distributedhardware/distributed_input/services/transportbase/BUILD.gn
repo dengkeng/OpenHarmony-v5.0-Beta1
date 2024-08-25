@@ -1,0 +1,74 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import(
+    "//foundation/distributedhardware/distributed_input/distributedinput.gni")
+
+ohos_shared_library("libdinput_trans_base") {
+  sanitize = {
+    boundary_sanitize = true
+    integer_overflow = true
+    ubsan = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "include",
+    "${common_path}/include",
+    "${frameworks_path}/include",
+    "${service_common}/include",
+    "${dfx_utils_path}/include",
+    "${utils_path}/include",
+    "${distributedinput_path}/services/transportbase/include",
+    "${distributedinput_path}/inputdevicehandler/include",
+  ]
+
+  sources = [ "src/distributed_input_transport_base.cpp" ]
+
+  defines = [
+    "HI_LOG_ENABLE",
+    "DH_LOG_TAG=\"distributedinputtransportbase\"",
+    "LOG_DOMAIN=0xD004120",
+  ]
+
+  deps = [
+    "${dfx_utils_path}:libdinput_dfx_utils",
+    "${utils_path}:libdinput_utils",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "distributed_hardware_fwk:distributed_av_receiver",
+    "distributed_hardware_fwk:distributed_av_sender",
+    "distributed_hardware_fwk:distributedhardwareutils",
+    "distributed_hardware_fwk:libdhfwk_sdk",
+    "dsoftbus:softbus_client",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "json:nlohmann_json_static",
+    "libevdev:libevdev",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  subsystem_name = "distributedhardware"
+
+  part_name = "distributed_input"
+}

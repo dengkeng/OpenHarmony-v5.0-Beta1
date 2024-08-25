@@ -1,0 +1,138 @@
+{
+    "name": "@ohos/data_share",
+    "version": "3.2.0",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache License 2.0",
+    "repository": "https://gitee.com/openharmony/distributeddatamgr_data_share",
+    "description": "allows an application to manage its own data and share data with other applications",
+    "domain": "ohos",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "foundation"
+    ],
+    "keywords": [
+        "distributeddatamgr",
+        "data_share"
+    ],
+    "envs": [],
+    "dirs": {},
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "contributors": [
+        {
+            "name": "",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "segment": {
+        "destPath": "foundation/distributeddatamgr/data_share"
+    },
+    "component": {
+        "name": "data_share",
+        "subsystem": "distributeddatamgr",
+        "syscap": [
+            "SystemCapability.DistributedDataManager.DataShare.Core",
+            "SystemCapability.DistributedDataManager.DataShare.Consumer",
+            "SystemCapability.DistributedDataManager.DataShare.Provider"
+        ],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "3584KB",
+        "ram": "10240KB",
+        "deps": {
+            "components": [
+                "ability_base",
+                "ability_runtime",
+                "access_token",
+                "bundle_framework",
+                "common_event_service",
+                "c_utils",
+                "hisysevent",
+                "hitrace",
+                "hilog",
+                "ipc",
+                "napi",
+                "relational_store",
+                "samgr"
+            ],
+            "third_party": [
+                "libuv"
+            ]
+        },
+        "build": {
+            "group_type": {
+                "base_group": [
+                ],
+                "fwk_group": [
+                    "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_consumer",
+                    "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_permission",
+                    "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_provider",
+                    "//foundation/distributeddatamgr/data_share/interfaces/inner_api/common:datashare_common",
+                    "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_ext_ability_module",
+                    "//foundation/distributeddatamgr/data_share/frameworks/js/napi:datashare_napi_packages"
+                ],
+                "service_group": [
+                ]
+            },
+            "inner_api": [
+                {
+                    "name": "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_consumer",
+                    "header": {
+                        "header_files": [
+                            "datashare_helper.h",
+                            "datashare_result_set.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/data_share/interfaces/inner_api/consumer/include"
+                    }
+                },
+                {
+                    "name": "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_permission",
+                    "header": {
+                        "header_files": [
+                            "data_share_permission.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/data_share/interfaces/inner_api/permission/include"
+                    }
+                },
+                {
+                    "name": "//foundation/distributeddatamgr/data_share/interfaces/inner_api:datashare_provider",
+                    "header": {
+                        "header_files": [
+                            "result_set_bridge.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/data_share/interfaces/inner_api/provider/include"
+                    }
+                },
+                {
+                    "name": "//foundation/distributeddatamgr/data_share/interfaces/inner_api/common:datashare_common",
+                    "header": {
+                        "header_files": [
+                            "basic/result_set.h",
+                            "datashare_errno.h",
+                            "datashare_abs_predicates.h",
+                            "datashare_predicates_def.h",
+                            "datashare_predicates_object.h",
+                            "datashare_predicates.h",
+                            "datashare_value_object.h",
+                            "datashare_values_bucket.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/data_share/interfaces/inner_api/common/include"
+                    }
+                }
+            ],
+            "test": [
+                "//foundation/distributeddatamgr/data_share/test/native:unittest",
+                "//foundation/distributeddatamgr/data_share/test/js/data_share:unittest"
+            ]
+        }
+    }
+}

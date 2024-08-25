@@ -1,0 +1,227 @@
+# Copyright (C) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if (defined(ohos_lite)) {
+  import("//build/lite/config/component/lite_component.gni")
+  import("//foundation/communication/wifi/wifi/wifi_lite.gni")
+} else {
+  import("//build/ohos.gni")
+  import("//foundation/communication/wifi/wifi/wifi.gni")
+}
+
+config("wifi_fw_common_header") {
+  include_dirs = [
+    "$WIFI_ROOT_DIR/base/state_machine/include",
+    "$WIFI_ROOT_DIR/base/cRPC/include",
+    "$WIFI_ROOT_DIR/interfaces/inner_api",
+    "$WIFI_ROOT_DIR/frameworks/native/interfaces",
+    "$WIFI_ROOT_DIR/services/wifi_standard/sdk/include",
+    "$WIFI_ROOT_DIR/base/cRPC/include",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit/include",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit/net_helper",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit/log",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit/config",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit/utils",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/common",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/hal_device_manage",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/wifi_hal_interface",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/client/idl_client",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/client/idl_client/idl_interface",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/client/hdi_client",
+    "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_manage/wifi_native/client/hdi_client/hdi_interface",
+    "$WIFI_ROOT_DIR/services/wifi_standard/include",
+    "$WIFI_ROOT_DIR/utils/inc",
+  ]
+  if (defined(ohos_lite)) {
+    include_dirs += [
+      "//base/hiviewdfx/hilog_lite/interfaces/native/innerkits",
+      "//third_party/bounds_checking_function/include",
+    ]
+  }
+}
+
+config("wifi_idl_cxx_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ ":wifi_fw_common_header" ]
+
+  cflags = [
+    "-std=c++17",
+    "-fno-rtti",
+  ]
+
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+}
+
+idl_client_sources = [
+  "$WIFI_ROOT_DIR/frameworks/native/src/wifi_hid2d_msg.cpp",
+  "$WIFI_ROOT_DIR/frameworks/native/src/wifi_msg.cpp",
+  "client/hdi_client/hdi_interface/wifi_hdi_ap_impl.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_common.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_p2p_impl.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_proxy.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_sta_impl.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_util.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_wpa_ap_impl.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_wpa_p2p_impl.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_wpa_proxy.c",
+  "client/hdi_client/hdi_interface/wifi_hdi_wpa_sta_impl.c",
+  "client/hdi_client/wifi_hdi_callback.cpp",
+  "client/hdi_client/wifi_hdi_client.cpp",
+  "client/hdi_client/wifi_hdi_wpa_callback.cpp",
+  "client/hdi_client/wifi_hdi_wpa_client.cpp",
+  "client/idl_client/idl_interface/i_wifi.c",
+  "client/idl_client/idl_interface/i_wifi_chip.c",
+  "client/idl_client/idl_interface/i_wifi_hotspot_iface.c",
+  "client/idl_client/idl_interface/i_wifi_iface.c",
+  "client/idl_client/idl_interface/i_wifi_p2p_iface.c",
+  "client/idl_client/idl_interface/i_wifi_public_func.c",
+  "client/idl_client/idl_interface/i_wifi_sta_iface.c",
+  "client/idl_client/idl_interface/i_wifi_supplicant_iface.c",
+  "client/idl_client/wifi_idl_client.cpp",
+  "client/idl_client/wifi_idl_inner_interface.cpp",
+  "hal_device_manage/hal_device_manage.cpp",
+  "wifi_hal_interface/wifi_ap_hal_interface.cpp",
+  "wifi_hal_interface/wifi_base_hal_interface.cpp",
+  "wifi_hal_interface/wifi_chip_hal_interface.cpp",
+  "wifi_hal_interface/wifi_p2p_hal_interface.cpp",
+  "wifi_hal_interface/wifi_sta_hal_interface.cpp",
+  "wifi_hal_interface/wifi_supplicant_hal_interface.cpp",
+]
+
+if (defined(ohos_lite)) {
+  shared_library("wifi_native") {
+    sources = idl_client_sources
+
+    configs += [
+      ":wifi_idl_cxx_config",
+      ":wifi_fw_common_header",
+    ]
+
+    deps = [
+      "$WIFI_ROOT_DIR/base/cRPC:crpc_client",
+      "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit:wifi_toolkit",
+      "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+    ]
+
+    external_deps = [ "bounds_checking_function:libsec_shared" ]
+
+    defines = [
+      "OHOS_ARCH_LITE",
+      "AP_INSTANCE_MAX_NUM=$wifi_feature_with_ap_num",
+    ]
+    configs -= [
+      "//build/lite/config:language_cpp",
+      "//build/lite/config:language_c",
+    ]
+    cflags_c = [
+      "-std=c99",
+      "-fPIC",
+    ]
+    cflags_cc = [
+      "-std=c++17",
+      "-fno-rtti",
+      "-fPIC",
+    ]
+    ldflags = [
+      "-fPIC",
+      "-Wl,-E",
+    ]
+  }
+} else {
+  ohos_source_set("wifi_utils") {
+    branch_protector_ret = "pac_ret"
+    sanitize = {
+      cfi = true
+      boundary_sanitize = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    part_name = "wifi"
+    sources = []
+
+    configs = [
+      ":wifi_idl_cxx_config",
+      ":wifi_fw_common_header",
+    ]
+  }
+
+  ohos_shared_library("wifi_native") {
+    branch_protector_ret = "pac_ret"
+
+    sanitize = {
+      cfi = true
+      boundary_sanitize = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    install_enable = true
+    sources = idl_client_sources
+
+    defines = [
+      "STA_INSTANCE_MAX_NUM=$wifi_feature_with_sta_num",
+      "AP_INSTANCE_MAX_NUM=$wifi_feature_with_ap_num",
+    ]
+
+    configs = [ ":wifi_fw_common_header" ]
+
+    deps = [
+      ":wifi_utils",
+      "$WIFI_ROOT_DIR/base/cRPC:crpc_client",
+      "$WIFI_ROOT_DIR/services/wifi_standard/wifi_framework/wifi_toolkit:wifi_toolkit",
+      "$WIFI_ROOT_DIR/utils:wifi_utils",
+    ]
+
+    external_deps = [
+      "c_utils:utils",
+      "hdf_core:libhdf_ipc_adapter",
+      "hdf_core:libhdi",
+      "hdf_core:libpub_utils",
+      "hilog:libhilog",
+    ]
+
+    if (wifi_feature_with_local_random_mac) {
+      defines += [ "SUPPORT_LOCAL_RANDOM_MAC" ]
+    }
+
+    if (wifi_feature_with_hdi_wpa_supported) {
+      defines += [ "HDI_WPA_INTERFACE_SUPPORT" ]
+      external_deps += [ "drivers_interface_wpa:libwpa_proxy_1.0" ]
+      external_deps += [ "drivers_interface_wlan:libhostapd_proxy_1.0" ]
+    }
+
+    if (wifi_feature_with_wifi_hdi) {
+      defines += [ "HDI_INTERFACE_SUPPORT" ]
+      external_deps += [ "drivers_interface_wlan:libwlan_proxy_1.2" ]
+    }
+
+    if (wifi_feature_with_hdi_chip_supported) {
+      defines += [ "HDI_CHIP_INTERFACE_SUPPORT" ]
+      external_deps += [ "drivers_interface_wlan:libchip_proxy_1.0" ]
+    }
+
+    cflags_cc = [
+      "-std=c++17",
+      "-fno-rtti",
+    ]
+
+    ldflags = [
+      "-fPIC",
+      "-Wl,-E",
+    ]
+
+    part_name = "wifi"
+    subsystem_name = "communication"
+  }
+}

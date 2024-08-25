@@ -1,0 +1,115 @@
+{
+    "name": "@ohos/drm_framework",
+    "description": "DRM standard",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/multimedia/drm_framework"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "drm_framework",
+        "subsystem": "multimedia",
+        "syscap": ["SystemCapability.Multimedia.Drm.Core"],
+        "features": [],
+        "adapted_system_type": [ "standard" ],
+        "rom": "",
+        "ram": "",
+        "hisysevent_config": [ ],
+        "deps": {
+          "components": [
+              "ability_base",
+              "ability_runtime",
+              "safwk",
+              "napi",
+              "samgr",
+              "hidumper",
+              "hitrace",
+              "ipc",
+              "hisysevent",
+              "c_utils",
+              "hilog",
+              "hidumper",
+              "access_token",
+              "hicollie",
+              "hdf_core",
+              "eventhandler",
+              "bundle_framework",
+              "drivers_interface_drm",
+              "media_foundation",
+              "json"
+            ]
+        },
+        "build": {
+          "group_type": {
+            "base_group": [
+            ],
+            "fwk_group": [
+              "//foundation/multimedia/drm_framework/:multimedia_drm_framework"
+            ],
+            "service_group": [
+              "//foundation/multimedia/drm_framework/sa_profile:drm_service_sa_profile",
+              "//foundation/multimedia/drm_framework/services/etc:drm_service.rc",
+              "//foundation/multimedia/drm_framework/services/drm_service:drm_service"
+            ]
+          },
+
+          "inner_kits": [
+            {
+              "type": "none",
+              "name": "//foundation/multimedia/drm_framework/frameworks/native:drm_framework",
+              "header": {
+                "header_base": [
+                    "foundation/multimedia/drm_framework/interfaces/inner_api/native/drm"
+                ],
+                "header_files": [
+                  "media_key_system_impl.h",
+                  "key_session_impl.h",
+                  "media_decrypt_module_impl.h"
+                ]
+              }
+            },
+            {
+              "type": "none",
+              "name": "//foundation/multimedia/drm_framework/interfaces/kits/c/drm_capi:native_drm",
+              "header": {
+                "header_base": [
+                    "foundation/multimedia/drm_framework/interfaces/kits/c/drm_capi/common",
+                    "foundation/multimedia/drm_framework/interfaces/kits/c/drm_capi/include"
+                ],
+                "header_files": [
+                  "native_mediakeysession.h",
+                  "native_mediakeysystem.h",
+                  "native_drm_common.h",
+                  "native_drm_object.h",
+                  "native_drm_err.h"
+                ]
+              }
+            },
+            {
+              "type": "none",
+              "name": "//foundation/multimedia/drm_framework/interfaces/kits/js/drm_napi:drm_napi",
+              "header": {
+                "header_base": [
+                    "//foundation/multimedia/drm_framework/interfaces/kits/js/drm_napi/include"
+                 ],
+                "header_files": [
+                  "drm_napi.h",
+                  "key_session_napi.h",
+                  "media_key_system_napi.h",
+                  "media_key_system_callback_napi.h",
+                  "native_module_ohos_drm.h"
+                ]
+              }
+            }
+          ],
+          "test": [
+            "//foundation/multimedia/drm_framework/frameworks/native/test:drmframeworktest",
+            "//foundation/multimedia/drm_framework/frameworks/native/test/unittest:drm_framework_capi_unittest_v1_0",
+            "//foundation/multimedia/drm_framework/frameworks/native/test/fuzztest:drm_framework_capi_fuzztest_v1_0"
+          ]
+        }
+    }
+}

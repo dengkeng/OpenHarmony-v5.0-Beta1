@@ -1,0 +1,131 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../distributedinput.gni")
+
+ohos_shared_library("libdinput_source") {
+  sanitize = {
+    boundary_sanitize = true
+    integer_overflow = true
+    ubsan = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "include",
+    "${frameworks_path}/include",
+    "${innerkits_path}/include",
+    "${innerkits_path}/include/ipc",
+    "${innerkits_path}/src",
+    "${ipc_path}/include",
+    "${ipc_path}/src",
+    "${common_path}/include",
+    "${service_common}/include",
+    "${services_source_path}/inputinject/include",
+    "${services_source_path}/transport/include",
+    "${dfx_utils_path}/include",
+    "${utils_path}/include",
+    "${distributedinput_path}/inputdevicehandler/include",
+    "${distributedinput_path}/services/transportbase/include",
+  ]
+
+  sources = [
+    "${common_path}/include/input_check_param.cpp",
+    "${common_path}/include/white_list_util.cpp",
+    "${ipc_path}/src/add_white_list_infos_call_back_proxy.cpp",
+    "${ipc_path}/src/add_white_list_infos_call_back_stub.cpp",
+    "${ipc_path}/src/del_white_list_infos_call_back_proxy.cpp",
+    "${ipc_path}/src/del_white_list_infos_call_back_stub.cpp",
+    "${ipc_path}/src/distributed_input_sink_proxy.cpp",
+    "${ipc_path}/src/distributed_input_sink_stub.cpp",
+    "${ipc_path}/src/distributed_input_source_proxy.cpp",
+    "${ipc_path}/src/distributed_input_source_stub.cpp",
+    "${ipc_path}/src/get_sink_screen_infos_call_back_proxy.cpp",
+    "${ipc_path}/src/get_sink_screen_infos_call_back_stub.cpp",
+    "${ipc_path}/src/input_node_listener_proxy.cpp",
+    "${ipc_path}/src/input_node_listener_stub.cpp",
+    "${ipc_path}/src/prepare_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/prepare_d_input_call_back_stub.cpp",
+    "${ipc_path}/src/register_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/register_d_input_call_back_stub.cpp",
+    "${ipc_path}/src/register_session_state_callback_proxy.cpp",
+    "${ipc_path}/src/register_session_state_callback_stub.cpp",
+    "${ipc_path}/src/sharing_dhid_listener_proxy.cpp",
+    "${ipc_path}/src/sharing_dhid_listener_stub.cpp",
+    "${ipc_path}/src/simulation_event_listener_proxy.cpp",
+    "${ipc_path}/src/simulation_event_listener_stub.cpp",
+    "${ipc_path}/src/start_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/start_d_input_call_back_stub.cpp",
+    "${ipc_path}/src/start_stop_d_inputs_call_back_proxy.cpp",
+    "${ipc_path}/src/start_stop_d_inputs_call_back_stub.cpp",
+    "${ipc_path}/src/start_stop_result_call_back_proxy.cpp",
+    "${ipc_path}/src/start_stop_result_call_back_stub.cpp",
+    "${ipc_path}/src/stop_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/stop_d_input_call_back_stub.cpp",
+    "${ipc_path}/src/unprepare_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/unprepare_d_input_call_back_stub.cpp",
+    "${ipc_path}/src/unregister_d_input_call_back_proxy.cpp",
+    "${ipc_path}/src/unregister_d_input_call_back_stub.cpp",
+    "src/dinput_source_listener.cpp",
+    "src/dinput_source_manager_event_handler.cpp",
+    "src/distributed_input_source_event_handler.cpp",
+    "src/distributed_input_source_manager.cpp",
+    "src/distributed_input_source_sa_cli_mgr.cpp",
+  ]
+
+  defines = [
+    "HI_LOG_ENABLE",
+    "DH_LOG_TAG=\"distributedinputmanagerkit\"",
+    "LOG_DOMAIN=0xD004120",
+  ]
+
+  deps = [
+    "${dfx_utils_path}:libdinput_dfx_utils",
+    "${distributedinput_path}/services/transportbase:libdinput_trans_base",
+    "${innerkits_path}:libdinput_sdk",
+    "${services_source_path}/inputinject:libdinput_inject",
+    "${services_source_path}/transport:libdinput_source_trans",
+    "${utils_path}:libdinput_utils",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "config_policy:configpolicy_util",
+    "distributed_hardware_fwk:distributed_av_receiver",
+    "distributed_hardware_fwk:distributed_av_sender",
+    "distributed_hardware_fwk:distributedhardwareutils",
+    "distributed_hardware_fwk:libdhfwk_sdk",
+    "dsoftbus:softbus_client",
+    "eventhandler:libeventhandler",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "json:nlohmann_json_static",
+    "libevdev:libevdev",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  subsystem_name = "distributedhardware"
+
+  part_name = "distributed_input"
+}

@@ -1,0 +1,92 @@
+{
+  "name": "@ohos/image_effect",
+  "description": "Image standard editing abilities",
+  "version": "4.0",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "foundation/multimedia/image_effect"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "image_effect",
+    "subsystem": "multimedia",
+    "syscap": [ "SystemCapability.Multimedia.ImageEffect.Core" ],
+    "features": [],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "",
+    "ram": "",
+    "deps": {
+      "components": [
+        "hitrace",
+        "hilog",
+        "napi",
+        "image_framework",
+        "graphic_2d",
+        "graphic_surface",
+        "c_utils",
+        "ability_base",
+        "bounds_checking_function",
+        "json"
+      ],
+      "third_party": [
+        "egl",
+        "opengles"
+      ]
+    },
+    "build": {
+      "sub_component": [
+        "//foundation/multimedia/image_effect:image_effect"
+      ],
+      "inner_kits": [
+        {
+          "type": "none",
+          "header":{
+            "header_base": [
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/base",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/common",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/custom",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/effect",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/efilter",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/memory",
+              "//foundation/multimedia/image_effect/interfaces/inner_api/native/utils"
+            ],
+            "header_files":[
+              "effect_buffer.h",
+              "effect_context.h",
+              "effect_info.h",
+              "effect_type.h",
+              "any.h",
+              "error_code.h",
+              "delegate.h",
+              "image_effect_inner.h",
+              "efilter.h",
+              "efilter_factory.h",
+              "effect_memory.h",
+              "effect_memory_manager.h",
+              "format_helper.h",
+              "memcpy_helper.h"
+            ]
+          },
+          "name": "//foundation/multimedia/image_effect/frameworks/native:image_effect_impl"
+        },
+        {
+          "type": "so",
+          "header": {
+            "header_base": "//foundation/multimedia/image_effect/interfaces/kits/native/",
+            "header_files": [
+              "image_effect.h",
+              "image_effect_errors.h",
+              "image_effect_filter.h"
+            ]
+          },
+          "name": "//foundation/multimedia/image_effect/frameworks/native:image_effect"
+        }
+      ],
+      "test": ["//foundation/multimedia/image_effect/test:image_effect_test"]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "allowToBackupRestore": true,
+    "supportScene": "next2next, hmos2next",
+    "includes": [
+        "/storage/media/local/files/Photo/",
+        "/storage/media/local/files/Camera/",
+        "/storage/media/local/files/Pictures/",
+        "/storage/media/local/files/Videos/",
+        "/storage/media/local/files/.editData/",
+        "/storage/media/local/files/Audio/",
+        "/storage/media/local/files/Audios/",
+        "/data/storage/el2/database/rdb/"
+    ],
+    "fullBackupOnly": true
+}

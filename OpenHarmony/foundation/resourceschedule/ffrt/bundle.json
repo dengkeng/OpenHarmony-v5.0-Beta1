@@ -1,0 +1,70 @@
+{
+    "name": "@ohos/ffrt",
+    "description": "Concurrent Programming Framework",
+    "optional": "false",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/resourceschedule/ffrt"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "ffrt",
+        "subsystem": "resourceschedule",
+        "syscap": [
+            "SystemCapability.Resourceschedule.Ffrt.Core"
+        ],
+        "features": [
+            "ffrt_support_enable"
+        ],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "hisysevent_config": [
+            "//foundation/resourceschedule/ffrt/hisysevent.yaml"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [
+                "bounds_checking_function",
+                "c_utils",
+                "hilog",
+                "hisysevent",
+                "napi",
+                "faultloggerd",
+                "hiprofiler",
+                "init",
+                "hitrace",
+                "libunwind"
+            ],
+            "third_party": [
+                "bounds_checking_function",
+                "libunwind"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/resourceschedule/ffrt:libffrt",
+                "//foundation/resourceschedule/ffrt:ffrt_ndk"
+            ],
+            "inner_kits": [
+                {
+                    "header": {
+                        "header_base": "//foundation/resourceschedule/ffrt/interfaces/",
+                        "header_files": [
+                            "kits/ffrt.h",
+                            "inner_api/ffrt_inner.h"
+                        ]
+                    },
+                    "name": "//foundation/resourceschedule/ffrt:libffrt"
+                }
+            ],
+            "test": [
+                "//foundation/resourceschedule/ffrt/test/ut:ffrt_unittest_ffrt"
+            ]
+        }
+    }
+}

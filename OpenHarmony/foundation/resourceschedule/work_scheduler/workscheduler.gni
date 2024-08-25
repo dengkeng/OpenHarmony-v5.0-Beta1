@@ -1,0 +1,81 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+ability_runtime_path = "//foundation/ability/ability_runtime"
+
+ability_runtime_kits_path = "${ability_runtime_path}/frameworks/kits"
+
+worksched_native_part_name = "work_scheduler"
+
+worksched_root_path = "//foundation/resourceschedule/work_scheduler"
+
+worksched_service_path = "${worksched_root_path}/services"
+
+worksched_kits_path = "${worksched_root_path}/kits"
+
+worksched_utils_path = "${worksched_root_path}/utils/native"
+
+worksched_interfaces_path = "${worksched_root_path}/interfaces"
+
+worksched_frameworks_path = "${worksched_root_path}/frameworks"
+
+worksched_test_path = "${worksched_root_path}/test"
+
+system_type = "default"
+
+declare_args() {
+  work_scheduler_device_enable = true
+  bundle_active_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.resourceschedule_device_usage_statistics)) {
+    bundle_active_enable = false
+  }
+
+  device_standby_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.resourceschedule_device_standby)) {
+    device_standby_enable = false
+  }
+
+  resourceschedule_bgtaskmgr_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.resourceschedule_background_task_mgr)) {
+    resourceschedule_bgtaskmgr_enable = false
+  }
+
+  workscheduler_with_communication_netmanager_base_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.communication_netmanager_base)) {
+    workscheduler_with_communication_netmanager_base_enable = false
+  }
+
+  powermgr_battery_manager_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.powermgr_battery_manager)) {
+    powermgr_battery_manager_enable = false
+  }
+
+  powermgr_thermal_manager_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.powermgr_thermal_manager)) {
+    powermgr_thermal_manager_enable = false
+  }
+
+  powermgr_power_manager_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.powermgr_power_manager)) {
+    powermgr_power_manager_enable = false
+  }
+}

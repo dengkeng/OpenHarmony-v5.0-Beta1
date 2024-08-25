@@ -1,0 +1,110 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos/ace/ace.gni")
+import("../../../../castplus_cast_engine_part.gni")
+import("../../../../config.gni")
+
+ohos_shared_library("avsession_napi") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "include",
+    "../../../../interfaces/inner_api/native/session/include",
+    "../../../native/session/include",
+  ]
+
+  sources = [
+    "src/napi_async_callback.cpp",
+    "src/napi_async_work.cpp",
+    "src/napi_avcall_meta_data.cpp",
+    "src/napi_avcall_state.cpp",
+    "src/napi_avcontroller_callback.cpp",
+    "src/napi_avsession.cpp",
+    "src/napi_avsession_callback.cpp",
+    "src/napi_avsession_controller.cpp",
+    "src/napi_avsession_enum.cpp",
+    "src/napi_avsession_manager.cpp",
+    "src/napi_cast_control_command.cpp",
+    "src/napi_control_command.cpp",
+    "src/napi_media_description.cpp",
+    "src/napi_media_info_holder.cpp",
+    "src/napi_meta_data.cpp",
+    "src/napi_module.cpp",
+    "src/napi_playback_state.cpp",
+    "src/napi_queue_item.cpp",
+    "src/napi_session_listener.cpp",
+    "src/napi_utils.cpp",
+  ]
+
+  deps = [
+    "../../../../utils:avsession_utils",
+    "../../../common:avsession_common",
+    "../../../native/session:avsession_client",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:app_manager",
+    "ability_runtime:napi_base_context",
+    "ability_runtime:napi_common",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libtokenid_sdk",
+    "audio_framework:audio_client",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "curl:curl_shared",
+    "hilog:libhilog",
+    "image_framework:image",
+    "image_framework:image_native",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  cflags = []
+
+  if (castplus_cast_engine_enable) {
+    cflags += [ "-DCASTPLUS_CAST_ENGINE_ENABLE" ]
+    sources += [
+      "src/napi_avcast_controller.cpp",
+      "src/napi_avcast_controller_callback.cpp",
+    ]
+    deps += [ "../../../native/session:avsession_cast_client" ]
+  }
+
+  if (multimedia_av_session_enable_trace_control) {
+    cflags += [ "-DENBABLE_AVSESSION_TRACE_CONTROL" ]
+    external_deps += [ "hitrace:hitrace_meter" ]
+  }
+  if (multimedia_av_session_enable_sysevent_control) {
+    cflags += [ "-DENABLE_AVSESSION_SYSEVENT_CONTROL" ]
+    external_deps += [ "hisysevent:libhisysevent" ]
+  }
+  relative_install_dir = "module/multimedia"
+
+  subsystem_name = "multimedia"
+  part_name = "av_session"
+}

@@ -1,0 +1,330 @@
+# Copyright (C) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/multimedia/media_library/media_library.gni")
+
+ohos_prebuilt_etc("userfilemanager_mimetypes.json") {
+  module_install_dir = "etc/userfilemanager"
+
+  source = "${MEDIALIB_UTILS_PATH}/configs/userfilemanager_mimetypes.json"
+
+  subsystem_name = "multimedia"
+  part_name = "media_library"
+}
+
+config("media_data_extension_public_config") {
+  include_fileext = [ "${MEDIALIB_SERVICES_PATH}/media_file_extension/include" ]
+  include_distributed = [
+    "${MEDIALIB_SERVICES_PATH}/media_distributed/include/database_manage",
+    "${MEDIALIB_SERVICES_PATH}/media_distributed/include/device_manage",
+    "${MEDIALIB_SERVICES_PATH}/media_distributed/include/devices_info_interact",
+  ]
+  include_scanner = [
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/include/callback",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/include/scanner",
+  ]
+
+  include_multistages_capture = [
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/include",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/include/deferred_processing",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/include/dfx",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/include/utils",
+  ]
+
+  include_dfx = [ "${MEDIALIB_SERVICES_PATH}/media_dfx/include" ]
+
+  include_dirs = [
+    "${MEDIALIB_INTERFACES_PATH}/innerkits/native/include",
+    "${MEDIALIB_INTERFACES_PATH}/inner_api/media_library_helper/include",
+    "${MEDIALIB_INNERKITS_PATH}/media_library_helper/include",
+    "${MEDIALIB_UTILS_PATH}/include",
+    "${MEDIALIB_INNERKITS_PATH}/medialibrary_data_extension/include",
+    "${MEDIALIB_SERVICES_PATH}/media_active_task/include",
+    "${MEDIALIB_SERVICES_PATH}/media_async_worker/include",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/include",
+
+    "../../../../../bundlemanager/bundle_framework/interfaces/kits/js/common",
+  ]
+  include_dirs += include_fileext
+  include_dirs += include_distributed
+  include_dirs += include_scanner
+  include_dirs += include_multistages_capture
+  include_dirs += include_dfx
+
+  ldflags = [ "-Wl,--gc-sections" ]
+
+  cflags = [
+    "-fvisibility=hidden",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Os",
+  ]
+
+  cflags_cc = [
+    "-fvisibility-inlines-hidden",
+    "-Os",
+  ]
+
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+}
+
+ohos_hap("medialibrary_ext_hap") {
+  hap_profile = "MediaLibraryExt/entry/src/main/module.json"
+  deps = [
+    ":MediaLibStage_js_assets",
+    ":MediaLibStage_resources",
+  ]
+  shared_libraries = [ "${MEDIALIB_INNERKITS_PATH}/medialibrary_data_extension:medialibrary_data_extension" ]
+  certificate_profile = "${MEDIALIB_INNERKITS_PATH}/signature/medialib.p7b"
+  hap_name = "Media_Library_Ext"
+  part_name = "prebuilt_hap"
+  subsystem_name = "applications"
+  module_install_dir = "app/com.ohos.medialibrary.MediaLibraryData"
+  if (defined(sign_hap_py_path)) {
+    certificate_profile =
+        "${MEDIALIB_INNERKITS_PATH}/signature/medialib_new.p7b"
+    key_alias = "medialibrarydata"
+    private_key_path = "medialibrarydata"
+    compatible_version = "9"
+  }
+}
+
+ohos_js_assets("MediaLibStage_js_assets") {
+  hap_profile = "MediaLibraryExt/entry/src/main/module.json"
+  ets2abc = true
+  source_dir = "MediaLibraryExt/entry/src/main/ets"
+}
+
+ohos_app_scope("MediaLibStage_app_profile") {
+  app_profile = "MediaLibraryExt/AppScope/app.json"
+  sources = [ "MediaLibraryExt/AppScope/resources" ]
+}
+
+ohos_resources("MediaLibStage_resources") {
+  sources = [ "MediaLibraryExt/entry/src/main/resources" ]
+  deps = [ ":MediaLibStage_app_profile" ]
+  hap_profile = "MediaLibraryExt/entry/src/main/module.json"
+}
+
+ohos_shared_library("medialibrary_data_extension") {
+  install_enable = true
+
+  media_scan_source = [
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/media_scan_executor.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/media_scanner.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/media_scanner_manager.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/media_scanner_db.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/metadata.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/metadata_extractor.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_scanner/src/scanner/scanner_utils.cpp",
+  ]
+
+  media_thumbnail_source = [
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/cloud_thumbnail_observer.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/ithumbnail_helper.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_aging_helper.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_generate_helper.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_generate_worker.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_generate_worker_manager.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_service.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_source_loading.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_uri_utils.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_thumbnail/src/thumbnail_utils.cpp",
+  ]
+
+  media_cloud_sync_source =
+      [ "${MEDIALIB_CLOUD_SYNC_PATH}/src/cloud_sync_helper.cpp" ]
+
+  media_rdb_utils_source = [
+    "src/medialibrary_rdb_utils.cpp",
+    "src/medialibrary_rdb_transaction.cpp",
+  ]
+
+  media_multistages_capture_source = [
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/deferred_processing/deferred_processing_adapter.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/dfx/multistages_capture_dfx_first_visit.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/dfx/multistages_capture_dfx_request_policy.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/dfx/multistages_capture_dfx_result.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/dfx/multistages_capture_dfx_total_time.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/dfx/multistages_capture_dfx_trigger_ratio.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/utils/database_adapter.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/utils/exif_utils.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/utils/file_utils.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/multistages_capture_manager.cpp",
+  ]
+
+  media_dfx_source = [
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_analyzer.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_collector.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_manager.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_reporter.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_timer.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_worker.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_utils.cpp",
+    "${MEDIALIB_SERVICES_PATH}/media_dfx/src/dfx_database_utils.cpp",
+  ]
+
+  sources = [
+    "${MEDIALIB_SERVICES_PATH}/media_active_task/src/media_actively_calling_analyse.cpp",
+    "${MEDIALIB_UTILS_PATH}/src/media_privacy_manager.cpp",
+    "src/media_datashare_ext_ability.cpp",
+    "src/media_datashare_stub_impl.cpp",
+    "src/medialibrary_album_operations.cpp",
+    "src/medialibrary_asset_operations.cpp",
+    "src/medialibrary_audio_operations.cpp",
+    "src/medialibrary_bundle_manager.cpp",
+    "src/medialibrary_command.cpp",
+    "src/medialibrary_data_manager.cpp",
+    "src/medialibrary_data_manager_utils.cpp",
+    "src/medialibrary_dir_operations.cpp",
+    "src/medialibrary_file_operations.cpp",
+    "src/medialibrary_formmap_operations.cpp",
+    "src/medialibrary_inotify.cpp",
+    "src/medialibrary_location_operations.cpp",
+    "src/medialibrary_notify.cpp",
+    "src/medialibrary_object_utils.cpp",
+    "src/medialibrary_photo_operations.cpp",
+    "src/medialibrary_rdbstore.cpp",
+    "src/medialibrary_search_operations.cpp",
+    "src/medialibrary_smartalbum_map_operations.cpp",
+    "src/medialibrary_smartalbum_operations.cpp",
+    "src/medialibrary_story_operations.cpp",
+    "src/medialibrary_subscriber.cpp",
+    "src/medialibrary_uripermission_operations.cpp",
+    "src/medialibrary_vision_operations.cpp",
+    "src/photo_map_operations.cpp",
+    "src/trash_async_worker.cpp",
+  ]
+  sources += media_scan_source
+  sources += media_thumbnail_source
+  sources += media_cloud_sync_source
+  sources += media_rdb_utils_source
+  sources += media_multistages_capture_source
+  sources += media_dfx_source
+
+  use_exceptions = true
+
+  public_configs = [ ":media_data_extension_public_config" ]
+
+  deps = [
+    "${MEDIALIB_INNERKITS_PATH}/media_library_helper:media_library",
+    "${MEDIALIB_SERVICES_PATH}/media_async_worker:medialibrary_async_worker",
+    "${MEDIALIB_UTILS_PATH}:medialibrary_common_utils",
+    "${MEDIALIB_UTILS_PATH}:permission_utils",
+    "${MEDIALIB_UTILS_PATH}:post_event_utils",
+  ]
+
+  include_dirs = [
+    "${MEDIALIB_CLOUD_SYNC_PATH}/include",
+    "${MEDIALIB_SERVICES_PATH}/media_async_worker/include",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_context",
+    "ability_runtime:app_manager",
+    "ability_runtime:dataobs_manager",
+    "ability_runtime:extensionkit_native",
+    "ability_runtime:runtime",
+    "ability_runtime:uri_permission_mgr",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libprivacy_sdk",
+    "app_file_service:sandbox_helper_native",
+    "background_task_mgr:bgtaskmgr_innerkits",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "data_share:datashare_provider",
+    "dfs_service:cloudsync_kit_inner",
+    "eventhandler:libeventhandler",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "image_framework:image_native",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+    "napi:ace_napi",
+    "player_framework:media_client",
+    "preferences:native_preferences",
+    "relational_store:native_rdb",
+    "relational_store:rdb_data_share_adapter",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+  ]
+
+  defines = []
+  defines += [ "MEDIALIBRARY_COMPATIBILITY=1" ]
+  if (defined(medialibrary_mtp_enable)) {
+    defines += [ "MEDIALIBRARY_MTP_ENABLE=1" ]
+  }
+
+  if (!defined(global_parts_info) ||
+      defined(global_parts_info.security_security_component_manager)) {
+    defines += [ "MEDIALIBRARY_SECURITY_OPEN=1" ]
+    external_deps += [ "security_component_manager:libsecurity_component_sdk" ]
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.multimedia_camera_framework) &&
+      global_parts_info.multimedia_camera_framework) {
+    defines += [ "ABILITY_CAMERA_SUPPORT" ]
+    external_deps += [ "camera_framework:camera_framework" ]
+    sources += [ "${MEDIALIB_SERVICES_PATH}/media_multistages_capture/src/deferred_processing/multistages_capture_deferred_proc_session_callback.cpp" ]
+  }
+
+  if (!link_opt) {
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+      blocklist = "./extension_blocklist.txt"
+      integer_overflow = true
+      ubsan = true
+      boundary_sanitize = true
+      stack_protector_ret = true
+    }
+  }
+  if (build_variant == "root") {
+    defines += [ "MEDIALIBRARY_MEDIATOOL_ENABLE=1" ]
+  }
+
+  cflags_cc = [
+    "-fvisibility-inlines-hidden",
+    "-Os",
+  ]
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.powermgr_battery_manager)) {
+    external_deps += [ "battery_manager:batterysrv_client" ]
+    cflags_cc += [ "-DHAS_BATTERY_MANAGER_PART" ]
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.powermgr_power_manager)) {
+    external_deps += [ "power_manager:powermgr_client" ]
+    cflags_cc += [ "-DHAS_POWER_MANAGER_PART" ]
+  }
+
+  subsystem_name = "multimedia"
+  part_name = "media_library"
+}

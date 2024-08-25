@@ -1,0 +1,151 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../appexecfwk.gni")
+
+config("bundlemgr_sdk_config") {
+  include_dirs = [
+    "include",
+    "include/app_control",
+    "include/bundle_resource",
+    "include/bundlemgr",
+    "include/default_app",
+    "include/extend_resource",
+    "include/overlay",
+    "include/quick_fix",
+    "include/verify",
+  ]
+}
+
+config("appexecfwk_core_config") {
+  include_dirs = [ "include" ]
+}
+
+ohos_shared_library("appexecfwk_core") {
+  sources = [
+    "src/bundlemgr/bundle_event_callback_host.cpp",
+    "src/bundlemgr/bundle_event_callback_proxy.cpp",
+    "src/bundlemgr/bundle_installer_proxy.cpp",
+    "src/bundlemgr/bundle_mgr_client.cpp",
+    "src/bundlemgr/bundle_mgr_client_impl.cpp",
+    "src/bundlemgr/bundle_mgr_host.cpp",
+    "src/bundlemgr/bundle_mgr_proxy.cpp",
+    "src/bundlemgr/bundle_mgr_service_death_recipient.cpp",
+    "src/bundlemgr/bundle_monitor.cpp",
+    "src/bundlemgr/bundle_status_callback_host.cpp",
+    "src/bundlemgr/bundle_status_callback_proxy.cpp",
+    "src/bundlemgr/bundle_stream_installer_host.cpp",
+    "src/bundlemgr/bundle_stream_installer_proxy.cpp",
+    "src/bundlemgr/bundle_user_mgr_host.cpp",
+    "src/bundlemgr/bundle_user_mgr_proxy.cpp",
+    "src/bundlemgr/clean_cache_callback_host.cpp",
+    "src/bundlemgr/clean_cache_callback_proxy.cpp",
+    "src/bundlemgr/launcher_service.cpp",
+    "src/bundlemgr/status_receiver_host.cpp",
+    "src/extend_resource/extend_resource_manager_host.cpp",
+    "src/extend_resource/extend_resource_manager_proxy.cpp",
+    "src/verify/verify_manager_host.cpp",
+    "src/verify/verify_manager_proxy.cpp",
+  ]
+
+  public_configs = [
+    ":appexecfwk_core_config",
+    ":bundlemgr_sdk_config",
+  ]
+
+  defines = [
+    "APP_LOG_TAG = \"BundleMgrService\"",
+    "LOG_DOMAIN = 0xD001120",
+  ]
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+  deps = [
+    "${base_path}:appexecfwk_base",
+    "${common_path}:libappexecfwk_common",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_core",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  public_external_deps = [ "common_event_service:cesfwk_innerkits" ]
+
+  if (bundle_framework_graphics) {
+    defines += [ "BUNDLE_FRAMEWORK_GRAPHICS" ]
+  }
+
+  if (bundle_framework_default_app) {
+    defines += [ "BUNDLE_FRAMEWORK_DEFAULT_APP" ]
+    sources += [
+      "src/default_app/default_app_host.cpp",
+      "src/default_app/default_app_proxy.cpp",
+    ]
+  }
+
+  if (bundle_framework_app_control) {
+    defines += [ "BUNDLE_FRAMEWORK_APP_CONTROL" ]
+    sources += [
+      "src/app_control/app_control_host.cpp",
+      "src/app_control/app_control_proxy.cpp",
+    ]
+  }
+
+  if (bundle_framework_quick_fix) {
+    defines += [ "BUNDLE_FRAMEWORK_QUICK_FIX" ]
+    sources += [
+      "src/quick_fix/quick_fix_manager_host.cpp",
+      "src/quick_fix/quick_fix_manager_proxy.cpp",
+      "src/quick_fix/quick_fix_result_info.cpp",
+      "src/quick_fix/quick_fix_status_callback_host.cpp",
+      "src/quick_fix/quick_fix_status_callback_proxy.cpp",
+    ]
+  }
+
+  if (bundle_framework_overlay_install) {
+    defines += [ "BUNDLE_FRAMEWORK_OVERLAY_INSTALLATION" ]
+    sources += [
+      "src/overlay/overlay_manager_host.cpp",
+      "src/overlay/overlay_manager_proxy.cpp",
+    ]
+  }
+
+  if (bundle_framework_bundle_resource) {
+    defines += [ "BUNDLE_FRAMEWORK_BUNDLE_RESOURCE" ]
+    sources += [
+      "src/bundle_resource/bundle_resource_host.cpp",
+      "src/bundle_resource/bundle_resource_proxy.cpp",
+    ]
+  }
+
+  if (global_resmgr_enable) {
+    defines += [ "GLOBAL_RESMGR_ENABLE" ]
+    external_deps += [ "resource_management:global_resmgr" ]
+  }
+
+  subsystem_name = "bundlemanager"
+  innerapi_tags = [
+    "platformsdk",
+    "sasdk",
+  ]
+  part_name = "bundle_framework"
+}

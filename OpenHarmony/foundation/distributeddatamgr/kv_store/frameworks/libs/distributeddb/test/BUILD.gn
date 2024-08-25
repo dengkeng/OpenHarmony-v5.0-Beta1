@@ -1,0 +1,942 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/test.gni")
+import("../distributeddb.gni")
+
+module_output_path = "kv_store/distributeddb"
+
+###############################################################################
+config("module_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "./unittest/common/common",
+    "./unittest/common/syncer",
+    "./unittest/common/syncer/cloud",
+    "./unittest/common/storage",
+    "./unittest/common/storage/cloud",
+    "./unittest/common/interfaces",
+    "../include",
+    "../interfaces/include",
+    "../interfaces/include/cloud",
+    "../interfaces/include/relational",
+    "../interfaces/src",
+    "../interfaces/src/relational",
+    "../common/include",
+    "../common/include/cloud",
+    "../common/include/relational",
+    "../common/src",
+    "../common/src/cloud",
+    "../communicator/include",
+    "../communicator/src",
+    "../storage/include",
+    "../storage/src",
+    "../storage/src/cloud",
+    "../storage/src/kv",
+    "../storage/src/multiver",
+    "../storage/src/operation",
+    "../storage/src/gaussdb_rd",
+    "../storage/src/relational",
+    "../storage/src/sqlite",
+    "../storage/src/sqlite/kv",
+    "../storage/src/sqlite/relational",
+    "../storage/src/upgrader",
+    "../syncer/include",
+    "../syncer/src",
+    "../syncer/src/cloud",
+    "../syncer/src/device",
+    "../syncer/src/device/multiver",
+    "../syncer/src/device/singlever",
+    "//third_party/openssl/include/",
+    "../gaussdb_rd/include",
+    "../gaussdb_rd/include/grd_base",
+    "../gaussdb_rd/include/grd_document",
+    "../gaussdb_rd/include/grd_kv",
+  ]
+
+  defines = [
+    "SQLITE_ENABLE_SNAPSHOT",
+    "_LARGEFILE64_SOURCE",
+    "_FILE_OFFSET_BITS=64",
+    "SQLITE_HAS_CODEC",
+    "SQLITE_ENABLE_JSON1",
+    "USING_HILOG_LOGGER",
+    "USE_SQLITE_SYMBOLS",
+    "USING_DB_JSON_EXTRACT_AUTOMATICALLY",
+    "LOW_LEVEL_MEM_DEV",
+    "JSONCPP_USE_BUILDER",
+    "OMIT_FLATBUFFER",
+    "OMIT_MULTI_VER",
+    "RELATIONAL_STORE",
+    "SQLITE_DISTRIBUTE_RELATIONAL",
+    "USE_DFX_ABILITY",
+    "TRACE_SQLITE_EXECUTE",
+    "SQLITE_ENABLE_DROPTABLE_CALLBACK",
+    "OPENSSL_SUPPRESS_DEPRECATED",
+    "USE_RD_KERNEL",
+  ]
+  if (is_ohos) {
+    defines += [ "USE_FFRT" ]
+  }
+}
+
+###############################################################################
+ohos_source_set("src_file") {
+  testonly = true
+
+  sources = distributeddb_src
+  sources += [
+    "unittest/common/common/distributeddb_data_generate_unit_test.cpp",
+    "unittest/common/common/distributeddb_tools_unit_test.cpp",
+    "unittest/common/common/native_sqlite.cpp",
+    "unittest/common/common/system_time.cpp",
+    "unittest/common/common/thread_pool_test_stub.cpp",
+    "unittest/common/interfaces/process_system_api_adapter_impl.cpp",
+    "unittest/common/syncer/cloud/cloud_db_data_utils.cpp",
+    "unittest/common/syncer/cloud/cloud_db_sync_utils_test.cpp",
+    "unittest/common/syncer/cloud/virtual_asset_loader.cpp",
+    "unittest/common/syncer/cloud/virtual_cloud_data_translate.cpp",
+    "unittest/common/syncer/cloud/virtual_cloud_db.cpp",
+    "unittest/common/syncer/cloud/virtual_cloud_syncer.cpp",
+    "unittest/common/syncer/generic_virtual_device.cpp",
+    "unittest/common/syncer/kv_virtual_device.cpp",
+    "unittest/common/syncer/relational_virtual_device.cpp",
+    "unittest/common/syncer/virtual_communicator.cpp",
+    "unittest/common/syncer/virtual_communicator_aggregator.cpp",
+    "unittest/common/syncer/virtual_multi_ver_sync_db_interface.cpp",
+    "unittest/common/syncer/virtual_relational_ver_sync_db_interface.cpp",
+    "unittest/common/syncer/virtual_single_ver_sync_db_Interface.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "//third_party/googletest:gtest_main",
+    "//third_party/sqlite:sqlite",
+    "//third_party/zlib:libz",
+  ]
+
+  configs += [ "//third_party/jsoncpp:jsoncpp_config" ]
+  ldflags = [ "-Wl,--exclude-libs,ALL" ]
+  deps += [
+    "../gaussdb_rd:gaussdb_rd",
+    "//third_party/jsoncpp:jsoncpp",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+  external_deps = [
+    "c_utils:utils",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+  ]
+  part_name = "kv_store"
+}
+
+template("distributeddb_unittest") {
+  ohos_unittest(target_name) {
+    forward_variables_from(invoker, "*")
+    module_out_path = module_output_path
+    if (!defined(deps)) {
+      deps = []
+    }
+    if (!defined(external_deps)) {
+      external_deps = []
+    }
+    configs = [ ":module_private_config" ]
+    deps += [
+      ":src_file",
+      "//third_party/googletest:gmock_main",
+      "//third_party/googletest:gtest_main",
+      "//third_party/sqlite:sqlite",
+      "//third_party/zlib:libz",
+    ]
+    configs += [ "//third_party/jsoncpp:jsoncpp_config" ]
+    ldflags = [ "-Wl,--exclude-libs,ALL" ]
+    deps += [
+      "../gaussdb_rd:gaussdb_rd",
+      "//third_party/jsoncpp:jsoncpp",
+      "//third_party/openssl:libcrypto_shared",
+    ]
+    external_deps = [
+      "c_utils:utils",
+      "ffrt:libffrt",
+      "hilog:libhilog",
+      "hisysevent:libhisysevent",
+      "hitrace:hitrace_meter",
+    ]
+  }
+}
+
+distributeddb_unittest("DistributedDBSchemalTest") {
+  sources = [ "unittest/common/common/distributeddb_schema_unit_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesDatabaseTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_database_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesDataOperationTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_data_operation_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesEncryptDatabaseTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_encrypt_database_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesEncryptDelegateTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_encrypt_delegate_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesImportAndExportTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_import_and_export_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudInterfacesReferenceTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_cloud_interfaces_reference_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudInterfacesRelationalSyncTest") {
+  sources = [ "unittest/common/storage/cloud/distributeddb_cloud_interfaces_relational_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudSyncerProgressManagerTest") {
+  sources = [ "unittest/common/syncer/cloud/distributeddb_cloud_syncer_progress_manager_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudSchemaMgrTest") {
+  sources =
+      [ "unittest/common/storage/distributeddb_cloud_schema_mgr_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageDataOperationTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_data_operation_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageRegisterConflictTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_register_conflict_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesTransactionTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_transaction_test.cpp",
+    "unittest/common/interfaces/distributeddb_interfaces_transaction_testcase.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageTransactionDataTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_transaction_data_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageTransactionRecordTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_transaction_record_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBNotificationChainTest") {
+  sources =
+      [ "unittest/common/common/distributeddb_notification_chain_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageCommitStorageTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_commit_storage_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesDataOperationSyncDBTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_data_operation_syncdb_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesRegisterSyncDBTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_register_syncdb_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesRelationalObserverTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_relational_observer_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesTransactionSyncDBTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_transaction_syncdb_test.cpp",
+    "unittest/common/interfaces/distributeddb_interfaces_transaction_testcase.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PSimpleSyncTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_single_ver_p2p_simple_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PPermissionSyncTest") {
+  sources = [ "unittest/common/syncer/distributeddb_single_ver_p2p_permission_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PComplexSyncTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_single_ver_p2p_complex_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerMsgScheduleTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_single_ver_msg_schedule_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBDelegateTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_nb_delegate_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudInterfacesRelationalExtTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_cloud_interfaces_relational_ext_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCommonTest") {
+  sources = [ "unittest/common/common/distributeddb_common_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBDelegateLocalBatchTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_nb_delegate_local_batch_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesTransactionOptimizationTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_transaction_optimization_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesQueryDBTest") {
+  sources =
+      [ "unittest/common/interfaces/distributeddb_interfaces_query_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBDelegateSchemaPutTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_nb_delegate_schema_put_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBTransactionTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_nb_transaction_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBPublishTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_nb_publish_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBUnpublishTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_nb_unpublish_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesSpaceManagementTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_space_management_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageRegisterObserverTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_register_observer_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCommunicatorTest") {
+  sources = [
+    "unittest/common/communicator/adapter_stub.cpp",
+    "unittest/common/communicator/distributeddb_communicator_common.cpp",
+    "unittest/common/communicator/distributeddb_communicator_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCommunicatorSendReceiveTest") {
+  sources = [
+    "unittest/common/communicator/adapter_stub.cpp",
+    "unittest/common/communicator/distributeddb_communicator_common.cpp",
+    "unittest/common/communicator/distributeddb_communicator_send_receive_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCommunicatorDeepTest") {
+  sources = [
+    "unittest/common/communicator/adapter_stub.cpp",
+    "unittest/common/communicator/distributeddb_communicator_common.cpp",
+    "unittest/common/communicator/distributeddb_communicator_deep_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSyncerDeviceManagerTest") {
+  sources =
+      [ "unittest/common/syncer/distributeddb_syncer_device_manager_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBMultiVerP2PSyncTest") {
+  sources =
+      [ "unittest/common/syncer/distributeddb_multi_ver_p2p_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalVerP2PSyncTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_relational_ver_p2p_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageSQLiteSingleVerNaturalStoreTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_single_ver_natural_store_testcase.cpp",
+    "unittest/common/storage/distributeddb_storage_sqlite_single_ver_natural_store_test.cpp",
+  ]
+}
+
+distributeddb_unittest(
+    "DistributedDBStorageSQLiteSingleVerNaturalExecutorTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_sqlite_single_ver_natural_executor_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageSQLiteSingleVerStorageEngineTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_sqlite_single_ver_storage_engine_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageMemorySingleVerNaturalStoreTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_memory_single_ver_naturall_store_test.cpp",
+    "unittest/common/storage/distributeddb_storage_single_ver_natural_store_testcase.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBEventLoopTimerTest") {
+  sources = [ "unittest/common/common/evloop_timer_unit_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBTimeSyncTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_time_sync_test.cpp",
+    "unittest/common/syncer/virtual_time_sync_communicator.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBThreadPoolTest") {
+  sources = [ "unittest/common/common/distributeddb_thread_pool_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBDeviceIdentifierTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_device_identifier_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSingleVersionResultSetTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_single_version_result_set_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesDatabaseCorruptTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_database_corrupt_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBFilePackageTest") {
+  sources = [ "unittest/common/storage/distributeddb_file_package_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBMultiVerVacuumTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_multi_ver_vacuum_test.cpp",
+    "unittest/common/storage/multi_ver_vacuum_executor_stub.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBParcelTest") {
+  sources = [ "unittest/common/common/distributeddb_parcel_unit_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBAbilitySyncTest") {
+  sources = [ "unittest/common/syncer/distributeddb_ability_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSchemaObjectTest") {
+  sources = [ "unittest/common/common/distributeddb_schema_object_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageSingleVerUpgradeTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_single_ver_upgrade_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSqliteRegisterTest") {
+  sources = [ "unittest\common\storage\distributeddb_sqlite_register_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesAutoLaunchTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_auto_launch_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesIndexUnitTest") {
+  sources = [
+    "unittest\common\interfaces\distributeddb_interfaces_index_unit_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBAutoLaunchUnitTest") {
+  sources = [ "unittest/common/common/distributeddb_auto_launch_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBDataCompressionTest") {
+  sources = [ "unittest/common/common/distributeddb_data_compression_test.cpp" ]
+}
+
+###############################################################################
+distributeddb_unittest("DistributedDBJsonPrecheckUnitTest") {
+  sources =
+      [ "unittest/common/common/distributeddb_json_precheck_unit_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBResultsetPerfTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_resultset_performance.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageResultAndJsonOptimizeTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_resultset_and_json_optimize.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageIndexOptimizeTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_index_optimize_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PSyncCheckTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_single_ver_p2p_sync_check_test.cpp",
+  ]
+}
+
+distributeddb_unittest("RuntimeContextProcessSystemApiAdapterImplTest") {
+  sources = [ "unittest/common/interfaces/runtime_context_process_system_api_adapter_impl_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesSchemaDatabaseUpgradeTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_schema_database_upgrade_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageQuerySyncTest") {
+  sources =
+      [ "unittest/common/storage/distributeddb_storage_query_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PQuerySyncTest") {
+  sources = [
+    "unittest/common/syncer/distributeddb_single_ver_p2p_query_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCommunicatorProxyTest") {
+  sources =
+      [ "unittest/common/syncer/distributeddb_communicator_proxy_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerP2PSubscribeSyncTest") {
+  sources = [ "unittest/common/syncer/distributeddb_single_ver_p2p_subscribe_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBMockSyncModuleTest") {
+  sources = [ "unittest/common/syncer/distributeddb_mock_sync_module_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedInterfacesRelationalTest") {
+  sources = [
+    "unittest/common/interfaces/distributeddb_interfaces_relational_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedInterfacesRelationalTrackerTableTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_relational_tracker_table_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalSchemaObjectTest") {
+  sources = [
+    "unittest/common/common/distributeddb_relational_schema_object_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesRelationalSyncTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_relational_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalGetDataTest") {
+  sources =
+      [ "unittest/common/storage/distributeddb_relational_get_data_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalMultiUserTest") {
+  sources =
+      [ "unittest/common/syncer/distributeddb_relational_multi_user_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerMultiUserTest") {
+  sources =
+      [ "unittest/common/syncer/distributeddb_single_ver_multi_user_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalRemoteQueryTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_relational_remote_query_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBRelationalResultSetTest") {
+  sources =
+      [ "unittest/common/storage/distributeddb_relational_result_set_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalEncryptedDbTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_relational_encrypted_db_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBSingleVerDLPTest") {
+  sources = [ "unittest/common/syncer/distributeddb_single_ver_dlp_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesRelationalRoutinesTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_relational_routines_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesLogTest") {
+  sources =
+      [ "unittest/common/interfaces/distributeddb_interfaces_log_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageDataConnectionTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_data_connection_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBRelationalSyncableStorageTest") {
+  sources = [ "unittest/common/storage/distributeddb_relational_syncable_storage_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBRelationalCloudSyncableStorageTest") {
+  sources = [ "unittest/common/storage/distributeddb_relational_cloud_syncable_storage_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSqliteUtilsTest") {
+  sources = [ "unittest/common/storage/distributeddb_sqlite_utils_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudStrategyTest") {
+  sources =
+      [ "unittest/common/syncer/cloud/distributeddb_cloud_strategy_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudSyncerDownloadAssetsTest") {
+  sources = [ "unittest/common/syncer/cloud/distributeddb_cloud_syncer_download_assets_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudSyncerLockTest") {
+  sources = [
+    "unittest/common/syncer/cloud/distributeddb_cloud_syncer_lock_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudSyncerUploadTest") {
+  sources = [
+    "unittest/common/syncer/cloud/distributeddb_cloud_syncer_upload_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudSyncerDownloadTest") {
+  sources = [
+    "unittest/common/syncer/cloud/distributeddb_cloud_syncer_download_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudDBProxyTest") {
+  sources =
+      [ "unittest/common/syncer/cloud/distributeddb_cloud_db_proxy_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudAssetCompareTest") {
+  sources = [
+    "unittest/common/syncer/cloud/distributeddb_cloud_asset_compare_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudSaveCloudDataTest") {
+  sources = [ "unittest/common/storage/cloud/distributeddb_cloud_save_cloud_data_test.cpp" ]
+}
+
+distributeddb_unittest(
+    "DistributedDBCloudInterfacesRelationalRemoveDeviceDataTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_cloud_interfaces_relational_remove_device_data_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudCheckSyncTest") {
+  sources = [
+    "unittest/common/storage/cloud/distributeddb_cloud_check_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudTableCompoundPrimaryKeySyncTest") {
+  sources = [ "unittest/common/syncer/cloud/distributeddb_cloud_table_compound_primary_key_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudTableWithoutPrimaryKeySyncTest") {
+  sources = [ "unittest/common/syncer/cloud/distributeddb_cloud_table_without_primary_key_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudInterfacesSetCloudSchemaTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_cloud_interfaces_set_cloud_schema_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudReferenceSyncTest") {
+  sources = [
+    "unittest/common/storage/cloud/distributeddb_cloud_reference_sync_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBCloudAssetsOperationSyncTest") {
+  sources = [ "unittest/common/storage/cloud/distributeddb_cloud_assets_operation_sync_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudTaskMergeTest") {
+  sources = [
+    "unittest/common/storage/cloud/distributeddb_cloud_task_merge_test.cpp",
+  ]
+}
+
+###############################################################################
+# testcase using rd kernel
+
+distributeddb_unittest(
+    "DistributedDBStorageMemoryRdSingleVerNaturalStoreTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_memory_rd_single_ver_naturall_store_test.cpp",
+    "unittest/common/storage/distributeddb_storage_rd_single_ver_natural_store_testcase.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageRdRegisterObserverTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_rd_register_observer_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageRdResultAndJsonOptimizeTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_rd_resultset_and_json_optimize.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageRdSingleVerNaturalExecutorTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_rd_single_ver_natural_executor_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageRdSingleVerNaturalStoreTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_storage_rd_single_ver_natural_store_test.cpp",
+    "unittest/common/storage/distributeddb_storage_rd_single_ver_natural_store_testcase.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBStorageRdSingleVerStorageEngineTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_rd_single_ver_storage_engine_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesNBDelegateRdTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_nb_delegate_rd_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBInterfacesDatabaseRdKernelTest") {
+  sources = [ "unittest/common/interfaces/distributeddb_interfaces_database_rd_kernel_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBStorageSingleVerDatabaseOperTest") {
+  sources = [ "unittest/common/storage/distributeddb_storage_single_ver_database_oper_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBSqliteRelationalUtilsTest") {
+  sources = [
+    "unittest/common/storage/distributeddb_sqlite_relational_utils_test.cpp",
+  ]
+}
+
+distributeddb_unittest("DistributedDBMetaDataTest") {
+  sources = [ "unittest/common/syncer/distributeddb_meta_data_test.cpp" ]
+}
+
+distributeddb_unittest("DistributedDBCloudKvTest") {
+  sources = [ "unittest/common/syncer/cloud/distributeddb_cloud_kv_test.cpp" ]
+}
+
+###############################################################################
+group("unittest") {
+  testonly = true
+  deps = [ "//third_party/googletest:gmock" ]
+
+  deps += [
+    ":DistributedDBAbilitySyncTest",
+    ":DistributedDBAutoLaunchUnitTest",
+    ":DistributedDBCloudAssetCompareTest",
+    ":DistributedDBCloudAssetsOperationSyncTest",
+    ":DistributedDBCloudCheckSyncTest",
+    ":DistributedDBCloudDBProxyTest",
+    ":DistributedDBCloudInterfacesReferenceTest",
+    ":DistributedDBCloudInterfacesRelationalExtTest",
+    ":DistributedDBCloudInterfacesRelationalRemoveDeviceDataTest",
+    ":DistributedDBCloudInterfacesRelationalSyncTest",
+    ":DistributedDBCloudInterfacesSetCloudSchemaTest",
+    ":DistributedDBCloudKvTest",
+    ":DistributedDBCloudReferenceSyncTest",
+    ":DistributedDBCloudSaveCloudDataTest",
+    ":DistributedDBCloudSchemaMgrTest",
+    ":DistributedDBCloudStrategyTest",
+    ":DistributedDBCloudSyncerDownloadTest",
+    ":DistributedDBCloudSyncerLockTest",
+    ":DistributedDBCloudSyncerProgressManagerTest",
+    ":DistributedDBCloudSyncerUploadTest",
+    ":DistributedDBCloudTableCompoundPrimaryKeySyncTest",
+    ":DistributedDBCloudTableWithoutPrimaryKeySyncTest",
+    ":DistributedDBCommonTest",
+    ":DistributedDBCommunicatorDeepTest",
+    ":DistributedDBCommunicatorProxyTest",
+    ":DistributedDBCommunicatorSendReceiveTest",
+    ":DistributedDBCommunicatorTest",
+    ":DistributedDBDeviceIdentifierTest",
+    ":DistributedDBEventLoopTimerTest",
+    ":DistributedDBFilePackageTest",
+    ":DistributedDBInterfacesAutoLaunchTest",
+    ":DistributedDBInterfacesDataOperationSyncDBTest",
+    ":DistributedDBInterfacesDataOperationTest",
+    ":DistributedDBInterfacesDatabaseCorruptTest",
+    ":DistributedDBInterfacesDatabaseTest",
+    ":DistributedDBInterfacesEncryptDatabaseTest",
+    ":DistributedDBInterfacesEncryptDelegateTest",
+    ":DistributedDBInterfacesImportAndExportTest",
+    ":DistributedDBInterfacesIndexUnitTest",
+    ":DistributedDBInterfacesLogTest",
+    ":DistributedDBInterfacesNBDelegateLocalBatchTest",
+    ":DistributedDBInterfacesNBDelegateSchemaPutTest",
+    ":DistributedDBInterfacesNBDelegateTest",
+    ":DistributedDBInterfacesNBPublishTest",
+    ":DistributedDBInterfacesNBResultsetPerfTest",
+    ":DistributedDBInterfacesNBTransactionTest",
+    ":DistributedDBInterfacesNBUnpublishTest",
+    ":DistributedDBInterfacesQueryDBTest",
+    ":DistributedDBInterfacesRegisterSyncDBTest",
+    ":DistributedDBInterfacesRelationalObserverTest",
+    ":DistributedDBInterfacesRelationalRoutinesTest",
+    ":DistributedDBInterfacesRelationalSyncTest",
+    ":DistributedDBInterfacesSchemaDatabaseUpgradeTest",
+    ":DistributedDBInterfacesSpaceManagementTest",
+    ":DistributedDBInterfacesTransactionOptimizationTest",
+    ":DistributedDBInterfacesTransactionSyncDBTest",
+    ":DistributedDBInterfacesTransactionTest",
+    ":DistributedDBJsonPrecheckUnitTest",
+    ":DistributedDBMetaDataTest",
+    ":DistributedDBMockSyncModuleTest",
+    ":DistributedDBMultiVerP2PSyncTest",
+    ":DistributedDBMultiVerVacuumTest",
+    ":DistributedDBNotificationChainTest",
+    ":DistributedDBParcelTest",
+    ":DistributedDBRelationalCloudSyncableStorageTest",
+    ":DistributedDBRelationalEncryptedDbTest",
+    ":DistributedDBRelationalGetDataTest",
+    ":DistributedDBRelationalRemoteQueryTest",
+    ":DistributedDBRelationalResultSetTest",
+    ":DistributedDBRelationalSchemaObjectTest",
+    ":DistributedDBRelationalSyncableStorageTest",
+    ":DistributedDBRelationalVerP2PSyncTest",
+    ":DistributedDBSchemaObjectTest",
+    ":DistributedDBSchemalTest",
+    ":DistributedDBSingleVerDLPTest",
+    ":DistributedDBSingleVerMsgScheduleTest",
+    ":DistributedDBSingleVerMultiUserTest",
+    ":DistributedDBSingleVerP2PComplexSyncTest",
+    ":DistributedDBSingleVerP2PPermissionSyncTest",
+    ":DistributedDBSingleVerP2PQuerySyncTest",
+    ":DistributedDBSingleVerP2PSimpleSyncTest",
+    ":DistributedDBSingleVerP2PSubscribeSyncTest",
+    ":DistributedDBSingleVerP2PSyncCheckTest",
+    ":DistributedDBSingleVersionResultSetTest",
+    ":DistributedDBSqliteRegisterTest",
+    ":DistributedDBSqliteRelationalUtilsTest",
+    ":DistributedDBSqliteUtilsTest",
+    ":DistributedDBStorageCommitStorageTest",
+    ":DistributedDBStorageDataConnectionTest",
+    ":DistributedDBStorageDataOperationTest",
+    ":DistributedDBStorageIndexOptimizeTest",
+    ":DistributedDBStorageMemorySingleVerNaturalStoreTest",
+    ":DistributedDBStorageQuerySyncTest",
+    ":DistributedDBStorageRegisterConflictTest",
+    ":DistributedDBStorageRegisterObserverTest",
+    ":DistributedDBStorageResultAndJsonOptimizeTest",
+    ":DistributedDBStorageSQLiteSingleVerNaturalExecutorTest",
+    ":DistributedDBStorageSQLiteSingleVerNaturalStoreTest",
+    ":DistributedDBStorageSQLiteSingleVerStorageEngineTest",
+    ":DistributedDBStorageSingleVerDatabaseOperTest",
+    ":DistributedDBStorageSingleVerUpgradeTest",
+    ":DistributedDBStorageTransactionDataTest",
+    ":DistributedDBStorageTransactionRecordTest",
+    ":DistributedDBSyncerDeviceManagerTest",
+    ":DistributedDBThreadPoolTest",
+    ":DistributedDBTimeSyncTest",
+    ":DistributedInterfacesRelationalTest",
+    ":RuntimeContextProcessSystemApiAdapterImplTest",
+  ]
+
+  if (defined(global_parts_info.distributeddatamgr_kv_store_lite)) {
+    deps += [
+      ":DistributedDBInterfacesDatabaseRdKernelTest",
+      ":DistributedDBInterfacesNBDelegateRdTest",
+      ":DistributedDBStorageMemoryRdSingleVerNaturalStoreTest",
+      ":DistributedDBStorageRdRegisterObserverTest",
+      ":DistributedDBStorageRdResultAndJsonOptimizeTest",
+      ":DistributedDBStorageRdSingleVerNaturalExecutorTest",
+      ":DistributedDBStorageRdSingleVerNaturalStoreTest",
+      ":DistributedDBStorageRdSingleVerStorageEngineTest",
+    ]
+  }
+}
+
+###############################################################################
+group("distributeddatamgr_fuzztest") {
+  testonly = true
+  deps = []
+  deps += [
+    "fuzztest/cloudsync_fuzzer:fuzztest",
+    "fuzztest/delegate_fuzzer:fuzztest",
+    "fuzztest/fileoper_fuzzer:fuzztest",
+    "fuzztest/importfile_fuzzer:fuzztest",
+    "fuzztest/iprocesscommunicator_fuzzer:fuzztest",
+    "fuzztest/kvdelegatemanager_fuzzer:fuzztest",
+    "fuzztest/kvstoreresultset_fuzzer:fuzztest",
+    "fuzztest/nbdelegate_fuzzer:fuzztest",
+    "fuzztest/parseckeck_fuzzer:fuzztest",
+    "fuzztest/query_fuzzer:fuzztest",
+    "fuzztest/rekey_fuzzer:fuzztest",
+    "fuzztest/relationalstoredelegate_fuzzer:fuzztest",
+    "fuzztest/relationalstoremanager_fuzzer:fuzztest",
+    "fuzztest/schemadelegate_fuzzer:fuzztest",
+    "fuzztest/storage_fuzzer:fuzztest",
+    "fuzztest/sync_fuzzer:fuzztest",
+  ]
+}
+###############################################################################

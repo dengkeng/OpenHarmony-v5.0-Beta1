@@ -1,0 +1,29 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/MyAbilityStage.ts",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [],
+    "extensionAbilities": [
+      {
+        "name": "ToastExtensionAbility",
+        "srcEntrance": "./ets/ServiceExtAbility/ToastExtensionAbility.ts",
+        "description": "$string:ToastExtensionAbility_desc",
+        "icon": "$media:icon",
+        "label":"$string:ToastExtensionAbility_label",
+        "visible": false,
+        "type": "service"
+      }
+    ]
+  }
+}

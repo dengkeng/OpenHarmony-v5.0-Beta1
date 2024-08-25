@@ -1,0 +1,44 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+ability_runtime_path = "//foundation/ability/ability_runtime"
+ability_runtime_kits_path = "${ability_runtime_path}/frameworks/kits"
+declare_args() {
+  storage_service_graphic = true
+  storage_service_user_crypto_manager = true
+  storage_service_external_storage_manager = true
+  storage_service_storage_statistics_manager = true
+  storage_service_crypto_test = false
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.filemanagement_dfs_service)) {
+    storage_service_dfs_service = true
+  } else {
+    storage_service_dfs_service = false
+  }
+}
+storage_manager_path =
+    "//foundation/filemanagement/storage_service/services/storage_manager"
+storage_daemon_path =
+    "//foundation/filemanagement/storage_service/services/storage_daemon"
+storage_interface_path =
+    "//foundation/filemanagement/storage_service/interfaces"
+storage_service_common_path =
+    "//foundation/filemanagement/storage_service/services/common"
+storage_service_path = "//foundation/filemanagement/storage_service"
+bundlemanager_framework_path = "//foundation/bundlemanager/bundle_framework"
+multimedia_library_path = "//foundation/multimedia/media_library"
+start_init_services_path = "//base/startup/init/services"
+start_init_interfaces_path = "//base/startup/init/interfaces"
+security_huks_frameworks_path = "//base/security/huks/frameworks/huks_standard"
+c_utils_base_path = "//commonlibrary/c_utils/base"
+communication_ipc_path = "//foundation/communication/ipc"

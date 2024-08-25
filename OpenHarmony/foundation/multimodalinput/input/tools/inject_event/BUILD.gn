@@ -1,0 +1,88 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+import("../../multimodalinput_mini.gni")
+
+ohos_source_set("input-manager") {
+  sources = [ "src/input_manager_command.cpp" ]
+  stack_protector_ret = true
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "include",
+    "${mmi_path}/util/common/include",
+  ]
+
+  deps = [
+    "${mmi_path}/frameworks/proxy:libmmi-client",
+    "${mmi_path}/util:libmmi-util",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "image_framework:image_native",
+  ]
+  subsystem_name = "multimodalinput"
+  part_name = "input"
+}
+
+ohos_executable("uinput") {
+  sources = [ "src/main.cpp" ]
+  configs = [ "${mmi_path}:coverage_flags" ]
+  include_dirs = [ "include" ]
+  stack_protector_ret = true
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  deps = [ "${mmi_path}/tools/inject_event:input-manager" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+  subsystem_name = "multimodalinput"
+  part_name = "input"
+}
+
+module_output_path = "multimodalinput/mmi_unit_out"
+ohos_unittest("InjectEventTest") {
+  module_out_path = module_output_path
+  configs = [ "${mmi_path}:coverage_flags" ]
+  include_dirs = [ "include" ]
+
+  sources = [ "test/inject_event_test.cpp" ]
+
+  deps = [
+    "${mmi_path}/frameworks/proxy:libmmi-client",
+    "${mmi_path}/tools/inject_event:input-manager",
+    "${mmi_path}/util:libmmi-util",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "image_framework:image_native",
+  ]
+}
+
+group("inject_event") {
+  testonly = true
+  deps = [ ":InjectEventTest" ]
+}

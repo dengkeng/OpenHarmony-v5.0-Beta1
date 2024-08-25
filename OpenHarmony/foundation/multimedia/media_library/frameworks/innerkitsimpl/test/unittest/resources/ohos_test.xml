@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2022 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration ver="2.0">
+    <target name="medialibrary_datamanager_unittest">
+        <preparer>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Docs/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Docs/Download/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Docs/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Docs/Download/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/files/.*"/>
+            <option name="shell" value="scanner"/>
+        </preparer>
+    </target>
+    <target name="media_library_helper_test">
+        <cleaner>
+            <option name="shell" value="rm -rf /data/test/*"/>
+            <option name="shell" value="rm -rf /data/test/.*"/>
+        </cleaner>
+    </target>
+    <target name="mediathumbnail_test">
+        <preparer>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+            <option name="shell" value="scanner"/>
+            <option name="shell" value="sleep 10"/>
+            <option name="shell" value="mkdir /storage/cloud/100/files/Pictures"/>
+            <option name="shell" value="mkdir /storage/cloud/100/files/Videos"/>
+            <option name="shell" value="mkdir /storage/cloud/100/files/Audios"/>
+            <option name="push" value="thumbnail_testfile/CreateImageThumbnailTest_001.jpg -> /storage/cloud/100/files/Documents" src="res"/>
+            <option name="push" value="thumbnail_testfile/CreateImageLcdTest_001.jpg -> /storage/cloud/100/files/Documents" src="res"/>
+            <option name="push" value="thumbnail_testfile/CreateAudioThumbnailTest_001.mp3 -> /storage/cloud/100/files/Documents" src="res"/>
+            <option name="push" value="thumbnail_testfile/CreateVideoThumbnailTest_001.mp4 -> /storage/cloud/100/files/Documents" src="res"/>
+            <option name="shell" value="scanner"/>
+            <option name="shell" value="sleep 10"/>
+        </preparer>
+    </target>
+    <target name="mediascanner_unittest">
+        <preparer>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+        </preparer>
+    </target>
+    <target name="medialibrary_queryperf_unittest">
+        <preparer>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+            <option name="shell" value="scanner"/>
+        </preparer>
+    </target>
+    <target name="medialibrary_backup_test">
+        <preparer>
+            <option name="shell" value="rm -rf /data/test/backup"/>
+            <option name="shell" value="mkdir -p /data/test/backup/db/gallery/ce/databases"/>
+            <option name="shell" value="mkdir -p /data/test/backup/db/medialibrary/ce/databases"/>
+            <option name="shell" value="mkdir -p /data/test/backup/db/external/ce/databases"/>
+            <option name="shell" value="touch /data/test/backup/1.txt"/>
+        </preparer>
+    </target>
+    <target name="medialibrary_scanner_db_test">
+        <preparer>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audio/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Audios/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Camera/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Documents/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Photo/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Pictures/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/Videos/*"/>
+            <option name="shell" value="rm -rf /storage/cloud/100/files/.*"/>
+            <option name="push" value="thumbnail_testfile/CreateImageLcdTest_001.jpg -> /storage/cloud/100/files/Documents" src="res"/>
+        </preparer>
+    </target>
+    <target name="medialibrary_backup_clone_test">
+        <preparer>
+            <option name="shell" value="rm -rf /data/test/backup"/>
+            <option name="shell" value="mkdir -p /data/test/backup/db/data/storage/el2/database/rdb"/>
+        </preparer>
+    </target>
+</configuration>

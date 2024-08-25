@@ -1,0 +1,53 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/multimedia/player_framework/config.gni")
+
+group("media_services_package") {
+  deps = [
+    ":codec_caps",
+    ":recorder_configs",
+    "engine:media_engine_package",
+    "etc:media_service.cfg",
+    "services:media_service",
+  ]
+  if (multimedia_player_framework_support_seccomp) {
+    deps += [ "seccomp_policy:media_seccomp_filter" ]
+  }
+  if (multimedia_player_framework_support_screen_capture_controller) {
+    deps += [
+      "etc:screen_capture_capsule_image",
+      "etc:screen_capture_mic_image",
+      "etc:screen_capture_mic_off_image",
+      "etc:screen_capture_notification_image",
+      "etc:screen_capture_stop_dark_image",
+      "etc:screen_capture_stop_image",
+    ]
+  }
+}
+
+ohos_prebuilt_etc("codec_caps") {
+  source = "etc/codec_caps.xml"
+
+  subsystem_name = "multimedia"
+  module_install_dir = "etc/codec"
+  part_name = "player_framework"
+}
+ohos_prebuilt_etc("recorder_configs") {
+  source = "etc/recorder_configs.xml"
+
+  subsystem_name = "multimedia"
+  module_install_dir = "etc/recorder"
+  part_name = "player_framework"
+}

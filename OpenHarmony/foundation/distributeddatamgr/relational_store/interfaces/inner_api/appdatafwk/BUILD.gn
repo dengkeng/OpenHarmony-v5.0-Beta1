@@ -1,0 +1,131 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/relational_store/relational_store.gni")
+
+config("appdatafwk_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${relational_store_innerapi_path}/rdb/include",
+    "${relational_store_common_path}/include",
+  ]
+  if (!is_mingw && !is_mac) {
+    cflags_cc = [ "-fvisibility=hidden" ]
+  }
+}
+
+config("appdatafwk_public_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${relational_store_innerapi_path}/rdb/include",
+    "${relational_store_common_path}/include",
+  ]
+}
+
+config("common_public_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${relational_store_common_path}/include",
+    "//third_party/json/single_include",
+  ]
+}
+
+if (is_android || is_ios) {
+  ohos_source_set("relational_common_base") {
+    sources =
+        [ "${relational_store_native_path}/appdatafwk/src/serializable.cpp" ]
+
+    if (is_mingw || is_mac || is_ios) {
+      sources +=
+          [ "${relational_store_native_path}/appdatafwk/src/mingw_endian.cpp" ]
+    } else if (is_ohos || is_android) {
+      sources += [
+        "${relational_store_native_path}/appdatafwk/src/general_endian.cpp",
+      ]
+      cflags_cc = [ "-fvisibility=hidden" ]
+    }
+
+    configs = [
+      ":common_public_config",
+      ":appdatafwk_public_config",
+    ]
+
+    subsystem_name = "distributeddatamgr"
+    part_name = "relational_store"
+
+    public_configs = [ ":common_public_config" ]
+  }
+} else {
+  ohos_shared_library("relational_common_base") {
+    if (is_ohos) {
+      branch_protector_ret = "pac_ret"
+      sanitize = {
+        cfi = true
+        cfi_cross_dso = true
+        debug = false
+      }
+    }
+
+    sources =
+        [ "${relational_store_native_path}/appdatafwk/src/serializable.cpp" ]
+
+    if (is_mingw || is_mac || is_ios) {
+      sources +=
+          [ "${relational_store_native_path}/appdatafwk/src/mingw_endian.cpp" ]
+    } else if (is_ohos || is_android) {
+      sources += [
+        "${relational_store_native_path}/appdatafwk/src/general_endian.cpp",
+      ]
+      cflags_cc = [ "-fvisibility=hidden" ]
+    }
+
+    configs = [
+      ":common_public_config",
+      ":appdatafwk_public_config",
+    ]
+
+    subsystem_name = "distributeddatamgr"
+    part_name = "relational_store"
+
+    public_configs = [ ":common_public_config" ]
+  }
+}
+
+ohos_shared_library("native_appdatafwk") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  sources =
+      [ "${relational_store_native_path}/appdatafwk/src/shared_block.cpp" ]
+
+  configs = [ ":appdatafwk_config" ]
+
+  subsystem_name = "distributeddatamgr"
+  innerapi_tags = [ "platformsdk_indirect" ]
+  part_name = "relational_store"
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+  ]
+
+  public_configs = [ ":appdatafwk_public_config" ]
+}

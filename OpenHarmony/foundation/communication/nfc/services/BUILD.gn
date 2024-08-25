@@ -1,0 +1,245 @@
+# Copyright (C) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("../nfc.gni")
+
+config("nfc_config") {
+  visibility = [ ":*" ]
+
+  defines = [ "DEBUG" ]
+  if (nfc_use_vendor_nci_native) {
+    defines += [ "USE_VENDOR_NCI_NATIVE" ]
+  }
+
+  if (nfc_service_feature_vendor_applications_enabled) {
+    defines += [ "VENDOR_APPLICATIONS_ENABLED" ]
+  }
+
+  if (nfc_sim_feature) {
+    defines += [ "NFC_SIM_FEATURE" ]
+  }
+
+  if (nfc_service_feature_ndef_wifi_enabled) {
+    defines += [ "NDEF_WIFI_ENABLED" ]
+  }
+
+  if (nfc_service_feature_ndef_bt_enabled) {
+    defines += [ "NDEF_BT_ENABLED" ]
+  }
+
+  include_dirs = [
+    "include",
+    "src/ipc/controller",
+    "src/ipc/tags",
+    "src/ipc/card_emulation",
+    "src/nci_adapter",
+    "src/utils",
+    "src/card_emulation",
+    "src/external_deps",
+    "src/tag",
+    "$NFC_DIR/interfaces/inner_api/common",
+  ]
+}
+
+ohos_prebuilt_etc("nfc_prebuilt_config_apdu") {
+  source = "res/nfc_card_apdu.json"
+  relative_install_dir = "nfc"
+  part_name = "nfc"
+  subsystem_name = "communication"
+}
+
+ohos_prebuilt_etc("nfc_prebuilt_config_string_en") {
+  source = "res/en/string_en.json"
+  relative_install_dir = "nfc"
+  part_name = "nfc"
+  subsystem_name = "communication"
+}
+
+ohos_prebuilt_etc("nfc_prebuilt_config_string_zh") {
+  source = "res/zh/string_zh.json"
+  relative_install_dir = "nfc"
+  part_name = "nfc"
+  subsystem_name = "communication"
+}
+
+ohos_prebuilt_etc("nfc_prebuilt_config_notification_icon") {
+  source = "res/nfc_icon.png"
+  relative_install_dir = "nfc"
+  part_name = "nfc"
+  subsystem_name = "communication"
+}
+
+nfc_service_source = [
+  "src/card_emulation/ce_service.cpp",
+  "src/card_emulation/host_card_emulation_manager.cpp",
+  "src/card_emulation/nfc_ability_connection_callback.cpp",
+  "src/card_emulation/setting_data_share_impl.cpp",
+  "src/external_deps/app_data_parser.cpp",
+  "src/external_deps/external_deps_proxy.cpp",
+  "src/external_deps/nfc_data_share_impl.cpp",
+  "src/external_deps/nfc_event_publisher.cpp",
+  "src/external_deps/nfc_hisysevent.cpp",
+  "src/external_deps/nfc_notification_publisher.cpp",
+  "src/external_deps/nfc_permission_checker.cpp",
+  "src/external_deps/nfc_preferences.cpp",
+  "src/external_deps/tag_ability_dispatcher.cpp",
+  "src/ipc/controller/ndef_msg_callback_proxy.cpp",
+  "src/ipc/controller/nfc_controller_callback_proxy.cpp",
+  "src/ipc/controller/nfc_controller_death_recipient.cpp",
+  "src/ipc/controller/nfc_controller_impl.cpp",
+  "src/ipc/controller/nfc_controller_stub.cpp",
+  "src/ipc/tags/foreground_callback_proxy.cpp",
+  "src/ipc/tags/foreground_death_recipient.cpp",
+  "src/ipc/tags/reader_mode_callback_proxy.cpp",
+  "src/ipc/tags/reader_mode_death_recipient.cpp",
+  "src/ipc/tags/tag_session.cpp",
+  "src/ipc/tags/tag_session_stub.cpp",
+  "src/nci_adapter/nci_ce_proxy.cpp",
+  "src/nci_adapter/nci_native_selector.cpp",
+  "src/nci_adapter/nci_nfcc_proxy.cpp",
+  "src/nci_adapter/nci_tag_proxy.cpp",
+  "src/nfc_event_handler.cpp",
+  "src/nfc_polling_manager.cpp",
+  "src/nfc_polling_params.cpp",
+  "src/nfc_routing_manager.cpp",
+  "src/nfc_sa_manager.cpp",
+  "src/nfc_service.cpp",
+  "src/utils/app_state_observer.cpp",
+  "src/utils/nfc_timer.cpp",
+  "src/utils/nfc_watch_dog.cpp",
+  "src/ipc/card_emulation/hce_cmd_callback_proxy.cpp",
+  "src/ipc/card_emulation/hce_cmd_death_recipient.cpp",
+  "src/ipc/card_emulation/hce_session.cpp",
+  "src/ipc/card_emulation/hce_session_stub.cpp",
+  "src/tag/isodep_card_handler.cpp",
+  "src/tag/ndef_har_data_parser.cpp",
+  "src/tag/ndef_har_dispatch.cpp",
+  "src/tag/tag_dispatcher.cpp",
+]
+
+if (nfc_service_feature_vendor_applications_enabled) {
+  nfc_service_source += [
+    "src/ipc/controller/on_card_emulation_notify_cb_proxy.cpp",
+    "src/ipc/controller/query_app_info_callback_proxy.cpp",
+  ]
+}
+
+nfc_service_external_deps = [
+  "ability_base:want",
+  "ability_base:zuri",
+  "ability_runtime:ability_manager",
+  "ability_runtime:app_manager",
+  "ability_runtime:dataobs_manager",
+  "access_token:libaccesstoken_sdk",
+  "bundle_framework:appexecfwk_base",
+  "bundle_framework:appexecfwk_core",
+  "c_utils:utils",
+  "common_event_service:cesfwk_core",
+  "common_event_service:cesfwk_innerkits",
+  "data_share:datashare_consumer",
+  "eventhandler:libeventhandler",
+  "hilog:libhilog",
+  "hisysevent:libhisysevent",
+  "ipc:ipc_core",
+  "miscdevice:vibrator_interface_native",
+  "power_manager:powermgr_client",
+  "preferences:native_preferences",
+  "safwk:system_ability_fwk",
+  "samgr:samgr_proxy",
+  "screenlock_mgr:screenlock_client",
+]
+
+if (nfc_service_feature_ndef_wifi_enabled) {
+  nfc_service_source += [
+    "src/tag/ndef_wifi_data_parser.cpp",
+    "src/tag/wifi_connection_manager.cpp",
+  ]
+  nfc_service_external_deps += [ "wifi:wifi_sdk" ]
+}
+
+if (nfc_service_feature_ndef_bt_enabled) {
+  nfc_service_source += [
+    "src/tag/ndef_bt_data_parser.cpp",
+    "src/tag/bt_connection_manager.cpp",
+  ]
+  nfc_service_external_deps += [ "bluetooth:btframework" ]
+}
+
+####################### nfc_service ################
+ohos_shared_library("nfc_service") {
+  sanitize = {
+    cfi = true
+    boundary_sanitize = true
+    integer_overflow = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  sources = nfc_service_source
+
+  public_configs = [ ":nfc_config" ]
+
+  # Used to control the export of dynamic library symbols.
+  version_script = "libnfc_service_version_script.txt"
+
+  deps = [
+    ":nfc_prebuilt_config_apdu",
+    ":nfc_prebuilt_config_notification_icon",
+    ":nfc_prebuilt_config_string_en",
+    ":nfc_prebuilt_config_string_zh",
+    "$NFC_DIR/interfaces/inner_api/common:nfc_inner_kits_common",
+    "etc/init:etc",
+    "src/notification:nfc_notification",
+    "//third_party/cJSON:cjson_static",
+  ]
+
+  if (!nfc_use_vendor_nci_native) {
+    deps += [ "src/nci_adapter/nci_native_default:nci_native_default" ]
+  }
+
+  external_deps = nfc_service_external_deps
+
+  part_name = "nfc"
+  subsystem_name = "communication"
+}
+
+####################### nfc_service_static ################
+# Only used for unittest
+ohos_static_library("nfc_service_static") {
+  sanitize = {
+    cfi = true
+    boundary_sanitize = true
+    integer_overflow = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = nfc_service_source
+  public_configs = [ ":nfc_config" ]
+
+  deps = [
+    "$NFC_DIR/interfaces/inner_api/common:nfc_inner_kits_common",
+    "etc/init:etc",
+    "//third_party/cJSON:cjson_static",
+  ]
+
+  if (!nfc_use_vendor_nci_native) {
+    deps += [ "src/nci_adapter/nci_native_default:nci_native_default" ]
+  }
+
+  external_deps = nfc_service_external_deps
+
+  part_name = "nfc"
+  subsystem_name = "communication"
+}

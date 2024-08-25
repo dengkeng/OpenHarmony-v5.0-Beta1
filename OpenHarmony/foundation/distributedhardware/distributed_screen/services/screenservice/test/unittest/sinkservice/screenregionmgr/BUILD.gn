@@ -1,0 +1,89 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import(
+    "//foundation/distributedhardware/distributed_screen/distributedscreen.gni")
+
+module_out_path = "distributed_screen/dscreen_sink_service_test"
+
+config("module_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "./include",
+    "${interfaces_path}/innerkits/native_cpp/screen_sink/include",
+    "${interfaces_path}/innerkits/native_cpp/screen_sink/include/callback",
+    "${interfaces_path}/innerkits/native_cpp/screen_source/include",
+    "${interfaces_path}/innerkits/native_cpp/screen_source/include/callback",
+    "${common_path}/include",
+    "${services_path}/common/utils/include",
+    "${services_path}/common/databuffer/include",
+    "${services_path}/common/screen_channel/include",
+    "${services_path}/screentransport/screensinktrans/include",
+    "${services_path}/screentransport/screensinkprocessor/include",
+    "${services_path}/screentransport/screensinkprocessor/decoder/include",
+    "${services_path}/screenclient/include/",
+    "${services_path}/screenservice/sinkservice/screenregionmgr/",
+    "${services_path}/screenservice/sourceservice/dscreenmgr",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/engineutils/include",
+  ]
+}
+
+## UnitTest DscreenRegionMgrTest
+ohos_unittest("DscreenRegionMgrTest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_out_path
+
+  sources = [
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/1.0/src/screenregion_test.cpp",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/1.0/src/screenregionmgr_test.cpp",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/2.0/src/av_receiver_engine_adapter_test.cpp",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/2.0/src/screenregion_test.cpp",
+    "${services_path}/screenservice/test/unittest/sinkservice/screenregionmgr/2.0/src/screenregionmgr_test.cpp",
+  ]
+
+  configs = [
+    ":module_private_config",
+    "${common_path}/test/unittest/resource:dscreen_unittest_public_config",
+  ]
+
+  deps = [
+    "${services_path}/screenclient:distributed_screen_client",
+    "${services_path}/screenservice/sinkservice:distributed_screen_sink",
+    "${services_path}/screenservice/sourceservice:distributed_screen_source",
+    "${services_path}/screentransport/screensinktrans:distributed_screen_sinktrans",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "av_codec:av_codec_client",
+    "cJSON:cjson",
+    "c_utils:utils",
+    "distributed_hardware_fwk:distributed_av_receiver",
+    "distributed_hardware_fwk:distributedhardwareutils",
+    "distributed_hardware_fwk:libdhfwk_sdk",
+    "graphic_2d:libcomposer",
+    "graphic_2d:libgraphic_utils",
+    "graphic_2d:librender_service_client",
+    "graphic_surface:surface",
+    "hisysevent:libhisysevent",
+    "media_foundation:media_foundation",
+    "window_manager:libdm",
+  ]
+}

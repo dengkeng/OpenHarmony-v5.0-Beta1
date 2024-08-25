@@ -1,0 +1,165 @@
+{
+    "name": "@ohos/datamgr_service",
+    "version": "3.2.0",
+    "description": "Distributed data manager that provides the capability to store data in the databases of different devices",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache V2",
+    "repository": "https://gitee.com/openharmony/distributeddatamgr_datamgr_service",
+    "domain": "os",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "foundation"
+    ],
+    "keywords": [
+        "distributeddatamgr",
+        "datamgr_service"
+    ],
+    "envs": [],
+    "dirs": [],
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "contributors": [
+        {
+            "name": "",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "segment": {
+        "destPath": "foundation/distributeddatamgr/datamgr_service"
+    },
+    "component": {
+        "name": "datamgr_service",
+        "subsystem": "distributeddatamgr",
+        "syscap": [],
+        "features": [
+            "datamgr_service_config",
+            "datamgr_service_udmf"
+        ],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "5120KB",
+        "ram": "8192KB",
+        "hisysevent_config": [
+            "//foundation/distributeddatamgr/datamgr_service/hisysevent.yaml"
+        ],
+        "deps": {
+            "components": [
+                "ability_base",
+                "ability_runtime",
+                "access_token",
+                "bundle_framework",
+                "common_event_service",
+                "c_utils",
+                "dataclassification",
+                "data_share",
+                "device_auth",
+                "device_manager",
+                "dfs_service",
+                "dsoftbus",
+                "hilog",
+                "hisysevent",
+                "hitrace",
+                "huks",
+                "kv_store",
+                "image_framework",
+                "ipc",
+                "napi",
+                "netmanager_base",
+                "os_account",
+                "relational_store",
+                "resource_management",
+                "safwk",
+                "samgr",
+                "time_service",
+                "udmf",
+                "app_file_service",
+                "file_api"
+            ],
+            "third_party": [
+                "cJSON",
+                "jsoncpp",
+                "libuv",
+                "openssl",
+                "sqlite",
+                "zlib"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/app:build_module",
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/framework:build_module",
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/rust/extension:build_module",
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/service:build_module",
+                "//foundation/distributeddatamgr/datamgr_service/conf:build_module",
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/service/data_share:build_module"
+            ],
+            "inner_kits": [
+                {
+                    "name": "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/framework:distributeddatasvcfwk",
+                    "header": {
+                        "header_files": [
+                            "backuprule/backup_rule_manager.h",
+                            "checker/checker_manager.h",
+                            "cloud/asset_loader.h",
+                            "cloud/change_event.h",
+                            "cloud/cloud_db.h",
+                            "cloud/cloud_event.h",
+                            "cloud/cloud_info.h",
+                            "cloud/cloud_server.h",
+                            "cloud/schema_meta.h",
+                            "cloud/subscription.h",
+                            "cloud/sync_event.h",
+                            "directory/directory_manager.h",
+                            "error/general_error.h",
+                            "eventcenter/event.h",
+                            "eventcenter/event_center.h",
+                            "feature/feature_system.h",
+                            "metadata/appid_meta_data.h",
+                            "metadata/capability_meta_data.h",
+                            "metadata/capability_range.h",
+                            "metadata/corrupted_meta_data.h",
+                            "metadata/matrix_meta_data.h",
+                            "metadata/meta_data.h",
+                            "metadata/meta_data_manager.h",
+                            "metadata/secret_key_meta_data.h",
+                            "metadata/store_meta_data.h",
+                            "metadata/store_meta_data_local.h",
+                            "metadata/strategy_meta_data.h",
+                            "metadata/user_meta_data.h",
+                            "serializable/serializable.h",
+                            "snapshot/bind_event.h",
+                            "snapshot/machine_status.h",
+                            "snapshot/snapshot.h",
+                            "store/auto_cache.h",
+                            "store/cursor.h",
+                            "store/general_store.h",
+                            "store/general_value.h",
+                            "store/general_watcher.h",
+                            "utils/anonymous.h",
+                            "utils/block_integer.h",
+                            "utils/constant.h",
+                            "utils/converter.h",
+                            "utils/crypto.h",
+                            "utils/endian_converter.h",
+                            "utils/ref_count.h"
+                        ],
+                        "header_base": "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/framework/include"
+                    }
+                }
+            ],
+            "test": [
+                "//foundation/distributeddatamgr/datamgr_service:fuzztest",
+                "//foundation/distributeddatamgr/datamgr_service:build_native_test",
+                "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/rust/ylong_cloud_extension:rust_ylong_cloud_ext_unit_test"
+            ]
+        }
+    }
+}

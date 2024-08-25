@@ -1,0 +1,136 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if (defined(ohos_lite)) {
+  import("//build/lite/config/component/lite_component.gni")
+} else {
+  import("//build/ohos.gni")
+}
+
+import("//foundation/distributedhardware/device_manager/device_manager.gni")
+
+if (defined(ohos_lite)) {
+  if (ohos_kernel_type == "linux") {
+    shared_library("devicemanagerutils") {
+      include_dirs = [
+        "include",
+        "include/crypto",
+        "include/fwkload/lite",
+        "include/appInfo/lite",
+        "include/timer",
+        "${common_path}/include",
+        "${common_path}/include/dfx",
+        "${common_path}/include/dfx/lite",
+        "${common_path}/include/ipc",
+        "${common_path}/include/ipc/lite",
+        "${common_path}/include/ipc/model",
+        "${innerkits_path}/native_cpp/include",
+        "${interfaces_path}/c/ipc/include",
+        "//third_party/json/include",
+        "//third_party/bounds_checking_function/include",
+      ]
+
+      sources = [
+        "${common_path}/src/dfx/lite/dm_hidumper.cpp",
+        "${common_path}/src/dfx/lite/dm_hisysevent.cpp",
+        "${common_path}/src/dfx/lite/dm_hitrace.cpp",
+        "${common_path}/src/dm_anonymous.cpp",
+        "${common_path}/src/dm_error_message.cpp",
+        "${common_path}/src/ipc/lite/ipc_cmd_register.cpp",
+        "src/appInfo/lite/app_manager.cpp",
+        "src/crypto/dm_crypto.cpp",
+        "src/dm_random.cpp",
+        "src/fwkload/lite/dm_distributed_hardware_load.cpp",
+        "src/timer/dm_timer.cpp",
+      ]
+
+      defines = [
+        "LITE_DEVICE",
+        "hI_LOG_ENABLE",
+        "DH_LOG_TAG=\"devicemanagerutils\"",
+        "lOG_DOMAIN=0xD004110",
+      ]
+
+      deps = [
+        "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+        "//third_party/bounds_checking_function:libsec_shared",
+        "//third_party/openssl:libcrypto_shared",
+      ]
+    }
+  }
+} else {
+  config("devicemanagerutils_config") {
+    include_dirs = [
+      "include",
+      "include/crypto",
+      "include/fwkload/standard",
+      "include/appInfo/standard",
+      "include/timer",
+      "${innerkits_path}/native_cpp/include",
+      "${common_path}/include",
+    ]
+  }
+
+  ohos_shared_library("devicemanagerutils") {
+    branch_protector_ret = "pac_ret"
+
+    sanitize = {
+      boundary_sanitize = true
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+      integer_overflow = true
+      ubsan = true
+    }
+
+    sources = [
+      "src/appInfo/standard/app_manager.cpp",
+      "src/crypto/dm_crypto.cpp",
+      "src/dm_random.cpp",
+      "src/timer/dm_timer.cpp",
+    ]
+
+    if (support_jsapi) {
+      sources += [ "src/fwkload/standard/dm_distributed_hardware_load.cpp" ]
+    }
+
+    public_configs = [ ":devicemanagerutils_config" ]
+
+    defines = [
+      "HI_LOG_ENABLE",
+      "DH_LOG_TAG=\"devicemanagerutils\"",
+      "LOG_DOMAIN=0xD004110",
+    ]
+
+    external_deps = [
+      "access_token:libaccesstoken_sdk",
+      "bundle_framework:appexecfwk_base",
+      "c_utils:utils",
+      "hilog:libhilog",
+      "ipc:ipc_core",
+      "ipc:ipc_single",
+      "openssl:libcrypto_shared",
+      "samgr:samgr_proxy",
+    ]
+
+    public_external_deps = [ "json:nlohmann_json_static" ]
+
+    if (support_jsapi) {
+      external_deps += [ "bundle_framework:appexecfwk_core" ]
+    }
+
+    subsystem_name = "distributedhardware"
+
+    part_name = "device_manager"
+  }
+}

@@ -1,0 +1,85 @@
+# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+
+module_output_path = "drm_framework/drm_framework_unittest"
+
+config("drm_framework_capi_unittest_v1_0_config") {
+  include_dirs = [
+    "../../../../interfaces/kits/c/drm_capi/include",
+    "../../../../interfaces/kits/c/drm_capi/common",
+    "../../../../frameworks/native/test/unittest/include",
+    "../../../../frameworks/native/test/common/include",
+    "../../../../interfaces/inner_api/native/drm",
+    "../../../../services/utils/include",
+  ]
+
+  cflags = [
+    "-fno-exceptions",
+    "-Wall",
+    "-fno-common",
+    "-fstack-protector-all",
+    "-Wshadow",
+    "-FPIC",
+    "-FS",
+    "-O2",
+    "-D_FORTIFY_SOURCE=2",
+    "-Wformat=2",
+    "-Wdate-time",
+  ]
+  cflags_cc = [ "-fno-rtti" ]
+}
+
+ohos_unittest("drm_framework_capi_unittest_v1_0") {
+  module_out_path = module_output_path
+  configs = [ ":drm_framework_capi_unittest_v1_0_config" ]
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = true
+  }
+  cflags = []
+  cflags += [ "-DENABLE_DRM_SYSEVENT_CONTROL" ]
+  sources = [
+    "../../../../frameworks/native/test/common/src/http.cpp",
+    "../../../../frameworks/native/test/unittest/src/drm_framework_dfx_unittest.cpp",
+    "../../../../frameworks/native/test/unittest/src/drm_framework_unittest.cpp",
+    "../../../../services/utils/drm_dfx.cpp",
+  ]
+
+  deps = [
+    "../../../../frameworks/native:drm_framework",
+    "../../../../interfaces/kits/c/drm_capi:native_drm",
+    "../../../../interfaces/kits/js/drm_napi:drm_napi",
+    "../../../../services/drm_service:drm_service",
+    "//third_party/curl:curl_shared",
+    "//third_party/googletest:gmock_main",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hidumper:lib_dump_usage",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+    "ipc:ipc_core",
+    "media_foundation:media_foundation",
+  ]
+  subsystem_name = "multimedia"
+  part_name = "drm_framework"
+}

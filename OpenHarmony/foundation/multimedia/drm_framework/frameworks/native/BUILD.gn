@@ -1,0 +1,104 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# for ohos_shared_library("drm_framework")
+
+import("//build/ohos.gni")
+
+config("drm_framework_public_config") {
+  include_dirs = [
+    "./../../interfaces/inner_api/native/drm",
+    "./../../services/drm_service",
+  ]
+}
+
+config("drm_framework_local_config") {
+  include_dirs = [
+    "./../../interfaces/inner_api/native/drm",
+    "./../../services/drm_service/client/include",
+    "./../../services/drm_service/ipc",
+    "./../../services/drm_service/server/include",
+    "./../../services/include",
+    "./../../services/utils",
+    "./../../services/utils/include",
+  ]
+}
+
+config("drm_framework_drivers_config") {
+  include_dirs = [ "./../../services/drm_service/ipc/" ]
+}
+
+ohos_shared_library("drm_framework") {
+  install_enable = true
+  sources = [
+    "./../../services/drm_service/client/src/key_session_service_proxy.cpp",
+    "./../../services/drm_service/client/src/media_decrypt_module_service_proxy.cpp",
+    "./../../services/drm_service/client/src/mediakeysystem_service_proxy.cpp",
+    "./../../services/drm_service/client/src/mediakeysystemfactory_service_proxy.cpp",
+    "./../../services/drm_service/server/src/drm_listener_stub.cpp",
+    "./../../services/drm_service/server/src/key_session_service_callback_stub.cpp",
+    "./../../services/drm_service/server/src/mediakeysystem_service_callback_stub.cpp",
+    "./../../services/utils/drm_trace.cpp",
+    "./drm/key_session_impl.cpp",
+    "./drm/media_key_system_factory_impl.cpp",
+    "./drm/media_key_system_impl.cpp",
+  ]
+
+  cflags = [
+    "-fPIC",
+    "-Wall",
+  ]
+  cflags += [ "-DENABLE_DRM_SYSEVENT_CONTROL" ]
+
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  public_configs = [
+    ":drm_framework_drivers_config",
+    ":drm_framework_local_config",
+    ":drm_framework_public_config",
+  ]
+
+  include_dirs = [
+    "./drm",
+    "//foundation//arkui/napi/interfaces/kits",
+  ]
+
+  deps = []
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_base_context",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  cflags_cc = cflags
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "drm_framework"
+  subsystem_name = "multimedia"
+}

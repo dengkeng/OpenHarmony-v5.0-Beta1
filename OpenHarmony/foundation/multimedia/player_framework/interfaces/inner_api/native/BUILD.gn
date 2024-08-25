@@ -1,0 +1,189 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/multimedia/player_framework/config.gni")
+
+MEDIA_ROOT_DIR = "//foundation/multimedia/player_framework"
+
+config("media_public_config") {
+  include_dirs = [
+    "$MEDIA_ROOT_DIR/interfaces/inner_api/native",
+    "$MEDIA_ROOT_DIR/services/utils/include",
+  ]
+
+  defines = []
+  defines += player_framework_defines
+}
+
+config("media_client_ipc_config") {
+  include_dirs = [
+    "$MEDIA_ROOT_DIR/services/services/sa_media/client",
+    "$MEDIA_ROOT_DIR/services/services/sa_media/ipc",
+    "$MEDIA_ROOT_DIR/services/services/player/client",
+    "$MEDIA_ROOT_DIR/services/services/player/ipc",
+    "$MEDIA_ROOT_DIR/services/services/media_data_source/ipc",
+    "$MEDIA_ROOT_DIR/services/services/monitor/client",
+    "$MEDIA_ROOT_DIR/services/services/monitor/ipc",
+    "$MEDIA_ROOT_DIR/services/services/recorder/client",
+    "$MEDIA_ROOT_DIR/services/services/recorder/ipc",
+    "$MEDIA_ROOT_DIR/services/services/avmetadatahelper/client",
+    "$MEDIA_ROOT_DIR/services/services/avmetadatahelper/ipc",
+    "$MEDIA_ROOT_DIR/services/services/common",
+    "$MEDIA_ROOT_DIR/services/services/recorder_profiles/client",
+    "$MEDIA_ROOT_DIR/services/services/recorder_profiles/ipc",
+    "$MEDIA_ROOT_DIR/services/services/screen_capture/ipc",
+    "$MEDIA_ROOT_DIR/services/services/screen_capture/client",
+  ]
+}
+
+config("media_client_base_config") {
+  include_dirs = [
+    "$MEDIA_ROOT_DIR/interfaces/inner_api/native",
+    "$MEDIA_ROOT_DIR/services/include",
+    "$MEDIA_ROOT_DIR/services/utils/include",
+  ]
+
+  cflags = [
+    "-std=c++17",
+    "-fno-rtti",
+    "-fno-exceptions",
+    "-Wall",
+    "-fno-common",
+    "-fstack-protector-strong",
+    "-Wshadow",
+    "-FPIC",
+    "-FS",
+    "-O2",
+    "-D_FORTIFY_SOURCE=2",
+    "-fvisibility=hidden",
+    "-Wformat=2",
+    "-Wfloat-equal",
+    "-Wdate-time",
+    "-Werror",
+    "-Wextra",
+    "-Wimplicit-fallthrough",
+    "-Wsign-compare",
+    "-Wunused-parameter",
+  ]
+
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  defines = []
+  defines += player_framework_defines
+}
+
+ohos_shared_library("media_client") {
+  stack_protector_ret = true
+  install_enable = true
+
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  sources = [
+    "$MEDIA_ROOT_DIR/frameworks/native/common/media_errors.cpp",
+    "$MEDIA_ROOT_DIR/services/services/common/avsharedmemory_ipc.cpp",
+    "$MEDIA_ROOT_DIR/services/services/monitor/client/monitor_client.cpp",
+    "$MEDIA_ROOT_DIR/services/services/monitor/client/monitor_client_object.cpp",
+    "$MEDIA_ROOT_DIR/services/services/monitor/ipc/monitor_service_proxy.cpp",
+    "$MEDIA_ROOT_DIR/services/services/sa_media/client/media_client.cpp",
+    "$MEDIA_ROOT_DIR/services/services/sa_media/ipc/media_listener_stub.cpp",
+    "$MEDIA_ROOT_DIR/services/services/sa_media/ipc/media_parcel.cpp",
+    "$MEDIA_ROOT_DIR/services/services/sa_media/ipc/media_service_proxy.cpp",
+  ]
+  if (multimedia_player_framework_support_player) {
+    sources += [
+      "$MEDIA_ROOT_DIR/frameworks/native/player/player_impl.cpp",
+      "$MEDIA_ROOT_DIR/services/services/media_data_source/ipc/media_data_source_stub.cpp",
+      "$MEDIA_ROOT_DIR/services/services/player/client/player_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/player/ipc/player_listener_stub.cpp",
+      "$MEDIA_ROOT_DIR/services/services/player/ipc/player_service_proxy.cpp",
+    ]
+  }
+  if (multimedia_player_framework_support_recorder) {
+    sources += [
+      "$MEDIA_ROOT_DIR/frameworks/native/recorder/recorder_impl.cpp",
+      "$MEDIA_ROOT_DIR/frameworks/native/recorder_profiles/recorder_profiles_impl.cpp",
+      "$MEDIA_ROOT_DIR/services/services/recorder/client/recorder_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/recorder/ipc/recorder_listener_stub.cpp",
+      "$MEDIA_ROOT_DIR/services/services/recorder/ipc/recorder_service_proxy.cpp",
+      "$MEDIA_ROOT_DIR/services/services/recorder_profiles/client/recorder_profiles_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/recorder_profiles/ipc/recorder_profiles_service_proxy.cpp",
+      "$MEDIA_ROOT_DIR/services/services/sa_media/ipc/recorder_profiles_parcel.cpp",
+    ]
+  }
+  if (multimedia_player_framework_support_metadata) {
+    sources += [
+      "$MEDIA_ROOT_DIR/frameworks/native/avmetadatahelper/avmetadatahelper_impl.cpp",
+      "$MEDIA_ROOT_DIR/services/services/avmetadatahelper/client/avmetadatahelper_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/avmetadatahelper/ipc/avmetadatahelper_service_proxy.cpp",
+      "$MEDIA_ROOT_DIR/services/services/avmetadatahelper/ipc/helper_listener_stub.cpp",
+    ]
+  }
+  if (multimedia_player_framework_support_screen_capture) {
+    sources += [
+      "$MEDIA_ROOT_DIR/frameworks/native/screen_capture/screen_capture_controller_impl.cpp",
+      "$MEDIA_ROOT_DIR/frameworks/native/screen_capture/screen_capture_impl.cpp",
+      "$MEDIA_ROOT_DIR/services/services/screen_capture/client/screen_capture_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/screen_capture/client/screen_capture_controller_client.cpp",
+      "$MEDIA_ROOT_DIR/services/services/screen_capture/ipc/screen_capture_controller_proxy.cpp",
+      "$MEDIA_ROOT_DIR/services/services/screen_capture/ipc/screen_capture_listener_stub.cpp",
+      "$MEDIA_ROOT_DIR/services/services/screen_capture/ipc/screen_capture_service_proxy.cpp",
+    ]
+  }
+
+  configs = [
+    ":media_client_base_config",
+    ":media_client_ipc_config",
+  ]
+
+  public_configs = [ ":media_public_config" ]
+  deps = [ "$MEDIA_ROOT_DIR/services/utils:media_service_utils" ]
+
+  external_deps = [
+    "audio_framework:audio_client",
+    "av_codec:av_codec_client",
+    "c_utils:utils",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+    "image_framework:image_native",
+    "ipc:ipc_single",
+    "media_foundation:media_foundation",
+    "qos_manager:qos",
+    "samgr:samgr_proxy",
+  ]
+  public_external_deps = [ "media_foundation:media_foundation" ]
+
+  if (multimedia_player_framework_support_video) {
+    external_deps += [ "graphic_surface:surface" ]
+  }
+
+  if (multimedia_player_framework_support_drm) {
+    external_deps += [ "drm_framework:drm_framework" ]
+  }
+
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "multimedia"
+  part_name = "player_framework"
+  version_script = "player_framework.versionscript"
+}

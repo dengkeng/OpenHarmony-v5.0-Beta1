@@ -1,0 +1,104 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//foundation/resourceschedule/device_standby/standby_service.gni")
+
+config("standby_utils_policy_config") {
+  include_dirs = [ "include" ]
+}
+
+StandbyUtilsPolicy = [
+  "src/json_utils.cpp",
+  "src/standby_config_manager.cpp",
+]
+
+StandbyUtilsPolicyExternalDeps = [
+  "c_utils:utils",
+  "hilog:libhilog",
+  "ipc:ipc_single",
+  "json:nlohmann_json_static",
+]
+
+ohos_shared_library("standby_utils_policy") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = StandbyUtilsPolicy
+
+  public_configs = [ ":standby_utils_policy_config" ]
+
+  deps = [ "${standby_utils_common_path}:standby_utils_common" ]
+
+  external_deps = StandbyUtilsPolicyExternalDeps
+
+  defines = []
+  if (enable_standby_configpolicy) {
+    external_deps += [ "config_policy:configpolicy_util" ]
+    defines += [ "STANDBY_CONFIG_POLICY_ENABLE" ]
+  }
+
+  subsystem_name = "resourceschedule"
+  part_name = "${standby_service_part_name}"
+  version_script = "libstandby_utils_policy.versionscript"
+}
+
+ohos_static_library("standby_utils_policy_static") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = StandbyUtilsPolicy
+
+  public_configs = [ ":standby_utils_policy_config" ]
+
+  deps = [ "${standby_utils_common_path}:standby_utils_common" ]
+
+  external_deps = StandbyUtilsPolicyExternalDeps
+
+  defines = []
+  if (enable_standby_configpolicy) {
+    external_deps += [ "config_policy:configpolicy_util" ]
+    defines += [ "STANDBY_CONFIG_POLICY_ENABLE" ]
+  }
+
+  subsystem_name = "resourceschedule"
+  part_name = "${standby_service_part_name}"
+}
+
+ohos_prebuilt_etc("stancby_service_policy_config_device_standby") {
+  source = "configs/device_standby_config.json"
+  install_enable = true
+  subsystem_name = "resourceschedule"
+  part_name = "${standby_service_part_name}"
+  module_install_dir = "etc/standby_service"
+}
+
+ohos_prebuilt_etc("stancby_service_policy_config_resource_config") {
+  source = "configs/standby_strategy_config.json"
+  install_enable = true
+  subsystem_name = "resourceschedule"
+  part_name = "${standby_service_part_name}"
+  module_install_dir = "etc/standby_service"
+}
+
+group("standby_service_config") {
+  deps = [
+    ":stancby_service_policy_config_device_standby",
+    ":stancby_service_policy_config_resource_config",
+  ]
+}

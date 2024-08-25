@@ -1,0 +1,175 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+
+module_output_path = "neural_network_runtime/"
+
+config("module_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "//third_party/googletest/googlemock/include",
+    "../../..",
+    "../../../frameworks/native/neural_network_runtime",
+    "../../../frameworks/native/neural_network_core",
+    "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
+    "//third_party/mindspore/mindspore-src/source/mindspore/lite/mindir/include",
+  ]
+}
+
+ohos_unittest("OpsUnittest") {
+  module_out_path = module_output_path
+
+  sources = [ "./abs_test.cpp" ]
+  sources += [ "./add_test.cpp" ]
+  sources += [ "./all_test.cpp" ]
+  sources += [ "./argmax_test.cpp" ]
+  sources += [ "./avgpool_pad_test.cpp" ]
+  sources += [ "./assert_test.cpp" ]
+  sources += [ "./avgpool_padmod_test.cpp" ]
+  sources += [ "./batch_to_space_nd_test.cpp" ]
+  sources += [ "./batchnorm_builder_test.cpp" ]
+  sources += [ "./biasadd_test.cpp" ]
+  sources += [ "./broadcast_to_test.cpp" ]
+  sources += [ "./cast_test.cpp" ]
+  sources += [ "./ceil_test.cpp" ]
+  sources += [ "./clip_test.cpp" ]
+  sources += [ "./concat_three_inputs_test.cpp" ]
+  sources += [ "./concat_two_inputs_test.cpp" ]
+  sources += [ "./constant_of_shape_test.cpp" ]
+  sources += [ "./conv2d_pad_test.cpp" ]
+  sources += [ "./conv2d_padmode_test.cpp" ]
+  sources += [ "./conv2d_tranpose_padmode_test.cpp" ]
+  sources += [ "./conv2d_transpose_pad_test.cpp" ]
+  sources += [ "./cos_test.cpp" ]
+  sources += [ "./crop_test.cpp" ]
+  sources += [ "./depth_to_space_test.cpp" ]
+  sources += [ "./depthwise_conv2d_native_pad_test.cpp" ]
+  sources += [ "./depthwise_conv2d_native_padmode_test.cpp" ]
+  sources += [ "./detection_post_process_test.cpp" ]
+  sources += [ "./div_test.cpp" ]
+  sources += [ "./eltwise_test.cpp" ]
+  sources += [ "./equal_builder_test.cpp" ]
+  sources += [ "./erf_test.cpp" ]
+  sources += [ "./exp_test.cpp" ]
+  sources += [ "./expandims_test.cpp" ]
+  sources += [ "./fullconnection_test.cpp" ]
+  sources += [ "./fullconnection_with_axis_test.cpp" ]
+  sources += [ "./fill_builder_test.cpp" ]
+  sources += [ "./flatten_test.cpp" ]
+  sources += [ "./floor_test.cpp" ]
+  sources += [ "./gather_builder_test.cpp" ]
+  sources += [ "./gather_nd_test.cpp" ]
+  sources += [ "./gelu_builder_test.cpp" ]
+  sources += [ "./greater_builder_test.cpp" ]
+  sources += [ "./greater_equal_builder_test.cpp" ]
+  sources += [ "./hard_sigmoid_test.cpp" ]
+  sources += [ "./hswish_builder_test.cpp" ]
+  sources += [ "./instance_norm_test.cpp" ]
+  sources += [ "./l2_normalize_test.cpp" ]
+  sources += [ "./layernorm_builder_test.cpp" ]
+  sources += [ "./leaky_relu_test.cpp" ]
+  sources += [ "./less_test.cpp" ]
+  sources += [ "./lessequal_builder_test.cpp" ]
+  sources += [ "./log_softmax_test.cpp" ]
+  sources += [ "./log_test.cpp" ]
+  sources += [ "./logical_and_test.cpp" ]
+  sources += [ "./logical_not_test.cpp" ]
+  sources += [ "./logical_or_test.cpp" ]
+  sources += [ "./lrn_test.cpp" ]
+  sources += [ "./lstm_test.cpp" ]
+  sources += [ "./maximum_builder_test.cpp" ]
+  sources += [ "./maxpool_pad_test.cpp" ]
+  sources += [ "./maxpool_padmode_test.cpp" ]
+  sources += [ "./matmul_builder_test.cpp" ]
+  sources += [ "./minimum_test.cpp" ]
+  sources += [ "./mod_test.cpp" ]
+  sources += [ "./mul_builder_test.cpp" ]
+  sources += [ "./neg_test.cpp" ]
+  sources += [ "./not_equal_builder_test.cpp" ]
+  sources += [ "./onehot_builder_test.cpp" ]
+  sources += [ "./pad_builder_test.cpp" ]
+  sources += [ "./pow_builder_test.cpp" ]
+  sources += [ "./prelu_builder_test.cpp" ]
+  sources += [ "./quant_dtype_cast_builder_test.cpp" ]
+  sources += [ "./range_test.cpp" ]
+  sources += [ "./rank_test.cpp" ]
+  sources += [ "./reciprocal_test.cpp" ]
+  sources += [ "./reduce_all_builder_test.cpp" ]
+  sources += [ "./reduce_l2_test.cpp" ]
+  sources += [ "./reduce_max_builder_test.cpp" ]
+  sources += [ "./reduce_mean_builder_test.cpp" ]
+  sources += [ "./reduce_min_builder_test.cpp" ]
+  sources += [ "./reduce_prod_builder_test.cpp" ]
+  sources += [ "./reduce_sum_builder_test.cpp" ]
+  sources += [ "./relu_builder_test.cpp" ]
+  sources += [ "./relu6_builder_test.cpp" ]
+  sources += [ "./reshape_builder_test.cpp" ]
+  sources += [ "./resize_bilinear_builder_test.cpp" ]
+  sources += [ "./round_test.cpp" ]
+  sources += [ "./rsqrt_builder_test.cpp" ]
+  sources += [ "./scale_builder_test.cpp" ]
+  sources += [ "./scatter_nd_test.cpp" ]
+  sources += [ "./select_test.cpp" ]
+  sources += [ "./shape_builder_test.cpp" ]
+  sources += [ "./sigmoid_builder_test.cpp" ]
+  sources += [ "./sin_test.cpp" ]
+  sources += [ "./slice_builder_test.cpp" ]
+  sources += [ "./softmax_builder_test.cpp" ]
+  sources += [ "./space_to_depth_test.cpp" ]
+  sources += [ "./spacetobatchnd_builder_test.cpp" ]
+  sources += [ "./sparse_to_dense_test.cpp" ]
+  sources += [ "./split_builder_test.cpp" ]
+  sources += [ "./sqrt_builder_test.cpp" ]
+  sources += [ "./square_test.cpp" ]
+  sources += [ "./squared_difference_builder_test.cpp" ]
+  sources += [ "./squeeze_builder_test.cpp" ]
+  sources += [ "./stack_builder_test.cpp" ]
+  sources += [ "./strided_slice_builder_test.cpp" ]
+  sources += [ "./sub_builder_test.cpp" ]
+  sources += [ "./swish_test.cpp" ]
+  sources += [ "./tanh_builder_test.cpp" ]
+  sources += [ "./tile_builder_test.cpp" ]
+  sources += [ "./topk_builder_test.cpp" ]
+  sources += [ "./transpose_builder_test.cpp" ]
+  sources += [ "./unsqueeze_builder_test.cpp" ]
+  sources += [ "./unstack_test.cpp" ]
+  sources += [ "./where_test.cpp" ]
+  sources += [ "./ops_test.cpp" ]
+  sources += [ "../common/base_test.cpp" ]
+
+  configs = [
+    "../../..:coverage_flags",
+    ":module_private_config",
+  ]
+
+  deps = [
+    "../../../frameworks/native/neural_network_core:libneural_network_core",
+    "../../../frameworks/native/neural_network_runtime:libneural_network_runtime",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "drivers_interface_nnrt:libnnrt_proxy_2.1",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "mindspore:mindir",
+  ]
+}
+
+group("ops_unittest") {
+  testonly = true
+  deps = [ ":OpsUnittest" ]
+}

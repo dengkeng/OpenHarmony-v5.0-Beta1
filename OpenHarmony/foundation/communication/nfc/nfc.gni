@@ -1,0 +1,40 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+NFC_DIR = "//foundation/communication/nfc"
+
+fuzz_module_out_path = "nfc/nfc"
+
+declare_args() {
+  nfc_use_vendor_nci_native = false
+  if (defined(global_parts_info.nfc_use_vendor_nci_native)) {
+    nfc_use_vendor_nci_native = true
+  }
+  nfc_service_feature_vendor_applications_enabled = false
+  if (defined(
+      global_parts_info.nfc_service_feature_vendor_applications_enabled)) {
+    nfc_service_feature_vendor_applications_enabled = true
+  }
+  nfc_sim_feature = false
+  if (defined(global_parts_info.nfc_sim_feature)) {
+    nfc_sim_feature = true
+  }
+  nfc_service_feature_ndef_wifi_enabled = false
+  if (defined(global_parts_info.communication_wifi)) {
+    nfc_service_feature_ndef_wifi_enabled = true
+  }
+  nfc_service_feature_ndef_bt_enabled = false
+  if (defined(global_parts_info.communication_bluetooth)) {
+    nfc_service_feature_ndef_bt_enabled = true
+  }
+}

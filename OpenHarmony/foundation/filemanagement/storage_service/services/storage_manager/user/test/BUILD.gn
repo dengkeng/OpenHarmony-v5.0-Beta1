@@ -1,0 +1,61 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("//foundation/filemanagement/storage_service/storage_service_aafwk.gni")
+ohos_unittest("multi_user_manager_service_test") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = "storage_service/storage_manager"
+
+  sources = [
+    "${storage_daemon_path}/ipc/src/storage_daemon_proxy.cpp",
+    "${storage_manager_path}/storage_daemon_communication/src/storage_daemon_communication.cpp",
+    "${storage_manager_path}/user/src/multi_user_manager_service.cpp",
+    "multi_user_manager_service_test.cpp",
+  ]
+
+  include_dirs = [
+    "${storage_service_common_path}/include",
+    "${storage_manager_path}/include",
+    "${storage_daemon_path}/include",
+    "${storage_service_path}/utils/include",
+    "include",
+  ]
+
+  defines = [
+    "STORAGE_LOG_TAG = \"StorageManager\"",
+    "LOG_DOMAIN = 0xD004300",
+  ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+group("storage_manager_user_test") {
+  testonly = true
+  deps = [ ":multi_user_manager_service_test" ]
+}

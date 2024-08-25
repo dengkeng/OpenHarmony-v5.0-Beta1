@@ -1,0 +1,242 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("//foundation/ability/dmsfwk/dmsfwk.gni")
+
+group("unittest") {
+  testonly = true
+  deps = [ "test:unittest" ]
+}
+
+config("distributed_sched_config") {
+  visibility = [ ":*" ]
+  visibility += [ "./test/*" ]
+  include_dirs = [
+    "include",
+    "${dms_path}/common/include",
+    "${dms_path}/interfaces/kits/napi/include",
+    "${dms_path}/interfaces/innerkits/common/include",
+    "include/continue",
+    "include/continue/state",
+    "include/continue/state/source_state",
+    "include/continue/state/sink_state",
+    "include/distributedWant",
+    "include/softbus_adapter/transport",
+  ]
+  defines = []
+  if (dmsfwk_mission_manager) {
+    defines += [ "SUPPORT_DISTRIBUTED_MISSION_MANAGER" ]
+  }
+  if (dmsfwk_report_memmgr || dmsfwk_report_memmgr_plugins) {
+    defines += [ "SUPPORT_DISTRIBUTEDCOMPONENT_TO_MEMMGR" ]
+  }
+  if (dmsfwk_standard_form_share) {
+    defines += [ "SUPPORT_DISTRIBUTED_FORM_SHARE" ]
+  }
+  if (efficiency_manager_service_enable) {
+    defines += [ "EFFICIENCY_MANAGER_ENABLE" ]
+  }
+  if (dmsfwk_service_disable) {
+    defines += [ "DMS_SERVICE_DISABLE" ]
+  }
+  if (os_account_part) {
+    defines += [ "OS_ACCOUNT_PART" ]
+  }
+  if (dmsfwk_ces_listener) {
+    defines += [ "SUPPORT_COMMON_EVENT_SERVICE" ]
+  }
+  if (dmsfwk_mmi_listener) {
+    defines += [ "SUPPORT_MULTIMODALINPUT_SERVICE" ]
+  }
+}
+
+ohos_shared_library("distributedschedsvr") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  install_enable = true
+
+  if (!dmsfwk_softbus_adapter_common) {
+    cflags = [ "-DDMSFWK_SAME_ACCOUNT" ]
+  }
+
+  sources = [
+    "src/ability_connection_wrapper_proxy.cpp",
+    "src/ability_connection_wrapper_stub.cpp",
+    "src/adapter/dnetwork_adapter.cpp",
+    "src/app_state_observer.cpp",
+    "src/bundle/bundle_manager_callback_stub.cpp",
+    "src/bundle/bundle_manager_internal.cpp",
+    "src/connect_death_recipient.cpp",
+    "src/continue/dsched_continue.cpp",
+    "src/continue/dsched_continue_event.cpp",
+    "src/continue/dsched_continue_event_handler.cpp",
+    "src/continue/dsched_continue_manager.cpp",
+    "src/continue/state/dsched_continue_state_machine.cpp",
+    "src/continue/state/sink_state/dsched_continue_data_state.cpp",
+    "src/continue/state/sink_state/dsched_continue_sink_end_state.cpp",
+    "src/continue/state/sink_state/dsched_continue_sink_start_state.cpp",
+    "src/continue/state/sink_state/dsched_continue_sink_wait_end_state.cpp",
+    "src/continue/state/source_state/dsched_continue_ability_state.cpp",
+    "src/continue/state/source_state/dsched_continue_source_end_state.cpp",
+    "src/continue/state/source_state/dsched_continue_source_start_state.cpp",
+    "src/continue/state/source_state/dsched_continue_source_wait_end_state.cpp",
+    "src/continue_scene_session_handler.cpp",
+    "src/datashare_manager.cpp",
+    "src/deviceManager/dms_device_info.cpp",
+    "src/dfx/dms_continue_time_dumper.cpp",
+    "src/dfx/dms_hisysevent_report.cpp",
+    "src/dfx/dms_hitrace_chain.cpp",
+    "src/distributedWant/distributed_operation.cpp",
+    "src/distributedWant/distributed_operation_builder.cpp",
+    "src/distributedWant/distributed_want.cpp",
+    "src/distributedWant/distributed_want_params.cpp",
+    "src/distributedWant/distributed_want_params_wrapper.cpp",
+    "src/distributed_device_node_listener.cpp",
+    "src/distributed_event_died_listener.cpp",
+    "src/distributed_radar.cpp",
+    "src/distributed_sched_adapter.cpp",
+    "src/distributed_sched_continuation.cpp",
+    "src/distributed_sched_dumper.cpp",
+    "src/distributed_sched_permission.cpp",
+    "src/distributed_sched_proxy.cpp",
+    "src/distributed_sched_service.cpp",
+    "src/distributed_sched_stub.cpp",
+    "src/dms_callback_task.cpp",
+    "src/dms_free_install_callback.cpp",
+    "src/dms_free_install_callback_proxy.cpp",
+    "src/dms_free_install_callback_stub.cpp",
+    "src/dms_token_callback.cpp",
+    "src/dms_version_manager.cpp",
+    "src/dtbschedmgr_device_info_storage.cpp",
+    "src/softbus_adapter/transport/dsched_data_buffer.cpp",
+    "src/softbus_adapter/transport/dsched_softbus_session.cpp",
+    "src/softbus_adapter/transport/dsched_transport_softbus_adapter.cpp",
+    "src/switch_status_dependency.cpp",
+  ]
+
+  if (!dmsfwk_softbus_adapter_common) {
+    sources += [ "src/softbus_adapter/softbus_adapter.cpp" ]
+  } else {
+    sources += [ "src/softbus_adapter/softbus_adapter_common.cpp" ]
+  }
+
+  configs = [
+    ":distributed_sched_config",
+    "//foundation/ability/dmsfwk/services/dtbschedmgr/test/resource:coverage_flags",
+  ]
+
+  deps = [ "${dms_path}/common:distributed_sched_utils" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "ability_runtime:dataobs_manager",
+    "ability_runtime:mission_info",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "cJSON:cjson",
+    "c_utils:utils",
+    "data_share:datashare_consumer",
+    "device_auth:deviceauth_sdk",
+    "device_info_manager:distributed_device_profile_common",
+    "device_info_manager:distributed_device_profile_sdk",
+    "device_manager:devicemanagersdk",
+    "device_security_level:dslm_sdk",
+    "distributed_bundle_framework:dbms_fwk",
+    "dsoftbus:softbus_client",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "kv_store:distributeddata_inner",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libwsutils",
+    "window_manager:scene_session",
+    "window_manager:session_manager_lite",
+  ]
+  if (os_account_part) {
+    external_deps += [ "os_account:os_account_innerkits" ]
+  }
+
+  if (efficiency_manager_service_enable) {
+    external_deps += [ "resource_schedule_service:ressched_client" ]
+  }
+
+  if (dmsfwk_standard_form_share) {
+    external_deps += [ "form_fwk:form_manager" ]
+    sources += [ "src/form_mgr_death_recipient.cpp" ]
+  }
+
+  if (dmsfwk_mission_manager) {
+    sources += [
+      "src/mission/distributed_bm_storage.cpp",
+      "src/mission/distributed_bundle_info.cpp",
+      "src/mission/distributed_data_change_listener.cpp",
+      "src/mission/distributed_data_storage.cpp",
+      "src/mission/distributed_mission_broadcast_listener.cpp",
+      "src/mission/distributed_mission_change_listener.cpp",
+      "src/mission/distributed_mission_died_listener.cpp",
+      "src/mission/distributed_mission_focused_listener.cpp",
+      "src/mission/distributed_mission_info.cpp",
+      "src/mission/distributed_sched_mission_manager.cpp",
+      "src/mission/dms_continue_recv_manager.cpp",
+      "src/mission/dms_continue_send_manager.cpp",
+      "src/mission/kvstore_death_recipient.cpp",
+      "src/mission/mission_changed_notify.cpp",
+      "src/mission/mission_info_converter.cpp",
+      "src/mission/snapshot.cpp",
+      "src/mission/snapshot_converter.cpp",
+    ]
+    external_deps += [ "image_framework:image_native" ]
+  }
+
+  if (dmsfwk_report_memmgr) {
+    external_deps += [ "memmgr:memmgrclient" ]
+  }
+
+  if (dmsfwk_report_memmgr_plugins) {
+    external_deps += [ "memmgr_override:memmgrclient" ]
+  }
+
+  if (dmsfwk_ces_listener) {
+    external_deps += [ "common_event_service:cesfwk_innerkits" ]
+    sources += [ "src/common_event_listener.cpp" ]
+  }
+
+  if (dmsfwk_mmi_listener) {
+    external_deps += [ "input:libmmi-client" ]
+    sources += [ "src/adapter/mmi_adapter.cpp" ]
+  } else {
+    sources += [ "src/adapter/mmi_adapter_common.cpp" ]
+  }
+
+  install_images = [ system_base_dir ]
+  relative_install_dir = "platformsdk"
+  part_name = "dmsfwk"
+  subsystem_name = "ability"
+}

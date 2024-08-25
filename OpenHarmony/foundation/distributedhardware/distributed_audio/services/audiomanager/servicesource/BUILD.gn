@@ -1,0 +1,119 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos_var.gni")
+import("../../../distributedaudio.gni")
+
+ohos_shared_library("distributed_audio_source") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  stack_protector_ret = true
+
+  include_dirs = [
+    "include",
+    "${audio_client_path}/micclient/include",
+    "${audio_client_path}/spkclient/include",
+    "${audio_control_path}/controlsource/include",
+    "${audio_hdi_proxy_path}/include",
+    "${audio_processor_path}/interface",
+    "${audio_transport_path}/interface",
+    "${audio_transport_path}/receiverengine/include",
+    "${audio_transport_path}/senderengine/include",
+    "${common_path}/dfx_utils/include",
+    "${common_path}/include",
+    "${distributedaudio_path}/audiohandler/include",
+    "${innerkits_path}/native_cpp/audio_sink/include",
+    "${innerkits_path}/native_cpp/audio_source/include",
+    "${interfaces_path}/inner_kits/native_cpp/audio_sink/include",
+    "${interfaces_path}/inner_kits/native_cpp/audio_source/include",
+    "${services_path}/audiomanager/managersource/include",
+    "${services_path}/common/audiodata/include",
+    "${services_path}/common/audioeventcallback",
+    "${services_path}/common/audioparam",
+    "${services_path}/audiomanager/common/include",
+  ]
+
+  sources = [
+    "${audio_control_path}/controlsource/src/daudio_source_dev_ctrl_manager.cpp",
+    "${audio_hdi_proxy_path}/src/daudio_hdf_operate.cpp",
+    "${audio_hdi_proxy_path}/src/daudio_hdi_handler.cpp",
+    "${audio_hdi_proxy_path}/src/daudio_manager_callback.cpp",
+    "${common_path}/dfx_utils/src/daudio_hidumper.cpp",
+    "${interfaces_path}/inner_kits/native_cpp/audio_sink/src/daudio_sink_proxy.cpp",
+    "${interfaces_path}/inner_kits/native_cpp/audio_source/src/daudio_source_proxy.cpp",
+    "${services_path}/audiomanager/managersource/src/daudio_source_dev.cpp",
+    "${services_path}/audiomanager/managersource/src/daudio_source_manager.cpp",
+    "${services_path}/audiomanager/managersource/src/daudio_source_mgr_callback.cpp",
+    "${services_path}/audiomanager/managersource/src/dmic_dev.cpp",
+    "${services_path}/audiomanager/managersource/src/dspeaker_dev.cpp",
+    "src/daudio_ipc_callback_proxy.cpp",
+    "src/daudio_source_service.cpp",
+    "src/daudio_source_stub.cpp",
+  ]
+
+  deps = [
+    "${audio_transport_path}/receiverengine:distributed_audio_decode_transport",
+    "${audio_transport_path}/senderengine:distributed_audio_encode_transport",
+    "${distributedaudio_path}/audiohandler:distributed_audio_handler",
+    "${services_path}/common:distributed_audio_utils",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "audio_framework:audio_capturer",
+    "audio_framework:audio_renderer",
+    "cJSON:cjson",
+    "c_utils:utils",
+    "distributed_hardware_fwk:distributed_av_receiver",
+    "distributed_hardware_fwk:distributed_av_sender",
+    "distributed_hardware_fwk:distributedhardwareutils",
+    "drivers_interface_distributed_audio:libdaudio_proxy_1.0",
+    "drivers_interface_distributed_audio:libdaudioext_proxy_2.0",
+    "dsoftbus:softbus_client",
+    "eventhandler:libeventhandler",
+    "hdf_core:libhdi",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "ipc:ipc_single",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = [
+    "HI_LOG_ENABLE",
+    "LOG_DOMAIN=0xD004130",
+  ]
+
+  if (build_variant == "root") {
+    defines += [
+      "DUMP_DSPEAKERDEV_FILE",
+      "DUMP_DMICDEV_FILE",
+    ]
+  }
+
+  subsystem_name = "distributedhardware"
+
+  part_name = "distributed_audio"
+}

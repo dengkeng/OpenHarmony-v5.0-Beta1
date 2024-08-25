@@ -1,0 +1,113 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/udmf/udmf.gni")
+
+config("udmf_client_config") {
+  include_dirs = [
+    "${udmf_interfaces_path}/innerkits/client",
+    "${udmf_interfaces_path}/innerkits/common",
+    "${udmf_interfaces_path}/innerkits/data",
+    "${udmf_framework_path}/common",
+    "${udmf_framework_path}/innerkitsimpl/data",
+    "${udmf_framework_path}/innerkitsimpl/service",
+    "${kv_store_path}/frameworks/common",
+    "//third_party/libuv/include",
+    "//third_party/node/src",
+    "${kv_store_path}/frameworks/innerkitsimpl/distributeddatafwk/include",
+    "${kv_store_path}/frameworks/innerkitsimpl/distributeddatafwk/src",
+    "${kv_store_path}/frameworks/innerkitsimpl/distributeddatasvc/include",
+    "${kv_store_path}/interfaces/innerkits/distributeddata/include",
+    "${file_service_path}/interfaces/common/include",
+    "${file_service_path}/interfaces/innerkits/native/file_uri/include",
+  ]
+}
+
+ohos_shared_library("udmf_client") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = [
+    "${udmf_framework_path}/common/base32_utils.cpp",
+    "${udmf_framework_path}/common/custom_utd_json_parser.cpp",
+    "${udmf_framework_path}/common/custom_utd_store.cpp",
+    "${udmf_framework_path}/common/graph.cpp",
+    "${udmf_framework_path}/common/tlv_object.cpp",
+    "${udmf_framework_path}/common/tlv_util.cpp",
+    "${udmf_framework_path}/common/udmf_types_util.cpp",
+    "${udmf_framework_path}/common/udmf_utils.cpp",
+    "${udmf_framework_path}/common/utd_cfgs_checker.cpp",
+    "${udmf_framework_path}/common/utd_graph.cpp",
+    "${udmf_framework_path}/innerkitsimpl/client/udmf_client.cpp",
+    "${udmf_framework_path}/innerkitsimpl/client/utd_client.cpp",
+    "${udmf_framework_path}/innerkitsimpl/common/unified_key.cpp",
+    "${udmf_framework_path}/innerkitsimpl/common/unified_meta.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/application_defined_record.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/audio.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/file.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/flexible_type.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/folder.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/html.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/image.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/link.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/plain_text.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/preset_type_descriptors.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/system_defined_appitem.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/system_defined_form.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/system_defined_pixelmap.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/system_defined_record.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/text.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/type_descriptor.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/unified_data.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/unified_data_helper.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/unified_record.cpp",
+    "${udmf_framework_path}/innerkitsimpl/data/video.cpp",
+    "${udmf_framework_path}/innerkitsimpl/service/udmf_service_client.cpp",
+    "${udmf_framework_path}/innerkitsimpl/service/udmf_service_proxy.cpp",
+  ]
+
+  public_configs = [ ":udmf_client_config" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "access_token:libaccesstoken_sdk",
+    "app_file_service:fileuri_native",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "hitrace:libhitracechain",
+    "image_framework:image",
+    "ipc:ipc_core",
+    "kv_store:distributeddata_inner",
+    "kv_store:distributeddata_mgr",
+    "samgr:samgr_proxy",
+  ]
+
+  public_configs += [ "//third_party/cJSON:cJSON_config" ]
+  deps = [ "//third_party/cJSON:cjson" ]
+
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "distributeddatamgr"
+
+  part_name = "udmf"
+
+  if (build_selinux) {
+    cflags = [ "-DWITH_SELINUX" ]
+    external_deps += [ "selinux_adapter:librestorecon" ]
+  }
+}

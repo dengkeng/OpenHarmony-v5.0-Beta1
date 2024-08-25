@@ -1,0 +1,83 @@
+# Copyright (C) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../accessibility_aafwk.gni")
+
+aafwk_path = "../../../frameworks/aafwk"
+
+config("accessibleability_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "${aafwk_path}/include",
+    "../../../common/log/include",
+  ]
+
+  defines = [
+    "AAMS_LOG_TAG = \"accessibility_aakit\"",
+    "AAMS_LOG_DOMAIN = 0xD001D01",
+  ]
+}
+
+config("accessibleability_public_config") {
+  include_dirs = [ "include" ]
+}
+
+aafwk_files = [
+  "${aafwk_path}/src/accessibility_element_operator_callback_impl.cpp",
+  "${aafwk_path}/src/accessibility_ui_test_ability_impl.cpp",
+  "${aafwk_path}/src/accessible_ability_channel_client.cpp",
+  "${aafwk_path}/src/accessible_ability_client_impl.cpp",
+]
+
+ohos_shared_library("accessibleability") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = false
+    cfi_cross_dso = false
+    debug = false
+  }
+
+  sources = aafwk_files
+  configs = [ ":accessibleability_private_config" ]
+
+  public_configs = [
+    ":accessibleability_public_config",
+    "../../../resources/config/build:coverage_flags",
+  ]
+
+  deps = [
+    "../../../common/interface:accessibility_interface",
+    "../common:accessibility_common",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbeget_proxy",
+    "init:libbegetutil",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "samgr:samgr_proxy",
+  ]
+
+  install_enable = true
+
+  subsystem_name = "barrierfree"
+  part_name = "accessibility"
+}

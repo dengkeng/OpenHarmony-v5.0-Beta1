@@ -1,0 +1,534 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//arkcompiler/ets_frontend/es2panda/es2abc_config.gni")
+import("//build/ohos.gni")
+import("//build/ohos/ace/ace.gni")
+import("//foundation/ability/form_fwk/form_fwk.gni")
+
+config("fmskit_config") {
+  defines = [ "FMS_LOG_TAG = \"FmskitNative\"" ]
+}
+
+################################### formbindingdata_napi ########################################
+ohos_shared_library("formbindingdata_napi") {
+  include_dirs = [ "${ipc_core_path}/include" ]
+
+  sources = [
+    "form_binding_data/form_binding_data.cpp",
+    "form_binding_data/form_binding_data_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [ "${form_fwk_path}:form_manager" ]
+
+  external_deps = [
+    "ability_runtime:runtime",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/application"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+ohos_shared_library("formbindingdata") {
+  include_dirs = [ "${ipc_core_path}/include" ]
+
+  sources = [
+    "form_binding_data/js_form_binding_data.cpp",
+    "form_binding_data/js_form_binding_data_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:runtime",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### gen_form_extension_abc ########################################
+es2abc_gen_abc("gen_form_extension_abc") {
+  src_js = rebase_path("form_extension/form_extension.js")
+  dst_file = rebase_path(target_out_dir + "/form_extension.abc")
+  in_puts = [ "form_extension/form_extension.js" ]
+  out_puts = [ target_out_dir + "/form_extension.abc" ]
+  extra_args = [ "--module" ]
+}
+
+gen_js_obj("form_extension_js") {
+  input = "form_extension/form_extension.js"
+  output = target_out_dir + "/form_extension.o"
+}
+
+gen_js_obj("form_extension_abc") {
+  input = get_label_info(":gen_form_extension_abc", "target_out_dir") +
+          "/form_extension.abc"
+  output = target_out_dir + "/form_extension_abc.o"
+  dep = ":gen_form_extension_abc"
+}
+
+ohos_shared_library("formextension_napi") {
+  sources = [ "form_extension/form_extension_module.cpp" ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":form_extension_abc",
+    ":form_extension_js",
+  ]
+
+  external_deps = [ "napi:ace_napi" ]
+
+  relative_install_dir = "module/application"
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### gen_form_extension_ability_abc ########################################
+es2abc_gen_abc("gen_form_extension_ability_abc") {
+  src_js = rebase_path("form_extension_ability/form_extension_ability.js")
+  dst_file = rebase_path(target_out_dir + "/form_extension_ability.abc")
+  in_puts = [ "form_extension_ability/form_extension_ability.js" ]
+  out_puts = [ target_out_dir + "/form_extension_ability.abc" ]
+  extra_args = [ "--module" ]
+}
+
+gen_js_obj("form_extension_ability_js") {
+  input = "form_extension_ability/form_extension_ability.js"
+  output = target_out_dir + "/form_extension_ability.o"
+}
+
+gen_js_obj("form_extension_ability_abc") {
+  input = get_label_info(":gen_form_extension_ability_abc", "target_out_dir") +
+          "/form_extension_ability.abc"
+  output = target_out_dir + "/form_extension_ability_abc.o"
+  dep = ":gen_form_extension_ability_abc"
+}
+
+ohos_shared_library("formextensionability") {
+  sources = [ "form_extension_ability/form_extension_ability_module.cpp" ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":form_extension_ability_abc",
+    ":form_extension_ability_js",
+  ]
+
+  external_deps = [ "napi:ace_napi" ]
+
+  relative_install_dir = "module/app/form"
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### gen_form_extension_context_abc ########################################
+es2abc_gen_abc("gen_form_extension_context_abc") {
+  src_js = rebase_path("form_extension_context/form_extension_context.js")
+  dst_file = rebase_path(target_out_dir + "/form_extension_context.abc")
+  in_puts = [ "form_extension_context/form_extension_context.js" ]
+  out_puts = [ target_out_dir + "/form_extension_context.abc" ]
+  extra_args = [ "--module" ]
+}
+
+gen_js_obj("form_extension_context_js") {
+  input = "form_extension_context/form_extension_context.js"
+  output = target_out_dir + "/form_extension_context.o"
+}
+
+gen_js_obj("form_extension_context_abc") {
+  input = get_label_info(":gen_form_extension_context_abc", "target_out_dir") +
+          "/form_extension_context.abc"
+  output = target_out_dir + "/form_extension_context_abc.o"
+  dep = ":gen_form_extension_context_abc"
+}
+
+ohos_shared_library("formextensioncontext_napi") {
+  sources = [ "form_extension_context/form_extension_context_module.cpp" ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":form_extension_context_abc",
+    ":form_extension_context_js",
+  ]
+
+  external_deps = [ "napi:ace_napi" ]
+
+  relative_install_dir = "module/application"
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### forminfo_napi ########################################
+ohos_shared_library("forminfo_napi") {
+  include_dirs = [ "${form_fwk_path}/interfaces/inner_api/include" ]
+
+  sources = [
+    "form_info/form_info_module.cpp",
+    "form_info/js_form_info.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = []
+
+  external_deps = [
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/application"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+ohos_shared_library("forminfo") {
+  include_dirs = [ "${form_fwk_path}/interfaces/inner_api/include" ]
+
+  sources = [
+    "form_info/form_info_module.cpp",
+    "form_info/js_form_info.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = []
+
+  external_deps = [
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  defines = [ "ENABLE_ERRCODE" ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formhost_napi ########################################
+ohos_shared_library("formhost_napi") {
+  include_dirs = [ "${ability_runtime_innerapi_path}/runtime/include" ]
+
+  sources = [
+    "formHost/napi_form_host.cpp",
+    "formHost/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:fmskit_native",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/application"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formhost ########################################
+ohos_shared_library("formhost") {
+  include_dirs = [
+    "${ability_runtime_innerapi_path}/runtime/include",
+    "${form_fwk_path}/interfaces/inner_api/include",
+  ]
+
+  sources = [
+    "form_host/js_form_host.cpp",
+    "form_host/js_form_state_observer.cpp",
+    "form_host/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:fmskit_native",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formobserver ########################################
+ohos_shared_library("formobserver") {
+  include_dirs = [
+    "${ability_runtime_innerapi_path}/runtime/include",
+    "${form_fwk_path}/interfaces/inner_api/include",
+    "${form_fwk_path}/frameworks/js/napi/form_host",
+    "${form_fwk_path}/frameworks/js/napi/form_observer",
+  ]
+
+  sources = [
+    "form_host/js_form_state_observer.cpp",
+    "form_observer/js_form_observer.cpp",
+    "form_observer/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_napi_path}:formhost",
+    "${form_fwk_path}:fmskit_native",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formprovider_napi ########################################
+ohos_shared_library("formprovider_napi") {
+  include_dirs = [ "${ability_runtime_innerapi_path}/runtime/include" ]
+
+  sources = [
+    "formProvider/napi_form_provider.cpp",
+    "formProvider/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:fmskit_native",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/application"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+ohos_shared_library("formprovider") {
+  include_dirs = [ "${ability_runtime_innerapi_path}/runtime/include" ]
+
+  sources = [
+    "form_provider/js_form_provider.cpp",
+    "form_provider/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:fmskit_native",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formagent_napi ########################################
+ohos_shared_library("formagent") {
+  include_dirs = [ "${ability_runtime_innerapi_path}/runtime/include" ]
+
+  sources = [
+    "form_agent/js_form_agent.cpp",
+    "form_agent/native_module.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [
+    ":formutil_napi",
+    "${form_fwk_path}:fmskit_native",
+    "${form_fwk_path}:form_manager",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/app/form"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}
+
+################################### formutil_napi_public_config ########################################
+config("formutil_napi_public_config") {
+  include_dirs = [ "formUtil/" ]
+}
+
+ohos_shared_library("formutil_napi") {
+  include_dirs = []
+
+  public_configs = [ ":formutil_napi_public_config" ]
+
+  sources = [
+    "formUtil/js_form_info_util.cpp",
+    "formUtil/napi_form_util.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  deps = [ "${form_fwk_path}:fmskit_native" ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:runtime",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  subsystem_name = "ability"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "form_fwk"
+}
+
+################################### formerror_napi ########################################
+ohos_shared_library("formerror_napi") {
+  include_dirs = [
+    "${ability_runtime_innerapi_path}/runtime/include",
+    "${form_fwk_napi_path}/formUtil",
+  ]
+
+  sources = [
+    "form_error/form_error_module.cpp",
+    "form_error/js_form_error.cpp",
+  ]
+
+  configs = [ ":fmskit_config" ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "module/application"
+
+  subsystem_name = "ability"
+  part_name = "form_fwk"
+}

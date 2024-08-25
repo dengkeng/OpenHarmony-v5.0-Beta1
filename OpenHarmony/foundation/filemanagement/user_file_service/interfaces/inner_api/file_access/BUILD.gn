@@ -1,0 +1,136 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/filemanagement/user_file_service/filemanagement_aafwk.gni")
+
+config("ability_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${user_file_service_path}/utils",
+    "${user_file_service_path}/interfaces/kits/js/src/common",
+  ]
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+}
+
+config("ability_public_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${user_file_service_path}/utils",
+    "${user_file_service_path}/services/native/file_access_service/include",
+    "${user_file_service_path}/interfaces/kits/js/src/common",
+  ]
+}
+
+ohos_shared_library("file_access_extension_ability_kit") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  include_dirs = [
+    "${commonlibrary_path}/c_utils/base/include",
+    "${user_file_service_path}/services/native/file_access_service/include",
+  ]
+
+  sources = [
+    "${user_file_service_path}/services/native/file_access_service/src/file_access_service_proxy.cpp",
+    "src/file_access_ext_ability.cpp",
+    "src/file_access_ext_connection.cpp",
+    "src/file_access_ext_proxy.cpp",
+    "src/file_access_ext_stub.cpp",
+    "src/file_access_ext_stub_impl.cpp",
+    "src/file_access_helper.cpp",
+    "src/js_file_access_ext_ability.cpp",
+    "src/napi_common_fileaccess.cpp",
+  ]
+  configs = [ ":ability_config" ]
+
+  version_script = "libfile_access_extension_ability_kit.map"
+  public_configs = [
+    ":ability_public_config",
+    "${ability_runtime_path}/frameworks/native/ability:ability_context_public_config",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_context",
+    "ability_runtime:extensionkit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "c_utils:utilsbase",
+    "file_api:filemgmt_libn",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+    "samgr:samgr_proxy",
+  ]
+
+  subsystem_name = "filemanagement"
+  part_name = "user_file_service"
+  innerapi_tags = [ "platformsdk" ]
+}
+
+ohos_shared_library("file_access_extension_ability_module") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  sources = [ "src/file_access_ext_ability_module_loader.cpp" ]
+
+  configs = [ ":ability_config" ]
+  public_configs = [ ":ability_public_config" ]
+
+  deps = [ ":file_access_extension_ability_kit" ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:runtime",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "extensionability/"
+  subsystem_name = "filemanagement"
+  part_name = "user_file_service"
+}

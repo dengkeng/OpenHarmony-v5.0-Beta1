@@ -1,0 +1,166 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos/ace/ace.gni")
+import("./../../../../multimedia_camera_framework.gni")
+
+js_declaration("camera_js") {
+  part_name = "camera_framework"
+  sources = [ "./@ohos.multimedia.camera.d.ts" ]
+}
+
+ohos_copy("camera_declaration") {
+  sources = [ "./@ohos.multimedia.camera.d.ts" ]
+  outputs = [ target_out_dir + "/$target_name/" ]
+  module_source_dir = target_out_dir + "/$target_name"
+  module_install_name = ""
+}
+
+config("camera_napi_public_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "${multimedia_camera_framework_path}/interfaces/kits/js/camera_napi/include" ]
+}
+
+ohos_shared_library("camera_napi") {
+  branch_protector_ret = "pac_ret"
+
+  public_configs = [ ":camera_napi_public_config" ]
+  include_dirs = [
+    "${multimedia_camera_framework_path}/interfaces/inner_api/native/camera/include",
+    "${multimedia_camera_framework_path}/services/camera_service/include",
+    "${multimedia_camera_framework_path}/frameworks/native/camera/include",
+    "${multimedia_camera_framework_path}/services/camera_service/binder/base/include/",
+    "${multimedia_camera_framework_path}/services/camera_service/binder/client/include",
+    "${multimedia_camera_framework_path}/services/camera_service/binder/server/include",
+    "${multimedia_image_framework_path}/interfaces/innerkits/include",
+  ]
+  sources = [
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/camera_napi_callback_param_parser.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/camera_napi_param_parser.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/camera_napi_security_utils.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/camera_napi_utils.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_info_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_input_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_manager_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_pre_launch_config_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_profile_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_setting_param_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/input/camera_size_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/listener_base.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/high_res_photo_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/macro_photo_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/macro_video_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/mode_manager_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/night_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/photo_session_for_sys_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/photo_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/portrait_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/profession_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/secure_camera_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/slow_motion_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/video_session_for_sys_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/mode/video_session_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/native_module_ohos_camera.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/camera_output_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/deferred_photo_proxy_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/metadata_object_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/metadata_output_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/photo_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/photo_output_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/preview_output_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/output/video_output_napi.cpp",
+    "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/session/camera_session_napi.cpp",
+  ]
+  deps = [ "${multimedia_camera_framework_path}/frameworks/native/camera:camera_framework" ]
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_camera:libcamera_proxy_1.0",
+    "drivers_interface_camera:libcamera_proxy_1.1",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "image_framework:image",
+    "image_framework:image_native",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+  ]
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  cflags = [ "-fPIC" ]
+  cflags_cc = cflags
+  relative_install_dir = "module/multimedia"
+  part_name = "camera_framework"
+  subsystem_name = "multimedia"
+}
+
+if (gen_camera_picker) {
+  js_declaration("camerapicker_js") {
+    part_name = "camera_framework"
+    sources = [ "./@ohos.multimedia.cameraPicker.d.ts" ]
+  }
+
+  ohos_copy("camerapicker_declaration") {
+    sources = [ "./@ohos.multimedia.cameraPicker.d.ts" ]
+    outputs = [ target_out_dir + "/$target_name/" ]
+    module_source_dir = target_out_dir + "/$target_name"
+    module_install_name = ""
+    part_name = "camera_framework"
+    subsystem_name = "multimedia"
+  }
+
+  ohos_shared_library("camerapicker_napi") {
+    branch_protector_ret = "pac_ret"
+    include_dirs = [ "${multimedia_camera_framework_path}/interfaces/kits/js/camera_napi/include" ]
+    sources = [
+      "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/camera_napi_utils.cpp",
+      "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/native_module_ohos_camerapicker.cpp",
+      "${multimedia_camera_framework_path}/frameworks/js/camera_napi/src/picker/camera_picker_napi.cpp",
+    ]
+    deps = [
+      ":camera_napi",
+      "${multimedia_camera_framework_path}/frameworks/native/camera:camera_framework",
+    ]
+
+    # configuration.h <-- context.h <-- ability_context.h
+    # pixel_map.h <-- iability_callback.h <-- ability_context.h
+    external_deps = [
+      "ability_base:base",
+      "ability_base:configuration",  # configuration.h
+      "ability_base:want",
+      "ability_runtime:ability_context_native",  # ability_context.h
+      "ability_runtime:ability_manager",  # pixel_map.h
+      "ability_runtime:napi_base_context",  # napi_base_context.h
+      "ace_engine:ace_uicontent",
+      "c_utils:utils",
+      "hilog:libhilog",
+      "hitrace:hitrace_meter",
+      "napi:ace_napi",  # native_reference <-- camera_napi_utils.h
+    ]
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    cflags = [ "-fPIC" ]
+    cflags_cc = cflags
+    relative_install_dir = "module/multimedia"
+    part_name = "camera_framework"
+    subsystem_name = "multimedia"
+  }
+}

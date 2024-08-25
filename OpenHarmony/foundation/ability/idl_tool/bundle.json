@@ -1,0 +1,48 @@
+{
+    "name": "@ohos/idl_tool",
+    "description": "提供自动生成Extension 服务端及客户端接口文件的能力",
+    "version": "3.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "foundation/ability/idl_tool"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "idl_tool",
+        "subsystem": "ability",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [
+                "hilog",
+                "ipc",
+                "samgr",
+                "c_utils",
+                "bounds_checking_function"
+            ],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [ "//foundation/ability/idl_tool:idl" ],
+            "inner_kits": [
+                {
+                    "name": "//foundation/ability/idl_tool:idl"
+                }
+            ],
+            "test": [
+                "//foundation/ability/idl_tool/test/rust/moduletest:moduletest",
+                "//foundation/ability/idl_tool/test/rust/unittest:unittest",
+                "//foundation/ability/idl_tool/test/ts/moduletest:moduletest",
+                "//foundation/ability/idl_tool/test/ts/unittest:unittest",
+                "//foundation/ability/idl_tool/test/unittest:unittest"
+            ]
+        }
+    }
+}

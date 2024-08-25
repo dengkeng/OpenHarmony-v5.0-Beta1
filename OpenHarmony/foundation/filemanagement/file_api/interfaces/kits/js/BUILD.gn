@@ -1,0 +1,511 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/filemanagement/file_api/file_api.gni")
+
+file_common_src = [
+  "src/common/file_helper/fd_guard.cpp",
+  "src/common/napi/n_async/n_async_work_callback.cpp",
+  "src/common/napi/n_async/n_async_work_promise.cpp",
+  "src/common/napi/n_async/n_ref.cpp",
+  "src/common/napi/n_class.cpp",
+  "src/common/napi/n_func_arg.cpp",
+  "src/common/napi/n_val.cpp",
+  "src/common/uni_error.cpp",
+]
+
+config("kits_public_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [ "src/mod_securitylabel" ]
+}
+
+ohos_shared_library("fileio") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module"
+
+  include_dirs = [
+    "${arkui_napi_path}/interfaces/kits",
+    "src/common/file_helper",
+    "src/common/napi",
+    "src/common/napi/n_async",
+    "//third_party/node/src",
+    "//third_party/libuv/include",
+    "//third_party/openssl/include",
+    "${utils_path}/common/include",
+  ]
+
+  sources = file_common_src
+  sources += [
+    "src/common/file_helper/hash_file.cpp",
+    "src/mod_fileio/class_constants/constants.cpp",
+    "src/mod_fileio/class_dir/dir_n_exporter.cpp",
+    "src/mod_fileio/class_dirent/dirent_n_exporter.cpp",
+    "src/mod_fileio/class_stat/stat_n_exporter.cpp",
+    "src/mod_fileio/class_stream/flush.cpp",
+    "src/mod_fileio/class_stream/stream_n_exporter.cpp",
+    "src/mod_fileio/class_watcher/watcher_n_exporter.cpp",
+    "src/mod_fileio/common_func.cpp",
+    "src/mod_fileio/module.cpp",
+    "src/mod_fileio/properties/chmod.cpp",
+    "src/mod_fileio/properties/chown.cpp",
+    "src/mod_fileio/properties/close.cpp",
+    "src/mod_fileio/properties/copy_file.cpp",
+    "src/mod_fileio/properties/create_stream.cpp",
+    "src/mod_fileio/properties/fchmod.cpp",
+    "src/mod_fileio/properties/fchown.cpp",
+    "src/mod_fileio/properties/fdatasync.cpp",
+    "src/mod_fileio/properties/fdopen_stream.cpp",
+    "src/mod_fileio/properties/fstat.cpp",
+    "src/mod_fileio/properties/fsync.cpp",
+    "src/mod_fileio/properties/ftruncate.cpp",
+    "src/mod_fileio/properties/hash.cpp",
+    "src/mod_fileio/properties/lchown.cpp",
+    "src/mod_fileio/properties/link.cpp",
+    "src/mod_fileio/properties/lseek.cpp",
+    "src/mod_fileio/properties/lstat.cpp",
+    "src/mod_fileio/properties/mkdtemp.cpp",
+    "src/mod_fileio/properties/open.cpp",
+    "src/mod_fileio/properties/open_dir.cpp",
+    "src/mod_fileio/properties/posix_fallocate.cpp",
+    "src/mod_fileio/properties/prop_n_exporter.cpp",
+    "src/mod_fileio/properties/read_dir.cpp",
+    "src/mod_fileio/properties/read_text.cpp",
+    "src/mod_fileio/properties/rename.cpp",
+    "src/mod_fileio/properties/rmdir.cpp",
+    "src/mod_fileio/properties/rmdirent.cpp",
+    "src/mod_fileio/properties/stat.cpp",
+    "src/mod_fileio/properties/symlink.cpp",
+    "src/mod_fileio/properties/truncate.cpp",
+    "src/mod_fileio/properties/watcher.cpp",
+  ]
+
+  deps = [
+    "${file_api_path}/interfaces/kits/native:remote_uri_native",
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+
+  use_exceptions = true
+
+  external_deps = [
+    "bounds_checking_function:libsec_shared",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  defines = [ "OPENSSL_SUPPRESS_DEPRECATED" ]
+}
+
+ohos_shared_library("fs") {
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module/file"
+
+  include_dirs = [
+    "${filemanagement_service_path}/distributedfiledaemon/include/ipc",
+    "${src_path}/common",
+    "${src_path}/common/file_helper",
+    "${src_path}/mod_fs",
+    "${src_path}/mod_fs/properties",
+    "${src_path}/mod_fs/properties/copy_listener",
+    "${utils_path}/common/include",
+    "//third_party/libuv/include",
+  ]
+
+  sources = [
+    "src/common/file_helper/fd_guard.cpp",
+    "src/mod_fs/class_file/file_n_exporter.cpp",
+    "src/mod_fs/class_stat/stat_n_exporter.cpp",
+    "src/mod_fs/common_func.cpp",
+    "src/mod_fs/module.cpp",
+    "src/mod_fs/properties/close.cpp",
+    "src/mod_fs/properties/fdatasync.cpp",
+    "src/mod_fs/properties/fsync.cpp",
+    "src/mod_fs/properties/lstat.cpp",
+    "src/mod_fs/properties/mkdtemp.cpp",
+    "src/mod_fs/properties/open.cpp",
+    "src/mod_fs/properties/prop_n_exporter.cpp",
+    "src/mod_fs/properties/rename.cpp",
+    "src/mod_fs/properties/rmdirent.cpp",
+    "src/mod_fs/properties/stat.cpp",
+    "src/mod_fs/properties/truncate.cpp",
+    "src/mod_fs/properties/utimes.cpp",
+  ]
+
+  cflags_cc = [ "-std=c++17" ]
+
+  deps = [
+    "${file_api_path}/interfaces/kits/native:task_signal_native",
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+  ]
+
+  use_exceptions = true
+
+  if (use_mingw_win) {
+    defines = [ "WIN_PLATFORM" ]
+  }
+  if (use_mac) {
+    defines = [ "IOS_PLATFORM" ]
+  }
+
+  external_deps = [
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  if (!use_mingw_win && !use_mac) {
+    branch_protector_ret = "pac_ret"
+    sanitize = {
+      integer_overflow = true
+      ubsan = true
+      boundary_sanitize = true
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+
+    include_dirs += [ "${file_api_path}/interfaces/kits/rust/include" ]
+    sources += [
+      "src/mod_fs/class_randomaccessfile/randomaccessfile_n_exporter.cpp",
+      "src/mod_fs/class_readeriterator/readeriterator_n_exporter.cpp",
+      "src/mod_fs/class_stream/flush.cpp",
+      "src/mod_fs/class_stream/stream_n_exporter.cpp",
+      "src/mod_fs/class_tasksignal/task_signal_entity.cpp",
+      "src/mod_fs/class_tasksignal/task_signal_n_exporter.cpp",
+      "src/mod_fs/class_watcher/watcher_entity.cpp",
+      "src/mod_fs/class_watcher/watcher_n_exporter.cpp",
+      "src/mod_fs/properties/copy.cpp",
+      "src/mod_fs/properties/copy_file.cpp",
+      "src/mod_fs/properties/copy_listener/trans_listener.cpp",
+      "src/mod_fs/properties/copydir.cpp",
+      "src/mod_fs/properties/create_randomaccessfile.cpp",
+      "src/mod_fs/properties/create_stream.cpp",
+      "src/mod_fs/properties/dup.cpp",
+      "src/mod_fs/properties/fdopen_stream.cpp",
+      "src/mod_fs/properties/listfile.cpp",
+      "src/mod_fs/properties/lseek.cpp",
+      "src/mod_fs/properties/move.cpp",
+      "src/mod_fs/properties/movedir.cpp",
+      "src/mod_fs/properties/read_lines.cpp",
+      "src/mod_fs/properties/read_text.cpp",
+      "src/mod_fs/properties/symlink.cpp",
+      "src/mod_fs/properties/watcher.cpp",
+    ]
+    external_deps += [
+      "ability_base:zuri",
+      "ability_runtime:ability_manager",
+      "ability_runtime:abilitykit_native",
+      "access_token:libtokenid_sdk",
+      "app_file_service:fileuri_native",
+      "bundle_framework:appexecfwk_base",
+      "bundle_framework:appexecfwk_core",
+      "c_utils:utils",
+      "data_share:datashare_common",
+      "data_share:datashare_consumer",
+      "dfs_service:distributed_file_daemon_kit_inner",
+      "ipc:ipc_core",
+      "samgr:samgr_proxy",
+    ]
+    deps += [
+      "${file_api_path}/interfaces/kits/native:remote_uri_native",
+      "${file_api_path}/interfaces/kits/rust:rust_file",
+    ]
+  }
+}
+
+ohos_shared_library("hash") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module/file"
+
+  include_dirs = [ "${src_path}/common/file_helper" ]
+
+  sources = [
+    "src/common/file_helper/fd_guard.cpp",
+    "src/common/file_helper/hash_file.cpp",
+    "src/mod_hash/hash.cpp",
+    "src/mod_hash/module.cpp",
+  ]
+
+  deps = [
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+
+  external_deps = [
+    "bounds_checking_function:libsec_shared",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  defines = [ "OPENSSL_SUPPRESS_DEPRECATED" ]
+}
+
+ohos_shared_library("file") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module"
+
+  include_dirs = [
+    "${arkui_napi_path}/interfaces/kits",
+    "src/common/napi",
+    "src/common/napi/n_async",
+    "src/common/file_helper",
+    "//third_party/node/src",
+  ]
+
+  sources = file_common_src
+  sources += [
+    "src/common/ability_helper.cpp",
+    "src/mod_file/class_file/file_n_exporter.cpp",
+    "src/mod_file/common_func.cpp",
+    "src/mod_file/module.cpp",
+  ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "bounds_checking_function:libsec_shared",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+}
+
+ohos_shared_library("statfs") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module"
+
+  sources = [
+    "src/mod_statfs/statfs_n_exporter.cpp",
+    "src/mod_statfs/statfs_napi.cpp",
+  ]
+
+  deps = [
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+  ]
+
+  external_deps = [
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+}
+
+ohos_shared_library("statvfs") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module/file"
+
+  sources = [
+    "src/mod_statvfs/statvfs_n_exporter.cpp",
+    "src/mod_statvfs/statvfs_napi.cpp",
+  ]
+
+  deps = [
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+  ]
+
+  external_deps = [
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+}
+
+ohos_shared_library("environment") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module/file"
+
+  sources = [
+    "src/mod_environment/environment_n_exporter.cpp",
+    "src/mod_environment/environment_napi.cpp",
+  ]
+
+  deps = [
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+  ]
+}
+ohos_shared_library("securitylabel") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module/file"
+
+  cflags = [ "-Wno-format" ]
+
+  sources = [
+    "src/mod_securitylabel/securitylabel_n_exporter.cpp",
+    "src/mod_securitylabel/securitylabel_napi.cpp",
+  ]
+
+  public_configs = [ ":kits_public_config" ]
+
+  deps = [
+    "${utils_path}/filemgmt_libhilog:filemgmt_libhilog",
+    "${utils_path}/filemgmt_libn:filemgmt_libn",
+  ]
+
+  external_deps = [
+    "access_token:libtokenid_sdk",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+  ]
+}
+
+ohos_shared_library("document") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "filemanagement"
+  part_name = "file_api"
+
+  relative_install_dir = "module"
+
+  include_dirs = [
+    "${arkui_napi_path}/interfaces/kits",
+    "src/common/napi/n_async",
+    "//third_party/node/src",
+  ]
+
+  sources = [
+    "src/common/napi/n_async/n_async_work_callback.cpp",
+    "src/common/napi/n_async/n_async_work_promise.cpp",
+    "src/common/napi/n_async/n_ref.cpp",
+    "src/common/napi/n_func_arg.cpp",
+    "src/common/napi/n_val.cpp",
+    "src/common/uni_error.cpp",
+    "src/mod_document/document_n_exporter.cpp",
+    "src/mod_document/document_napi.cpp",
+  ]
+
+  external_deps = [
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+}
+
+group("build_kits_js") {
+  deps = [
+    ":document",
+    ":environment",
+    ":file",
+    ":fileio",
+    ":fs",
+    ":hash",
+    ":securitylabel",
+    ":statfs",
+    ":statvfs",
+  ]
+}

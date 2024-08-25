@@ -1,0 +1,65 @@
+# Copyright (C) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("test") {
+  testonly = true
+
+  deps = [
+    "unittest/album_count_cover_test:AlbumCountCoverTest",
+    "unittest/media_event_test:unittest",
+    "unittest/media_library_asset_manager_test:unittest",
+    "unittest/media_library_manager_test:unittest",
+    "unittest/medialib_statistic_test:unittest",
+    "unittest/medialibrary_album_operation_test:unittest",
+    "unittest/medialibrary_album_source_test:unittest",
+    "unittest/medialibrary_audio_operations_test:unittest",
+    "unittest/medialibrary_backup_clone_test:unittest",
+    "unittest/medialibrary_backup_test:unittest",
+    "unittest/medialibrary_common_utils_test:unittest",
+    "unittest/medialibrary_datamanager_test:unittest",
+    "unittest/medialibrary_dfx_test:unittest",
+    "unittest/medialibrary_helper_test:unittest",
+    "unittest/medialibrary_location_test:unittest",
+    "unittest/medialibrary_manager_utils_test:unittest",
+    "unittest/medialibrary_mimetype_test:unittest",
+    "unittest/medialibrary_multistages_capture_test:unittest",
+    "unittest/medialibrary_object_test:unittest",
+    "unittest/medialibrary_photo_operations_test:unittest",
+    "unittest/medialibrary_queryperf_test:unittest",
+    "unittest/medialibrary_rdb_test:unittest",
+    "unittest/medialibrary_scanner_db_test:unittest",
+    "unittest/medialibrary_scanner_test:unittest",
+    "unittest/medialibrary_search_test:unittest",
+    "unittest/medialibrary_shooting_mode_album_test:unittest",
+    "unittest/medialibrary_smartalbum_map_operations_test:unittest",
+    "unittest/medialibrary_smartalbum_operations_test:unittest",
+    "unittest/medialibrary_story_test:unittest",
+    "unittest/medialibrary_thumbnail_service_test:unittest",
+    "unittest/medialibrary_uri_test:unittest",
+    "unittest/medialibrary_utils_test:unittest",
+    "unittest/medialibrary_vision_test:unittest",
+    "unittest/medialibrary_visitor_db_test:unittest",
+    "unittest/mediascanner_test:unittest",
+    "unittest/notify_test:Notifytest",
+    "unittest/photo_album_test:PhotoAlbumTest",
+    "unittest/portrait_album_update_test:PortraitAlbumUpdateTest",
+  ]
+
+  if (defined(global_parts_info.hdf_drivers_interface_usb) &&
+      defined(medialibrary_mtp_enable)) {
+    deps += [
+      "unittest/medialibrary_mtp_test:unittest",
+      "unittest/mtp_native_test:unittest",
+    ]
+  }
+}

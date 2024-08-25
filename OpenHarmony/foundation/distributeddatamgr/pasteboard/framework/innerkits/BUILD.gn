@@ -1,0 +1,88 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/pasteboard/pasteboard.gni")
+
+config("pasteboard_client_config") {
+  visibility = [ ":*" ]
+  visibility += [ "//foundation/distributeddatamgr/pasteboard/test/fuzztest/pasteboardclient_fuzzer/*" ]
+  include_dirs = [
+    "include",
+    "${pasteboard_service_path}/core/include",
+    "${pasteboard_service_path}/dfx/src",
+    "${pasteboard_service_path}/zidl/include",
+    "${pasteboard_utils_path}/native/include",
+    "//commonlibrary/c_utils/base/include",
+    "//foundation/distributeddatamgr/pasteboard/framework/framework/include",
+    "//foundation/distributeddatamgr/pasteboard/framework/tlv",
+    "//foundation/distributeddatamgr/pasteboard/framework/uri",
+    "//foundation/filemanagement/app_file_service/interfaces/innerkits/remote_file_share/native",
+  ]
+}
+
+ohos_shared_library("pasteboard_client") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  sources = [
+    "${pasteboard_service_path}/dfx/src/hiview_adapter.cpp",
+    "${pasteboard_service_path}/zidl/src/pasteboard_delay_getter_client.cpp",
+    "${pasteboard_service_path}/zidl/src/pasteboard_delay_getter_stub.cpp",
+    "${pasteboard_service_path}/zidl/src/pasteboard_observer_stub.cpp",
+    "${pasteboard_service_path}/zidl/src/pasteboard_service_proxy.cpp",
+    "src/paste_data.cpp",
+    "src/paste_data_record.cpp",
+    "src/pasteboard_client.cpp",
+    "src/pasteboard_load_callback.cpp",
+    "src/pasteboard_observer.cpp",
+    "src/pasteboard_utils.cpp",
+    "src/pasteboard_web_controller.cpp",
+  ]
+
+  cflags_cc = [
+    "-fstack-protector",
+    "-D_FORTIFY_SOURCE=2",
+    "-O2",
+    "-fvisibility=hidden",
+  ]
+
+  configs = [ ":pasteboard_client_config" ]
+  public_configs = [ ":pasteboard_client_config" ]
+  deps = [
+    "${pasteboard_root_path}/framework/tlv:pasteboard_tlv",
+    "${pasteboard_root_path}/framework/uri:pasteboard_uri",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:wantagent_innerkits",
+    "app_file_service:fileuri_native",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "image_framework:image_native",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+    "time_service:time_client",
+  ]
+  public_external_deps = [ "udmf:udmf_client" ]
+  subsystem_name = "distributeddatamgr"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "pasteboard"
+}

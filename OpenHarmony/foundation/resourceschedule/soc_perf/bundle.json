@@ -1,0 +1,72 @@
+{
+  "name": "@ohos/soc_perf",
+  "description": "resource schedule service",
+  "version": "3.1",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "foundation/resourceschedule/soc_perf"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "soc_perf",
+    "subsystem": "resourceschedule",
+    "syscap": [],
+    "features": [ "soc_perf_device_enable" ],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "2048KB",
+    "ram": "10240KB",
+    "deps": {
+      "components": [
+        "access_token",
+        "c_utils",
+        "config_policy",
+        "eventhandler",
+        "ffrt",
+        "hitrace",
+        "hilog",
+        "ipc",
+        "init",
+        "safwk",
+        "samgr",
+        "hisysevent",
+        "libxml2"
+      ]
+    },
+    "build": {
+      "group_type": {
+        "base_group" : [
+          "//foundation/resourceschedule/soc_perf:base_group_soc_perf_all"
+        ],
+        "fwk_group" : [
+          "//foundation/resourceschedule/soc_perf:fwk_group_socperf_client_all"
+        ],
+        "service_group" : [
+          "//foundation/resourceschedule/soc_perf:service_group_soc_perf_all"
+        ]
+      },
+      "inner_kits": [
+        {
+          "type": "so",
+          "header": {
+            "header_base": "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client/include",
+            "header_files": [
+              "i_socperf_service.h",
+              "socperf_action_type.h",
+              "socperf_client.h",
+              "socperf_proxy.h",
+              "socperf_ipc_interface_code.h"
+            ]
+          },
+          "name": "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client:socperf_client"
+        }
+      ],
+      "test": [
+        "//foundation/resourceschedule/soc_perf:test_soc_perf_all"
+      ]
+    }
+  }
+}

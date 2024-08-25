@@ -1,0 +1,91 @@
+{
+  "name": "@ohos/device_usage_statistics",
+  "description": "device usage statistics",
+  "version": "3.1",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath" : "foundation/resourceschedule/device_usage_statistics"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "device_usage_statistics",
+    "subsystem": "resourceschedule",
+    "syscap": [ "SystemCapability.ResourceSchedule.UsageStatistics.AppGroup",
+                "SystemCapability.ResourceSchedule.UsageStatistics.App"
+              ],
+    "features": [ "device_usage_statistics_device_enable" ],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "11264KB",
+    "ram": "10240KB",
+    "deps": {
+      "components": [
+        "bundle_framework",
+        "relational_store",
+        "safwk",
+        "common_event_service",
+        "os_account",
+        "ipc",
+        "access_token",
+        "ability_runtime",
+        "hilog",
+        "samgr",
+        "c_utils",
+        "napi",
+        "ability_base",
+        "background_task_mgr",
+        "eventhandler",
+        "power_manager",
+        "time_service",
+        "init",
+        "ffrt"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "group_type" : {
+        "base_group": [],
+        "fwk_group": [
+          "//foundation/resourceschedule/device_usage_statistics:bfwk_group_all"
+        ],
+        "service_group": [
+          "//foundation/resourceschedule/device_usage_statistics:service_group_all"
+        ]
+      },
+      "inner_kits": [
+        {
+          "header": {
+            "header_base": "//foundation/resourceschedule/device_usage_statistics/interfaces/innerkits/include",
+            "header_files": [
+              "app_group_callback_info.h",
+              "app_group_callback_proxy.h",
+              "app_group_callback_stub.h",
+              "bundle_active_client.h",
+              "bundle_active_event.h",
+              "bundle_active_event_stats.h",
+              "bundle_active_form_record.h",
+              "bundle_active_group_map.h",
+              "bundle_active_module_record.h",
+              "bundle_active_package_stats.h",
+              "bundle_active_proxy.h",
+              "iapp_group_callback.h"
+            ]
+          },
+          "name": "//foundation/resourceschedule/device_usage_statistics:usagestatsinner"
+        }
+      ],
+      "test": [
+        "//foundation/resourceschedule/device_usage_statistics/test/unittest:unittest",
+        "//foundation/resourceschedule/device_usage_statistics/interfaces/test/unittest/device_usage_statistics_jsunittest:js_unittest",
+        "//foundation/resourceschedule/device_usage_statistics/test/fuzztest/bundleactiveonremoterequest_fuzzer:fuzztest",
+        "//foundation/resourceschedule/device_usage_statistics/test/fuzztest/bundleactiveobserver_fuzzer:fuzztest",
+        "//foundation/resourceschedule/device_usage_statistics/test/fuzztest/appgroupcallbackstub_fuzzer:fuzztest",
+        "//foundation/resourceschedule/device_usage_statistics/test/fuzztest/bundleactivepowerstatecallbackproxy_fuzzer:fuzztest",
+        "//foundation/resourceschedule/device_usage_statistics:test_all"
+      ]
+    }
+  }
+}

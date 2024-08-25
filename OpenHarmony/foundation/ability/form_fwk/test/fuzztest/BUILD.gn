@@ -1,0 +1,82 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//foundation/ability/ability_runtime/ability_runtime.gni")
+import("//foundation/ability/form_fwk/form_fwk.gni")
+
+group("fuzztest") {
+  testonly = true
+
+  deps = [
+    "formabilityconnection_fuzzer:fuzztest",
+    "formashmem_fuzzer:fuzztest",
+    "formbmshelper_fuzzer:fuzztest",
+    "formcachemgr_fuzzer:fuzztest",
+    "formcallermgr_fuzzer:fuzztest",
+    "formdatamgr_fuzzer:fuzztest",
+    "formdatamgrfour_fuzzer:fuzztest",
+    "formdatamgrone_fuzzer:fuzztest",
+    "formdatamgrthree_fuzzer:fuzztest",
+    "formdatamgrtwo_fuzzer:fuzztest",
+    "formdbcache_fuzzer:fuzztest",
+    "formdbcacheannex_fuzzer:fuzztest",
+    "formerrors_fuzzer:fuzztest",
+    "formfreeinstalloperator_fuzzer:fuzztest",
+    "formhostcaller_fuzzer:fuzztest",
+    "formhostclient_fuzzer:fuzztest",
+    "formhostrecord_fuzzer:fuzztest",
+    "formhoststub_fuzzer:fuzztest",
+    "forminfomgr_fuzzer:fuzztest",
+    "formiteminfo_fuzzer:fuzztest",
+    "formjsinfo_fuzzer:fuzztest",
+    "formmgr_fuzzer:fuzztest",
+    "formmgradapter_fuzzer:fuzztest",
+    "formmgradapterone_fuzzer:fuzztest",
+    "formmgradapterthree_fuzzer:fuzztest",
+    "formmgradaptertwo_fuzzer:fuzztest",
+    "formmgrannex_fuzzer:fuzztest",
+    "formmgrproxy_fuzzer:fuzztest",
+    "formmgrproxyannex_fuzzer:fuzztest",
+    "formmgrservice_fuzzer:fuzztest",
+    "formmgrstub_fuzzer:fuzztest",
+    "formprovidercaller_fuzzer:fuzztest",
+    "formproviderdata_fuzzer:fuzztest",
+    "formproviderinfo_fuzzer:fuzztest",
+    "formprovidermgr_fuzzer:fuzztest",
+    "formproviderproxy_fuzzer:fuzztest",
+    "formproviderstub_fuzzer:fuzztest",
+    "formrenderconnection_fuzzer:fuzztest",
+    "formrenderimpl_fuzzer:fuzztest",
+    "formrendermgr_fuzzer:fuzztest",
+    "formrenderproxy_fuzzer:fuzztest",
+    "formrenderrecord_fuzzer:fuzztest",
+    "formrenderserviceextension_fuzzer:fuzztest",
+    "formrenderstub_fuzzer:fuzztest",
+    "formsharemgr_fuzzer:fuzztest",
+    "formsupplycallback_fuzzer:fuzztest",
+    "formsupplyproxy_fuzzer:fuzztest",
+    "formsupplystub_fuzzer:fuzztest",
+    "formsyseventreceiver_fuzzer:fuzztest",
+    "formtaskmgr_fuzzer:fuzztest",
+    "formtimermgr_fuzzer:fuzztest",
+    "formtimermgrannex_fuzzer:fuzztest",
+    "formutil_fuzzer:fuzztest",
+    "geterrormsg_fuzzer:fuzztest",
+    "providerconnectproxy_fuzzer:fuzztest",
+    "providerconnectstub_fuzzer:fuzztest",
+  ]
+
+  if (ability_runtime_graphics) {
+    deps += [ "formmanager_fuzzer:fuzztest" ]
+  }
+}

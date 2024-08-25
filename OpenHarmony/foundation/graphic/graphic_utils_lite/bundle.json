@@ -1,0 +1,36 @@
+{
+  "name": "@ohos/graphic_utils_lite",
+  "description": "Graphic fundamental components",
+  "version": "3.1",
+  "license": "Apache License 2.0",
+  "pubiishAs": "code-segment",
+  "segment": {
+    "destPath": "foundation/graphic/graphic_utils_lite"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "graphic_utils_lite",
+    "subsystem": "graphic",
+    "feature": [],
+    "adapted_system_type": [ "mini","small" ],
+    "rom": "450KB",
+    "ram": "~50KB",
+    "deps": {
+      "third_party": [
+        "bounds_checking_function"
+      ],
+      "components": [
+        "hilog_lite",
+        "drivers_peripheral_display"
+      ]
+    },
+    "build": {
+      "sub_component": [ 
+        "//foundation/graphic/graphic_utils_lite:utils_lite",
+        "//foundation/graphic/graphic_utils_lite/test:graphic_utils_lite_test" ],
+      "inner_kits": [],
+      "test": []
+    }
+  }
+}

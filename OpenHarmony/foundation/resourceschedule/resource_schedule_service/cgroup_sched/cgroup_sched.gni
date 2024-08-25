@@ -1,0 +1,49 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+cgroup_sched_path =
+    "//foundation/resourceschedule/resource_schedule_service/cgroup_sched"
+
+cgroup_sched_framework = "${cgroup_sched_path}/framework"
+
+cgroup_sched_common = "${cgroup_sched_path}/common"
+
+cgroup_sched_dummy = "${cgroup_sched_path}/dummy_adaption"
+
+cgroup_sched_interfaces = "${cgroup_sched_path}/interfaces"
+
+resourceschedule_path = "//foundation/resourceschedule"
+
+ressched_common =
+    "${resourceschedule_path}/resource_schedule_service/ressched/common"
+
+ressched_interfaces =
+    "${resourceschedule_path}/resource_schedule_service/ressched/interfaces"
+
+ressched_services =
+    "${resourceschedule_path}/resource_schedule_service/ressched/services"
+
+declare_args() {
+  cgroup_ressched_power_manager_enable = true
+  has_bg_task_mgr = false
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.resourceschedule_background_task_mgr)) {
+    has_bg_task_mgr = true
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.powermgr_power_manager)) {
+    cgroup_ressched_power_manager_enable = false
+  }
+}

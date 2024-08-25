@@ -1,0 +1,41 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("fuzztest") {
+  testonly = true
+
+  deps = [
+    "dscreen_sink_handler/handlerinitsink_fuzzer:fuzztest",
+    "dscreen_sink_handler/handleronremotesinksvrdied_fuzzer:fuzztest",
+    "dscreen_sink_handler/handlersubscribelocalhardware_fuzzer:fuzztest",
+    "dscreen_sink_handler/handlerunsubscribelocalhardware_fuzzer:fuzztest",
+    "dscreen_sink_proxy/proxyinitsink_fuzzer:fuzztest",
+    "dscreen_sink_proxy/proxysubscribelocalhardware_fuzzer:fuzztest",
+    "dscreen_sink_proxy/proxyunsubscribelocalhardware_fuzzer:fuzztest",
+    "dscreen_sink_proxy/sinkproxydscreennotify_fuzzer:fuzztest",
+    "dscreen_source_callback/callbackonnotifyregresult_fuzzer:fuzztest",
+    "dscreen_source_callback/callbackonnotifyunregresult_fuzzer:fuzztest",
+    "dscreen_source_callback/callbackonremoterequest_fuzzer:fuzztest",
+    "dscreen_source_callback/dscreensourcecallbackstub_fuzzer:fuzztest",
+    "dscreen_source_handler/handlerconfigdistributedhardware_fuzzer:fuzztest",
+    "dscreen_source_handler/handlerinitsource_fuzzer:fuzztest",
+    "dscreen_source_handler/handleronremotesourcesvrdied_fuzzer:fuzztest",
+    "dscreen_source_handler/handlerregisterdistributedhardware_fuzzer:fuzztest",
+    "dscreen_source_handler/handlerunregisterdistributedhardware_fuzzer:fuzztest",
+    "dscreen_source_proxy/proxyconfigdistributedhardware_fuzzer:fuzztest",
+    "dscreen_source_proxy/proxydscreennotify_fuzzer:fuzztest",
+    "dscreen_source_proxy/proxyinitsource_fuzzer:fuzztest",
+    "dscreen_source_proxy/proxyregisterdistributedhardware_fuzzer:fuzztest",
+    "dscreen_source_proxy/proxyunregisterdistributedhardware_fuzzer:fuzztest",
+  ]
+}

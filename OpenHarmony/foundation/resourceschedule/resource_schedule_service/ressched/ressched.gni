@@ -1,0 +1,96 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+resourceschedule_path = "//foundation/resourceschedule"
+
+resschedexe_interfaces = "${resourceschedule_path}/resource_schedule_service/ressched_executor/interfaces"
+
+ressched_services =
+    "${resourceschedule_path}/resource_schedule_service/ressched/services"
+
+ressched_common =
+    "${resourceschedule_path}/resource_schedule_service/ressched/common"
+
+ressched_interfaces =
+    "${resourceschedule_path}/resource_schedule_service/ressched/interfaces"
+
+ressched_plugins =
+    "${resourceschedule_path}/resource_schedule_service/ressched/plugins"
+
+ressched_test =
+    "${resourceschedule_path}/resource_schedule_service/ressched/test"
+
+ressched_sched_controller = "${resourceschedule_path}/resource_schedule_service/ressched/sched_controller"
+
+declare_args() {
+  device_movement_perception_enable = true
+  ressched_with_telephony_state_registry_enable = true
+  ressched_with_communication_netmanager_base_enable = true
+  resource_schedule_service_with_ffrt_enable = false
+  resource_schedule_service_with_ext_res_enable = false
+
+  if (defined(global_parts_info) && !defined(global_parts_info.msdp_movement)) {
+    device_movement_perception_enable = false
+  }
+
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.telephony_state_registry)) {
+    ressched_with_telephony_state_registry_enable = false
+  }
+
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.communication_netmanager_base)) {
+    ressched_with_communication_netmanager_base_enable = false
+  }
+
+  ressched_with_resourceschedule_soc_perf_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.resourceschedule_soc_perf)) {
+    ressched_with_resourceschedule_soc_perf_enable = false
+  }
+
+  communication_bluetooth_perception_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.communication_bluetooth)) {
+    communication_bluetooth_perception_enable = false
+  }
+
+  ressched_with_resourceschedule_multimedia_av_session_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.multimedia_av_session)) {
+    ressched_with_resourceschedule_multimedia_av_session_enable = false
+  }
+
+  ressched_power_manager_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.powermgr_power_manager)) {
+    ressched_power_manager_enable = false
+  }
+
+  ressched_with_resourceschedule_multimedia_audio_framework_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.multimedia_audio_framework)) {
+    ressched_with_resourceschedule_multimedia_audio_framework_enable = false
+  }
+
+  rss_device_standby_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.resourceschedule_device_standby)) {
+    rss_device_standby_enable = false
+  }
+  rss_request_enable = true
+  if (defined(global_parts_info) &&
+      !defined(global_parts_info.request_request)) {
+    rss_request_enable = false
+  }
+}

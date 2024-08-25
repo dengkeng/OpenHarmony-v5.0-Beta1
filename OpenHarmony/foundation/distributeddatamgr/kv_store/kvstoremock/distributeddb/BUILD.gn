@@ -1,0 +1,144 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/kv_store/kv_store.gni")
+import("../.././frameworks/libs/distributeddb/distributeddb.gni")
+kv_store_distributeddb_path = "../.././frameworks/libs/distributeddb/"
+distrdb_Dir = [
+  "${kv_store_distributeddb_path}include",
+  "${kv_store_distributeddb_path}interfaces/include",
+  "${kv_store_distributeddb_path}interfaces/src",
+  "${kv_store_distributeddb_path}interfaces/src/relational",
+  "${kv_store_distributeddb_path}common/include",
+  "${kv_store_distributeddb_path}common/include/relational",
+  "${kv_store_distributeddb_path}communicator/include",
+  "${kv_store_distributeddb_path}gaussdb_rd",
+  "${kv_store_distributeddb_path}gaussdb_rd/include",
+  "${kv_store_distributeddb_path}gaussdb_rd/include/grd_base",
+  "${kv_store_distributeddb_path}gaussdb_rd/include/grd_document",
+  "${kv_store_distributeddb_path}gaussdb_rd/include/grd_kv",
+  "${kv_store_distributeddb_path}storage/include",
+  "${kv_store_distributeddb_path}storage/src",
+  "${kv_store_distributeddb_path}storage/src/cloud",
+  "${kv_store_distributeddb_path}storage/src/kv",
+  "${kv_store_distributeddb_path}storage/src/gaussdb_rd",
+  "${kv_store_distributeddb_path}storage/src/multiver",
+  "${kv_store_distributeddb_path}storage/src/operation",
+  "${kv_store_distributeddb_path}storage/src/relational",
+  "${kv_store_distributeddb_path}storage/src/sqlite",
+  "${kv_store_distributeddb_path}storage/src/sqlite/kv",
+  "${kv_store_distributeddb_path}storage/src/sqlite/relational",
+  "${kv_store_distributeddb_path}storage/src/upgrader",
+  "${kv_store_distributeddb_path}syncer/include",
+  "${kv_store_distributeddb_path}syncer/src",
+  "${kv_store_distributeddb_path}syncer/src/cloud",
+  "${kv_store_distributeddb_path}syncer/src/device",
+  "${kv_store_distributeddb_path}syncer/src/device/multiver",
+  "${kv_store_distributeddb_path}syncer/src/device/singlever",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/common/include",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/executor/include",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/executor/document",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/oh_adapter/include",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/oh_adapter/src",
+  "${kv_store_distributeddb_path}gaussdb_rd/src/interface/include",
+
+  "//third_party/openssl/include/",
+  "//third_party/bounds_checking_function/include",
+]
+distrdb_defines = [
+  "_LARGEFILE64_SOURCE",
+  "_FILE_OFFSET_BITS=64",
+  "SQLITE_HAS_CODEC",
+  "SQLITE_ENABLE_JSON1",
+  "USE_SQLITE_SYMBOLS",
+  "USING_DB_JSON_EXTRACT_AUTOMATICALLY",
+  "JSONCPP_USE_BUILDER",
+  "OMIT_FLATBUFFER",
+  "OMIT_MULTI_VER",
+  "RELATIONAL_STORE",
+  "SQLITE_DISTRIBUTE_RELATIONAL",
+  "SQLITE_ENABLE_DROPTABLE_CALLBACK",
+]
+config("distrdb_public_config") {
+  visibility = [ "*:*" ]
+  include_dirs = [
+    "${kv_store_distributeddb_path}interfaces/include",
+    "${kv_store_distributeddb_path}interfaces/include/relational",
+    "${kv_store_distributeddb_path}include",
+    "${kv_store_distributeddb_path}gaussdb_rd/include/grd_base",
+    "${kv_store_distributeddb_path}gaussdb_rd/include/grd_document",
+    "${kv_store_distributeddb_path}gaussdb_rd/include/grd_kv",
+  ]
+}
+
+group("build_module") {
+  deps = []
+  if (use_platform_win || use_platforn_mac) {
+    deps += [ ":distributeddb" ]
+  }
+}
+distrdb_sources = distributeddb_src
+
+config("distrdb_config") {
+  visibility = [ ":*" ]
+  include_dirs = distrdb_Dir
+  include_dirs += [
+    "//third_party/jsoncpp/include",
+    "//third_party/zlib",
+    "//third_party/sqlite/include",
+    "//third_party/bounds_checking_function/include",
+  ]
+
+  defines = distrdb_defines
+  defines += [
+    "EVLOOP_TIMER_ONLY",
+    "USING_PRINTF_LOGGER",
+    "OPENSSL_SUPPRESS_DEPRECATED",
+    "OMIT_cJSON",
+  ]
+  if (use_platform_win) {
+    defines += [ "OS_TYPE_WINDOWS" ]
+  } else if (use_platforn_mac) {
+    defines += [ "OS_TYPE_MAC" ]
+  }
+}
+
+ohos_shared_library("distributeddb_mock") {
+  cflags_cc = [ "-std=c++17" ]
+  sources = distrdb_sources
+  sources += distributeddb_src_rd
+  configs = [ ":distrdb_config" ]
+  public_configs = [ ":distrdb_public_config" ]
+  ldflags = [ "-v" ]
+  deps = [
+    "//third_party/bounds_checking_function:libsec_static",
+    "//third_party/jsoncpp:jsoncpp_static",
+    "//third_party/openssl:libcrypto_static",
+    "//third_party/sqlite:sqlite_sdk",
+    "//third_party/zlib:shared_libz",
+  ]
+
+  if (use_platform_win) {
+    libs = [ "//prebuilts/mingw-w64/ohos/linux-x86_64/clang-mingw/x86_64-w64-mingw32/lib/libws2_32.a" ]
+    deps += [
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_windows",
+    ]
+  } else if (use_platforn_mac) {
+    deps +=
+        [ "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog_mac" ]
+  }
+  configs += [ "//third_party/jsoncpp:jsoncpp_config" ]
+
+  subsystem_name = "distributeddatamgr"
+  part_name = "kv_store"
+}

@@ -1,0 +1,82 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+acfwk_path = "../../../frameworks/acfwk"
+
+config("accessibilityconfig_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "${acfwk_path}/include",
+    "../../../common/log/include",
+  ]
+
+  defines = [
+    "AAMS_LOG_TAG = \"accessibility_acfwk\"",
+    "AAMS_LOG_DOMAIN = 0xD001D03",
+  ]
+}
+
+config("accessibilityconfig_public_config") {
+  include_dirs = [ "include" ]
+}
+
+acfwk_src = [
+  "${acfwk_path}/../../interfaces/kits/napi/src/napi_accessibility_config_observer.cpp",
+  "${acfwk_path}/src/accessibility_config_impl.cpp",
+  "${acfwk_path}/src/accessibility_config.cpp",
+]
+
+ohos_shared_library("accessibilityconfig") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = false
+    cfi_cross_dso = false
+    debug = false
+  }
+
+  sources = acfwk_src
+  configs = [
+    ":accessibilityconfig_private_config",
+    "../../../resources/config/build:coverage_flags",
+  ]
+
+  public_configs = [ ":accessibilityconfig_public_config" ]
+
+  deps = [
+    "../../../common/interface:accessibility_interface",
+    "../common:accessibility_common",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "init:libbeget_proxy",
+    "init:libbegetutil",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "samgr:samgr_proxy",
+  ]
+  innerapi_tags = [ "platformsdk" ]
+  install_enable = true
+
+  subsystem_name = "barrierfree"
+  part_name = "accessibility"
+}

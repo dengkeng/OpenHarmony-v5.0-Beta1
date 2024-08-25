@@ -1,0 +1,59 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+ability_base_kits_path = "//foundation/ability/ability_base/interfaces/kits"
+ability_runtime_kits_path =
+    "//foundation/ability/ability_runtime/frameworks/kits"
+
+distributedfile_path = "//foundation/filemanagement/dfs_service"
+
+utils_path = "${distributedfile_path}/utils"
+services_path = "${distributedfile_path}/services"
+innerkits_native_path = "${distributedfile_path}/interfaces/inner_api/native"
+bas_hiviewdfx_hilog_path = "//base/hiviewdfx/hilog"
+device_manager_path = "//foundation/distributedhardware/device_manager"
+dsoftbus_path = "//foundation/communication/dsoftbus"
+media_library_path = "//foundation/multimedia/media_library"
+communication_ipc_path = "//foundation/communication"
+image_framework_path = "//foundation/multimedia/image_framework"
+clouddisk_database_path = "${services_path}/clouddisk_database"
+
+declare_args() {
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.powermgr_battery_manager)) {
+    cloudsync_service_power = true
+  } else {
+    cloudsync_service_power = false
+  }
+  dfs_service_feature_enable_cloud_adapter = false
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.multimedia_media_library)) {
+    cloudsync_service_media_library = true
+  } else {
+    cloudsync_service_media_library = false
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.resourceschedule_resource_schedule_service)) {
+    cloudsync_service_resource_schedule = true
+  } else {
+    cloudsync_service_resource_schedule = false
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.hiviewdfx_hicollie)) {
+    cloudsync_service_hicollie_enable = true
+  } else {
+    cloudsync_service_hicollie_enable = false
+  }
+}

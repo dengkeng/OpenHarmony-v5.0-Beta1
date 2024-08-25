@@ -1,0 +1,79 @@
+# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//foundation/distributeddatamgr/pasteboard/pasteboard.gni")
+
+ohos_shared_library("pasteboard_napi") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "${pasteboard_innerkits_path}/include",
+    "//foundation/distributeddatamgr/pasteboard/framework/tlv",
+    "//foundation/distributeddatamgr/pasteboard/framework/uri",
+    "${ability_runtime_napi_path}/inner/napi_common",
+    "napi/include",
+    "${pasteboard_utils_path}/native/include",
+  ]
+
+  cflags = [
+    "-fPIC",
+    "-g3",
+  ]
+
+  cflags_cc = [
+    "-fstack-protector",
+    "-D_FORTIFY_SOURCE=2",
+    "-O2",
+  ]
+
+  sources = [
+    "napi/src/async_call.cpp",
+    "napi/src/napi_init.cpp",
+    "napi/src/napi_pasteboard.cpp",
+    "napi/src/napi_pastedata.cpp",
+    "napi/src/napi_pastedata_record.cpp",
+    "napi/src/napi_systempasteboard.cpp",
+    "napi/src/pasteboard_common.cpp",
+  ]
+
+  deps = [
+    "//foundation/distributeddatamgr/pasteboard/framework/innerkits:pasteboard_client",
+    "//third_party/libuv:uv",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:napi_common",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "image_framework:image",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+  ]
+
+  public_external_deps = [
+    "udmf:udmf_client",
+    "udmf:udmf_data_napi",
+  ]
+
+  relative_install_dir = "module"
+
+  subsystem_name = "distributeddatamgr"
+  part_name = "pasteboard"
+}
