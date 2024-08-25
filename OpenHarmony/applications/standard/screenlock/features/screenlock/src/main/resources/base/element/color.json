@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "lock_prompt_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background_transparent",
+      "value": "#00ffffff"
+    },
+    {
+      "name": "batterysoc_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "accounts_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "lock_ic_color",
+      "value": "#ffffff"
+    }
+  ]
+}

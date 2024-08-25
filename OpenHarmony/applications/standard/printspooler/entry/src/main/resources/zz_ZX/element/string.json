@@ -1,0 +1,236 @@
+{
+    "string":[
+        {
+            "name":"index_borderless",
+            "value":"[TS_836908]_Borderless printing"
+        },
+        {
+            "name":"print_block_reason_print_permission_error",
+            "value":"[TS_835751]_Printing permission required"
+        },
+        {
+            "name":"index_media_size",
+            "value":"[TS_836902]_Paper size:"
+        },
+        {
+            "name":"index_add_copies",
+            "value":"[TS_836919]_Copies:"
+        },
+        {
+            "name":"print_job_status_converted",
+            "value":"[TS_835763]_File conversion complete. Swipe the employee card on the printer to start printing."
+        },
+        {
+            "name":"index_media_type",
+            "value":"[TS_836917]_Media:"
+        },
+        {
+            "name":"index_add_printer",
+            "value":"[TS_836912]_Add printer"
+        },
+        {
+            "name":"print_job_status_upload_failed",
+            "value":"[TS_835667]_Unable to upload files"
+        },
+        {
+            "name":"index_direction",
+            "value":"[TS_836906]_Orientation:"
+        },
+        {
+            "name":"index_all_pages",
+            "value":"[TS_836910]_All pages"
+        },
+        {
+            "name":"alarm_dialog_connect_failed",
+            "value":"[TS_836914]_Connection failed. Restart the printer and try again."
+        },
+        {
+            "name":"open_wifi_failed",
+            "value":"[TS_836828]_Unable to enable WLAN."
+        },
+        {
+            "name":"index_printer",
+            "value":"[TS_836918]_Printer:"
+        },
+        {
+            "name":"print_block_reason_network_error",
+            "value":"[TS_835668]_Network error"
+        },
+        {
+            "name":"print_job_status_convert_slowly",
+            "value":"[TS_835750]_File conversion may take some time"
+        },
+        {
+            "name":"print_block_reason_account_error",
+            "value":"[TS_835741]_Domain account error"
+        },
+        {
+            "name":"print_block_reason_large_file_error",
+            "value":"[TS_835742]_Print file error"
+        },
+        {
+            "name":"index_page_range",
+            "value":"[TS_836904]_Page range:"
+        },
+        {
+            "name":"index_to",
+            "value":"[TS_836907]_To:"
+        },
+        {
+            "name":"index_from",
+            "value":"[TS_836909]_From:"
+        },
+        {
+            "name":"print_block_reason_swipe_card_print",
+            "value":"[TS_835724]_Swipe your employee card on the printer for the next step."
+        },
+        {
+            "name":"index_no_printer_selected",
+            "value":"[TS_836901]_None selected"
+        },
+        {
+            "name":"index_print_quality",
+            "value":"[TS_836905]_Print quality:"
+        },
+        {
+            "name":"print_job_status_converting",
+            "value":"[TS_835660]_Converting…"
+        },
+        {
+            "name":"print_block_reason_print_color_permission_error",
+            "value":"[TS_835696]_Color printing permission required"
+        },
+        {
+            "name":"index_duplex_mode",
+            "value":"[TS_836915]_Print style:"
+        },
+        {
+            "name":"print_job_status_uploading",
+            "value":"[TS_835711]_Uploading…"
+        },
+        {
+            "name":"PrintQuality_STANDARD",
+            "value":"[TS_835675]_Standard"
+        },
+        {
+            "name":"connect_confirm_dialog_confirm",
+            "value":"[TS_836903]_Press the network button on the printer control panel to confirm connection"
+        },
+        {
+            "name":"printer_offline",
+            "value":"[TS_835732]_Offline"
+        },
+        {
+            "name":"PrintQuality_BEST",
+            "value":"[TS_835709]_Best"
+        },
+        {
+            "name":"MediaType_PHOTO",
+            "value":"[TS_835662]_Photo"
+        },
+        {
+            "name":"DuplexMode_SINGLE",
+            "value":"[TS_835757]_Single-sided"
+        },
+        {
+            "name":"preview_failed",
+            "value":"[TS_840483]_Preview failed"
+        },
+        {
+            "name":"PrintQuality_ECONOMY",
+            "value":"[TS_835767]_Ink saving"
+        },
+        {
+            "name":"print_job_printing",
+            "value":"[TS_835653]_Printing…"
+        },
+        {
+            "name":"print_job_completed",
+            "value":"[TS_835738]_Printing complete"
+        },
+        {
+            "name":"print_job_cancelling",
+            "value":"[TS_835737]_Canceling…"
+        },
+        {
+            "name":"borderless_enable_toast",
+            "value":"[TS_835685]_Borderless printing may result in an incomplete image."
+        },
+        {
+            "name":"DuplexMode_DOUBLE",
+            "value":"[TS_835643]_Double-sided"
+        },
+        {
+            "name":"preview_loading",
+            "value":"[TS_840478]_Loading preview…"
+        },
+        {
+            "name":"printer_out_of_paper",
+            "value":"[TS_835658]_Out of paper"
+        },
+        {
+            "name":"DuplexMode_LONG",
+            "value":"[TS_835747]_Flip pages on long edge."
+        },
+        {
+            "name":"MediaType_NORMAL",
+            "value":"[TS_835756]_Plain"
+        },
+        {
+            "name":"print_job_created",
+            "value":"[TS_835652]_Preparing to print…"
+        },
+        {
+            "name":"welcome",
+            "value":"[TS_836831]_Welcome to"
+        },
+        {
+            "name":"printer_busy",
+            "value":"[TS_835728]_Busy"
+        },
+        {
+            "name":"printer_bad_certificate",
+            "value":"[TS_835671]_Bad certificate"
+        },
+        {
+            "name":"PageDirection_AUTO",
+            "value":"[TS_835687]_Auto"
+        },
+        {
+            "name":"borderless_type_toast",
+            "value":"[TS_835674]_Borderless printing is not available with plain paper."
+        },
+        {
+            "name":"DuplexMode_SHORT",
+            "value":"[TS_835761]_Flip pages on short edge."
+        },
+        {
+            "name":"connect_confirm_dialog_tips",
+            "value":"[TS_836913]_*The actual operation required may vary by product."
+        },
+        {
+            "name":"connectConfirmDialog_countDown",
+            "value":"[TS_835730]_OK (%1$ds)"
+        },
+        {
+            "name":"print_job",
+            "value":"[TS_835760]_Tasks"
+        },
+        {
+            "name":"PageDirection_VERTICAL",
+            "value":"[TS_835727]_Portrait"
+        },
+        {
+            "name":"PageDirection_LANDSCAPE",
+            "value":"[TS_835686]_Landscape"
+        },
+        {
+            "name":"ColorMode",
+            "value":"[TS_835755]_B/W"
+        },
+        {
+            "name":"DuplexMode_ONESIDE",
+            "value":"[TS_835716]_Print on one side."
+        }
+    ]
+}

@@ -1,0 +1,164 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "Notepad"
+    },
+    {
+      "name": "description_mainability",
+      "value": "ETS_Empty Ability"
+    },
+    {
+      "name": "note",
+      "value": "Notes"
+    },
+    {
+      "name": "allNotes",
+      "value": "All notes"
+    },
+    {
+      "name": "unClassified",
+      "value": "No category"
+    },
+    {
+      "name": "recentDeletes",
+      "value": "Recently deleted"
+    },
+    {
+      "name": "myFavorites",
+      "value": "My favourites"
+    },
+    {
+      "name": "create",
+      "value": "NEW"
+    },
+    {
+      "name": "createFolder",
+      "value": "New Folder"
+    },
+    {
+      "name": "editFolder",
+      "value": "Edit Folder"
+    },
+    {
+      "name": "deleteFolder",
+      "value": "Delete Folder"
+    },
+    {
+      "name": "createNote",
+      "value": "New note"
+    },
+    {
+      "name": "cancel",
+      "value": "CANCEL"
+    },
+    {
+      "name": "save",
+      "value": "SAVE"
+    },
+    {
+      "name": "delete",
+      "value": "DELETE"
+    },
+    {
+      "name": "delete_tips",
+      "value": "Do you want to delete this folder and its contents?"
+    },
+    {
+      "name": "deleteNote",
+      "value": "Delete this note?"
+    },
+    {
+      "name": "deleteNoteComplete",
+      "value": "Permanently delete this note?"
+    },
+    {
+      "name": "deleteAllNote",
+      "value": "Delete all note?"
+    },
+    {
+      "name": "deletePartNote",
+      "value": "Delete %d notes?"
+    },
+    {
+      "name": "selected",
+      "value": "%d item selected"
+    },
+    {
+      "name": "none_selected",
+      "value": "None selected"
+    },
+    {
+      "name": "noteslist",
+      "value": "notes"
+    },
+    {
+      "name": "Empty_page",
+      "value": "No notes"
+    },
+    {
+      "name": "searchNote",
+      "value": "Search notes"
+    },
+    {
+      "name": "chooseFolder",
+      "value": "Select folder"
+    },
+    {
+      "name": "category_already_exist",
+      "value": "The folder name already exists."
+    },
+    {
+      "name": "input_placeholder",
+      "value": "Name"
+    },
+    {
+      "name": "permanently_delete_tips",
+      "value": "notes will be permanently deleted after the number of days shown (up to 30 days)."
+    },
+    {
+      "name": "set_top",
+      "value": "Top"
+    },
+    {
+      "name": "move",
+      "value": "Move"
+    },
+    {
+      "name": "recover",
+      "value": "Restore"
+    },
+    {
+      "name": "check_all",
+      "value": "Select all"
+    },
+    {
+      "name": "editNoteTitle",
+      "value": "Modify the title"
+    },
+    {
+      "name": "list",
+      "value": "Checklist"
+    },
+    {
+      "name": "style",
+      "value": "Style"
+    },
+    {
+      "name": "photo",
+      "value": "Gallery"
+    },
+    {
+      "name": "title",
+      "value": "Title"
+    },
+    {
+      "name": "empty_note",
+      "value": "The note content is empty."
+    },
+    {
+      "name": "restore",
+      "value": "Note Restored"
+    }
+  ]
+}

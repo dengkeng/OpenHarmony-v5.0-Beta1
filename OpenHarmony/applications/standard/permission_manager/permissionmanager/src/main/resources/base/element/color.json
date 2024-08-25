@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "label_color_20",
+      "value": "#33182431"
+    },
+    {
+      "name": "default_background_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "location_circle_color",
+      "value": "#254FF7"
+    },
+    {
+      "name": "icon_bg",
+      "value": "#E6ffffff"
+    },
+    {
+      "name": "icon_border",
+      "value": "#33808080"
+    }
+  ]
+}

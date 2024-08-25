@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "备忘录"
+    },
+    {
+      "name": "read_media_permission",
+      "value": "Used to read media file information in external storage of users"
+    },
+    {
+      "name": "media_location_permission",
+      "value": "Used for memo access to geographic location information in user media files"
+    },
+    {
+      "name": "distributed_dataSync_permission",
+      "value": "Used for memo data exchange between different equipment"
+    },
+    {
+      "name": "write_media_permission",
+      "value": "Used to write media file information in external storage of users"
+    }
+  ]
+}

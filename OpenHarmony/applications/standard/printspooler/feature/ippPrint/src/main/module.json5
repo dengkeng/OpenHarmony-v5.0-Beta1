@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "ippPrint",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

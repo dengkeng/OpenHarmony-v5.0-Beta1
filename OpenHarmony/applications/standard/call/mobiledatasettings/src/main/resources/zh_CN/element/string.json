@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "mainability_description",
+      "value": "移动网络设置"
+    },
+    {
+      "name": "mobile_data",
+      "value": "移动数据"
+    },
+    {
+      "name": "mobile_data_charges",
+      "value": "启用后，产生的流量将由运营商收取相应费用"
+    },
+    {
+      "name": "mobile_data_general",
+      "value": "通用"
+    },
+    {
+      "name": "mobile_data_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "mobile_data_card1",
+      "value": "卡 1 网络 "
+    },
+    {
+      "name": "mobile_data_card2",
+      "value": "卡 2 网络 "
+    },
+    {
+      "name": "mobile_data_network",
+      "value": "网络"
+    },
+    {
+      "name": "mobile_data_dataRoaming",
+      "value": "数据漫游"
+    },
+    {
+      "name": "mobile_data_enableDataWhileRoaming",
+      "value": "漫游时开启数据业务"
+    },
+    {
+      "name": "mobile_data_netFive",
+      "value": "启用 5G"
+    },
+    {
+      "name": "mobile_data_accessPointNamesAPN",
+      "value": "接入点名称 (APN)"
+    },
+    {
+      "name": "mobile_data_networkProvider",
+      "value": "网络运营商"
+    },
+    {
+      "name": "mobile_data_chooseNetworkProvider",
+      "value": "手动或自动选择"
+    },
+    {
+      "name": "mobile_data_more",
+      "value": "高级"
+    },
+    {
+      "name": "mobile_data_fiveAuto",
+      "value": "5G/4G/3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_fourAuto",
+      "value": "4G/3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_threeAuto",
+      "value": "3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_twoOnly",
+      "value": "仅 2G"
+    },
+    {
+      "name": "mobile_data_automaticRecognition",
+      "value": "自动识别"
+    },
+    {
+      "name": "mobile_data_preferredNetwork",
+      "value": "首选网络："
+    },
+    {
+      "name": "mobile_data_closeAutoSelect",
+      "value": "关闭自动选择"
+    },
+    {
+      "name": "mobile_data_whetherToClose",
+      "value": "关闭后，将使用手动选择的运营商注册，不会自动选择其他运营商。这可能导致网络服务不可用。是否关闭?"
+    },
+    {
+      "name": "mobile_data_networkMode",
+      "value": "网络模式"
+    },
+    {
+      "name": "mobile_data_apnOpen",
+      "value": "APN 已开启"
+    },
+    {
+      "name": "mobile_data_apnName",
+      "value": "名称"
+    },
+    {
+      "name": "mobile_data_notSet",
+      "value": "未设置"
+    },
+    {
+      "name": "mobile_data_volte",
+      "value": "VoLTE高清通话"
+    },
+    {
+      "name": "mobile_data_confirmation_function",
+      "value": "启用前应向运营商确认已开通此功能，否则可能影响正常通话"
+    },
+    {
+      "name": "mobile_data_5g",
+      "value": "5G/4G/3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_4g",
+      "value": "4G/3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_3g",
+      "value": "3G/2G 自动选择"
+    },
+    {
+      "name": "mobile_data_2g",
+      "value": "仅 2G"
+    },
+    {
+      "name": "mobile_data_tips",
+      "value": "注意"
+    },
+    {
+      "name": "mobile_data_turn_on_data_roaming",
+      "value": "开启数据漫游可能产生漫游费。是否开启？"
+    },
+    {
+      "name": "cancel_space",
+      "value": "取 消"
+    },
+    {
+      "name": "confim_space",
+      "value": "确 定"
+    },
+    {
+      "name": "GET_NETWORK_INFO",
+      "value": "获取网络信息权限"
+    },
+    {
+      "name": "SET_TELEPHONY_STATE",
+      "value": "设置卡的状态"
+    },
+    {
+      "name": "GET_TELEPHONY_STATE",
+      "value": "获取卡的状态"
+    },
+    {
+      "name": "mobile_empty_string",
+      "value": " "
+    },
+    {
+      "name": "MANAGE_SECURE_SETTINGS",
+      "value": "管理安全设置"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "ScreenShot"
+    },
+    {
+      "name": "description_mainability",
+      "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "button_name",
+      "value": "Detail"
+    }
+  ]
+}

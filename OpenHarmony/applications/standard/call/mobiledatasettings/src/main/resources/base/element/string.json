@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "mainability_description",
+      "value": "Mobile data settings"
+    },
+    {
+      "name": "mobile_data",
+      "value": "mobile data"
+    },
+    {
+      "name": "mobile_data_charges",
+      "value": "After activation, the charges incurred are charged by the operator"
+    },
+    {
+      "name": "mobile_data_general",
+      "value": "Be in common use"
+    },
+    {
+      "name": "mobile_data_cancel",
+      "value": "cancel"
+    },
+    {
+      "name": "mobile_data_card1",
+      "value": "Card 1 network"
+    },
+    {
+      "name": "mobile_data_card2",
+      "value": "Card 2 network"
+    },
+    {
+      "name": "mobile_data_network",
+      "value": "Network"
+    },
+    {
+      "name": "mobile_data_dataRoaming",
+      "value": "Data roaming"
+    },
+    {
+      "name": "mobile_data_enableDataWhileRoaming",
+      "value": "Enable data service during roaming"
+    },
+    {
+      "name": "mobile_data_netFive",
+      "value": "Enable 5G"
+    },
+    {
+      "name": "mobile_data_accessPointNamesAPN",
+      "value": "Access Point Name APN"
+    },
+    {
+      "name": "mobile_data_networkProvider",
+      "value": "Network operator"
+    },
+    {
+      "name": "mobile_data_chooseNetworkProvider",
+      "value": "Manual or automatic selection"
+    },
+    {
+      "name": "mobile_data_more",
+      "value": "Senior"
+    },
+    {
+      "name": "mobile_data_fiveAuto",
+      "value": "5G/4G/3G/2G Auto Select"
+    },
+    {
+      "name": "mobile_data_fourAuto",
+      "value": "4G/3G/2G Auto Select"
+    },
+    {
+      "name": "mobile_data_threeAuto",
+      "value": "3G/2G Auto Select"
+    },
+    {
+      "name": "mobile_data_twoOnly",
+      "value": "2G only"
+    },
+    {
+      "name": "mobile_data_automaticRecognition",
+      "value": "Automatic recognition"
+    },
+    {
+      "name": "mobile_data_preferredNetwork",
+      "value": "Preferred network"
+    },
+    {
+      "name": "mobile_data_closeAutoSelect",
+      "value": "Turn off automatic selection"
+    },
+    {
+      "name": "mobile_data_whetherToClose",
+      "value": "After closing, the operator selected manually will be used for registration, and other operators will not be selected automatically. This may cause the network service to be unavailable. Close?"
+    },
+    {
+      "name": "mobile_data_networkMode",
+      "value": "Network mode"
+    },
+    {
+      "name": "mobile_data_apnOpen",
+      "value": "APN ON"
+    },
+    {
+      "name": "mobile_data_apnName",
+      "value": "Name"
+    },
+    {
+      "name": "mobile_data_notSet",
+      "value": "Not set"
+    },
+    {
+      "name": "mobile_data_volte",
+      "value": "VoLTE HD call"
+    },
+    {
+      "name": "mobile_data_confirmation_function",
+      "value": "Confirm to the operator that this function is enabled before enabling, otherwise normal calls may be affected"
+    },
+    {
+      "name": "mobile_data_5g",
+      "value": "5G/4G/3G/2G automatic selection"
+    },
+    {
+      "name": "mobile_data_4g",
+      "value": "4G/3G/2G automatic selection"
+    },
+    {
+      "name": "mobile_data_3g",
+      "value": "3G/2G automatic selection"
+    },
+    {
+      "name": "mobile_data_2g",
+      "value": "2G only"
+    },
+    {
+      "name": "mobile_data_tips",
+      "value": "be careful"
+    },
+    {
+      "name": "mobile_data_turn_on_data_roaming",
+      "value": "Enabling data roaming may incur roaming charges. Open?"
+    },
+    {
+      "name": "cancel_space",
+      "value": "cancel"
+    },
+    {
+      "name": "confim_space",
+      "value": "Confim"
+    },
+    {
+      "name": "GET_NETWORK_INFO",
+      "value": "get network info"
+    },
+    {
+      "name": "SET_TELEPHONY_STATE",
+      "value": "set telephony state"
+    },
+    {
+      "name": "GET_TELEPHONY_STATE",
+      "value": "get telephony state"
+    },
+    {
+      "name": "mobile_empty_string",
+      "value": " "
+    },
+    {
+      "name": "MANAGE_SECURE_SETTINGS",
+      "value": "manage secure settings"
+    }
+  ]
+}

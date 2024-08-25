@@ -1,0 +1,11 @@
+{
+  "src": [
+    "pages/certManagerFa",
+    "pages/certPwdInput",
+    "pages/trustedCa",
+    "pages/cerEvidenceFa",
+    "pages/requestAuth",
+    "pages/certInstallAliasInput",
+    "pages/certInstallFromStorage"
+  ]
+}

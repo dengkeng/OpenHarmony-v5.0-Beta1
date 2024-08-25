@@ -1,0 +1,25 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "white_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "color_E3E3E3_grey",
+      "value": "#E3E3E3"
+    },
+    {
+      "name": "color_00000000_transparent",
+      "value": "#00000000"
+    }
+
+  ]
+}

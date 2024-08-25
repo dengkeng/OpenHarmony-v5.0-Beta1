@@ -1,0 +1,416 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "证书管理"
+    },
+    {
+      "name": "mainability_description",
+      "value": "ETS_Empty Feature Ability"
+    },
+    {
+      "name": "version",
+      "value": "版本 "
+    },
+    {
+      "name": "certificateTab",
+      "value": "证书与凭据"
+    },
+    {
+      "name": "certificateManage",
+      "value": "证书管理"
+    },
+    {
+      "name": "trustedEvidence",
+      "value": "受信任的证书"
+    },
+    {
+      "name": "userEvidence",
+      "value": "凭据列表"
+    },
+    {
+      "name": "installInStorageDevice",
+      "value": "从存储设备安装"
+    },
+    {
+      "name": "installCertificateFailed",
+      "value": "从存储设备安装失败"
+    },
+    {
+      "name": "certificatePwdTab",
+      "value": "提取证书"
+    },
+    {
+      "name": "certificateAliasTab",
+      "value": "设置证书"
+    },
+    {
+      "name": "certificatePwdInfo",
+      "value": "输入证书密码以提取"
+    },
+    {
+      "name": "certificateAliasInfo",
+      "value": "输入证书名称"
+    },
+    {
+      "name": "deleteAllCred",
+      "value": "删除所有证书与凭据"
+    },
+    {
+      "name": "deleteAllCredDialogTitle",
+      "value": "删除所有证书与凭据"
+    },
+    {
+      "name": "deleteAllCredDialogMessage",
+      "value": "所有用户证书与凭据将被永久删除。是否删除？"
+    },
+    {
+      "name": "deleteAllCredCancel",
+      "value": "取消"
+    },
+    {
+      "name": "deleteAllCredDelete",
+      "value": "删除"
+    },
+    {
+      "name": "pickCredToAuth",
+      "value": "选择证书授权"
+    },
+    {
+      "name": "requestAuthMsg",
+      "value": "应用\"%s\"请求使用证书。选择一个证书可让该应用对服务器使用此身份凭证。该应用已将请求服务标识为\"localhost\"，您只应向信任的应用授予使用证书的权限。"
+    },
+    {
+      "name": "requestAuthCancel",
+      "value": "拒绝"
+    },
+    {
+      "name": "requestAuthFinish",
+      "value": "授权"
+    },
+    {
+      "name": "requestFailPromptMsg",
+      "value": "授权失败，无效AppUid"
+    },
+    {
+      "name": "installPwdInputCancel",
+      "value": "取消"
+    },
+    {
+      "name": "installPwdInputConfirm",
+      "value": "提取"
+    },
+    {
+      "name": "installAliasInputCancel",
+      "value": "取消"
+    },
+    {
+      "name": "installAliasInputConfirm",
+      "value": "确定"
+    },
+    {
+      "name": "installAliasInputInfo",
+      "value": "注：证书名称仅支持英文和数字"
+    },
+    {
+      "name": "managerAuthApp",
+      "value": "管理授权应用"
+    },
+    {
+      "name": "cancelAuthApp",
+      "value": "取消"
+    },
+    {
+      "name": "finishAuthApp",
+      "value": "完成"
+    },
+    {
+      "name": "evidenceDetails",
+      "value": "凭据详情"
+    },
+    {
+      "name": "entryContains",
+      "value": "此条目包含:"
+    },
+    {
+      "name": "keyNum",
+      "value": "    %s个用户密钥"
+    },
+    {
+      "name": "userCerNum",
+      "value": "    %s个用户证书"
+    },
+    {
+      "name": "privateDetailsClose",
+      "value": "关闭"
+    },
+    {
+      "name": "publicDetailsCancel",
+      "value": "取消"
+    },
+    {
+      "name": "publicDetailsDelete",
+      "value": "删除"
+    },
+    {
+      "name": "warning_title",
+      "value": "删除凭据"
+    },
+    {
+      "name": "warning_message",
+      "value": "删除后，被授权此凭据的应用将无法正常使用。是否删除？"
+    },
+    {
+      "name": "warning_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "warning_delete",
+      "value": "删除"
+    },
+    {
+      "name": "tabName_public",
+      "value": "公共"
+    },
+    {
+      "name": "tabName_private",
+      "value": "私有"
+    },
+    {
+      "name": "system",
+      "value": "系统"
+    },
+    {
+      "name": "user",
+      "value": "用户"
+    },
+    {
+      "name": "CustomDialogExample_firText",
+      "value": "证书详情"
+    },
+    {
+      "name": "CustomDialogExample_firListItem_text",
+      "value": "颁发给:"
+    },
+    {
+      "name": "CustomDialogExample_secListItem_text",
+      "value": "颁发者:"
+    },
+    {
+      "name": "CustomDialogExample_thdListItem_text",
+      "value": "有效期:"
+    },
+    {
+      "name": "CustomDialogExample_Button_text",
+      "value": "取消"
+    },
+    {
+      "name": "CustomDialogExample_Button_on",
+      "value": "启用"
+    },
+    {
+      "name": "CustomDialogExample_Button_off",
+      "value": "禁用"
+    },
+    {
+      "name": "CustomDialogExampleUser_Status_true",
+      "value": "已启用"
+    },
+    {
+      "name": "CustomDialogExampleUser_Status_false",
+      "value": "已禁用"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_firButton_text",
+      "value": "取消"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_secButton_text",
+      "value": "删除"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_text",
+      "value": "取消"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_title_text",
+      "value": "删除证书"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_message_text",
+      "value": "删除后，被授权此证书的应用将无法正常使用。是否删除？"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_firButton_text",
+      "value": "取消"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_secButton_text",
+      "value": "删除"
+    },
+    {
+      "name": "DialogSubjectComponent_firText",
+      "value": "常用名称:"
+    },
+    {
+      "name": "DialogSubjectComponent_secText",
+      "value": "组织:"
+    },
+    {
+      "name": "DialogSubjectComponent_thdText",
+      "value": "组织单位:"
+    },
+    {
+      "name": "DialogSubjectComponent_fouText",
+      "value": "序列号:"
+    },
+    {
+      "name": "DialogSubjectComponent_fifText",
+      "value": "颁发时间:"
+    },
+    {
+      "name": "DialogSubjectComponent_sixText",
+      "value": "有效期至:"
+    },
+    {
+      "name": "CustomDialogExample_fouListItem_text",
+      "value": "指纹:"
+    },
+    {
+      "name": "CustomDialogExample_FingerPrint_text",
+      "value": "SHA-256 指纹:"
+    },
+    {
+      "name": "root_certificate",
+      "value": "根证书"
+    },
+    {
+      "name": "root_certificate_message",
+      "value": "警告：为网站启用此证书将允许第三方查看发送给网站的任何私人数据。"
+    },
+    {
+      "name": "root_certificate_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "root_certificate_continue",
+      "value": "继续"
+    },
+    {
+      "name": "CA_cert",
+      "value": "CA证书"
+    },
+    {
+      "name": "user_certificate_credentials",
+      "value": "用户凭据"
+    },
+    {
+      "name": "delete_success",
+      "value": "删除成功"
+    },
+    {
+      "name": "importCertDialogTitle",
+      "value": "安装用户受信任的证书"
+    },
+    {
+      "name": "importCertDialogMessage",
+      "value": "即将安装用户受信任的证书。是否安装？"
+    },
+    {
+      "name": "importCredDialogTitle",
+      "value": "安装公共凭据"
+    },
+    {
+      "name": "importCredDialogMessage",
+      "value": "即将安装公共凭据。是否安装？"
+    },
+    {
+      "name": "invalidCertAndCredDialogTitle",
+      "value": "无法使用此文件"
+    },
+    {
+      "name": "invalidCertAndCredDialogMessage",
+      "value": "无法将此文件用作证书和凭据"
+    },
+    {
+      "name": "importCancel",
+      "value": "取消"
+    },
+    {
+      "name": "importConfirm",
+      "value": "确认"
+    },
+    {
+      "name": "invalidCertAndCredConfirm",
+      "value": "关闭"
+    },
+    {
+      "name": "authenticationTitle",
+      "value": "请进行身份认证"
+    },
+    {
+      "name": "certInputPassword",
+      "value": "输入证书密码"
+    },
+    {
+      "name": "inputConfirm",
+      "value": "确认"
+    },
+    {
+      "name": "setCertName",
+      "value": "设置证书名称"
+    },
+    {
+      "name": "setCertMessage",
+      "value": "此证书颁布者可能会检查进出设备的所有流量，该数据包含：CA证书"
+    },
+    {
+      "name": "Install_Cert_Success",
+      "value": "安装证书成功"
+    },
+    {
+      "name": "Install_Cred_Success",
+      "value": "安装凭据成功"
+    },
+    {
+      "name": "Install_Cert_Failed",
+      "value": "安装证书失败"
+    },
+    {
+      "name": "Install_Cred_Failed",
+      "value": "安装凭据失败"
+    },
+    {
+      "name": "Install_Error_NOT_FOUND",
+      "value": "无法识别此文件。"
+    },
+    {
+      "name": "Install_ERROR_INCORRECT_FORMAT",
+      "value": "证书已损坏。"
+    },
+    {
+      "name": "Install_Error_MAX_QUANTITY_REACHED",
+      "value": "证书数量已达上限，请清理证书。"
+    },
+    {
+      "name": "OK",
+      "value": "知道了"
+    },
+    {
+      "name": "Password_Message",
+      "value": "密码错误"
+    },
+    {
+      "name": "Identity_Authentication",
+      "value": "请进行身份验证"
+    },
+    {
+      "name": "inputAliasWarn",
+      "value": "已达到长度上限"
+    },
+    {
+      "name": "system_credentials",
+      "value": "系统凭据"
+    }
+  ]
+}

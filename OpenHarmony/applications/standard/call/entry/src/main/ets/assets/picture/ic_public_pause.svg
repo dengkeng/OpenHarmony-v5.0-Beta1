@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_public_pause</title>
+    <g id="ic_public_pause" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10,4.375 C10.6903559,4.375 11.25,4.93464406 11.25,5.625 L11.25,24.375 C11.25,25.0653559 10.6903559,25.625 10,25.625 C9.30964406,25.625 8.75,25.0653559 8.75,24.375 L8.75,5.625 C8.75,4.93464406 9.30964406,4.375 10,4.375 Z M20,4.375 C20.6903559,4.375 21.25,4.93464406 21.25,5.625 L21.25,24.375 C21.25,25.0653559 20.6903559,25.625 20,25.625 C19.3096441,25.625 18.75,25.0653559 18.75,24.375 L18.75,5.625 C18.75,4.93464406 19.3096441,4.375 20,4.375 Z" id="ic/pause/ic_pause" fill="#FFFFFF"></path>
+    </g>
+</svg>

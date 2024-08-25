@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "read_media_permission",
+      "value": "用于备忘录读取用户外部存储中的媒体文件信息"
+    },
+    {
+      "name": "media_location_permission",
+      "value": "用于备忘录访问用户媒体文件中的地理位置信息"
+    },
+    {
+      "name": "distributed_dataSync_permission",
+      "value": "用于备忘录进行不同设备间的数据交换"
+    },
+    {
+      "name": "write_media_permission",
+      "value": "用于备忘录记录用户外部存储中的图片文件信息"
+    }
+  ]
+}

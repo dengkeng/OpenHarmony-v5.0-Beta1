@@ -1,0 +1,120 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "FilePicker"
+    },
+    {
+      "name": "cancel",
+      "value": "CANCEL"
+    },
+    {
+      "name": "confirm",
+      "value": "OK"
+    },
+    {
+      "name": "loading",
+      "value": "Loading..."
+    },
+    {
+      "name": "myPhone",
+      "value": "Phone"
+    },
+    {
+      "name": "sameName",
+      "value": "Folder name already in use."
+    },
+    {
+      "name": "addFolder",
+      "value": "New folder"
+    },
+    {
+      "name": "illegal",
+      "value": "Special characters .. < > | : \" * ? / . \\ are not supported"
+    },
+    {
+      "name": "num",
+      "value": "(%d)"
+    },
+    {
+      "name": "select_location",
+      "value": "Select a location."
+    },
+    {
+      "name": "noContent",
+      "value": "No file"
+    },
+    {
+      "name": "justNow",
+      "value": "Just now"
+    },
+    {
+      "name": "today",
+      "value": "Today"
+    },
+    {
+      "name": "yesterday",
+      "value": "Yesterday"
+    },
+    {
+      "name": "selected_none",
+      "value": "None selected"
+    },
+    {
+      "name": "selected_items_singular",
+      "value": " %d item selected"
+    },
+    {
+      "name": "selected_items_plural",
+      "value": " %d items selected"
+    },
+    {
+      "name": "addFolder_fail",
+      "value": "addFolder fail"
+    },
+    {
+      "name": "to_save",
+      "value": "Save file to %s"
+    },
+    {
+      "name": "to_save_plural",
+      "value": "Save %d files to %s"
+    },
+    {
+      "name": "choose_size",
+      "value": "Total %s"
+    },
+    {
+      "name": "selected",
+      "value": "Selected %d/%d"
+    },
+    {
+      "name": "save_file_fail",
+      "value": "Saving failed"
+    },
+    {
+      "name": "input_nothing",
+      "value": "There is no content."
+    },
+    {
+      "name": "input_invalid",
+      "value": "\" \\ / : * ? < > | are not supported."
+    },
+    {
+      "name": "max_input_length",
+      "value": "Maximum length reached"
+    },
+    {
+      "name": "permission_storage_reason_tips",
+      "value": "This is used to acquire and store photos, files, and other media content."
+    }
+  ]
+}

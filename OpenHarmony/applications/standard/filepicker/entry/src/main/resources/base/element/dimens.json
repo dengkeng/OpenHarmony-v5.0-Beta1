@@ -1,0 +1,260 @@
+{
+  "float": [
+    {
+      "name": "common_font_size10",
+      "value": "10fp"
+    },
+    {
+      "name": "common_font_size12",
+      "value": "12fp"
+    },
+    {
+      "name": "common_font_size14",
+      "value": "14fp"
+    },
+    {
+      "name": "common_font_size16",
+      "value": "16fp"
+    },
+    {
+      "name": "common_font_size19",
+      "value": "19fp"
+    },
+    {
+      "name": "common_font_size20",
+      "value": "20fp"
+    },
+    {
+      "name": "common_size6",
+      "value": "6vp"
+    },
+    {
+      "name": "common_size8",
+      "value": "8vp"
+    },
+    {
+      "name": "common_size10",
+      "value": "10vp"
+    },
+    {
+      "name": "common_size12",
+      "value": "12vp"
+    },
+    {
+      "name": "common_size15",
+      "value": "15vp"
+    },
+    {
+      "name": "common_size19",
+      "value": "19vp"
+    },
+    {
+      "name": "common_size20",
+      "value": "20vp"
+    },
+    {
+      "name": "common_size24",
+      "value": "24vp"
+    },
+    {
+      "name": "common_size30",
+      "value": "30vp"
+    },
+    {
+      "name": "common_size36",
+      "value": "36vp"
+    },
+    {
+      "name": "common_size46",
+      "value": "46vp"
+    },
+    {
+      "name": "common_size52",
+      "value": "52vp"
+    },
+    {
+      "name": "common_size64",
+      "value": "64vp"
+    },
+    {
+      "name": "common_size120",
+      "value": "120vp"
+    },
+    {
+      "name": "common_line_height36",
+      "value": "36vp"
+    },
+    {
+      "name": "common_margin2",
+      "value": "2vp"
+    },
+    {
+      "name": "common_margin6",
+      "value": "6vp"
+    },
+    {
+      "name": "common_margin10",
+      "value": "10vp"
+    },
+    {
+      "name": "common_margin16",
+      "value": "16vp"
+    },
+    {
+      "name": "common_margin20",
+      "value": "20vp"
+    },
+    {
+      "name": "common_margin24",
+      "value": "24vp"
+    },
+    {
+      "name": "common_padding2",
+      "value": "2vp"
+    },
+    {
+      "name": "common_padding4",
+      "value": "4vp"
+    },
+    {
+      "name": "common_padding5",
+      "value": "5vp"
+    },
+    {
+      "name": "common_padding10",
+      "value": "10vp"
+    },
+    {
+      "name": "common_padding12",
+      "value": "12vp"
+    },
+    {
+      "name": "common_padding14",
+      "value": "14vp"
+    },
+    {
+      "name": "common_padding15",
+      "value": "15vp"
+    },
+    {
+      "name": "common_padding16",
+      "value": "16vp"
+    },
+    {
+      "name": "common_padding24",
+      "value": "24vp"
+    },
+    {
+      "name": "common_padding30",
+      "value": "30vp"
+    },
+    {
+      "name": "common_vp26",
+      "value": "26vp"
+    },
+    {
+      "name": "common_opacity2",
+      "value": "0.2"
+    },
+    {
+      "name": "common_opacity4",
+      "value": "0.4"
+    },
+    {
+      "name": "common_opacity5",
+      "value": "0.5"
+    },
+    {
+      "name": "common_opacity6",
+      "value": "0.6"
+    },
+    {
+      "name": "common_opacity9",
+      "value": "0.9"
+    },
+    {
+      "name": "common_opacity10",
+      "value": "1"
+    },
+    {
+      "name": "common_borderRadius8",
+      "value": "8vp"
+    },
+    {
+      "name": "common_borderRadius10",
+      "value": "10vp"
+    },
+    {
+      "name": "common_borderRadius18",
+      "value": "18vp"
+    },
+    {
+      "name": "common_mark_y50",
+      "value": "50vp"
+    },
+    {
+      "name": "common_position24",
+      "value": "24vp"
+    },
+    {
+      "name": "common_position26",
+      "value": "26vp"
+    },
+    {
+      "name": "common_size4",
+      "value": "4vp"
+    },
+    {
+      "name": "album_borderRadius_5",
+      "value": "5"
+    },
+    {
+      "name": "album_borderRadius_8",
+      "value": "8vp"
+    },
+    {
+      "name": "common_markAnchor_16",
+      "value": "16vp"
+    },
+    {
+      "name": "common_markAnchor_28",
+      "value": "28vp"
+    },
+    {
+      "name": "recent_markAnchor_4",
+      "value": "-4vp"
+    },
+    {
+      "name": "recent_markAnchor_20",
+      "value": "20vp"
+    },
+    {
+      "name": "file_list_columns_gap",
+      "value": "40"
+    },
+    {
+      "name": "file_list_rows_gap",
+      "value": "25"
+    },
+    {
+      "name": "divider_height24",
+      "value": "24vp"
+    },
+    {
+      "name": "common_position8",
+      "value": "8vp"
+    },
+    {
+      "name": "text_input_margin_minus10",
+      "value": "-10vp"
+    },
+    {
+      "name": "text_input_margin_minus20",
+      "value": "-20vp"
+    },
+    {
+      "name": "common_size56",
+      "value": "56vp"
+    }
+  ]
+}

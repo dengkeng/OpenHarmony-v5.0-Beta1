@@ -1,0 +1,124 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "FilePicker"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "to_save",
+      "value": "将文件保存到 \"%s\""
+    },
+    {
+      "name": "to_save_plural",
+      "value": "将 %d 项文件保存到 \"%s\""
+    },
+    {
+      "name": "loading",
+      "value": "正在加载..."
+    },
+    {
+      "name": "myPhone",
+      "value": "我的手机"
+    },
+    {
+      "name": "noContent",
+      "value": "没有文件"
+    },
+    {
+      "name": "sameName",
+      "value": "目标文件夹下面有同名文件"
+    },
+    {
+      "name": "addFolder",
+      "value": "新建文件夹"
+    },
+    {
+      "name": "illegal",
+      "value": "不支持特殊字符 .. < > | : \" * ? / . \\"
+    },
+    {
+      "name": "num",
+      "value": "%d 项"
+    },
+    {
+      "name": "select_location",
+      "value": "请选择目标位置"
+    },
+    {
+      "name": "justNow",
+      "value": "刚刚"
+    },
+    {
+      "name": "today",
+      "value": "今天"
+    },
+    {
+      "name": "yesterday",
+      "value": "昨天"
+    },
+    {
+      "name": "selected_none",
+      "value": "未选择"
+    },
+    {
+      "name": "selected_items_singular",
+      "value": "已选择 %d 项"
+    },
+    {
+      "name": "selected_items_plural",
+      "value": "已选择 %d 项"
+    },
+    {
+      "name": "addFolder_fail",
+      "value": "新建文件夹失败"
+    },
+    {
+      "name": "choose_size",
+      "value": "共 %s"
+    },
+    {
+      "name": "selected",
+      "value": "已选择 %d/%d"
+    },
+    {
+      "name": "save_file_fail",
+      "value": "保存失败"
+    },
+    {
+      "name": "input_nothing",
+      "value": "内容为空"
+    },
+    {
+      "name": "input_invalid",
+      "value": "不支持 \" \\ /： * ? < > |"
+    },
+    {
+      "name": "max_input_length",
+      "value": "已达到长度上限"
+    },
+    {
+      "name": "save_file_has_same_file",
+      "value": "已有重名文件"
+    },
+    {
+      "name": "permission_storage_reason_tips",
+      "value": "用于获取和存储照片、媒体内容和文件"
+    }
+  ]
+}

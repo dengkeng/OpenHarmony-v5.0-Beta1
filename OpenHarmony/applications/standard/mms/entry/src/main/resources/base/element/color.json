@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "sender_bubble",
+      "value": "#3300CB87"
+    },
+    {
+      "name": "detail_main_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "ic_user_head_color",
+      "value": "#99007dff"
+    },
+    {
+      "name": "light_background_color",
+      "value": "#19000000"
+    }
+  ]
+}

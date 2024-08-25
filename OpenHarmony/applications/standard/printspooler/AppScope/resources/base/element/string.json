@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "打印"
+    },
+    {
+      "name": "privacy_statement_web_base_url",
+      "value": "https://legal.cloud.huawei.com.cn/terms/scope/huawei/hw-print-spooler/privacy-statement.htm?code=cn&branchid=0&version=20230512&subVersion=0&contenttag=default&language="
+    }
+  ]
+}

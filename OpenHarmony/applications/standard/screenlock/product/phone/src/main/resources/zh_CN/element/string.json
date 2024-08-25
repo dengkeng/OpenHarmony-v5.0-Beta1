@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "ScreenLock"
+    },
+    {
+      "name": "description_mainability",
+      "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "input",
+      "value": "输入密码"
+    }
+  ]
+}

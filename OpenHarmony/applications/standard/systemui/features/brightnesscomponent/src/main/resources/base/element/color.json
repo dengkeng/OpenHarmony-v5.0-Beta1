@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "brightness_slider_block_color",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "brightness_slider_track_color",
+      "value": "#1A000000"
+    },
+    {
+      "name": "brightness_slider_selected_color",
+      "value": "#FF007DFF"
+    }
+  ]
+}

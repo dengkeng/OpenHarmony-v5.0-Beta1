@@ -1,0 +1,75 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntry": "./ets/application/PickerAbilityStage.ets",
+    "description": "$string:module_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "srcEntry": "./ets/entryability/MainAbility.ts",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:app_icon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "actions": [
+              "ohos.want.action.OPEN_FILE",
+              "ohos.want.action.CREATE_FILE"
+            ]
+          }
+        ]
+      }
+    ],
+    requestPermissions: [
+      // 媒体库管理权限
+      {
+        name: "ohos.permission.MEDIA_LOCATION",
+        "reason": "$string:permission_storage_reason_tips",
+        usedScene: {
+          "when": "always",
+          "abilities": ['MainAbility']
+        }
+      },
+      {
+        name: "ohos.permission.READ_MEDIA",
+        "reason": "$string:permission_storage_reason_tips",
+        usedScene: {
+          "when": "always",
+          "abilities": ['MainAbility']
+        }
+      },
+      {
+        name: "ohos.permission.WRITE_MEDIA",
+        "reason": "$string:permission_storage_reason_tips",
+        usedScene: {
+          "when": "always",
+          "abilities": ['MainAbility']
+        }
+      },
+      // 文件管理权限
+      {
+        name: "ohos.permission.FILE_ACCESS_MANAGER"
+      },
+      // 应用程序包管理权限
+      {
+        name: 'ohos.permission.GET_BUNDLE_INFO_PRIVILEGED'
+      },
+      // 公共目录uri代理授权的权限
+      {
+        "name": "ohos.permission.PROXY_AUTHORIZATION_URI"
+      }
+    ]
+  }
+}

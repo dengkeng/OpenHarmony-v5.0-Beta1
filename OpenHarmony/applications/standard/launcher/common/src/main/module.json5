@@ -1,0 +1,10 @@
+ {
+  "module": {
+    "name": "launcher_common",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

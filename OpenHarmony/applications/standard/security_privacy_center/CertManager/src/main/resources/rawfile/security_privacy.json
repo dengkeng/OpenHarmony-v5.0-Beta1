@@ -1,0 +1,7 @@
+{
+  "displayedMode": "list",
+  "mainTitleResource": "$string:certificateTab",
+  "dstAbilityMode": 1,
+  "dstAbilityName": "MainExtensionAbility",
+  "dstBundleName": "com.ohos.certmanager"
+}

@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "dialer_shadow_color",
+      "value": "#D8D8D8"
+    },
+    {
+      "name": "detail_main_background",
+      "value": "#F1F3F5"
+    }
+  ]
+}

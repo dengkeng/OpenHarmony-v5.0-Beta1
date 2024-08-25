@@ -1,0 +1,487 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Entry to the privacy module"
+    }
+  ,{
+      "name": "EntryAbility_desc",
+      "value": "Privacy home page"
+    },{
+      "name": "EntryAbility_label",
+      "value": "Privacy"
+    },
+    {
+      "name": "button_go",
+      "value": "Go set"
+    },
+    {
+      "name": "button_ignore",
+      "value": "Ignore"
+    },
+    {
+      "name": "category_title_lock_screen_password",
+      "value": "Lock screen password"
+    },
+    {
+      "name": "category_desc_lock_screen_password",
+      "value": "Set a lock screen password to protect your device from unauthorized access"
+    },
+    {
+      "name": "operation_froup_location",
+      "value": "Location"
+    },
+    {
+      "name": "operation_group_camera",
+      "value": "Camera"
+    },
+    {
+      "name": "operation_group_microphone",
+      "value": "Microphone"
+    },
+    {
+      "name": "operation_group_image_and_videos",
+      "value": "Images & videos"
+    },
+    {
+      "name": "operation_group_contacts",
+      "value": "Contacts"
+    },
+    {
+      "name": "operation_group_application_tracing",
+      "value": "Tracking"
+    },
+    {
+      "name": "operation_group_clipboard",
+      "value": "Clipboard"
+    },
+    {
+      "name": "operation_group_document",
+      "value": "Files"
+    },
+    {
+      "name": "operation_group_music_and_audio",
+      "value": "Music & audio"
+    },
+    {
+      "name": "operation_group_health_and_fitness",
+      "value": "Physical activity"
+    },
+    {
+      "name": "operation_group_calendar",
+      "value": "Calendar"
+    },
+    {
+      "name": "operation_group_more_permission",
+      "value": "More permission"
+    },
+    {
+      "name": "total_times_in_last_three_days",
+      "value": "Access in last %d days"
+    },
+    {
+      "name": "other",
+      "value": "Other"
+    },
+    {
+      "name": "privacy_permission",
+      "value": "Permissions"
+    },
+    {
+      "name": "data_and_privacy",
+      "value": "Data & privacy"
+    },
+    {
+      "name": "permission_more",
+      "value": "Show more"
+    },
+    {
+      "name": "permission_collapse",
+      "value": "Show less"
+    },
+    {
+      "name": "permission_by_default",
+      "value": "Default"
+    },
+    {
+      "name": "allow",
+      "value": "Allow"
+    },
+    {
+      "name": "media_only",
+      "value": "Media only"
+    },
+    {
+      "name": "allow_management_of_all_files",
+      "value": "All files"
+    },
+    {
+      "name": "precise_location",
+      "value": "Precise location"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "Search apps"
+    },
+    {
+      "name": "today",
+      "value": "Today"
+    },
+    {
+      "name": "yesterday",
+      "value": "Yesterday"
+    },
+    {
+      "name": "allow_all_the_time",
+      "value": "Allow all the time"
+    },
+    {
+      "name": "allow_only_while_in_use",
+      "value": "Allow only while using the app"
+    },
+    {
+      "name": "ask_each_time",
+      "value": "Ask each time"
+    },
+    {
+      "name": "deny",
+      "value": "Deny"
+    },
+    {
+      "name": "allow_state",
+      "value": "Allowed"
+    },
+    {
+      "name": "app_version_name",
+      "value": "Version %s"
+    },
+    {
+      "name": "allow_all_the_time_state",
+      "value": "All the time"
+    },
+    {
+      "name": "allow_only_while_in_use_state",
+      "value": "While in use"
+    },
+    {
+      "name": "ask_each_time_state",
+      "value": "Ask each time"
+    },
+    {
+      "name": "deny_state",
+      "value": "Denied"
+    },
+    {
+      "name": "access_permission",
+      "value": "Location Services"
+    },
+    {
+      "name": "view_ad_logo",
+      "value": "View OAID"
+    },
+    {
+      "name": "operation_group_application_tracing_desc",
+      "value": "Your Open Anonymous Device Identifier (OAID) is a non-permanent device identifier that allows app developers to track your activity and serve personalized content,without revealing your personal data"
+    },
+    {
+      "name": "privacy_introduction",
+      "value": "Huawei values your privacy. our products are designed to use and upload as little user data as possible - and only when necessary.\n\nwe respect both your right to know and your right to control how your date is used."
+    },
+    {
+      "name": "use_privacy",
+      "value": "How we use your data"
+    },
+    {
+      "name": "privacy_item1",
+      "value": "Our privacy commitment"
+    },
+    {
+      "name": "privacy_protect_proposition_uri",
+      "value": "https://consumer.huawei.com/cn/privacy"
+    },
+    {
+      "name": "privacy_item2",
+      "value": "Huawei Consumer Business Privacy Statement"
+    },
+    {
+      "name": "consumer_business_privacy_statement_uri",
+      "value": "https://consumer.huawei.com/cn/privacy/privacy-policy/"
+    },
+    {
+      "name": "privacy_item3",
+      "value": "Use of cookies"
+    },
+    {
+      "name": "cookies_policy_uri",
+      "value": "https://consumer.huawei.com/cn/legal/cookie-policy"
+    },
+    {
+      "name": "privacy_item4",
+      "value": "Privacy & security certifications"
+    },
+    {
+      "name": "privacy_and_security_certification_uri",
+      "value": "https://consumer.huawei.com/cn/privacy/certification"
+    },
+    {
+      "name": "more_privacy",
+      "value": "More about privacy protection"
+    },
+    {
+      "name": "more_privacy_protection_information_uri",
+      "value": "https://privacy.consumer.huawei.com/tool?lang-cn&themeName=blue"
+    },
+    {
+      "name": "app_state_foreground",
+      "value": "foreground"
+    },
+    {
+      "name": "app_state_background",
+      "value": "background"
+    },
+    {
+      "name": "app_state_screen_locked",
+      "value": "screen locked"
+    },
+    {
+      "name": "app_state_common",
+      "value": "common"
+    },
+    {
+      "name": "precise_location_description",
+      "value": "Allow this app to access your precise location. When disabled,this app can only access your approximate location."
+    },
+    {
+      "name": "system_services",
+      "value": "System services"
+    },
+    {
+      "name": "Improves_accuracy",
+      "value": "here"
+    },
+    {
+      "name": "make_location_more_accurate_desc",
+      "value": "To improve location accuracy, touch %s."
+    },
+    {
+      "name": "permission_group_storage",
+      "value": "Media and files"
+    },
+    {
+      "name": "permission_group_phone",
+      "value": "Phone"
+    },
+    {
+      "name": "permission_group_sms",
+      "value": "Messaging"
+    },
+    {
+      "name": "permission_group_sensors",
+      "value": "Body sensors"
+    },
+    {
+      "name": "permission_group_call_log",
+      "value": "Caii logs"
+    },
+    {
+      "name": "permission_group_nearby_devices",
+      "value": "Nearby devices"
+    },
+    {
+      "name": "permission_group_request_install_packages",
+      "value": "In-app installations"
+    },
+    {
+      "name": "permission_group_shortcut",
+      "value": "Create home screen shortcuts"
+    },
+    {
+      "name": "permission_group_system_alert_window",
+      "value": "Dropzone"
+    },
+    {
+      "name": "permission_group_get_install_apps",
+      "value": "App list"
+    },
+    {
+      "name": "permission_group_popup_background_window",
+      "value": "Background pop-ups"
+    },
+    {
+      "name": "permission_group_distribution",
+      "value": "Multi-device collaboration"
+    },
+    {
+      "name": "no_access_records_in_the_last_seven_days",
+      "value": "No access records for the last %d days"
+    },
+    {
+      "name": "search_item_permission",
+      "value": "Permission manager"
+    },
+    {
+      "name": "no_matching_results",
+      "value": "No results"
+    },
+    {
+      "name": "forbidden_description_location",
+      "value": "Location Services is disabled.No apps can access your location."
+    },
+    {
+      "name": "precise_location_app_description",
+      "value": "Allow this app to access your precise location. When disabled, this app can only access your approximate location.Some apps that don't support this feature may fall to get any location "
+    },
+    {
+      "name": "barchart_no_access_record",
+      "value": "No records"
+    },
+    {
+      "name": "loading",
+      "value": "Loading-"
+    },
+    {
+      "name": "total_times_in_last_seven_days",
+      "value": "Accessed %3$s by %2$s in the %1$s days"
+    },
+    {
+      "name": "location_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "camera_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "microphone_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "image_and_videos_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "contacts_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "application_tracing_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "clipboard_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "document_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "music_and_audio_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "health_and_fitness_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "calendar_access_record_title",
+      "value": "Permission history"
+    },
+    {
+      "name": "location_portrait_permission_title",
+      "value": "Location Permission"
+    },
+    {
+      "name": "camera_portrait_permission_title",
+      "value": "Camera Permission"
+    },
+    {
+      "name": "microphone_portrait_permission_title",
+      "value": "Microphone Permission"
+    },
+    {
+      "name": "image_and_videos_portrait_permission_title",
+      "value": "Image & videos Permission"
+    },
+    {
+      "name": "contacts_portrait_permission_title",
+      "value": "Contacts Permission"
+    },
+    {
+      "name": "application_tracing_portrait_permission_title",
+      "value": "App tracking Permission"
+    },
+    {
+      "name": "clipboard_portrait_permission_title",
+      "value": "Clipboard Permission"
+    },
+    {
+      "name": "document_portrait_permission_title",
+      "value": "Files Permission"
+    },
+    {
+      "name": "music_and_audio_portrait_permission_title",
+      "value": "Music & audio Permission"
+    },
+    {
+      "name": "health_and_fitness_portrait_permission_title",
+      "value": "Physical activity permission"
+    },
+    {
+      "name": "calendar_portrait_permission_title",
+      "value": "Calendar Permission"
+    },
+    {
+      "name": "location_portrait_permission_subtitle",
+      "value": "Location access for this app"
+    },
+    {
+      "name": "camera_portrait_permission_subtitle",
+      "value": "Camera permission"
+    },
+    {
+      "name": "microphone_portrait_permission_subtitle",
+      "value": "Microphone access for this app"
+    },
+    {
+      "name": "image_and_videos_portrait_permission_subtitle",
+      "value": "Image & videos access for this app"
+    },
+    {
+      "name": "contacts_portrait_permission_subtitle",
+      "value": "Contacts access for this app"
+    },
+    {
+      "name": "application_tracing_portrait_permission_subtitle",
+      "value": "App tracking for this app"
+    },
+    {
+      "name": "clipboard_portrait_permission_subtitle",
+      "value": "Clipboard access for this app"
+    },
+    {
+      "name": "document_portrait_permission_subtitle",
+      "value": "Files access for this app"
+    },
+    {
+      "name": "music_and_audio_portrait_permission_subtitle",
+      "value": "Music & audio access for this app"
+    },
+    {
+      "name": "health_and_fitness_portrait_permission_subtitle",
+      "value": "Physical activity access for this app"
+    },
+    {
+      "name": "calendar_portrait_permission_subtitle",
+      "value": "Calendar access for this app"
+    },
+    {
+      "name": "locationServicesTab",
+      "value": "locationServices"
+    },
+    {
+      "name": "positionInformation",
+      "value": "access my location information"
+    }
+  ]
+}

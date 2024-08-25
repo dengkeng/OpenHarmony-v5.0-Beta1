@@ -1,0 +1,37 @@
+{
+  "description": "Configuration for demo Tests",
+  "driver": {
+    "type": "OHJSUnitTest",
+    "test-timeout": "300000",
+    "bundle-name": "com.huawei.hmos.security.privacycenter",
+    "module-name": "entry_test",
+    "shell-timeout": 7000,
+    "testcase-timeout": "esmodule",
+    "coverage": true,
+    "package-tool-path": "D:\\Local\\coverage\\node_module\\@ohos\\coverage"
+  },
+  "kits": [
+    {
+      "run-command": [
+        "mount -o rw,remount /",
+        "rm -rf /system/app/SecurityPrivacyCenter/*",
+        "rm /data/service/el1/public/bms/bundle_manage_service/bmsdb.db",
+        "rm /data/service/el1/public/bms/bundle_manage_service/bmsdb.db-shm",
+        "rm /data/service/el1/public/bms/bundle_manage_service/bmsdb.db-wal",
+        "reboot"
+      ],
+      "teardown-command": [
+        "mount -o rw,remount /"
+      ],
+      "type": "ShellKit"
+    },
+    {
+      "test-file-name": [
+        "SecurityPrivacyCenter.hap",
+        "SecurityPrivacyCenterTest.hap"
+      ],
+      "type": "AppInstallKit",
+      "cleanup-apps": true
+    }
+  ]
+}

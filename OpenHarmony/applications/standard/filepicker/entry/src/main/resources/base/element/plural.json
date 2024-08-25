@@ -1,0 +1,30 @@
+{
+  "plural": [
+    {
+      "name": "minute_ago",
+      "value": [
+        {
+          "quantity": "one",
+          "value": "%d min ago"
+        },
+        {
+          "quantity": "other",
+          "value": "%d min ago"
+        }
+      ]
+    },
+    {
+      "name": "filePickerTip",
+      "value": [
+        {
+          "quantity": "one",
+          "value": "The number of selected files has exceeded the limit of %d. Please select again."
+        },
+        {
+          "quantity": "other",
+          "value": "The number of selected files has exceeded the limit of %d. Please select again."
+        }
+      ]
+    }
+  ]
+}

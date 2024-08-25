@@ -1,0 +1,81 @@
+{
+  "module": {
+    "name": "adminprovisioning",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "description": "$string:description_mainability",
+    "mainElement": "com.ohos.adminprovisioning.MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "uiSyntax": "ets",
+    "abilities": [
+      {
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "removeMissionAfterTerminate": true,
+        "name": "com.ohos.adminprovisioning.MainAbility",
+        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "description": "$string:description_mainability",
+        "icon": "$media:icon",
+        "label": "$string:entry_MainAbility",
+        "visible": false,
+        "launchType": "singleton",
+        "startWindowIcon": "$media:transparent",
+        "startWindowBackground": "$color:color_00000000_transparent"
+      },
+      {
+        "removeMissionAfterTerminate": true,
+        "name": "com.ohos.automanager.AutoManagerAbility",
+        "srcEntrance": "./ets/MainAbility/AutoManagerAbility.ts",
+        "description": "$string:description_mainability",
+        "icon": "$media:icon",
+        "visible": true,
+        "launchType": "singleton",
+        "permissions": ["ohos.permission.PROVISIONING_MESSAGE"],
+        "startWindowIcon": "$media:transparent",
+        "startWindowBackground": "$color:color_00000000_transparent"
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "MDMUIExtensionAbility",
+        "icon": "$media:icon",
+        "description": "UIExtensionAbility",
+        "exported": false,
+        "type": "ui",
+        "srcEntrance": "./ets/MainAbility/UIExtensionAbility.ets"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.MANAGE_LOCAL_ACCOUNTS"
+      },
+      {
+        "name": "ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.MANAGE_ENTERPRISE_DEVICE_ADMIN"
+      },
+      {
+        "name": "ohos.permission.FACTORY_RESET"
+      },
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ]
+  }
+}

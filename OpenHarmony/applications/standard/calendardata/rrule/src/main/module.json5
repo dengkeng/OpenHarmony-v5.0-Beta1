@@ -1,0 +1,11 @@
+{
+    "module": {
+        "name": "rrule",
+        "type": "har",
+        "deviceTypes": [
+            "default",
+            "tablet"
+        ],
+        "installationFree": false,
+    }
+}

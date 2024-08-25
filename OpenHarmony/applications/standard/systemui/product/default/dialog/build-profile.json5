@@ -1,0 +1,12 @@
+{
+  "entryModules": [
+    "phone_entry",
+    "pc_entry"
+  ],
+  "apiType": 'stageMode',
+  "targets": [
+    {
+      "name": "default",
+    }
+  ]
+}

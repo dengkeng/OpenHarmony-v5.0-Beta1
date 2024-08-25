@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "settings_MainAbility",
+      "value": "settings_MainAbility"
+    },
+    {
+      "name": "mainability_description",
+      "value": "ETS_Empty Feature Ability"
+    },
+    {
+      "name": "into_settings",
+      "value": "桌面设置"
+    },
+    {
+      "name": "layout",
+      "value": "布局"
+    },
+    {
+      "name": "layout_style",
+      "value": "布局样式"
+    },
+    {
+      "name": "launcher_layout",
+      "value": "桌面布局"
+    },
+    {
+      "name": "recent_tasks_setting",
+      "value": "最近任务数"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "gesture_navigation_options",
+      "value": "手势导航开关"
+    }
+  ]
+}

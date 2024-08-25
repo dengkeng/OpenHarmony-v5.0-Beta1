@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "截屏"
+    },
+    {
+      "name": "description_mainability",
+      "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "button_name",
+      "value": "查 看"
+    },
+    {
+      "name": "media_location_reason",
+      "value": "Screenshot apps need to read media location information"
+    },
+    {
+      "name": "read_media_reason",
+      "value": "Screenshot apps need to read media files"
+    },
+    {
+      "name": "write_media_reason",
+      "value": "Screenshot apps need to write media files"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "divider_gray",
+      "value": "#1A000000"
+    },
+    {
+      "name": "divider_calllist",
+      "value": "#14FFFFFF"
+    },
+    {
+      "name": "button_active",
+      "value": "#007DFF"
+    }
+  ]
+}

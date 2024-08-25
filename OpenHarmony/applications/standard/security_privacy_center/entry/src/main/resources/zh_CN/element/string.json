@@ -1,0 +1,486 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "隐私模块入口"
+    }
+  ,{
+      "name": "EntryAbility_desc",
+      "value": "隐私主页面"
+    },{
+      "name": "EntryAbility_label",
+      "value": "隐私"
+    },
+    {
+      "name": "button_go",
+      "value": "前往"
+    },
+    {
+      "name": "button_ignore",
+      "value": "忽略"
+    },
+    {
+      "name": "category_title_lock_screen_password",
+      "value": "锁屏密码"
+    },
+    {
+      "name": "category_desc_lock_screen_password",
+      "value": "建议设置锁屏密码，以保护您的数据和财产安全。"
+    },
+    {
+      "name": "operation_froup_location",
+      "value": "位置信息"
+    },
+    {
+      "name": "operation_group_camera",
+      "value": "相机"
+    },
+    {
+      "name": "operation_group_microphone",
+      "value": "麦克风"
+    },
+    {
+      "name": "operation_group_image_and_videos",
+      "value": "图片与视频"
+    },
+    {
+      "name": "operation_group_contacts",
+      "value": "通讯录"
+    },
+    {
+      "name": "operation_group_application_tracing",
+      "value": "应用跟踪"
+    },
+    {
+      "name": "operation_group_clipboard",
+      "value": "剪贴板"
+    },
+    {
+      "name": "operation_group_document",
+      "value": "文件"
+    },
+    {
+      "name": "operation_group_music_and_audio",
+      "value": "音乐与音频"
+    },
+    {
+      "name": "operation_group_health_and_fitness",
+      "value": "健身运动"
+    },
+    {
+      "name": "operation_group_calendar",
+      "value": "日历"
+    },
+    {
+      "name": "operation_group_more_permission",
+      "value": "更多权限"
+    },
+    {
+      "name": "total_times_in_last_three_days",
+      "value": "近 %d 天应用访问权限次数"
+    },
+    {
+      "name": "other",
+      "value": "其他"
+    },
+    {
+      "name": "privacy_permission",
+      "value": "隐私权限"
+    },
+    {
+      "name": "data_and_privacy",
+      "value": "数据与隐私"
+    },
+    {
+      "name": "permission_more",
+      "value": "更多"
+    },
+    {
+      "name": "permission_collapse",
+      "value": "收起"
+    },
+    {
+      "name": "permission_by_default",
+      "value": "默认"
+    },
+    {
+      "name": "allow",
+      "value": "允许"
+    },
+    {
+      "name": "media_only",
+      "value": "仅媒体"
+    },
+    {
+      "name": "allow_management_of_all_files",
+      "value": "所有文件"
+    },
+    {
+      "name": "precise_location",
+      "value": "精确位置"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "搜索应用"
+    },
+    {
+      "name": "today",
+      "value": "今天"
+    },
+    {
+      "name": "yesterday",
+      "value": "昨天"
+    },
+    {
+      "name": "allow_all_the_time",
+      "value": "始终允许"
+    },
+    {
+      "name": "allow_only_while_in_use",
+      "value": "仅使用期间允许"
+    },
+    {
+      "name": "ask_each_time",
+      "value": "每次使用询问"
+    },
+    {
+      "name": "deny",
+      "value": "禁止"
+    },
+    {
+      "name": "allow_state",
+      "value": "允许"
+    },
+    {
+      "name": "app_version_name",
+      "value": "版本 %s"
+    },
+    {
+      "name": "allow_all_the_time_state",
+      "value": "始终允许"
+    }, {
+      "name": "allow_only_while_in_use_state",
+      "value": "仅使用期间允许"
+    },
+    {
+      "name": "ask_each_time_state",
+      "value": "每次使用询问"
+    },
+    {
+      "name": "deny_state",
+      "value": "禁止"
+    },
+    {
+      "name": "access_permission",
+      "value": "访问我的位置信息"
+    },
+    {
+      "name": "view_ad_logo",
+      "value": "查看 OAID"
+    },
+    {
+      "name": "operation_group_application_tracing_desc",
+      "value": "开放匿名广告标识符（Open Anonymous Device Identifier,OAID）是一种非永久性设备标识符。使用OAID保护用户个人数据隐私安全的前提下提供给App开发者用于设备识别、跨设备跟踪、提供个性化广告或内容推荐。"
+    },
+    {
+      "name": "privacy_introduction",
+      "value": "华为讲隐私视作每个人的基本权利，所有华为产品力求使用最少得用户数据，尽可能采用本地处理，富裕用户对信息的知情权和控制权。"
+    },
+    {
+      "name": "use_privacy",
+      "value": "了解我们如何使用您的数据"
+    },
+    {
+      "name": "privacy_item1",
+      "value": "我们隐私保护的主张和承诺"
+    },
+    {
+      "name": "privacy_protect_proposition_uri",
+      "value": "https://consumer.huawei.com/cn/privacy"
+    },
+    {
+      "name": "privacy_item2",
+      "value": "华为消费者业务隐私声明"
+    },
+    {
+      "name": "consumer_business_privacy_statement_uri",
+      "value": "https://consumer.huawei.com/cn/privacy/privacy-policy"
+    },
+    {
+      "name": "privacy_item3",
+      "value": "Cookies 政策"
+    },
+    {
+      "name": "cookies_policy_uri",
+      "value": "https://consumer.huawei.com/cn/legal/cookie-pilicy"
+    },
+    {
+      "name": "privacy_item4",
+      "value": "我们获得的隐私安全认证"
+    },
+    {
+      "name": "privacy_and_security_certification_uri",
+      "value": "https://consumer.huawei.com/cn/privacy/certification"
+    },
+    {
+      "name": "more_privacy",
+      "value": "了解更多隐私保护信息"
+    },
+    {
+      "name": "more_privacy_protection_information_uri",
+      "value": "https://privacy.consumer.huawei.com/tool?lang=zh-cn&themeName=blue"
+    },
+    {
+      "name": "app_state_foreground",
+      "value": "前台"
+    },
+    {
+      "name": "app_state_background",
+      "value": "后台"
+    },
+    {
+      "name": "app_state_screen_locked",
+      "value": "锁屏"
+    },
+    {
+      "name": "app_state_common",
+      "value": "普通"
+    },
+    {
+      "name": "precise_location_description",
+      "value": "允许应用获取您的准确位置信息。关闭后，应用获取的位置信息会有偏差"
+    },
+    {
+      "name": "system_services",
+      "value": "系统服务"
+    },
+    {
+      "name": "Improves_accuracy",
+      "value": "提高精确度"
+    },
+    {
+      "name": "make_location_more_accurate_desc",
+      "value": "为了位置服务更准确， 您可以设置%s。"
+    },
+    {
+      "name": "permission_group_storage",
+      "value": "媒体和文件"
+    },
+    {
+      "name": "permission_group_phone",
+      "value": "电话"
+    },
+    {
+      "name": "permission_group_sms",
+      "value": "信息"
+    },
+    {
+      "name": "permission_group_call_log",
+      "value": "通话记录"
+    },
+    {
+      "name": "permission_group_sensors",
+      "value": "身体传感器"
+    },
+    {
+      "name": "permission_group_nearby_devices",
+      "value": "附近设备"
+    },
+    {
+      "name": "permission_group_request_install_packages",
+      "value": "应用内安装其他应用"
+    },
+    {
+      "name": "permission_group_shortcut",
+      "value": "创建桌面快捷方式"
+    },
+    {
+      "name": "permission_group_system_alert_window",
+      "value": "悬浮窗"
+    },
+    {
+      "name": "permission_group_get_install_apps",
+      "value": "读取已安装应用列表"
+    },
+    {
+      "name": "permission_group_popup_background_window",
+      "value": "后台弹窗"
+    },
+    {
+      "name": "permission_group_distribution",
+      "value": "多设备协同"
+    },
+    {
+      "name": "no_access_records_in_the_last_seven_days",
+      "value": "近 %d 天没有访问记录"
+    },
+    {
+      "name": "search_item_permission",
+      "value": "权限管理"
+    },
+    {
+      "name": "no_matching_results",
+      "value": "没有匹配结果"
+    },
+    {
+      "name": "forbidden_description_location",
+      "value": "位置信息已关闭，当前没有应用可以获取此设备的位置。"
+    },
+    {
+      "name": "precise_location_app_description",
+      "value": "允许此应用获取您的精确位置。关闭后，应用获取的位置会有偏差，部分不支持次功能的应用可能会定位失败。"
+    },
+    {
+      "name": "barchart_no_access_record",
+      "value": "暂未发现该权限使用记录"
+    },
+    {
+      "name": "loading",
+      "value": "正在加载..."
+    },
+    {
+      "name": "total_times_in_last_seven_days",
+      "value": "近 %1$d 天，%2$s共访问 %3$s "
+    },
+    {
+      "name": "location_access_record_title",
+      "value": "位置访问记录"
+    },
+    {
+      "name": "camera_access_record_title",
+      "value": "相机访问记录"
+    },
+    {
+      "name": "microphone_access_record_title",
+      "value": "麦克风访问记录"
+    },
+    {
+      "name": "image_and_videos_access_record_title",
+      "value": "图片与视频访问记录"
+    },
+    {
+      "name": "contacts_access_record_title",
+      "value": "通讯录访问记录"
+    },
+    {
+      "name": "application_tracing_access_record_title",
+      "value": "应用跟踪访问记录"
+    },
+    {
+      "name": "clipboard_access_record_title",
+      "value": "剪贴板访问记录"
+    },
+    {
+      "name": "document_access_record_title",
+      "value": "文件访问记录"
+    },
+    {
+      "name": "music_and_audio_access_record_title",
+      "value": "音乐与音频访问记录"
+    },
+    {
+      "name": "health_and_fitness_access_record_title",
+      "value": "健身运动访问记录"
+    },
+    {
+      "name": "calendar_access_record_title",
+      "value": "日历访问记录"
+    },
+    {
+      "name": "location_portrait_permission_title",
+      "value": "位置信息权限"
+    },
+    {
+      "name": "camera_portrait_permission_title",
+      "value": "相机权限"
+    },
+    {
+      "name": "microphone_portrait_permission_title",
+      "value": "麦克风权限"
+    },
+    {
+      "name": "image_and_videos_portrait_permission_title",
+      "value": "图片与视频权限"
+    },
+    {
+      "name": "contacts_portrait_permission_title",
+      "value": "通讯录权限"
+    },
+    {
+      "name": "application_tracing_portrait_permission_title",
+      "value": "应用跟踪权限"
+    },
+    {
+      "name": "clipboard_portrait_permission_title",
+      "value": "剪贴板权限"
+    },
+    {
+      "name": "document_portrait_permission_title",
+      "value": "文件权限"
+    },
+    {
+      "name": "music_and_audio_portrait_permission_title",
+      "value": "音乐与音频权限"
+    },
+    {
+      "name": "health_and_fitness_portrait_permission_title",
+      "value": "健身运动权限"
+    },
+    {
+      "name": "calendar_portrait_permission_title",
+      "value": "日历权限"
+    },
+    {
+      "name": "location_portrait_permission_subtitle",
+      "value": "位置信息访问权限"
+    },
+    {
+      "name": "camera_portrait_permission_subtitle",
+      "value": "相机访问权限"
+    },
+    {
+      "name": "microphone_portrait_permission_subtitle",
+      "value": "麦克风访问权限"
+    },
+    {
+      "name": "image_and_videos_portrait_permission_subtitle",
+      "value": "图片与视频访问权限"
+    },
+    {
+      "name": "contacts_portrait_permission_subtitle",
+      "value": "通讯录访问权限"
+    },
+    {
+      "name": "application_tracing_portrait_permission_subtitle",
+      "value": "应用跟踪访问权限"
+    },
+    {
+      "name": "clipboard_portrait_permission_subtitle",
+      "value": "剪切板访问权限"
+    },
+    {
+      "name": "document_portrait_permission_subtitle",
+      "value": "文件访问权限"
+    },
+    {
+      "name": "music_and_audio_portrait_permission_subtitle",
+      "value": "音乐与音频访问权限"
+    },
+    {
+      "name": "health_and_fitness_portrait_permission_subtitle",
+      "value": "健身运动权限"
+    },
+    {
+      "name": "calendar_portrait_permission_subtitle",
+      "value": "日历访问权限"
+    },
+    {
+      "name": "locationServicesTab",
+      "value": "定位服务"
+    },
+    {
+      "name": "positionInformation",
+      "value": "访问我的位置信息"
+    }
+  ]
+}

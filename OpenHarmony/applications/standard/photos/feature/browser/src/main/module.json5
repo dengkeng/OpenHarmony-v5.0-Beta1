@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "photos_browser",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+  }
+}

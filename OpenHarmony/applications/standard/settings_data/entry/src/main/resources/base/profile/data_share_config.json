@@ -1,0 +1,15 @@
+{
+    "tableConfig": [
+      {
+        "uri": "*"
+      },
+      {
+        "uri": "datashare:///com.ohos.settingsdata/entry/settingsdata/SETTINGSDATA",
+        "crossUserMode": 1
+      },
+      {
+        "uri": "datashare:///com.ohos.settingsdata/entry/settingsdata/USER_SETTINGSDATA",
+        "crossUserMode": 2
+      }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/alert",
+    "pages/encryptionProtection",
+    "pages/encryptionSuccess",
+    "pages/changeEncryption",
+    "pages/permissionStatus"
+  ]
+}

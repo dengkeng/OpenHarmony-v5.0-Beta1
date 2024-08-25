@@ -1,0 +1,216 @@
+{
+  "color": [
+    {
+      "name": "color_ffffff",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "color_fffffB",
+      "value": "#ffffff"
+    },
+    {
+      "name": "delete_color_fa2a2d",
+      "value": "#fa2a2d"
+    },
+    {
+      "name": "cancel_color_4fb4e3",
+      "value": "#4fb4e3"
+    },
+    {
+      "name": "divider_color_e4e4e4",
+      "value": "#cce4e4e4"
+    },
+    {
+      "name": "divider_color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "button_color_419fff",
+      "value": "#419fff"
+    },
+    {
+      "name": "button_color_fb4447",
+      "value": "#fb4447"
+    },
+    {
+      "name": "text_color_3f97e9",
+      "value": "#3f97e9"
+    },
+    {
+      "name": "text_color_f86d05",
+      "value": "#f86d05"
+    },
+    {
+      "name": "folder_color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "folder_color_99182431",
+      "value": "#99182431"
+    },
+    {
+      "name": "folder_color_f86d05",
+      "value": "#f86d05"
+    },
+    {
+      "name": "folder_color_ffffff",
+      "value": "#ffffff"
+    },
+    {
+      "name": "folder_color_19ffffff",
+      "value": "#19ffffff"
+    },
+    {
+      "name": "folder_color_d6d6d6",
+      "value": "#d6d6d6"
+    },
+    {
+      "name": "folder_color_19182431",
+      "value": "#19182431"
+    },
+    {
+      "name": "notecontent_color_ffffff",
+      "value": "#ffffff"
+    },
+    {
+      "name": "notecontent_color_000000",
+      "value": "#000000"
+    },
+    {
+      "name": "folderlist_bgcolor_f1f3f5",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "search_longpress_bgcolor_f7f8f9",
+      "value": "#f7f8f9"
+    },
+    {
+      "name": "notelist_bgcolor_f1f3f5",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "notelist_bgcolor_000000",
+      "value": "#000000"
+    },
+    {
+      "name": "image_bordercolor_19182431",
+      "value": "#19182431"
+    },
+    {
+      "name": "button_color_f86d05",
+      "value": "#f86d05"
+    },
+    {
+      "name": "font_stylecolor_AD182431",
+      "value": "#AD182431"
+    },
+    {
+      "name": "New_folder_input_box_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "category_already_exist_font_color",
+      "value": "#FA2A2D"
+    },
+    {
+      "name": "category_already_exist_divider_color",
+      "value": "#FA2A2D"
+    },
+    {
+      "name": "create_folder_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "delete_note_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "choose_folder_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "title_input_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "Edit_title_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "press_folder_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "modified_time_font_color",
+      "value": "#A3A7AD"
+    },
+    {
+      "name": "delete_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "recover_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "list_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "style_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "photo_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "all_notes_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "num_of_notes_font_color",
+      "value": "#A3A7AD"
+    },
+    {
+      "name": "note_selected_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "note_title_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "note_title_font_color_blue",
+      "value": "#0000ff"
+    },
+    {
+      "name": "list_modified_time_font_color",
+      "value": "#99182431"
+    },
+    {
+      "name": "Recently_delete_prompt_font_color",
+      "value": "#99182431"
+    },
+    {
+      "name": "Empty_page_font_color",
+      "value": "#A3A7AD"
+    },
+    {
+      "name": "search_note_caret_color",
+      "value": "#F86D05"
+    },
+    {
+      "name": "set_top_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "move_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "check_all_font_color",
+      "value": "#182431"
+    }
+  ]
+}

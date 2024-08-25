@@ -1,0 +1,114 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntry": "./ets/Application/AbilityStage.ets",
+    "description": "$string:entry_desc",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "metadata": [
+      {
+        "name": "ArkTSPartialUpdate",
+        "value": "true"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "AlertAbility",
+        "srcEntry": "./ets/AlertAbility/AlertAbility.ets",
+        "description": "$string:MainAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:white",
+        "excludeFromMissions": true
+      },
+      {
+        "name": "SaveAsAbility",
+        "srcEntry": "./ets/SaveAsAbility/SaveAsAbility.ets",
+        "description": "$string:MainAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:white"
+      },
+      {
+        "name": "MainAbility",
+        "srcEntry": "./ets/MainAbility/MainAbility.ets",
+        "description": "$string:MainAbility_desc",
+        "icon": "$media:app_icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:white",
+        "orientation": "auto_rotation_restricted",
+        "exported": true,
+        "removeMissionAfterTerminate": true
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "MainAbilityEx",
+        "icon": "$media:icon",
+        "description": "MainAbilityEx",
+        "type": "sys/commonUI",
+        "exported": true,
+        "srcEntry": "./ets/MainAbility/MainAbilityEx.ets",
+        "metadata": [
+          {
+            "name": "ohos.extension.servicetype",
+            "value": "share"
+          }
+        ]
+      },
+      {
+        "name": "ViewAbility",
+        "srcEntry": "./ets/ViewAbility/ViewAbility.ets",
+        "icon": "$media:icon",
+        "description": "$string:ViewAbility_desc",
+        "type": "service",
+        "exported": false
+      },
+      {
+        "name": "DataAbility",
+        "srcEntry": "./ets/DataAbility/DataAbility.ets",
+        "icon": "$media:icon",
+        "description": "$string:ViewAbility_desc",
+        "type": "service"
+      },
+      {
+        "name": "ServiceExtAbility",
+        "srcEntry": "./ets/serviceExtensionAbility/ServiceExtAbility.ets",
+        "icon": "$media:icon",
+        "description": "service",
+        "type": "service",
+        "exported": false
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.ACCESS_DLP_FILE"
+      },
+      {
+        "name": "ohos.permission.MANAGE_LOCAL_ACCOUNTS"
+      },
+      {
+        "name": "ohos.permission.FILE_ACCESS_MANAGER"
+      },
+      {
+        "name": "ohos.permission.START_ABILITIES_FROM_BACKGROUND"
+      },
+      {
+        "name": "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED"
+      },
+      {
+        "name": "ohos.permission.GET_DOMAIN_ACCOUNTS"
+      }
+    ]
+  }
+}

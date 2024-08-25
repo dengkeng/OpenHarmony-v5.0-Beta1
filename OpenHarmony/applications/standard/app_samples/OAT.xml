@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2021 Huawei Device Co., Ltd.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+     Notes:
+     This is project config file for OpenHarmony OSS Audit Tool, if you have any questions or concerns, please email chenyaxun.
+-->
+<!-- OAT(OSS Audit Tool) configuration guide:
+basedir: Root dir, the basedir + project path is the real source file location.
+licensefile:
+1.If the project don't have "LICENSE" in root dir, please define all the license files in this project in , OAT will check license files according to this rule.
+
+tasklist(only for batch mode):
+1. task: Define oat check thread, each task will start a new thread.
+2. task name: Only an name, no practical effect.
+3. task policy: Default policy for projects under this task, this field is required and the specified policy must defined in policylist.
+4. task filter: Default filefilter for projects under this task, this field is required and the specified filefilter must defined in filefilterlist.
+5. task project: Projects to be checked, the path field define the source root dir of the project.
+
+
+policyList:
+1. policy: All policyitems will be merged to default OAT.xml rules, the name of policy doesn't affect OAT check process.
+2. policyitem: The fields type, name, path, desc is required, and the fields rule, group, filefilter is optional,the default value is:
+<policyitem type="" name="" path="" desc="" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter"/>
+3. policyitem type:
+    "compatibility" is used to check license compatibility in the specified path;
+    "license" is used to check source license header in the specified path;
+    "copyright" is used to check source copyright header in the specified path;
+    "import" is used to check source dependency in the specified path, such as import ... ,include ...
+    "filetype" is used to check file type in the specified path, supported file types: archive, binary
+    "filename" is used to check whether the specified file exists in the specified path(support projectroot in default OAT.xml), supported file names: LICENSE, README, README.OpenSource
+
+4. policyitem name: This field is used for define the license, copyright, "*" means match all, the "!" prefix means could not match this value. For example, "!GPL" means can not use GPL license.
+5. policyitem path: This field is used for define the source file scope to apply this policyitem, the "!" prefix means exclude the files. For example, "!.*/lib/.*" means files in lib dir will be exclude while process this policyitem.
+6. policyitem rule and group: These two fields are used together to merge policy results. "may" policyitems in the same group means any one in this group passed, the result will be passed.
+7. policyitem filefilter: Used to bind filefilter which define filter rules.
+8. filefilter: Filter rules, the type filename is used to filter file name, the type filepath is used to filter file path.
+
+Note:If the text contains special characters, please escape them according to the following rules:
+" == &gt;
+& == &gt;
+' == &gt;
+< == &gt;
+> == &gt;
+-->
+<configuration>
+    <oatconfig>
+        <licensefile></licensefile>
+        <policylist>
+            <policy
+                desc=""
+                name="projectPolicy">
+                <policyitem
+                    desc="Developed By OpenValley Digital Co., Ltd."
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="Hunan OpenValley Digital Industry Development Co., Ltd."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>
+            </policy>
+            <policy
+                desc=""
+                name="projectPolicy">
+                <policyitem
+                    desc="Developed By Fujian Newland Auto-ID Tech.Co.,Ltd."
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="Fujian Newland Auto-ID Tech.Co.,Ltd."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>
+            </policy>
+            <policy
+                desc=""
+                name="projectPolicy">
+                <policyitem
+                    desc="Developed By Shenzhen Kaihong Digital Industry Development Co., Ltd."
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="Shenzhen Kaihong Digital Industry Development Co., Ltd."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>
+            </policy>
+			<policy name="projectPolicy" desc="">
+                <policyitem type="copyright" name="Shenzhen Kaihong Digital Industry Development Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By shenzhen Kaihong Digital Industry Development Co., Ltd."/>
+            </policy>
+        </policylist>
+        <filefilterlist>
+            <filefilter name="licenseFileNamePolicyFilter" desc="Filters for LICENSE file policies">
+                <filteritem type="filepath" name="network/Bluetooth/entry/src/main/java/ohos/samples/bluetooth/adapter/" desc="Not contains 3rd code，license file is not required in this subdirectory."/>
+            </filefilter>
+            <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies" >
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/AppScope/resources/base/media/app_icon.png" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/AppScope/resources/base/media/forward.png" desc="Provided by the UX team."/>
+		        <filteritem type="filepath" name="code/BasicFeature/Security/Asset/AppScope/resources/base/media/back.png" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/update_edit.jpeg" desc="screenshot"/>
+		        <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/single_query_result.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/update_list.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/delete.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/save.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/batch_query_result.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="code/BasicFeature/Security/Asset/screenshots/query.jpeg" desc="screenshot"/>
+                <filteritem type="filepath" name="ability/DistributedMusicPlayer/entry/src/main/resources/rawfile/Homey.mp3" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="ability/DistributedMusicPlayer/entry/src/main/resources/rawfile/Technology.mp3" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="UI/JsAnimation/entry/src/main/js/default/common/animator/show.mp4" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="UI/JsAnimation/entry/src/main/js/default/common/animator/butterfly.mp4" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="UI/JsShopping/entry/src/main/js/default/common/detailImg/swiperImg/swiper.mp4" desc="Provided by the UX team."/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-enter-animation-1.0.1.tgz" desc="Provided by ETSUI/TransitionAnimation"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-http-1.0.0.tgz" desc="Provided by Network/Http"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="Provided by Notification/CustomNotification"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-feature-qr-code-scan-1.0.0.tgz" desc="Provided by media/QRCodeScan"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-sharecomponent-1.0.1.tgz" desc="Provided by Share/Share"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-updatedialog-1.0.0.tgz" desc="Provided by ETSUI/UpgradePopup"/>
+                <filteritem type="filepath" name="ETSUI/OrangeShopping/libs/ohos-video-component-1.0.4.tgz" desc="Provided by media/VideoShow"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="Provided by Notification/CustomEmitter"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-enter-animation-1.0.1.tgz" desc="Provided by ETSUI/TransitionAnimation"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-http-1.0.0.tgz" desc="Provided by Network/Http"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="Provided by Notification/CustomNotification"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-feature-qr-code-scan-1.0.0.tgz" desc="Provided by media/QRCodeScan"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-sharecomponent-1.0.1.tgz" desc="Provided by Share/Share"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-updatedialog-1.0.0.tgz" desc="Provided by ETSUI/UpgradePopup"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-video-component-1.0.5.tgz" desc="Provided by media/VideoShow"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="Provided by Notification/CustomEmitter"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/VideoPlayer.tgz" desc="Provided by code/Solutions/Media/MultiMedia"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/CameraPage-1.0.0.tgz" desc="Provided by code/Solutions/Media/MultiMedia"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/AVRecorder/lib/VideoRecorder-1.0.0.tgz" desc="Provided by code/BasicFeature/Media/AVRecorder"/>
+                <filteritem type="filepath" name="code/BasicFeature/FileManagement/FileManager/lib/MyPhoneFilePage-1.0.0.tgz" desc="Provided by code/BasicFeature/FileManagement/FileManager"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/VPN/lib/VPNFoundation-1.0.0.tgz" desc="Provided by code/BasicFeature/Connectivity/VPN"/>
+                <filteritem type="filepath" name="code/UI/ArkTsComponentCollection/ComponentCollection/lib/DragEvent-1.0.0.tgz" desc="Provided by code/UI/ArkTsComponentCollection/ComponentCollection"/>
+                <filteritem type="filepath" name="code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary/lib/ProcessMessage-1.0.0.tgz" desc="Provided by code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary"/>
+                <filteritem type="filepath" name="code/BasicFeature/Notification/CustomCommonEvent/lib/CardEvent-1.0.0.tgz" desc="Provided by code/BasicFeature/Notification/CustomCommonEvent"/>
+                <filteritem type="filepath" name="code/BasicFeature/Ads/OAIDSample/lib/ResetOAID-1.0.0.tgz" desc="Provided by code/BasicFeature/Ads/OAIDSample"/>
+                <filteritem type="filepath" name="code/Solutions/Tools/FlipClock/lib/Brightness-1.0.0.tgz" desc="Provided by code/Solutions/Tools/FlipClock"/>
+                <filteritem type="filepath" name="code/DataMock/QuickFix/entry-signed-release.hqf" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/ASOrangeShopping/data/freeinstall/famanager.hap" desc="Provided by BMS"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/ASOrangeShopping/data/freeinstall/launcher.hap" desc="Provided by  code/SystemFeature/ApplicationModels/Launcher"/>
+                <filteritem type="filepath" name="code/DataMock/WorkScheduler/UpdateWorkScheduler.hap" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/OpenHarmony.p12" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/OpenHarmonyApplication.pem" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/OpenHarmonyProfileRelease.pem" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/OpenHarmonyProfileDebug.pem" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/app_packing_tool.jar" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/signTool/hap-sign-tool.jar" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/signature/material/OpenHarmony.p12" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/signature/material/OpenHarmonyApplication.pem" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+                <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/signature/material/hap-sign-tool.jar" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/UploadAndDownLoad/environment/hfs.exe" desc="Provided by hfs"/>
+                <filteritem type="filepath" name="code/BasicFeature/DeviceManagement/Vibrator/CustomHaptic/libs/library.har" desc="Provided by code/BasicFeature/DeviceManagement/Vibrator"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-qr-code-scan-1.0.2.har" desc="Provided by media/QRCodeScan"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-sharecomponent-1.0.2.har" desc="Provided by code/BasicFeature/ApplicationModels/CustomShare"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-video-component-1.0.6.har" desc="Provided by media/VideoShow"/>
+                <filteritem type="filepath" name="code/Solutions/IM/Chat/products/phone/entry/src/main/resources/rawfile/video_1.zip" desc="Provided by code/Solutions/IM/Chat"/>
+                <filteritem type="filepath" name="code/Solutions/IM/Chat/products/phone/entry/src/main/resources/rawfile/video_2.zip" desc="Provided by code/Solutions/IM/Chat"/>
+                <filteritem type="filepath" name="code/Solutions/IM/Chat/products/phone/entry/src/main/resources/rawfile/video_3.zip" desc="Provided by code/Solutions/IM/Chat"/>
+                <filteritem type="filepath" name="code/Solutions/IM/Chat/products/phone/entry/src/main/resources/rawfile/video_4.zip" desc="Provided by code/Solutions/IM/Chat"/>
+                <filteritem type="filepath" name="code/SystemFeature/Security/DLP/screenshots/haps/DlpManager.hap" desc="Provided by DlpManager"/>
+                <filteritem type="filepath" name="code/SystemFeature/Security/DLP/screenshots/haps/FileEdit.hap" desc="Provided by FileEdit"/>
+                <filteritem type="filepath" name="code/BasicFeature/DeviceManagement/Sensor/Capi/libs/library.har" desc="Provided by code/BasicFeature/DeviceManagement/Sensor"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/VideoPlayer.hap" desc="Provided by code/Solutions/Media/MultiMedia"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/CameraPage-1.0.0.hap" desc="Provided by code/Solutions/Media/MultiMedia"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/AVRecorder/lib/VideoRecorder-1.0.0.hap" desc="Provided by code/BasicFeature/Media/AVRecorder"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_avatar_radio01.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_avatar_regular.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_popup_right.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/auth3.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_popup_left.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/auth2.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_avatar_radio02.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_camera_line.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/setting.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/main/resources/base/media/pic_camera_mirror.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/preview.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/auth1.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/app_pic/auth4.jpg" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/Camera_js/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Media/Camera_js"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/filter_details.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/brightness_efilter.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/filters_info.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/image_show.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/contrast_efilter.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/filter_chains.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/entry/src/main/resources/base/media/startIcon.png" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/crop_efilter.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/filter_selection.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/entry/src/main/resources/base/media/ic_1080x1920.jpg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/filter_parameters.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/screenshots/query_parameter.jpeg" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/ImageEffect/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Media/ImageEffect"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/VPN/server/server.zip" desc="Provided by code/BasicFeature/Connectivity/VPN"/>
+		<filteritem type="filepath" name="code/BasicFeature/Connectivity/StageSocket/certificate_file.zip" desc="Provided by code/BasicFeature/Connectivity/StageSocket"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkDrawing/screenshots/device/Index.jpg" desc="Provided by code/BasicFeature/Native/NdkDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkDrawing/screenshots/device/DrawPath.jpg" desc="Provided by code/BasicFeature/Native/NdkDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkDrawing/screenshots/device/DrawText.jpg" desc="Provided by code/BasicFeature/Native/NdkDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/AppScope/resources/rawfile/shaders/vert.spv" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/screenshots/device/sample.png" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/AppScope/resources/rawfile/shaders/frag.spv" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkVulkan/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkVulkan"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/screenshots/Index.jpeg" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/screenshots/DrawPath.jpeg" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/screenshots/DrawImage.jpeg" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/screenshots/DrawText.jpeg" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/entry/src/main/resources/base/media/startIcon.png" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/entry/src/main/resources/rawfile/test.jpg" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkRenderNodeDrawing/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Native/NdkRenderNodeDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/screenshots/Index.jpeg" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/screenshots/DrawPath.jpeg" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/screenshots/DrawRect.jpeg" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/screenshots/DrawText.jpeg" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/entry/src/main/resources/base/media/startIcon.png" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkTsDrawing/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Native/NdkTsDrawing"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/ChangeColor.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/GetAvailableCount.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/Main.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/ProduceBuffer.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/AttachBuffer.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+		<filteritem type="filepath" name="code/BasicFeature/Native/NdkNativeWindow/screenshots/device/DetachBuffer.jpg" desc="Provided by code/BasicFeature/Native/NdkNativeWindow"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/entry/src/main/resources/base/media/startIcon.png" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/screenshots/device/QoSLog.png" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/screenshots/device/showlowQoScomputingTime.jpeg" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/AppScope/resources/base/media/app_icon.png" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/screenshots/device/main.jpeg" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/screenshots/device/showhighQoScomputingTime.jpeg" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+                <filteritem type="filepath" name="code/BasicFeature/Native/NdkQoS/entry/src/main/resources/base/media/icon.png" desc="Provided by code/BasicFeature/Native/NdkNativeQoS"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartByTypeRely/entry/src/main/resources/base/media/icon.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartByTypeRely"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartByTypeRely/screenshots/newability.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartByTypeRely"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageModelAbilityInteraction/screenshot/coldstartuppage.png" desc="Provided by code/DocsSample/ApplicationModels/StageModelAbilityInteraction"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageModelAbilityInteraction/screenshot/hotstartuppage.png" desc="Provided by code/DocsSample/ApplicationModels/StageModelAbilityInteraction"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageModelAbilityInteraction/screenshot/synergypage.png" desc="Provided by code/DocsSample/ApplicationModels/StageModelAbilityInteraction"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageModelAbilityDevelop/screenshots/main.png" desc="Provided by code/DocsSample/ApplicationModels/StageModelAbilityDevelop"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageModelAbilityInteraction/screenshot/mainpage.png" desc="Provided by code/DocsSample/ApplicationModels/StageModelAbilityInteraction"/>
+	<filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartByTypeRely/AppScope/resources/base/media/app_icon.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartByTypeRely"/>
+        <filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartRely/entry/src/main/resources/base/media/icon.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartRely"/>
+        <filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartRely/screenshots/newability.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartRely"/>
+        <filteritem type="filepath" name="code/DocsSample/ApplicationModels/StageProcessThread/screenshots/main.png" desc="Provided by code/DocsSample/ApplicationModels/StageProcessThread"/>
+        <filteritem type="filepath" name="code/DocsSample/ApplicationModels/ImplicitStartRely/AppScope/resources/base/media/app_icon.png" desc="Provided by code/DocsSample/ApplicationModels/ImplicitStartRely"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/call_off.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/screenshots/device/create_contact.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/call_on.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/screenshots/device/save_contact.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/arrow.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/contact.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/sms.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/main/resources/base/media/back.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/screenshots/device/send_message.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Message/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Telephony/Message"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/screenshots/index.jpeg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/screenshots/DistributedAccountInfo.jpeg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/screenshots/DistributedAccountList.jpeg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAccount/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAccount"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/screenshots/device/delete.jpg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/screenshots/device/discover.jpg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/screenshots/device/filteroption.jpg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/screenshots/device/main.jpg" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+		<filteritem type="filepath" name="code/SystemFeature/DistributedAppDev/DistributedAuthentication/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/DistributedAppDev/DistributedAuthentication"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/index.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/chain_index.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/chain_success.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/verify_fail.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/verify_success.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/screenshots/device/chain_fail.jpeg" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/BasicFeature/Security/DLPManager/screenshots/device/index.jpeg" desc="Provided by code/BasicFeature/Security/DLPManager"/>
+        <filteritem type="filepath" name="code/SystemFeature/Security/CertificateFramework/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Security/CertificateFramework"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/js/common/qing.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/js/common/widget.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/resources/base/media/add.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/resources/base/media/back.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/resources/base/media/book.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/resources/base/media/delete.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/ApplicationModels/StageModel/screenshots/device/stage_mode.png" desc="Provided by code/SystemFeature/ApplicationModels/StageModel"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/airqulity.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/calculator.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/camera.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/clock.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/contacts.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/ecg.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/flashlight.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/msg.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/musicplayer.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/notes.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/photos.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/settings.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/Library/src/main/resources/base/media/shopping.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics/screenshots/devices/main.png" desc="Provided by code/SystemFeature/DeviceUsageStatistics/DeviceUsageStatistics"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/screenshots/device/Edit.jpeg" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/screenshots/device/Index.jpeg" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/screenshots/device/Picture.jpeg" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/FileShare/Picker/screenshots/device/Video.jpeg" desc="Provided by code/SystemFeature/FileManagement/FileShare/Picker"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/album_empty.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/ic_video_play_btn_png.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/ohos_gallery.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/photo_empty.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/scroll_light.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/scroll_press_light.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/screenshots/detail.jpeg" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/screenshots/home.jpeg" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/screenshots/photos.jpeg" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/screenshots/selector.jpeg" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/gradient_mask_layer.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/arrow.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/gradientBasePlate.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/FileManagement/Photos/entry/src/main/resources/base/media/no_image_icon.png" desc="Provided by code/SystemFeature/FileManagement/Photos"/>
+        <filteritem type="filepath" name="code/SystemFeature/Ability/AbilityFeatureSystem/screenshots/index.jpeg" desc="Provided by code/SystemFeature/Ability/AbilityFeatureSystem"/>
+        <filteritem type="filepath" name="code/SystemFeature/Ability/AbilityFeatureSystem/screenshots/app_status.jpeg" desc="Provided by code/SystemFeature/Ability/AbilityFeatureSystem"/>
+        <filteritem type="filepath" name="code/SystemFeature/Ability/AbilityFeatureSystem/screenshots/sync_data.jpeg" desc="Provided by code/SystemFeature/Ability/AbilityFeatureSystem"/>
+        <filteritem type="filepath" name="code/SystemFeature/Ability/AbilityFeatureSystem/screenshots/uiextension.jpeg" desc="Provided by code/SystemFeature/Ability/AbilityFeatureSystem"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/background.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/ic_pause.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/list_activate.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/list_none.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/lyric_activate.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/lyric_none.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/next.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/no_music.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/playmusic.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/previous.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/main/resources/base/media/stopmusic.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/screenshots/device/index.jpeg" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/screenshots/device/showLyric.jpeg" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/AVSession/MediaController/screenshots/device/showQueueItem.jpeg" desc="Provided by code/SystemFeature/Media/AVSession/MediaController"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/devices/float_win.jpeg" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/devices/incoming.jpeg" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/devices/ring_up.jpeg" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/devices/voice.jpeg" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/img.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/img1.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/screenshots/img2.png" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/entry/src/main/resources/rawfile/wechat_voice_ring.mp3" desc="Provided by code/SystemFeature/Media/VoiceCallDemo"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/entry/src/main/resources/base/media/call_off.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/entry/src/main/resources/base/media/call_on.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Telephony/Call/screenshots/device/call.png" desc="Provided by code/SystemFeature/Telephony/Call"/>
+        <filteritem type="filepath" name="code/SystemFeature/Media/Audio/screenshot/devices/spatialSceneMode.jpg" desc="Provided by code/SystemFeature/Media/Audio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/screenshots/device/getWindowSize.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/screenshots/device/setWindowRatio.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/screenshots/device/startAbility.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/WindowManagement/WindowRatio/screenshots/device/startAbility.png" desc="Provided by code/SystemFeature/WindowManagement/WindowRatio"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/add.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/arrows_right.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/banner_movie1.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/banner_movie2.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/banner_movie3.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/banner_movie4.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/card_volumn.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/cart.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/cart_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/cash.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/favor_list_tea.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/favor_list_tree.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/home.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/homeBg.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/home_background.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/home_mask.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/home_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/interaction.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/line.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/line_navclass.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/live_coriander.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/live_scene.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/logo.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/mask.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/my_evaluation.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_background.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_cart_light.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_cart_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_classification.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_home_light.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_home_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_me_light.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_me_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_product_light.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/nav_product_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/new.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/new_navclass.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/new_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/obligation.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/official_service.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/old_fornew.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/point_reward.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product001.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product002.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product003.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product004.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product005.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product006.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product007.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product008.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product009.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product010.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product011.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product012.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product013.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/product014.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/reduce.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/refund.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/scan.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/scan_code.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/search.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/setting.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/shop_user.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/titleBar.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/title_bar.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/user.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/user_selected.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/usname.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/vip_channel.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/wait_delivery.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/wait_evaluted.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/base/media/wait_receive.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/banner.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/banner2.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/nav_cart.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/nav_home.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/nav_me.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/dark/media/nav_product.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/banner.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/banner2.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/nav_cart.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/nav_home.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/nav_me.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/main/resources/light/media/nav_product.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/screenshots/devices/blue.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/screenshots/devices/dark.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch/screenshots/devices/light.png" desc="Provided by code/SystemFeature/ResourceAllocation/ApplicationThemeSwitch"/>
+        <filteritem type="filepath" name="code/SystemFeature/Notification/CustomNotificationPush/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Notification/CustomNotificationPush"/>
+        <filteritem type="filepath" name="code/SystemFeature/Notification/CustomNotificationPush/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Notification/CustomNotificationPush"/>
+        <filteritem type="filepath" name="code/SystemFeature/Notification/CustomNotificationPush/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Notification/CustomNotificationPush"/>
+        <filteritem type="filepath" name="code/SystemFeature/Notification/CustomNotificationPush/screenshots/filter_off.png" desc="Provided by code/SystemFeature/Notification/CustomNotificationPush"/>
+        <filteritem type="filepath" name="code/SystemFeature/Notification/CustomNotificationPush/screenshots/filter_on.png" desc="Provided by code/SystemFeature/Notification/CustomNotificationPush"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/entry/src/main/resources/base/media/right.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/screenshots/device/dialog.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/screenshots/device/newVersion.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/WorkScheduler/screenshots/device/oldVersion.png" desc="Provided by code/SystemFeature/TaskManagement/WorkScheduler"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/entry/src/main/resources/base/media/Tomato.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/screenshots/device/after.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/TransientTask/screenshots/device/before.png" desc="Provided by code/SystemFeature/TaskManagement/TransientTask"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bgFive.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bgFour.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bgOne.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bgThree.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bgTwo.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/bird.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/fgFive.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/fgFour.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/fgOne.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/fgThree.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/fgTwo.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeNorthFive.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeNorthFour.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeNorthOne.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeNorthThree.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeNorthTwo.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeSouthFive.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeSouthFour.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeSouthOne.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeSouthThree.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/ets/common/pic/pipeSouthTwo.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/screenshot/snapshot1.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/TaskManagement/Flybird/screenshot/snapshot2.png" desc="Provided by code/SystemFeature/TaskManagement/Flybird"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/EntryCard/entry/base/snapshot/widget-2x2.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/entry/src/main/js/common/widget.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/persistentProxyForm/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/processProxyForm/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/ProcessProxyForm_main.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/ProcessProxyForm_modifyCondition.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/ProcessProxyForm_preview.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/ProcessProxyForm_push.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/cardStyle.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/dataRelease.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/eTSFormExample.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/mainInterface.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/modifySubscriptionConditions.jpeg" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/FormExtAbility/screenshots/second.png" desc="Provided by code/SystemFeature/Widget/FormExtAbility"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/AppScope/resources/base/media/app_icon.png" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/entry/src/main/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/entry/src/ohosTest/resources/base/media/icon.png" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/screenshots/zh/card.jpeg" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/screenshots/zh/menu.jpeg" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+        <filteritem type="filepath" name="code/SystemFeature/Widget/RequestAddForm/screenshots/zh/menu.jpeg" desc="Provided by code/SystemFeature/Widget/RequestAddForm"/>
+		<filteritem type="filepath" name="code/BasicFeature/ArkTSCard/ArkTSCard/libs/ArkTSUser.hap" desc="Provided by code/BasicFeature/ArkTSCard/ArkTSCard"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/Audio/entry/src/main/resources/base/media/pic_Audiovivid.png" desc="Provided by code/BasicFeature/Native/Audio"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/Audio/screenshots/device/AudioVivid.jpg" desc="Provided by code/BasicFeature/Native/Audio"/>
+        <filteritem type="filepath" name="code/BasicFeature/Native/Audio/screenshots/device/index.jpg" desc="Provided by code/BasicFeature/Native/Audio"/>
+        <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/tool/sign_tool/OpenHarmonyProfileDebug.pem" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/tool/sign_tool/OpenHarmonyApplication.pem" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/tool/sign_tool/OpenHarmonyProfileRelease.pem" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/tool/hap-sign-tool.jar" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/tool/sign_tool/OpenHarmony.p12" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/resources/app1-signed.hap" desc="Provided by code/Project/HapBuild"/>
+                <filteritem type="filepath" name="code/BasicFeature/FileManagement/FileManager/lib/MyPhoneFilePage-1.0.0.hap" desc="Provided by code/BasicFeature/FileManagement/FileManager"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/VPN/lib/VPNFoundation-1.0.0.hap" desc="Provided by code/BasicFeature/Connectivity/VPN"/>
+                <filteritem type="filepath" name="code/UI/ArkTsComponentCollection/ComponentCollection/lib/DragEvent-1.0.0.hap" desc="Provided by code/UI/ArkTsComponentCollection/ComponentCollection"/>
+                <filteritem type="filepath" name="code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary/lib/ProcessMessage-1.0.0.hap" desc="Provided by code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary"/>
+                <filteritem type="filepath" name="code/BasicFeature/Notification/CustomCommonEvent/lib/CardEvent-1.0.0.hap" desc="Provided by code/BasicFeature/Notification/CustomCommonEvent"/>
+                <filteritem type="filepath" name="code/BasicFeature/Ads/OAIDSample/lib/ResetOAID-1.0.0.hap" desc="Provided by code/BasicFeature/Ads/OAIDSample"/>
+                <filteritem type="filepath" name="code/Solutions/Tools/FlipClock/lib/Brightness-1.0.0.hap" desc="Provided by code/Solutions/Tools/FlipClock"/>
+
+        <filteritem type="filepath" name="code/BasicFeature/DeviceManagement/Sensor/Capi/entry/src/main/resources/base/media/compass.png" desc="Provided by code/BasicFeature/DeviceManagement/Sensor"/>
+        <filteritem type="filepath" name=" code/BasicFeature/DeviceManagement/Vibrator/CustomHaptic/entry/src/main/resources/base/media/select.png" desc="Provided by code/BasicFeature/DeviceManagement/Vibrator"/>
+        <filteritem type="filepath" name="code/BasicFeature/Graphics/DisplaySync/screenshots/device/animator.jpg" desc="Provided by code/BasicFeature/Graphics/DisplaySync"/>
+		<filteritem type="filepath" name="code/Solutions/Social/GrapeSquare/feature/authorizedControl/src/main/resources/base/media/photo120.jpg" desc="Provided by code/Solutions/Social/GrapeSquare"/>
+                <filteritem type="filepath" name="code/BasicFeature/WindowManagement/WindowManage/screenshots/devices/getPropertiesOfSystemBar.jpg" desc="Provided by code/BasicFeature/WindowManagement/WindowManage"/>
+                <filteritem type="filepath" name="code/BasicFeature/WindowManagement/WindowManage/screenshots/devices/mainWindow.jpg" desc="Provided by code/BasicFeature/WindowManagement/WindowManage"/>
+                <filteritem type="filepath" name="code/BasicFeature/WindowManagement/WindowManage/screenshots/devices/setTouchableAreas.jpg" desc="Provided by code/BasicFeature/WindowManagement/WindowManage"/>
+                <filteritem type="filepath" name="code/BasicFeature/WindowManagement/WindowManage/screenshots/devices/startAbility.png" desc="Provided by code/BasicFeature/WindowManagement/WindowManage"/>
+                <filteritem type="filepath" name="code/BasicFeature/WindowManagement/WindowManage/screenshots/devices/subWindow.png" desc="Provided by code/BasicFeature/WindowManagement/WindowManage"/>
+            </filefilter>
+            <filefilter name="defaultPolicyFilter" desc="License文件头校验策略的过滤条件" >
+                <filteritem type="filename" name="oh-package.json5" desc="OpenHarmony工程编译入口脚本，无需添加License头"/>
+                <filteritem type="filename" name="hvigorw" desc="OpenHarmony工程编译入口脚本，无需添加License头"/>
+                <filteritem type="filename" name="hvigorw.bat" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigorfile.js" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigorfile.ts" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="OpenHarmony工程编译配置文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/bin/compile-ohpm-ci.sh" desc="预测试工具脚本文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/test-tool/LinuxContains.py" desc="预测试工具配置文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/resources/echoHilog.bat" desc="预测试工具配置文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-enter-animation-1.0.1.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-http-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-feature-qr-code-scan-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-sharecomponent-1.0.1.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-updatedialog-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-video-component-1.0.5.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/VideoPlayer.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/AVRecorder/lib/VideoRecorder-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/FileManagement/FileManager/lib/MyPhoneFilePage-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/VPN/lib/VPNFoundation-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/UI/ArkTsComponentCollection/ComponentCollection/lib/DragEvent-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary/lib/ProcessMessage-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/CameraPage-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Notification/CustomCommonEvent/lib/CardEvent-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Ads/OAIDSample/lib/ResetOAID-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/Solutions/Tools/FlipClock/lib/Brightness-1.0.0.tgz" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/entry/src/main/resources/rawfile/wechat_voice_ring.mp3" desc="二进制文件，无需添加License头"/>
+                <filteritem type="filepath" name="code/BasicFeature/DataManagement/UDMF/UniformTypeDescriptor/UTDType/entry/src/main/resources/rawfile/arkdata/utd/utd.json5" desc="二进制文件，无需添加License头"/>
+            </filefilter>
+            <filefilter name="copyrightPolicyFilter" desc="Copyright文件头校验策略的过滤条件" >
+                <filteritem type="filename" name="oh-package.json5" desc="OpenHarmony工程编译入口脚本，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorw" desc="OpenHarmony工程编译入口脚本，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorw.bat" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorfile.js" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigorfile.ts" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigor-config.json5" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filename" name="hvigor-wrapper.js" desc="OpenHarmony工程编译配置文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/bin/compile-ohpm-ci.sh" desc="预测试工具脚本文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/test-tool/LinuxContains.py" desc="预测试工具配置文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Project/HapBuild/compile-tool/resources/echoHilog.bat" desc="预测试工具配置文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-enter-animation-1.0.1.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-http-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-notification-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-feature-qr-code-scan-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-sharecomponent-1.0.1.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-updatedialog-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Shopping/OrangeShopping/libs/ohos-video-component-1.0.5.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/VideoPlayer.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Media/AVRecorder/lib/VideoRecorder-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/FileManagement/FileManager/lib/MyPhoneFilePage-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Connectivity/VPN/lib/VPNFoundation-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/UI/ArkTsComponentCollection/ComponentCollection/lib/DragEvent-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/LaunguageBaseClassLibrary/LanguageBaseClassLibrary/lib/ProcessMessage-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Media/MultiMedia/lib/CameraPage-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Notification/CustomCommonEvent/lib/CardEvent-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/Ads/OAIDSample/lib/ResetOAID-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/Solutions/Tools/FlipClock/lib/Brightness-1.0.0.tgz" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/SystemFeature/Media/VoiceCallDemo/entry/src/main/resources/rawfile/wechat_voice_ring.mp3" desc="二进制文件，无需添加版权头"/>
+                <filteritem type="filepath" name="code/BasicFeature/DataManagement/UDMF/UniformTypeDescriptor/UTDType/entry/src/main/resources/rawfile/arkdata/utd/utd.json5" desc="二进制文件，无需添加版权头"/>
+            </filefilter>
+        </filefilterlist>
+    </oatconfig>
+</configuration>

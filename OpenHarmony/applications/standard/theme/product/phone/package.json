@@ -1,0 +1,13 @@
+{
+  "name": "wallpaper",
+  "version": "1.0.0",
+  "ohos": {
+    "org": "huawei",
+    "buildTool": "hvigor",
+    "directoryLevel": "module"
+  },
+  "description": "wallpaper for phone",
+  "repository": {},
+  "license": "ISC",
+  "dependencies": {}
+}

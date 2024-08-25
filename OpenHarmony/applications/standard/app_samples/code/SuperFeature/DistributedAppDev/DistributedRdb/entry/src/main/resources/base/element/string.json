@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "eTSDistributedRdb"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "DistributedRdb"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "DistributedRdb"
+    },
+    {
+      "name": "check_device",
+      "value": "Check device"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "Search contact"
+    },
+    {
+      "name": "select_all",
+      "value": "Select all"
+    },
+    {
+      "name": "delete",
+      "value": "Delete"
+    },
+    {
+      "name": "sure",
+      "value": "OK"
+    },
+    {
+      "name": "quit",
+      "value": "Quit"
+    },
+    {
+      "name": "male",
+      "value": "Male"
+    },
+    {
+      "name": "female",
+      "value": "Female"
+    },
+    {
+      "name": "gender",
+      "value": "Gender:"
+    },
+    {
+      "name": "contact_name",
+      "value": "Name"
+    },
+    {
+      "name": "phone",
+      "value": "Phone"
+    },
+    {
+      "name": "remark",
+      "value": "Remark"
+    },
+    {
+      "name": "age",
+      "value": "Age"
+    },
+    {
+      "name": "automatic",
+      "value": "Automatic synchronization"
+    },
+    {
+      "name": "manual",
+      "value": "Manual synchronization"
+    },
+    {
+      "name": "setting",
+      "value": "Setting"
+    },
+    {
+      "name": "connect",
+      "value": "Connect device"
+    },
+    {
+      "name": "delete_contact",
+      "value": "Delete the selected contacts?"
+    },
+    {
+      "name": "name_validate",
+      "value": "姓名不能为空"
+    },
+    {
+      "name": "phone_validate",
+      "value": "手机不能为空"
+    },
+    {
+      "name": "age_validate",
+      "value": "age invalidate"
+    },
+    {
+      "name": "ascending",
+      "value": "升序排列"
+    },
+    {
+      "name": "descending",
+      "value": "降序排列"
+    },
+    {
+      "name": "search_placeholder_start",
+      "value": "请输入要搜索的手机号开头"
+    },
+    {
+      "name": "search_placeholder_end",
+      "value": "请输入要搜索的手机号结尾"
+    },
+    {
+      "name": "search_placeholder_content",
+      "value": "请输入要搜索的内容"
+    },
+    {
+      "name": "search_placeholder_age",
+      "value": "请输入要搜索的年龄区间"
+    },
+    {
+      "name": "search_placeholder_name",
+      "value": "请输入要搜索的姓名"
+    },
+    {
+      "name": "search_placeholder_index",
+      "value": "请输入要搜索的索引"
+    },
+    {
+      "name": "search_placeholder_expression",
+      "value": "请输入匹配表达式"
+    },
+    {
+      "name": "sort_the_results",
+      "value": "结果排序"
+    },
+    {
+      "name": "index_query",
+      "value": "指定索引查询"
+    },
+    {
+      "name": "expression_matching",
+      "value": "表达式匹配和不匹配"
+    },
+    {
+      "name": "query_criteria",
+      "value": "查询条件"
+    },
+    {
+      "name": "search_placeholder_age1",
+      "value": "请输入年龄"
+    },
+    {
+      "name": "no_data",
+      "value": "无数据"
+    },
+    {
+      "name": "search",
+      "value": "查询"
+    },
+    {
+      "name": "add_contact",
+      "value": "新增联系人"
+    }
+  ]
+}

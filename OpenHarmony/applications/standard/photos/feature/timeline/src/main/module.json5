@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "photos_timeline",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+  }
+}

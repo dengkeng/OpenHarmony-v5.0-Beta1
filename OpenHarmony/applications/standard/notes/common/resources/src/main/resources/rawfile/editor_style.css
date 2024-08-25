@@ -1,0 +1,116 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+html {
+  height: 100%;
+  font-family: sans-serif;
+-webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  color: #333333;
+  margin: 0;
+}
+
+
+#editorjs_box {
+  width: 100%;
+  height: 90%;
+  outline: 0px solid transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #182431;
+  opacity: 0.9;
+  user-select: none;
+  overflow: scroll;
+}
+
+#editorjs[placeholder]:empty:not(:focus):before {
+  content: attr(placeholder);
+  font-size: 24px;
+  color: #9b9b9b;
+}
+
+.note-checkbox:checked {
+  background: #F88805;
+  border: 1px solid #F88805;
+  outline: none;
+  opacity: 1;
+}
+
+.note-checkbox {
+  width: 18px;
+  height: 18px;
+  line-height: 22.4px;
+  background-color: #ffffff;
+  border: 2px solid #182431;
+  opacity: 0.6;
+-webkit-border-radius: 50%;
+-webkit-appearance: none;
+-webkit-user-select: none;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  margin-right: 10px;
+  margin-bottom: 6px;
+  outline: none;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+-webkit-transition: background-color ease 0.1s;
+  transition: background-color ease 0.1s;
+  vertical-align: top;
+  cursor: default;
+  user-select: none;
+}
+
+.note-checkbox:checked+span {
+  text-decoration: line-through;
+  margin-left: 10px;
+  color: #F88805;
+  opacity: 0.4;
+}
+
+.edit-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-box {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  display: none;
+  justify-content: space-around;
+  padding-bottom: 6px;
+}
+
+.button-box div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-box img {
+  margin-bottom: 6px;
+}
+
+.button-box span {
+  font-size: 20px;
+}

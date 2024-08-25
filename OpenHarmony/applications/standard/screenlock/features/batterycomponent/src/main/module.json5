@@ -1,0 +1,17 @@
+{
+  "module": {
+    "name": "batterycomponent",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "metadata": [
+      {
+        "name": "ArkTSPartialUpdate",
+        "value": "true"
+      }
+    ],
+    "uiSyntax": "ets"
+  }
+}

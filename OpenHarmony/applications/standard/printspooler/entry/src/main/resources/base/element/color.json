@@ -1,0 +1,84 @@
+{
+  "color": [
+    {
+      "name": "color_ffffff",
+      "value": "#ffffff"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "border_line",
+      "value": "#33000000"
+    },
+    {
+      "name": "border_line_error",
+      "value": "#E84026"
+    },
+    {
+      "name": "button_color_cancel",
+      "value": "#E9E6E5"
+    },
+    {
+      "name": "preview_background_color",
+      "value": "#0C000000"
+    },
+    {
+      "name": "effect_color_none",
+      "value": "#00000000"
+    },
+    {
+      "name": "effect_color_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "effect_color_hover",
+      "value": "#0C000000"
+    },
+    {
+      "name": "effect_color_press",
+      "value": "#19000000"
+    },
+    {
+      "name": "text_jobDes",
+      "value": "#99000000"
+    },
+    {
+      "name": "text_block_reason",
+      "value": "#E84026"
+    },
+    {
+      "name": "text_jobState_running",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "text_jobState_blocked",
+      "value": "#ED6F21"
+    },
+    {
+      "name": "text_jobState_completed",
+      "value": "#99000000"
+    },
+    {
+      "name": "divider_color",
+      "value": "#19000000"
+    },
+    {
+      "name": "selected_color",
+      "value": "#190A59F7"
+    },
+    {
+      "name": "button_cancel_text",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "disabled_textInput",
+      "value": "#66FFFFFF"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "备忘录"
+    },
+    {
+      "name": "description_mainability",
+      "value": "ETS_Empty Ability"
+    },
+    {
+      "name": "note",
+      "value": "笔记"
+    },
+    {
+      "name": "allNotes",
+      "value": "全部笔记"
+    },
+    {
+      "name": "unClassified",
+      "value": "未分类"
+    },
+    {
+      "name": "recentDeletes",
+      "value": "最近删除"
+    },
+    {
+      "name": "myFavorites",
+      "value": "我的收藏"
+    },
+    {
+      "name": "create",
+      "value": "新建"
+    },
+    {
+      "name": "createFolder",
+      "value": "新建文件夹"
+    },
+    {
+      "name": "editFolder",
+      "value": "编辑文件夹"
+    },
+    {
+      "name": "deleteFolder",
+      "value": "删除文件夹"
+    },
+    {
+      "name": "createNote",
+      "value": "新建笔记"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "delete_tips",
+      "value": "是否删除此文件夹及其中的内容？"
+    },
+    {
+      "name": "deleteNote",
+      "value": "是否删除此笔记？"
+    },
+    {
+      "name": "deleteNoteComplete",
+      "value": "此笔记将被永久删除，无法恢复。是否删除？"
+    },
+    {
+      "name": "deleteAllNote",
+      "value": "是否删除全部笔记？"
+    },
+    {
+      "name": "deletePartNote",
+      "value": "是否删除%d条笔记？"
+    },
+    {
+      "name": "selected",
+      "value": "已选择%d项"
+    },
+    {
+      "name": "none_selected",
+      "value": "未选择"
+    },
+    {
+      "name": "noteslist",
+      "value": "条笔记"
+    },
+    {
+      "name": "Empty_page",
+      "value": "没有笔记"
+    },
+    {
+      "name": "searchNote",
+      "value": "搜索笔记"
+    },
+    {
+      "name": "chooseFolder",
+      "value": "请选择文件夹"
+    },
+    {
+      "name": "category_already_exist",
+      "value": "文件夹名称已存在"
+    },
+    {
+      "name": "input_placeholder",
+      "value": "名称"
+    },
+    {
+      "name": "permanently_delete_tips",
+      "value": "笔记删除前会显示剩余天数（最长30天），之后将永久删除"
+    },
+    {
+      "name": "set_top",
+      "value": "置顶"
+    },
+    {
+      "name": "move",
+      "value": "移到"
+    },
+    {
+      "name": "recover",
+      "value": "恢复"
+    },
+    {
+      "name": "check_all",
+      "value": "多选"
+    },
+    {
+      "name": "editNoteTitle",
+      "value": "修改标题"
+    },
+    {
+      "name": "list",
+      "value": "清单"
+    },
+    {
+      "name": "style",
+      "value": "样式"
+    },
+    {
+      "name": "photo",
+      "value": "相册"
+    },
+    {
+      "name": "title",
+      "value": "标题"
+    },
+    {
+      "name": "empty_note",
+      "value": "笔记内容为空"
+    },
+    {
+      "name": "restore",
+      "value": "已恢复"
+    },
+    {
+      "name": "per_read_media",
+      "value": "是否允许备忘录访问媒体资源"
+    },
+    {
+      "name": "per_get_bundleInfo",
+      "value": "是否允许备忘录打开图库资源"
+    },
+    {
+      "name": "per_dis_dataSync",
+      "value": "是否允许备忘录流转到其它设备"
+    }
+  ]
+}

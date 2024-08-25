@@ -1,0 +1,416 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "Certificate Manager"
+    },
+    {
+      "name": "mainability_description",
+      "value": "ETS_Empty Feature Ability"
+    },
+    {
+      "name": "version",
+      "value": "Version "
+    },
+    {
+      "name": "certificateTab",
+      "value": "Certificate and Credential"
+    },
+    {
+      "name": "certificateManage",
+      "value": "Certificate Manager"
+    },
+    {
+      "name": "trustedEvidence",
+      "value": "Trusted Certificate"
+    },
+    {
+      "name": "userEvidence",
+      "value": "Credential List"
+    },
+    {
+      "name": "installInStorageDevice",
+      "value": "Install From Storage"
+    },
+    {
+      "name": "installCertificateFailed",
+      "value": "Install From Storage Failed"
+    },
+    {
+      "name": "certificatePwdTab",
+      "value": "Get Certificated"
+    },
+    {
+      "name": "certificateAliasTab",
+      "value": "Set Certificated"
+    },
+    {
+      "name": "certificatePwdInfo",
+      "value": "Input Password"
+    },
+    {
+      "name": "certificateAliasInfo",
+      "value": "Input Certificate Alias"
+    },
+    {
+      "name": "deleteAllCred",
+      "value": "Delete All Credentials and Certificates"
+    },
+    {
+      "name": "deleteAllCredDialogTitle",
+      "value": "Delete All Credentials and Certificates"
+    },
+    {
+      "name": "deleteAllCredDialogMessage",
+      "value": "All credentials and certificates will be deleted. Whether or not to delete？"
+    },
+    {
+      "name": "deleteAllCredCancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "deleteAllCredDelete",
+      "value": "Delete"
+    },
+    {
+      "name": "pickCredToAuth",
+      "value": "Select credential"
+    },
+    {
+      "name": "requestAuthMsg",
+      "value": "Application \"%s\" Request a certificate. Selecting a certificate allows the app to use this identity credential for the server. The app has identified the requested service as \"localhost\", You should only grant permission to use certificates to trusted apps."
+    },
+    {
+      "name": "requestAuthCancel",
+      "value": "Reject"
+    },
+    {
+      "name": "requestAuthFinish",
+      "value": "Authorize"
+    },
+    {
+      "name": "requestFailPromptMsg",
+      "value": "Authorize failed ， invalid AppUid"
+    },
+    {
+      "name": "installPwdInputCancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "installPwdInputConfirm",
+      "value": "Extract"
+    },
+    {
+      "name": "installAliasInputCancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "installAliasInputConfirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "installAliasInputInfo",
+      "value": "Attention: certificate names only support English and numbers"
+    },
+    {
+      "name": "managerAuthApp",
+      "value": "Manage Authorized Applications"
+    },
+    {
+      "name": "cancelAuthApp",
+      "value": "Cancel"
+    },
+    {
+      "name": "finishAuthApp",
+      "value": "Finish"
+    },
+    {
+      "name": "evidenceDetails",
+      "value": "Credential details"
+    },
+    {
+      "name": "entryContains",
+      "value": "This item contains:"
+    },
+    {
+      "name": "keyNum",
+      "value": "  %s user keys"
+    },
+    {
+      "name": "userCerNum",
+      "value": "  %s user certificates"
+    },
+    {
+      "name": "privateDetailsClose",
+      "value": "Close"
+    },
+    {
+      "name": "publicDetailsCancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "publicDetailsDelete",
+      "value": "Delete"
+    },
+    {
+      "name": "warning_title",
+      "value": "Delete certificate"
+    },
+    {
+      "name": "warning_message",
+      "value": "After deletion, the application authorized with this certificate will not work normally. Whether or not to delete?"
+    },
+    {
+      "name": "warning_cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "warning_delete",
+      "value": "Delete"
+    },
+    {
+      "name": "tabName_public",
+      "value": "Public"
+    },
+    {
+      "name": "tabName_private",
+      "value": "Private"
+    },
+    {
+      "name": "system",
+      "value": "System"
+    },
+    {
+      "name": "user",
+      "value": "User"
+    },
+    {
+      "name": "CustomDialogExample_firText",
+      "value": "Certificate Detail"
+    },
+    {
+      "name": "CustomDialogExample_firListItem_text",
+      "value": "Issued to:"
+    },
+    {
+      "name": "CustomDialogExample_secListItem_text",
+      "value": "Issued by:"
+    },
+    {
+      "name": "CustomDialogExample_thdListItem_text",
+      "value": "Validity:"
+    },
+    {
+      "name": "CustomDialogExample_Button_text",
+      "value": "Cancel"
+    },
+    {
+      "name": "CustomDialogExample_Button_on",
+      "value": "Enable"
+    },
+    {
+      "name": "CustomDialogExample_Button_off",
+      "value": "Disable"
+    },
+    {
+      "name": "CustomDialogExampleUser_Status_true",
+      "value": "Enabled"
+    },
+    {
+      "name": "CustomDialogExampleUser_Status_false",
+      "value": "Disabled"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_firButton_text",
+      "value": "Cancel"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_secButton_text",
+      "value": "Delete"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_text",
+      "value": "Cancel"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_title_text",
+      "value": "Delete certificate"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_Button_message_text",
+      "value": "After deletion, the application authorized with this certificate will not work normally. Whether or not to delete?"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_firButton_text",
+      "value": "Cancel"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_secButton_text",
+      "value": "Delete"
+    },
+    {
+      "name": "DialogSubjectComponent_firText",
+      "value": "Common name:"
+    },
+    {
+      "name": "DialogSubjectComponent_secText",
+      "value": "Organization:"
+    },
+    {
+      "name": "DialogSubjectComponent_thdText",
+      "value": "Organizational unit:"
+    },
+    {
+      "name": "DialogSubjectComponent_fouText",
+      "value": "Serial number:"
+    },
+    {
+      "name": "DialogSubjectComponent_fifText",
+      "value": "Issued on:"
+    },
+    {
+      "name": "DialogSubjectComponent_sixText",
+      "value": "Expires on:"
+    },
+    {
+      "name": "CustomDialogExample_fouListItem_text",
+      "value": "Fingerprints:"
+    },
+    {
+      "name": "CustomDialogExample_FingerPrint_text",
+      "value": "SHA-256 fingerprints:"
+    },
+    {
+      "name": "root_certificate",
+      "value": "root certificate"
+    },
+    {
+      "name": "root_certificate_message",
+      "value": "Warning: Enabling this certificate for a website will allow third parties to view any private data sent to the website."
+    },
+    {
+      "name": "root_certificate_cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "root_certificate_continue",
+      "value": "Continue"
+    },
+    {
+      "name": "CA_cert",
+      "value": "CA certificate"
+    },
+    {
+      "name": "user_certificate_credentials",
+      "value": "User credentials"
+    },
+    {
+      "name": "delete_success",
+      "value": "delete success"
+    },
+    {
+      "name": "importCertDialogTitle",
+      "value": "importCertDialogTitle"
+    },
+    {
+      "name": "importCertDialogMessage",
+      "value": "User trusted certificate is about to be installed. Whether or not to install?"
+    },
+    {
+      "name": "importCredDialogTitle",
+      "value": "Install Public Credential"
+    },
+    {
+      "name": "importCredDialogMessage",
+      "value": "Public credential is about to be installed. Whether or not to install?"
+    },
+    {
+      "name": "invalidCertAndCredDialogTitle",
+      "value": "Cannot use This File "
+    },
+    {
+      "name": "invalidCertAndCredDialogMessage",
+      "value": "Cannot use this file as a certificate and credential"
+    },
+    {
+      "name": "importCancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "importConfirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "invalidCertAndCredConfirm",
+      "value": "Close"
+    },
+    {
+      "name": "authenticationTitle",
+      "value": "Please authenticate"
+    },
+    {
+      "name": "certInputPassword",
+      "value": "Enter the certificate password."
+    },
+    {
+      "name": "inputConfirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "setCertName",
+      "value": "Set certificate name"
+    },
+    {
+      "name": "setCertMessage",
+      "value": "The certificate issuer may check all traffic to and from the device, including: CA certificate"
+    },
+    {
+      "name": "Install_Cert_Success",
+      "value": "The certificate is successfully installed."
+    },
+    {
+      "name": "Install_Cred_Success",
+      "value": "Install credentials successfully"
+    },
+    {
+      "name": "Install_Cert_Failed",
+      "value": "Install certificate failure"
+    },
+    {
+      "name": "Install_Cred_Failed",
+      "value": "Install credentials failure"
+    },
+    {
+      "name": "Install_Error_NOT_FOUND",
+      "value": "This file is not recognized."
+    },
+    {
+      "name": "Install_ERROR_INCORRECT_FORMAT",
+      "value": "Certificate corrupted."
+    },
+    {
+      "name": "Install_Error_MAX_QUANTITY_REACHED",
+      "value": "The number of certificates has reached the upper limit, Please clear the certificates."
+    },
+    {
+      "name": "OK",
+      "value": "OK"
+    },
+    {
+      "name": "Password_Message",
+      "value": "Password error"
+    },
+    {
+      "name": "Identity_Authentication",
+      "value": "Please authenticate"
+    },
+    {
+      "name": "inputAliasWarn",
+      "value": "Maximum length reached"
+    },
+    {
+      "name": "system_credentials",
+      "value": "System credentials"
+    }
+  ]
+}

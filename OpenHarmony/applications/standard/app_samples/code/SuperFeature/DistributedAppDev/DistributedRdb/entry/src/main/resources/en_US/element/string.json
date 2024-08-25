@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "DistributedRdb"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "DistributedRdb"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "DistributedRdb"
+    },
+    {
+      "name": "check_device",
+      "value": "Check device"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "Search contact"
+    },
+    {
+      "name": "select_all",
+      "value": "Select all"
+    },
+    {
+      "name": "delete",
+      "value": "Delete"
+    },
+    {
+      "name": "sure",
+      "value": "OK"
+    },
+    {
+      "name": "add_contact",
+      "value": "add contact"
+    },
+    {
+      "name": "quit",
+      "value": "Quit"
+    },
+    {
+      "name": "male",
+      "value": "Male"
+    },
+    {
+      "name": "female",
+      "value": "Female"
+    },
+    {
+      "name": "gender",
+      "value": "Gender:"
+    },
+    {
+      "name": "contact_name",
+      "value": "Name"
+    },
+    {
+      "name": "phone",
+      "value": "phone"
+    },
+    {
+      "name": "remark",
+      "value": "remark"
+    },
+    {
+      "name": "age",
+      "value": "Age"
+    },
+    {
+      "name": "automatic",
+      "value": "Automatic synchronization"
+    },
+    {
+      "name": "manual",
+      "value": "Manual synchronization"
+    },
+    {
+      "name": "setting",
+      "value": "Setting"
+    },
+    {
+      "name": "connect",
+      "value": "Connect device"
+    },
+    {
+      "name": "delete_contact",
+      "value": "Delete the selected contacts?"
+    },
+    {
+      "name": "name_validate",
+      "value": "Name cannot be empty"
+    },
+    {
+      "name": "phone_validate",
+      "value": "Phone number cannot be empty"
+    },
+    {
+      "name": "ascending",
+      "value": "Ascending"
+    },
+    {
+      "name": "descending",
+      "value": "Descending"
+    },
+    {
+      "name": "search_placeholder_start",
+      "value": "Please enter the beginning of the phone number"
+    },
+    {
+      "name": "search_placeholder_end",
+      "value": "Please enter the ending of the phone number"
+    },
+    {
+      "name": "search_placeholder_content",
+      "value": "Please enter what you want to search for"
+    },
+    {
+      "name": "search_placeholder_age",
+      "value": "Please enter the age range you want to search for"
+    },
+    {
+      "name": "search_placeholder_name",
+      "value": "Please enter the name you want to search for"
+    },
+    {
+      "name": "search_placeholder_index",
+      "value": "Please enter the index you want to search"
+    },
+    {
+      "name": "search_placeholder_expression",
+      "value": "Please enter a matching expression"
+    },
+    {
+      "name": "index_query",
+      "value": "Specifies the index query"
+    },
+    {
+      "name": "sort_the_results",
+      "value": "SortResults"
+    },
+    {
+      "name": "expression_matching",
+      "value": "Expression matching and mismatching"
+    },
+    {
+      "name": "query_criteria",
+      "value": "QueryCriteria"
+    },
+    {
+      "name": "search_placeholder_age1",
+      "value": "Please enter age"
+    },
+    {
+      "name": "no_data",
+      "value": "No Data"
+    },
+    {
+      "name": "search",
+      "value": "search"
+    },
+    {
+      "name": "age_validate",
+      "value": "age invalidate"
+    }
+  ]
+}

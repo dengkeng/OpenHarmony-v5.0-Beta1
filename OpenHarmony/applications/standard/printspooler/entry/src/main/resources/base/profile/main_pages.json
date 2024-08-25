@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/PrintPage",
+    "pages/JobManagerPage",
+    "pages/PrivacyStatementPage",
+    "pages/AboutPage",
+    "pages/PrivacyStatementWebPage"
+  ]
+}

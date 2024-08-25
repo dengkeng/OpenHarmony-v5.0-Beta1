@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "settings_MainAbility",
+      "value": "settings_MainAbility"
+    },
+    {
+      "name": "mainability_description",
+      "value": "ETS_Empty Feature Ability"
+    },
+    {
+      "name": "layout",
+      "value": "Layout"
+    },
+    {
+      "name": "into_settings",
+      "value": "Launcher settings"
+    },
+    {
+      "name": "layout_style",
+      "value": "Layout Style"
+    },
+    {
+      "name": "launcher_layout",
+      "value": "Launcher Layout"
+    },
+    {
+      "name": "recent_tasks_setting",
+      "value": "Recent Tasks Setting"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "gesture_navigation_options",
+      "value": "Gesture Navigation Options"
+    }
+  ]
+}

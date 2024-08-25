@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/IndexNote",
+    "pages/Edit",
+    "pages/Index",
+    "pages/IndexCanvas"
+  ]
+}

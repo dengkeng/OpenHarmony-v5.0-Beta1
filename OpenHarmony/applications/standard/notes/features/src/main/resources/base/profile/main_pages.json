@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/MyNoteHome",
+    "pages/NoteContentHome",
+    "pages/NoteHome",
+    "pages/NoteHomePortrait"
+  ]
+}

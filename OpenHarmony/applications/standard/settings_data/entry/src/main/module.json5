@@ -1,0 +1,48 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/DataAbilityStage.ts",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "metadata": [
+      {
+        "name": "ArkTSPartialUpdate",
+        "value": "false"
+      }
+    ],
+    "uiSyntax": "ets",
+    "extensionAbilities": [
+      {
+        "srcEntrance": "./ets/DataAbility/DataExtAbility.ets",
+        "name": "DataExtAbility",
+        "icon": "$media:icon",
+        "description": "$string:description_datashareextability",
+        "type": "dataShare",
+        "uri": "datashare://com.ohos.settingsdata.DataAbility",
+        "visible": true,
+        "writePermission": "ohos.permission.MANAGE_SECURE_SETTINGS",
+        "metadata": [{"name": "ohos.extension.dataShare", "resource": "$profile:data_share_config"}]
+      },
+      {
+        "name": "UserChangeStaticSubscriber",
+        "type": "staticSubscriber",
+        "visible": true,
+        "description": "UserChangeStaticSubscriber",
+        "icon": "$media:icon",
+        "metadata": [{
+          "name": "ohos.extension.staticSubscriber",
+          "resource": "$profile:static_subscriber_config"
+        }],
+        "srcEntrance": "./ets/StaticSubscriber/UserChangeStaticSubscriber.ets"
+      }
+    ]
+  }
+}

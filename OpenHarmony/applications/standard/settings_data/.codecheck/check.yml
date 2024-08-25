@@ -1,0 +1,3 @@
+tool_params:
+  cmetrics:
+    exclude:applications/standard/settingsdata/hvigorfile.js|applications/standard/settingsdata/entry/hvigorfile.js

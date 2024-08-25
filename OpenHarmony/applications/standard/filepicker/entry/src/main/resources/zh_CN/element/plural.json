@@ -1,0 +1,30 @@
+{
+  "plural": [
+    {
+      "name": "minute_ago",
+      "value": [
+        {
+          "quantity": "one",
+          "value": "%d 分钟前"
+        },
+        {
+          "quantity": "other",
+          "value": "%d 分钟前"
+        }
+      ]
+    },
+    {
+      "name": "filePickerTip",
+      "value": [
+        {
+          "quantity": "one",
+          "value": "选择的文件数量已经超过 %d 个限制，请重新选择"
+        },
+        {
+          "quantity": "other",
+          "value": "选择的文件数量已经超过 %d 个限制，请重新选择"
+        }
+      ]
+    }
+  ]
+}

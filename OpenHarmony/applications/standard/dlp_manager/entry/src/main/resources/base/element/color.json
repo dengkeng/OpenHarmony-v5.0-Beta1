@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "encryption_divider_color",
+      "value": "#efefef"
+    },
+    {
+      "name": "base_background_color_dark",
+      "value": "#33182431"
+    }
+  ]
+}

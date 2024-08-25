@@ -1,0 +1,44 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "userauthuiextensionability",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "extensionAbilities": [
+      {
+        "name": "userauthuiextensionability",
+        "srcEntry": "./ets/extensionability/UserAuthAbility.ts",
+        "icon": "$media:app_icon",
+        "label": "$string:EntryAbility_label",
+        "type": "sysDialog/userAuth",
+        "metadata": [
+          {
+            "name": "ohos.extension.servicetype",
+            "value": "commonDialog"
+          }
+        ]
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.ACCESS_PIN_AUTH"
+      },
+      {
+        "name": "ohos.permission.ACCESS_BIOMETRIC"
+      },
+      {
+        "name": "ohos.permission.SUPPORT_USER_AUTH"
+      },
+      {
+        "name": "ohos.permission.PRIVACY_WINDOW"
+      }
+    ]
+  }
+}

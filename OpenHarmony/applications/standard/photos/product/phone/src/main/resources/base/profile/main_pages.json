@@ -1,0 +1,20 @@
+{
+  "src": [
+    "pages/index",
+    "pages/PhotoGridPage",
+    "pages/PhotoBrowser",
+    "pages/VideoBrowser",
+    "pages/SelectPhotoBrowser",
+    "pages/ThirdSelectPhotoBrowser",
+    "pages/ThirdSelectAlbumSetPage",
+    "pages/ThirdSelectPhotoGridPage",
+    "pages/MediaOperationPage",
+    "pages/DefaultPhotoPage",
+    "pages/NewAlbumPage",
+    "pages/AlbumSelect",
+    "pages/EditMain",
+    "pages/FormEditorPage",
+    "pages/ResourceDeletePage",
+    "pages/DeleteUIExtensionPage"
+  ]
+}

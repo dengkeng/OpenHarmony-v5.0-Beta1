@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d年%d月%d日"
+    },
+    {
+      "name": "mm_dd",
+      "value": "%d月%d日"
+    }
+  ]
+}

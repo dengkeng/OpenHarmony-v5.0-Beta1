@@ -1,0 +1,6 @@
+{
+  "src": [
+    "pages/PathPicker",
+    "pages/browser/storage/MyPhone"
+  ]
+}

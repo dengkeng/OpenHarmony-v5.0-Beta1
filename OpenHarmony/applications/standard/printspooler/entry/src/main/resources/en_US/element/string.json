@@ -1,0 +1,496 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "MainAbility_desc",
+      "value": "MainAbility"
+    },
+    {
+      "name": "welcome",
+      "value": "Welcome to"
+    },
+    {
+      "name": "MainAbility_label",
+      "value": "Print"
+    },
+    {
+      "name": "print_slogan",
+      "value": "Harmony printing in one step"
+    },
+    {
+      "name": "privacy_statement_text",
+      "value": "This service needs to be connected to the Internet, invoke Location information permissions, and collect device information to provide printing services. For details about personal information processing, see the "
+    },
+    {
+      "name": "about_privacy_statement_text",
+      "value": "Statement about print services and privacy"
+    },
+    {
+      "name": "permissions_notice",
+      "value": "Permissions Notice"
+    },
+    {
+      "name": "print_permissions_notice",
+      "value": "Description of the Print Permission"
+    },
+    {
+      "name": "permissions_notice_content",
+      "value": "To start this service, you need to apply for one of the following permissions, which can be revoked by going to Settings > Privacy > Permissions:"
+    },
+    {
+      "name": "print_permission_network",
+      "value": "Internet"
+    },
+    {
+      "name": "location_information",
+      "value": "Location information"
+    },
+    {
+      "name": "permission_location_content",
+      "value": "Used to implement the WLAN direct connection function of the printer."
+    },
+    {
+      "name": "JobManagerAbility_desc",
+      "value": "JobManagerAbility"
+    },
+    {
+      "name": "JobManagerAbility_label",
+      "value": "PrintJob"
+    },
+    {
+      "name": "index_printer",
+      "value": "Printer name:"
+    },
+    {
+      "name": "index_add_printer",
+      "value": "add printer"
+    },
+    {
+      "name": "index_add_copies",
+      "value": "Copies:"
+    },
+    {
+      "name":"index_page_custom",
+      "value":"Customization:"
+    },
+    {
+      "name":"index_page_custom_example",
+      "value":"For example：1,3,5-12"
+    },
+    {
+      "name": "index_page_range",
+      "value": "Page range:"
+    },
+    {
+      "name": "index_all_pages",
+      "value": "All pages"
+    },
+    {
+      "name": "index_from",
+      "value": "from"
+    },
+    {
+      "name": "index_to",
+      "value": "to"
+    },
+    {
+      "name": "index_media_size",
+      "value": "Paper size:"
+    },
+    {
+      "name": "index_direction",
+      "value": "Orientation:"
+    },
+    {
+      "name": "index_media_type",
+      "value": "Paper type:"
+    },
+    {
+      "name": "index_borderless",
+      "value": "Borderless"
+    },
+    {
+      "name": "index_print_quality",
+      "value": "Print quality:"
+    },
+    {
+      "name": "index_duplex_mode",
+      "value": "Print style:"
+    },
+    {
+      "name": "Agree",
+      "value": "Agree"
+    },
+    {
+      "name": "Cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "Index_doPrint",
+      "value": "PRINT"
+    },
+    {
+      "name": "index_no_printer_selected",
+      "value": "No printer"
+    },
+    {
+      "name": "custom_dialog_choose_printer",
+      "value": "Select printer"
+    },
+    {
+      "name": "ISO_C5",
+      "value": "C5 envelope"
+    },
+    {
+      "name": "ISO_DL",
+      "value": "DL envelope"
+    },
+    {
+      "name": "PHOTO_4x6",
+      "value": "4x6 in"
+    },
+    {
+      "name": "PHOTO_5x7",
+      "value": "5x7 in"
+    },
+    {
+      "name": "ColorMode",
+      "value": "B/W"
+    },
+    {
+      "name": "ColorMode_MONOCHROME",
+      "value": "Black & White"
+    },
+    {
+      "name": "ColorMode_COLOR",
+      "value": "Color"
+    },
+    {
+      "name": "PageDirection_AUTO",
+      "value": "auto"
+    },
+    {
+      "name": "PageDirection_LANDSCAPE",
+      "value": "Landscape"
+    },
+    {
+      "name": "PageDirection_VERTICAL",
+      "value": "Portrait"
+    },
+    {
+      "name": "MediaType_NORMAL",
+      "value": "Plain"
+    },
+    {
+      "name": "MediaType_PHOTO",
+      "value": "Photo"
+    },
+    {
+      "name": "PrintQuality_BEST",
+      "value": "Best"
+    },
+    {
+      "name": "PrintQuality_STANDARD",
+      "value": "Standard"
+    },
+    {
+      "name": "PrintQuality_ECONOMY",
+      "value": "Economy"
+    },
+    {
+      "name": "JobDes_BorderLess",
+      "value": "BorderLess"
+    },
+    {
+      "name": "DuplexMode_SINGLE",
+      "value": "Single-sided"
+    },
+    {
+      "name": "DuplexMode_DOUBLE",
+      "value": "Double-sided"
+    },
+    {
+      "name": "DuplexMode_ONESIDE",
+      "value": "Print on one side"
+    },
+    {
+      "name": "DuplexMode_LONG",
+      "value": "Flip pages on long edge"
+    },
+    {
+      "name": "DuplexMode_SHORT",
+      "value": "Flip pages on short edge"
+    },
+    {
+      "name": "printer_door_open",
+      "value": "Door open"
+    },
+    {
+      "name": "printer_jammed",
+      "value": "Jammed"
+    },
+    {
+      "name": "printer_offline",
+      "value": "Offline"
+    },
+    {
+      "name": "printer_low_on_toner",
+      "value": "Low on toner"
+    },
+    {
+      "name": "printer_low_on_ink",
+      "value": "Low on ink"
+    },
+    {
+      "name": "printer_out_of_toner",
+      "value": "Out of toner"
+    },
+    {
+      "name": "printer_out_of_ink",
+      "value": "Out of ink"
+    },
+    {
+      "name": "printer_out_of_paper",
+      "value": "Out of paper"
+    },
+    {
+      "name": "printer_busy",
+      "value": "Busy"
+    },
+    {
+      "name": "printer_check",
+      "value": "Check printer"
+    },
+    {
+      "name": "printer_bad_certificate",
+      "value": "Bad certificate"
+    },
+    {
+      "name": "print_job_queued",
+      "value": "In line to print…"
+    },
+    {
+      "name": "print_job_created",
+      "value": "Preparing to print…"
+    },
+    {
+      "name": "print_job_printing",
+      "value": "Printing…"
+    },
+    {
+      "name": "print_job_completed",
+      "value": "Printing complete"
+    },
+    {
+      "name": "print_job_cancelling",
+      "value": "Canceling…"
+    },
+    {
+      "name": "print_job_cancelled",
+      "value": "Cancel printing"
+    },
+    {
+      "name": "print_job_failed",
+      "value": "Printing failed"
+    },
+    {
+      "name": "print_job_blocked",
+      "value": "Printer error"
+    },
+    {
+      "name": "confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "print_job",
+      "value": "Tasks"
+    },
+    {
+      "name": "wlan_confirm_dialog_open_wlan",
+      "value": "WLAN needs to be enabled to search for printers."
+    },
+    {
+      "name": "connect_confirm_dialog_confirm",
+      "value": "Press the network button on the printer control panel to confirm connection"
+    },
+    {
+      "name": "connect_confirm_dialog_tips",
+      "value": "*The actual operation required may vary by product."
+    },
+    {
+      "name": "JobManagerPage_ok",
+      "value": "Got it"
+    },
+    {
+      "name": "alarm_dialog_connect_failed",
+      "value": "Connection failed"
+    },
+    {
+      "name": "pauseMark",
+      "value": ","
+    },
+    {
+      "name": "Index_pluralsJobName",
+      "value": "Printing %s image, including"
+    },
+    {
+      "name": "connectConfirmDialog_countDown",
+      "value": "OK (%ss)"
+    },
+    {
+      "name": "borderless_enable_toast",
+      "value": "Borderless printing may result in an incomplete image."
+    },
+    {
+      "name": "borderless_type_toast",
+      "value": "Borderless printing is not available with plain paper."
+    },
+    {
+      "name": "print_job_status_uploading",
+      "value": "Task uploading..."
+    },
+    {
+      "name": "print_job_status_upload_failed",
+      "value": "Failed to upload the task"
+    },
+    {
+      "name": "print_job_status_converting",
+      "value": "Converting..."
+    },
+    {
+      "name": "print_job_status_convert_slowly",
+      "value": "Task conversion takes a long time"
+    },
+    {
+      "name": "print_job_status_converted",
+      "value": "Task conversion is complete. Please go to the printer to swipe the card to print."
+    },
+    {
+      "name": "print_block_reason_swipe_card_print",
+      "value": " Please go to the printer to swipe the card to print."
+    },
+    {
+      "name": "print_block_reason_account_error",
+      "value": "Account error"
+    },
+    {
+      "name": "print_block_reason_print_permission_error",
+      "value": "The printing permission is abnormal"
+    },
+    {
+      "name": "print_block_reason_print_color_permission_error",
+      "value": "Color printing permission exception"
+    },
+    {
+      "name": "print_block_reason_network_error",
+      "value": "The network is abnormal"
+    },
+    {
+      "name": "print_block_reason_connect_server_error",
+      "value": "The server is abnormal"
+    },
+    {
+      "name": "print_block_reason_large_file_error",
+      "value": "An error occurred when printing the file"
+    },
+    {
+      "name": "print_block_reason_parse_file_error",
+      "value": "File parsing exception."
+    },
+    {
+      "name": "http_require",
+      "value": "http require"
+    },
+    {
+      "name": "p2p_require",
+      "value": "Used to scan WIFI-DIRECT printers."
+    },
+    {
+      "name": "wifi_require",
+      "value": "open wifi require"
+    },
+    {
+      "name": "emmit_require",
+      "value": "send emmit message require"
+    },
+    {
+      "name": "print_require",
+      "value": "print job require"
+    },
+    {
+      "name": "open_wifi_failed",
+      "value": "Failed to enable Wi-Fi"
+    },
+    {
+      "name": "print_security_guard_require",
+      "value": "print security guard require"
+    },
+    {
+      "name":"print_file_name_require",
+      "value":"print file name require"
+    },
+    {
+      "name": "app_name",
+      "value": "Print"
+    },
+    {
+      "name": "connected_device",
+      "value": "Connected Device"
+    },
+    {
+      "name":"cus_range_error_max_image_count",
+      "value":"Page number out of range, upper limit is %s."
+    },
+    {
+      "name":"cus_range_error_invalid_range",
+      "value":"Invalid page number range, please use example: 1, 3, 5 - 12."
+    },
+    {
+      "name":"cus_range_error_words_limit",
+      "value":"Maximum word limit reached."
+    },
+    {
+      "name":"preview_loading",
+      "value":"Loading..."
+    },
+    {
+      "name":"preview_failed",
+      "value":"Preview Failed"
+    },
+    {
+      "name":"toast_preview_failed",
+      "value":"\"%s\"preview failed"
+    },
+    {
+      "name":"toast_preview_failed_plurals",
+      "value":"Failed to preview %2$d files such as \"%1$s\"."
+    },
+    {
+      "name":"toast_max_copies",
+      "value":"A maximum of 100 pages can be printed at the same time."
+    },
+    {
+      "name":"toast_cannot_connect_while_printing",
+      "value":"Printing is in progress. Cannot connect to another printer."
+    },
+    {
+      "name": "error_task_send_msg",
+      "value": "Task sending error"
+    },
+    {
+      "name": "custom_dialog_no_printer",
+      "value": "No printers available."
+    },
+    {
+      "name": "print_job_name_plurals",
+      "value": "and other %d pictures"
+    },
+    {
+      "name":"media_size_suffix",
+      "value":"(%d mm × %d mm)"
+    }
+  ]
+}

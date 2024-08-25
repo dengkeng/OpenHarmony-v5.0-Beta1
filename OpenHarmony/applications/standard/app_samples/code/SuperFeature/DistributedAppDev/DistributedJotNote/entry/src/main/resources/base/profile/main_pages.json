@@ -1,0 +1,11 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/Home",
+    "pages/Settings",
+    "pages/Notes",
+    "pages/Todolist",
+    "pages/ImgWall",
+    "pages/Page_AsyncAbility"
+  ]
+}

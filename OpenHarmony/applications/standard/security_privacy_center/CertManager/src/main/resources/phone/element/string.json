@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "证书管理"
+    },
+    {
+      "name": "mainability_description",
+      "value": "ETS_Empty Feature Ability"
+    },
+    {
+      "name": "certificateTab",
+      "value": "证书与凭据"
+    },
+    {
+      "name": "certificateManage",
+      "value": "证书管理"
+    },
+    {
+      "name": "trustedEvidence",
+      "value": "受信任的证书"
+    },
+    {
+      "name": "userEvidence",
+      "value": "凭据列表"
+    },
+    {
+      "name": "installInStorageDevice",
+      "value": "从存储设备安装"
+    },
+    {
+      "name": "installCertificateFailed",
+      "value": "从存储设备安装失败"
+    },
+    {
+      "name": "certificatePwdTab",
+      "value": "提取证书"
+    },
+    {
+      "name": "certificatePwdInfo",
+      "value": "输入证书密码以提取"
+    },
+    {
+      "name": "deleteAllCred",
+      "value": "删除所有证书与凭据"
+    }
+  ]
+}

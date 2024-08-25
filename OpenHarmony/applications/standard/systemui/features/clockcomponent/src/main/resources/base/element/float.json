@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "status_bar_clock_width",
+      "value": "60vp"
+    },
+    {
+      "name": "mTime_text_margin_left",
+      "value": "0vp"
+    },
+    {
+      "name": "icon_component_opacity",
+      "value": "1"
+    }
+  ]
+}

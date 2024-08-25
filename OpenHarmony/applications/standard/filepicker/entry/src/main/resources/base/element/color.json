@@ -1,0 +1,72 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "hicloud_hmos_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "button_pressStyles",
+      "value": "#ededed"
+    },
+    {
+      "name": "dialog_button_blue",
+      "value": "#254FF7"
+    },
+    {
+      "name": "dialog_title_font_color",
+      "value": "#18181A"
+    },
+    {
+      "name": "recently_font_color",
+      "value": "#18181A"
+    },
+    {
+      "name": "detail_path_text_color",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "dialog_button_divider_color",
+      "value": "#33000000"
+    },
+    {
+      "name": "text_input_bg_color",
+      "value": "#00000000"
+    },
+    {
+      "name": "move_dialog_divider",
+      "value": "#dcdcdc"
+    },
+    {
+      "name": "move_dialog_background",
+      "value": "#e9edfe"
+    },
+    {
+      "name": "transparent_color",
+      "value": "#00000000"
+    },
+    {
+      "name": "error_message_color",
+      "value": "#FF3300"
+    },
+    {
+      "name": "path_pick_selected_bg",
+      "value": "#1A254FF7"
+    },
+    {
+      "name": "list_item_pressed_bg",
+      "value": "#1A000000"
+    }
+  ]
+}

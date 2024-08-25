@@ -1,0 +1,11 @@
+{
+  "entryModules": [
+    "pc_entry"
+  ],
+  "apiType": 'stageMode',
+    "targets": [
+    {
+      "name": "default",
+    }
+  ]
+}

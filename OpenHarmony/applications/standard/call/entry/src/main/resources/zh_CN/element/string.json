@@ -1,0 +1,280 @@
+{
+  "string": [
+    {
+      "name": "sms",
+      "value": "短信"
+    },
+    {
+      "name": "callui_description",
+      "value": "通话"
+    },
+    {
+      "name": "remind",
+      "value": "提醒"
+    },
+    {
+      "name": "hangUpReply",
+      "value": "挂断并短信回复"
+    },
+    {
+      "name": "backLater",
+      "value": "稍后给您回电话"
+    },
+    {
+      "name": "answerThePhone",
+      "value": "抱歉，现在不方便接电话。"
+    },
+    {
+      "name": "contactMeLater",
+      "value": "正在开会，稍后联系。"
+    },
+    {
+      "name": "beThereSoon",
+      "value": "稍等，马上到。"
+    },
+    {
+      "name": "customSMS",
+      "value": "自定义短信"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "callBackReminder",
+      "value": "回拨提醒"
+    },
+    {
+      "name": "minutes",
+      "value": "30分钟后"
+    },
+    {
+      "name": "oneHourLater",
+      "value": "1小时后"
+    },
+    {
+      "name": "twoHoursLater",
+      "value": "2小时后"
+    },
+    {
+      "name": "dialing",
+      "value": "正在拨号"
+    },
+    {
+      "name": "calling",
+      "value": "通话中"
+    },
+    {
+      "name": "callHold",
+      "value": "保持"
+    },
+    {
+      "name": "hangUpCompleted",
+      "value": "挂断完成"
+    },
+    {
+      "name": "hangingUp",
+      "value": "正在挂断"
+    },
+    {
+      "name": "recording",
+      "value": "录音"
+    },
+    {
+      "name": "keep",
+      "value": "等待"
+    },
+    {
+      "name": "addCall",
+      "value": "添加通话"
+    },
+    {
+      "name": "videoCall",
+      "value": "视频通话"
+    },
+    {
+      "name": "mute",
+      "value": "静音"
+    },
+    {
+      "name": "contactPerson",
+      "value": "联系人"
+    },
+    {
+      "name": "partyIsRinging",
+      "value": "对方已振铃"
+    },
+    {
+      "name": "saveNumber",
+      "value": "保存号码"
+    },
+    {
+      "name": "addToBlacklist",
+      "value": "加入黑名单"
+    },
+    {
+      "name": "shutDown",
+      "value": "关闭"
+    },
+    {
+      "name": "speaker",
+      "value": "扬声器"
+    },
+    {
+      "name": "phoneHandset",
+      "value": "手机听筒"
+    },
+    {
+      "name": "wiredHeadset",
+      "value": "有线耳机"
+    },
+    {
+      "name": "blueetoothDevice",
+      "value": "蓝牙设备"
+    },
+    {
+      "name": "mobileNetwork",
+      "value": "无法访问移动网络。"
+    },
+    {
+      "name": "gotIt",
+      "value": "知道了"
+    },
+    {
+      "name": "currentCall",
+      "value": "当前通话"
+    },
+    {
+      "name": "hangUp",
+      "value": "挂断"
+    },
+    {
+      "name": "handsFree",
+      "value": "免提"
+    },
+    {
+      "name": "incomingCall",
+      "value": "来电"
+    },
+    {
+      "name": "reject",
+      "value": "拒接"
+    },
+    {
+      "name": "answer",
+      "value": "接听"
+    },
+    {
+      "name": "maintain",
+      "value": "保持"
+    },
+    {
+      "name": "exchange",
+      "value": "交换"
+    },
+    {
+      "name": "mergeCall",
+      "value": "合并通话"
+    },
+    {
+      "name": "manageUsers",
+      "value": "管理用户"
+    },
+    {
+      "name": "telephoneConference",
+      "value": "电话会议"
+    },
+    {
+      "name": "unknownNumber",
+      "value": "未知号码"
+    },
+    {
+      "name": "noCard",
+      "value": "无法访问移动网络"
+    },
+    {
+      "name": "telephone_Conference",
+      "value": "电话会议"
+    },
+    {
+      "name": "message_Failed",
+      "value": "短信发送失败"
+    },
+    {
+      "name": "SMS_Sent",
+      "value": "短信已发送至"
+    },
+    {
+      "name": "SMS_Authorization_Notification",
+      "value": "请前往设置进行短信授权"
+    },
+    {
+      "name": "emergency",
+      "value": "紧急通话"
+    },
+    {
+      "name": "end_holding_call",
+      "value": "接听来电将挂断之前保持的通话"
+    },
+    {
+      "name": "READ_CONTACTS",
+      "value": "读取联系人"
+    },
+    {
+      "name": "SEND_MESSAGES",
+      "value": "发送短信"
+    },
+    {
+      "name": "GET_BUNDLE_INFO_PRIVILEGED",
+      "value": "获取绑定信息特权"
+    },
+    {
+      "name": "GET_TELEPHONY_STATE",
+      "value": "获取电话状态"
+    },
+    {
+      "name": "NOTIFICATION_CONTROLLER",
+      "value": "发送通知"
+    },
+    {
+      "name": "START_ABILITIES_FROM_BACKGROUND",
+      "value": "从后台启动的能力"
+    },
+    {
+      "name": "KEEP_BACKGROUND_RUNNING",
+      "value": "后台运行能力"
+    },
+    {
+      "name": "ANSWER_CALL",
+      "value": "接听电话"
+    },
+    {
+      "name": "turn_off_airplane_and_calls",
+      "value": "是否关闭飞行模式以拨打电话？"
+    },
+    {
+      "name": "VIBRATE",
+      "value": "振动"
+    },
+    {
+      "name": "SET_TELEPHONY_STATE",
+      "value": "设置电话状态"
+    },
+    {
+      "name": "ACCELEROMETER",
+      "value": "加速度计"
+    },
+    {
+      "name": "MANAGE_SECURE_SETTINGS",
+      "value": "管理安全设置"
+    },
+    {
+      "name": "PLACE_CALL",
+      "value": "拨打电话"
+    },
+    {
+      "name": "RUNNING_LOCK",
+      "value": "屏幕运行锁"
+    }
+  ]
+}

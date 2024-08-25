@@ -1,0 +1,272 @@
+{
+  "color": [
+    {
+      "name": "color_333333_grey",
+      "value": "#333333"
+    },
+    {
+      "name": "color_666666_grey",
+      "value": "#666666"
+    },
+    {
+      "name": "color_999999_grey",
+      "value": "#999999"
+    },
+    {
+      "name": "color_E3E3E3_grey",
+      "value": "#E3E3E3"
+    },
+    {
+      "name": "color_D8D8D8_grey",
+      "value": "#D8D8D8"
+    },
+    {
+      "name": "color_button_grey",
+      "value": "#1824310D"
+    },
+    {
+      "name": "color_00000000_transparent",
+      "value": "#00000000"
+    },
+    {
+      "name": "volume_bg_color",
+      "value": "#CCFFFFFF"
+    },
+    {
+      "name": "white_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "font_color_007DFF",
+      "value": "#007DFF"
+    },
+    {
+      "name": "search_no_result_text_color",
+      "value": "$color:font_color_182431"
+    },
+    {
+      "name": "search_result_text_color",
+      "value": "$color:font_color_182431"
+    },
+    {
+      "name": "search_result_text_color_highlight",
+      "value": "$color:font_color_007DFF"
+    },
+    {
+      "name": "bluetooth_text_color_highlight",
+      "value": "$color:font_color_007DFF"
+    },
+    {
+      "name": "FAFAFA",
+      "value": "#FAFAFA"
+    },
+    {
+      "name": "DCEAF9",
+      "value": "#DCEAF9"
+    },
+    {
+      "name": "4C89F0",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "D1D0DB",
+      "value": "#D1D0DB"
+    },
+    {
+      "name": "cm_del_all_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "cm_del_all_cancel_button_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "cm_del_all_delete_button_color",
+      "value": "#FA2A2D"
+    },
+    {
+      "name": "request_auth_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "request_auth_background_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "request_auth_bt_font_color",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "request_auth_color",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "install_cancel_bt_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "install_cancel_bt_bg_color",
+      "value": "#0d182431"
+    },
+    {
+      "name": "install_confirm_bt_font_color",
+      "value": "#ffffffff"
+    },
+    {
+      "name": "install_confirm_bt_bg_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "install_confirm_bt_bg_disable_color",
+      "value": "#66007DFF"
+    },
+    {
+      "name": "install_info_font_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "credentials_app_name_color",
+      "value": "#182431"
+    },
+    {
+      "name": "credentials_app_Toggle_selectColor",
+      "value": "#007DFF"
+    },
+    {
+      "name": "credentials_app_title_color",
+      "value": "#182431"
+    },
+    {
+      "name": "credentials_app_list_backgroundColor",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "credentials_app_finishColor",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "credentials_app_finish_backgroundColor",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "credentials_detail_keyNum_fontColor",
+      "value": "#000000"
+    },
+    {
+      "name": "credentials_detail_close_fontColor",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "warning_delete_fontColor",
+      "value": "#FF0000"
+    },
+    {
+      "name": "public_delete_fontColor",
+      "value": "#CD5C5C"
+    },
+    {
+      "name": "evidenceList_TabBuilder_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "Evidence_color",
+      "value": "#0D000000"
+    },
+    {
+      "name": "Evidence_backgroundColor",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "sys_list_divider_color_000000",
+      "value": "#0D000000"
+    },
+    {
+      "name": "TrustedEvidence_TabBuilder_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "sys_list_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "user_list_divider_color_000000",
+      "value": "#0D000000"
+    },
+    {
+      "name": "user_list_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "componentUser_text_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "ComponentSystem_text_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "ComponentSystem_Toggle_selectedColor_007DFF",
+      "value": "#007DFF"
+    },
+    {
+      "name": "CustomDialogExample_text_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "CustomDialogExample_list_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "CustomDialogExample_Button_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "CustomDialogExample_Button_fontColor_4C89F0",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "CustomDialogExampleUser_text_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_Toggle_selectedColor_007DFF",
+      "value": "#007DFF"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_firButton_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_firButton_fontColor_4C89F0",
+      "value": "#4C89F0"
+    },
+    {
+      "name": "CustomDialogExampleUser_warning_secButton_fontColor_FF0000",
+      "value": "#FF0000"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_secButton_backgroundColor_FFFFFF",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "CustomDialogExampleUser_Flex_secButton_fontColor_FF0000",
+      "value": "#FF0000"
+    },
+    {
+      "name": "DialogSubjectComponent_Text_fontColor_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "CertManager_Divider_Color_182431",
+      "value": "#182431"
+    },
+    {
+      "name": "TrustedEvidence_tabs_backgroundColor_F1F3F5",
+      "value": "#F1F3F5"
+    }
+  ]
+}
