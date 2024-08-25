@@ -1,0 +1,44 @@
+[
+  {
+    "packageName": "api\\api_level_change_001.d.ts",
+    "className": "deviceControl",
+    "rawText": "declare deviceControl",
+    "dtsName": "api_level_change_001.d.ts",
+    "dtsPath": "api/api_level_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 9,
+    "status": "访问级别有变化",
+    "oldMessage": "systemapi",
+    "newMessage": "",
+    "syscap": "Customization"
+  },
+  {
+    "packageName": "api\\api_level_change_001.d.ts",
+    "className": "deviceControl",
+    "rawText": "function resetFactory(admin: Want, callback: AsyncCallback<void>): void;",
+    "dtsName": "api_level_change_001.d.ts",
+    "dtsPath": "api/api_level_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 9,
+    "status": "访问级别有变化",
+    "oldMessage": "systemapi",
+    "newMessage": "",
+    "syscap": "Customization"
+  },
+  {
+    "packageName": "api\\api_level_change_001.d.ts",
+    "className": "deviceControl",
+    "rawText": "function resetFactory(admin: Want): Promise<void>;",
+    "dtsName": "api_level_change_001.d.ts",
+    "dtsPath": "api/api_level_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 9,
+    "status": "访问级别有变化",
+    "oldMessage": "systemapi",
+    "newMessage": "",
+    "syscap": "Customization"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "filePath": "ut_method_class_002.d.ts",
+    "packageName": "ut_method_class_002",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_method_class_002.d.ts/Test",
+    "apiName": "Test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Class",
+    "definedText": " export class Test",
+    "pos": {
+      "line": 20,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_method_class_002.d.ts",
+    "packageName": "ut_method_class_002",
+    "parentModuleName": "Test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_method_class_002.d.ts/Test/func",
+    "apiName": "func",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Method",
+    "definedText": "func(str: string) {}",
+    "pos": {
+      "line": 21,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

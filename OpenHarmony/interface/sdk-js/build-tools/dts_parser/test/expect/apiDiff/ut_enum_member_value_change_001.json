@@ -1,0 +1,113 @@
+[
+  {
+    "apiType": "EnumValue",
+    "statusCode": 16,
+    "oldApiDefinedText": "VALUE_ONE",
+    "newApiDefinedText": "VALUE_ONE = 2",
+    "oldApiName": "VALUE_ONE",
+    "newApiName": "VALUE_ONE",
+    "oldDtsName": "ut_enum_member_value_change_001.d.ts",
+    "newDtsName": "ut_enum_member_value_change_001.d.ts",
+    "diffType": 58,
+    "diffMessage": "枚举赋值发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_ONE"
+    ],
+    "newHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_ONE"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "0",
+    "newDescription": "2",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "EnumValue",
+    "statusCode": 16,
+    "oldApiDefinedText": "VALUE_TWO",
+    "newApiDefinedText": "VALUE_TWO",
+    "oldApiName": "VALUE_TWO",
+    "newApiName": "VALUE_TWO",
+    "oldDtsName": "ut_enum_member_value_change_001.d.ts",
+    "newDtsName": "ut_enum_member_value_change_001.d.ts",
+    "diffType": 58,
+    "diffMessage": "枚举赋值发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_TWO"
+    ],
+    "newHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_TWO"
+    ],
+    "oldPos": {
+      "line": 22,
+      "character": 3
+    },
+    "newPos": {
+      "line": 22,
+      "character": 3
+    },
+    "oldDescription": "1",
+    "newDescription": "3",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "EnumValue",
+    "statusCode": 16,
+    "oldApiDefinedText": "VALUE_THREE",
+    "newApiDefinedText": "VALUE_THREE",
+    "oldApiName": "VALUE_THREE",
+    "newApiName": "VALUE_THREE",
+    "oldDtsName": "ut_enum_member_value_change_001.d.ts",
+    "newDtsName": "ut_enum_member_value_change_001.d.ts",
+    "diffType": 58,
+    "diffMessage": "枚举赋值发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_THREE"
+    ],
+    "newHierarchicalRelations": [
+      "ut_enum_member_value_change_001.d.ts",
+      "Test",
+      "VALUE_THREE"
+    ],
+    "oldPos": {
+      "line": 24,
+      "character": 3
+    },
+    "newPos": {
+      "line": 24,
+      "character": 3
+    },
+    "oldDescription": "2",
+    "newDescription": "4",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

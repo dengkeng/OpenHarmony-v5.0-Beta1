@@ -1,0 +1,41 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "requestPermissionsFromUser(context: Context, permissionList: Array<Permissions>): Promise<PermissionRequestResult>;",
+    "newApiDefinedText": "requestPermissionsFromUser(context: Context, permissions: Array<Permissions>): Promise<PermissionRequestResult>;",
+    "oldApiName": "requestPermissionsFromUser",
+    "newApiName": "requestPermissionsFromUser",
+    "oldDtsName": "ut_extend_syscap.d.ts",
+    "newDtsName": "ut_extend_syscap.d.ts",
+    "diffType": 41,
+    "diffMessage": "函数中的参数名称发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_extend_syscap.d.ts",
+      "abilityAccessCtrl",
+      "AtManager",
+      "requestPermissionsFromUser"
+    ],
+    "newHierarchicalRelations": [
+      "ut_extend_syscap.d.ts",
+      "abilityAccessCtrl",
+      "AtManager",
+      "requestPermissionsFromUser"
+    ],
+    "oldPos": {
+      "line": 30,
+      "character": 5
+    },
+    "newPos": {
+      "line": 30,
+      "character": 5
+    },
+    "oldDescription": "permissionList: Array<Permissions>",
+    "newDescription": "permissions: Array<Permissions>",
+    "oldSyscapField": "Security",
+    "newSyscapField": "Security"
+  }
+]

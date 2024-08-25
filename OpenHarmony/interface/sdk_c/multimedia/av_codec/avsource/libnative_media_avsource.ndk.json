@@ -1,0 +1,26 @@
+[
+    {
+        "first_introduced": "12",
+        "name": "OH_AVSource_CreateWithDataSource"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVSource_CreateWithURI"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVSource_CreateWithFD"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVSource_Destroy"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVSource_GetSourceFormat"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVSource_GetTrackFormat"
+    }
+]

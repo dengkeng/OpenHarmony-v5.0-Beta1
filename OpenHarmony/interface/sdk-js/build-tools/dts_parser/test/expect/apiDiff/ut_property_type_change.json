@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 16,
+    "oldApiDefinedText": "str: string;",
+    "newApiDefinedText": "str: number;",
+    "oldApiName": "str",
+    "newApiName": "str",
+    "oldDtsName": "ut_property_type_change.d.ts",
+    "newDtsName": "ut_property_type_change.d.ts",
+    "diffType": 49,
+    "diffMessage": "属性类型发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_property_type_change.d.ts",
+      "Test",
+      "str"
+    ],
+    "newHierarchicalRelations": [
+      "ut_property_type_change.d.ts",
+      "Test",
+      "str"
+    ],
+    "oldPos": {
+      "line": 21,
+      "character": 3
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "string",
+    "newDescription": "number",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_export_002.d.ts",
+    "packageName": "ut_export_002",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_export_002.d.ts/Test",
+    "apiName": "Test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Class",
+    "definedText": " export class Test",
+    "pos": {
+      "line": 19,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

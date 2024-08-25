@@ -1,0 +1,62 @@
+[
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_CreateByMime"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_CreateByName"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Destroy"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_SetCallback"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Configure"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Prepare"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Start"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Stop"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Flush"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_Reset"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_GetOutputDescription"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_SetParameter"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_PushInputData"
+    },
+    {
+        "first_introduced": "9",
+        "name": "OH_AudioEncoder_FreeOutputData"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioEncoder_IsValid"
+    }
+]

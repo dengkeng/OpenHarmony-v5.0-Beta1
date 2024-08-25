@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\type002.d.ts(line: 27, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\type002.d.ts",
+    "message": "API check error of [wrong value]: the [type] tag type is incorrect. Please check if the type matches the attribute type"
+  }
+]

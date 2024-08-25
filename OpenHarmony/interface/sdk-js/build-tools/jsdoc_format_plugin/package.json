@@ -1,0 +1,43 @@
+{
+  "name": "jsdoc_format_plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "testAll": "npm install && mocha --config test/mocha/.mocharc.jsonc",
+    "testOnly": "nyc mocha --config test/mocha/.mocharc.jsonc --grep",
+    "pack": "webpack --mode=production",
+    "build": "npm run pack --bundle",
+    "formatSDK": "ts-node src/main.ts -i ../../api/ -o formatedSDK/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "api-checker": "file:../api_check_plugin",
+    "commander": "^9.1.0",
+    "comment-parser": "1.3.1",
+    "exceljs": "^4.3.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "prettier": "^2.6.2",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^9.0.13",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^17.0.23",
+    "@types/prettier": "^2.4.4",
+    "chai": "^4.2.0",
+    "json-loader": "^0.5.7",
+    "mocha": "^7.1.1",
+    "mochawesome": "^7.1.3",
+    "nyc": "^15.1.0",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.2.8",
+    "ts-node": "^10.9.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "EnumValue",
+    "statusCode": 16,
+    "oldApiDefinedText": "VALUE_ONE",
+    "newApiDefinedText": "VALUE_ONE = 6",
+    "oldApiName": "VALUE_ONE",
+    "newApiName": "VALUE_ONE",
+    "oldDtsName": "ut_enum_member_value_change_002.d.ts",
+    "newDtsName": "ut_enum_member_value_change_002.d.ts",
+    "diffType": 58,
+    "diffMessage": "枚举赋值发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_enum_member_value_change_002.d.ts",
+      "Test",
+      "VALUE_ONE"
+    ],
+    "newHierarchicalRelations": [
+      "ut_enum_member_value_change_002.d.ts",
+      "Test",
+      "VALUE_ONE"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "0",
+    "newDescription": "6",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

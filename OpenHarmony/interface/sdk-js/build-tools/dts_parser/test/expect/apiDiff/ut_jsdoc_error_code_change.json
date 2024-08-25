@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 7,
+    "oldApiDefinedText": "func(str: string): void;",
+    "newApiDefinedText": "func(str: string): void;",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_jsdoc_error_code_change.d.ts",
+    "newDtsName": "ut_jsdoc_error_code_change.d.ts",
+    "diffType": 22,
+    "diffMessage": "错误码的code值发生变化",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_error_code_change.d.ts",
+      "Test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_error_code_change.d.ts",
+      "Test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 26,
+      "character": 3
+    },
+    "newPos": {
+      "line": 26,
+      "character": 3
+    },
+    "oldDescription": "201,202,401",
+    "newDescription": "201,202,404",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\errorcode_change_001.d.ts",
+    "className": "deviceControl",
+    "rawText": "function resetFactory(admin: Want, callback: AsyncCallback<void>): void;",
+    "dtsName": "errorcode_change_001.d.ts",
+    "dtsPath": "api/errorcode_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 7,
+    "status": "错误码有变化",
+    "oldMessage": "9200001,9200002,201,202,401",
+    "newMessage": "9200001,9200002,201,202,401,402",
+    "syscap": "Customization"
+  }
+]

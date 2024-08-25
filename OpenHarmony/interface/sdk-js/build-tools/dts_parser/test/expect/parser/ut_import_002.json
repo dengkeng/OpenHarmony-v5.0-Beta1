@@ -1,0 +1,32 @@
+{
+  "ut_import_002.d.ts": [
+    {
+      "filePath": "ut_import_002.d.ts",
+      "apiType": "Import",
+      "definedText": "import Want from './@ohos.app.ability.Want';",
+      "pos": {
+        "line": 19,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "'./@ohos.app.ability.Want'",
+      "hierarchicalRelations": [
+        "ut_import_002.d.ts",
+        "'./@ohos.app.ability.Want'"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "",
+      "isJoinType": false,
+      "genericInfo": [],
+      "importValues": [
+        {
+          "key": "Want",
+          "value": "Want"
+        }
+      ],
+      "importPath": "'./@ohos.app.ability.Want'"
+    }
+  ]
+}

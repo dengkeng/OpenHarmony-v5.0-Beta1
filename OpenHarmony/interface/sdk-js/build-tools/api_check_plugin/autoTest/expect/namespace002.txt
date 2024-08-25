@@ -1,0 +1,9 @@
+[
+  {
+    "id": 8,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\namespace002.d.ts(line: 21, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\namespace002.d.ts",
+    "message": "API check error of [wrong scene]: JSDoc tag validity verification failed. Please confirm if the [namespace] tag is missing"
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\extends002.d.ts(line: 23, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\extends002.d.ts",
+    "message": "API check error of [wrong value]: JSDoc label validity verification failed. The [extends] label is not allowed. Please check the label usage method."
+  }
+]

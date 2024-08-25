@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_field_namespace_type_single_002.d.ts",
+    "packageName": "ut_field_namespace_type_single_002",
+    "parentModuleName": "testNamespace",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_field_namespace_type_single_002.d.ts/testNamespace/test",
+    "apiName": "test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "TypeAlias",
+    "definedText": "export type test = '123';",
+    "pos": {
+      "line": 17,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

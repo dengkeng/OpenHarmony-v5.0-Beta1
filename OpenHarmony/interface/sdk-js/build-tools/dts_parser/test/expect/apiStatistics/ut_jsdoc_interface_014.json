@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_interface_014.d.ts",
+    "packageName": "ut_jsdoc_interface_014",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_interface_014.d.ts/Test",
+    "apiName": "Test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Interface",
+    "definedText": " export interface Test",
+    "pos": {
+      "line": 21,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

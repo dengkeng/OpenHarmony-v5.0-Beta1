@@ -1,0 +1,36 @@
+[
+  {
+    "apiType": "Class",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Property",
+        "name": "name",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isReadOnly": false,
+        "isRequired": true,
+        "isStatic": false,
+        "permission": "ohos.permission.GET_SENSITIVE_PERMISSIONS or ohos.permission.GRANT_SENSITIVE_PERMISSIONS"
+      }
+    ],
+    "parentClasses": []
+  }
+]

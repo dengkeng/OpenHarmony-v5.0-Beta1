@@ -1,0 +1,17 @@
+[
+  {
+    "apiType": "Interface",
+    "name": "ButtonInterface",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": true,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [],
+    "parentClasses": []
+  }
+]

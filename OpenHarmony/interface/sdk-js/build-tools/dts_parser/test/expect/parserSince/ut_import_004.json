@@ -1,0 +1,15 @@
+[
+  {
+    "apiType": "Import",
+    "importValues": [
+      {
+        "key": "DataAbilityHelper1",
+        "value": "DataAbilityHelper1"
+      },
+      {
+        "key": "_DataAbilityHelper2",
+        "value": "DataAbilityHelper2"
+      }
+    ]
+  }
+]

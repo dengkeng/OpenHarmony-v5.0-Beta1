@@ -1,0 +1,68 @@
+[
+  {
+    "apiType": "Constant",
+    "statusCode": 0,
+    "oldApiDefinedText": "const CONSTANT2 = 2;",
+    "newApiDefinedText": "",
+    "oldApiName": "CONSTANT2",
+    "newApiName": "",
+    "oldDtsName": "ut_constant_change.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_constant_change.d.ts",
+      "test",
+      "CONSTANT2"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 21,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "const CONSTANT2 = 2;",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Constant",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "const CONSTANT3 = 2;",
+    "oldApiName": "",
+    "newApiName": "CONSTANT3",
+    "oldDtsName": "",
+    "newDtsName": "ut_constant_change.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_constant_change.d.ts",
+      "test",
+      "CONSTANT3"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "const CONSTANT3 = 2;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\param006.d.ts(line: 34, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\param006.d.ts",
+    "message": "API check error of [wrong value]: JSDoc tag validity verification failed. The [3] [param] tag is redundant. Please check if the tag should be deleted."
+  }
+]

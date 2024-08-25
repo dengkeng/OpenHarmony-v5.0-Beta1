@@ -1,0 +1,45 @@
+<!--
+ Copyright (c) 2023 Huawei Device Co., Ltd.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<idea-plugin>
+    <id>com.action.update.check</id>
+
+    <name>UpdateCheck</name>
+
+    <vendor email="free618@126.com" url="https://gitee.com/hrfgostop">Vendor Name</vendor>
+
+    <description><![CDATA[
+     SDK upgrade aids. Help developers solve problems caused by upgrading the SDK</br>After installing this plugin, you can receive prompt information that needs to be modified during use,
+     </br>which helps you locate the modification location and greatly facilitates developers.
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup displayType="BALLOON" id="com.update.check"/>
+        <projectService serviceImplementation="com.update.check.action.UpdateCheckService" order="last" />
+
+        <toolWindow factoryClass="com.update.check.action.view.ReporterToolWindowFactory" id="UpdateReport"
+                    anchor="bottom" icon="AllIcons.Actions.Annotate" />
+    </extensions>
+    <actions>
+        <group id="com.huawei.updateCheck" text="UpdateCheck"
+                description="Project updateCheck" popup="true">
+            <add-to-group group-id="MainMenu" anchor="before" relative-to-action="HelpMenu"/>
+        </group>
+        <action id="com.update.check.action.ToCheck" class="com.update.check.action.ToCheck" text="Start" description="To updateCheck">
+            <add-to-group group-id="com.huawei.updateCheck"/>
+        </action>
+    </actions>
+</idea-plugin>

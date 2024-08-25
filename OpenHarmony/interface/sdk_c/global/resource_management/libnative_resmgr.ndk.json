@@ -1,0 +1,26 @@
+[
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetMediaBase64"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetMediaBase64ByName"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetMedia"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetMediaByName"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetDrawableDescriptor"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_ResourceManager_GetDrawableDescriptorByName"
+    }
+]

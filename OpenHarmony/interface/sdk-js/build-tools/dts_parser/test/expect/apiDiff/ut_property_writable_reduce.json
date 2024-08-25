@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 0,
+    "oldApiDefinedText": "str2: string;",
+    "newApiDefinedText": "",
+    "oldApiName": "str2",
+    "newApiName": "",
+    "oldDtsName": "ut_property_writable_reduce.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_property_writable_reduce.d.ts",
+      "Test",
+      "str2"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 22,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "str2: string;",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

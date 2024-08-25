@@ -1,0 +1,37 @@
+[
+  {
+    "apiType": "Class",
+    "statusCode": 9,
+    "oldApiDefinedText": " export class Test",
+    "newApiDefinedText": " export class Test",
+    "oldApiName": "Test",
+    "newApiName": "Test",
+    "oldDtsName": "ut_jsdoc_system_to_public.d.ts",
+    "newDtsName": "ut_jsdoc_system_to_public.d.ts",
+    "diffType": 1,
+    "diffMessage": "从系统API变更为公开API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_system_to_public.d.ts",
+      "Test"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_system_to_public.d.ts",
+      "Test"
+    ],
+    "oldPos": {
+      "line": 21,
+      "character": 1
+    },
+    "newPos": {
+      "line": 20,
+      "character": 1
+    },
+    "oldDescription": "systemapi",
+    "newDescription": "NA",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

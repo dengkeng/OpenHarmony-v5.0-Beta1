@@ -1,0 +1,115 @@
+{
+  "ut_ArkTS_struct_006.d.ets": [
+    {
+      "filePath": "ut_ArkTS_struct_006.d.ets",
+      "apiType": "Struct",
+      "definedText": " struct MyComponent",
+      "pos": {
+        "line": 15,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "MyComponent",
+      "hierarchicalRelations": [
+        "ut_ArkTS_struct_006.d.ets",
+        "MyComponent"
+      ],
+      "decorators": [
+        {
+          "expression": "Component"
+        }
+      ],
+      "isStruct": true,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "/*\r\n* Copyright (C) 2023-2023 Huawei Device Co., Ltd.\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n* http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*/\r\n",
+      "isJoinType": false,
+      "genericInfo": [],
+      "jsDocInfos": [],
+      "childApis": [
+        {
+          "filePath": "ut_ArkTS_struct_006.d.ets",
+          "apiType": "Method",
+          "definedText": "",
+          "pos": {
+            "line": 1,
+            "character": 1
+          },
+          "isExport": false,
+          "apiName": "constructor",
+          "hierarchicalRelations": [
+            "ut_ArkTS_struct_006.d.ets",
+            "MyComponent",
+            "constructor"
+          ],
+          "isStruct": true,
+          "syscap": "",
+          "currentVersion": "-1",
+          "jsDocText": "",
+          "isJoinType": false,
+          "genericInfo": [],
+          "jsDocInfos": [],
+          "callForm": "",
+          "params": [
+            {
+              "apiType": "Param",
+              "apiName": "",
+              "paramType": 178,
+              "type": [
+                ""
+              ],
+              "isRequired": false,
+              "definedText": "",
+              "typeLocations": [],
+              "objLocations": []
+            }
+          ],
+          "returnValue": [],
+          "isStatic": false,
+          "sync": "",
+          "returnValueType": -1,
+          "typeLocations": [],
+          "objLocations": []
+        },
+        {
+          "filePath": "ut_ArkTS_struct_006.d.ets",
+          "apiType": "Property",
+          "definedText": "@Provide('a') count: number = 0;",
+          "pos": {
+            "line": 17,
+            "character": 3
+          },
+          "isExport": false,
+          "apiName": "count",
+          "hierarchicalRelations": [
+            "ut_ArkTS_struct_006.d.ets",
+            "MyComponent",
+            "count"
+          ],
+          "decorators": [
+            {
+              "expression": "Provide",
+              "expressionArguments": [
+                "'a'"
+              ]
+            }
+          ],
+          "isStruct": true,
+          "syscap": "",
+          "currentVersion": "-1",
+          "jsDocText": "\r\n  ",
+          "isJoinType": false,
+          "genericInfo": [],
+          "jsDocInfos": [],
+          "type": [
+            "number"
+          ],
+          "isReadOnly": false,
+          "isRequired": true,
+          "isStatic": false,
+          "typeKind": 145
+        }
+      ]
+    }
+  ]
+}

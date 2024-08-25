@@ -1,0 +1,9 @@
+[
+  {
+    "id": 6,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\type003.d.ts(line: 27, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\type003.d.ts",
+    "message": "API check error of [wrong order]: JSDoc label order error, please make adjustments"
+  }
+]

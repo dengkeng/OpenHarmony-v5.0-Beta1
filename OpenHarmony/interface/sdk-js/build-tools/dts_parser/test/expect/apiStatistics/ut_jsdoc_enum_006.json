@@ -1,0 +1,80 @@
+[
+  {
+    "filePath": "ut_jsdoc_enum_006.d.ts",
+    "packageName": "ut_jsdoc_enum_006",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_enum_006.d.ts/test/ONE",
+    "apiName": "ONE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "ONE = 1",
+    "pos": {
+      "line": 22,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_jsdoc_enum_006.d.ts",
+    "packageName": "ut_jsdoc_enum_006",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_enum_006.d.ts/test/TWO",
+    "apiName": "TWO",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "TWO = 2",
+    "pos": {
+      "line": 23,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_jsdoc_enum_006.d.ts",
+    "packageName": "ut_jsdoc_enum_006",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_enum_006.d.ts/test/THREE",
+    "apiName": "THREE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "THREE = 3",
+    "pos": {
+      "line": 24,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

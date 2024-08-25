@@ -1,0 +1,76 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 23,
+    "oldApiDefinedText": "@Provide('a') count: number = 0;",
+    "newApiDefinedText": "@Provide('b') count: number = 0;",
+    "oldApiName": "count",
+    "newApiName": "count",
+    "oldDtsName": "ut_struct_decorator_argument_change.d.ets",
+    "newDtsName": "ut_struct_decorator_argument_change.d.ets",
+    "diffType": 61,
+    "diffMessage": "新增装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_decorator_argument_change.d.ets",
+      "MyComponent",
+      "count"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_decorator_argument_change.d.ets",
+      "MyComponent",
+      "count"
+    ],
+    "oldPos": {
+      "line": 17,
+      "character": 3
+    },
+    "newPos": {
+      "line": 17,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "Provide",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Property",
+    "statusCode": 24,
+    "oldApiDefinedText": "@Provide('a') count: number = 0;",
+    "newApiDefinedText": "@Provide('b') count: number = 0;",
+    "oldApiName": "count",
+    "newApiName": "count",
+    "oldDtsName": "ut_struct_decorator_argument_change.d.ets",
+    "newDtsName": "ut_struct_decorator_argument_change.d.ets",
+    "diffType": 62,
+    "diffMessage": "删除装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_decorator_argument_change.d.ets",
+      "MyComponent",
+      "count"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_decorator_argument_change.d.ets",
+      "MyComponent",
+      "count"
+    ],
+    "oldPos": {
+      "line": 17,
+      "character": 3
+    },
+    "newPos": {
+      "line": 17,
+      "character": 3
+    },
+    "oldDescription": "Provide",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

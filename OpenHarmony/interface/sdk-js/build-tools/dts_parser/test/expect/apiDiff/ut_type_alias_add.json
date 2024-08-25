@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "TypeAlias",
+    "statusCode": -1,
+    "oldApiDefinedText": "type Type = 'none';",
+    "newApiDefinedText": "type Type = 'none' | 'new';",
+    "oldApiName": "Type",
+    "newApiName": "Type",
+    "oldDtsName": "ut_type_alias_add.d.ts",
+    "newDtsName": "ut_type_alias_add.d.ts",
+    "diffType": 56,
+    "diffMessage": "自定义类型值范围扩大",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_type_alias_add.d.ts",
+      "test",
+      "Type"
+    ],
+    "newHierarchicalRelations": [
+      "ut_type_alias_add.d.ts",
+      "test",
+      "Type"
+    ],
+    "oldPos": {
+      "line": 21,
+      "character": 3
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "'none'",
+    "newDescription": "'none','new'",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

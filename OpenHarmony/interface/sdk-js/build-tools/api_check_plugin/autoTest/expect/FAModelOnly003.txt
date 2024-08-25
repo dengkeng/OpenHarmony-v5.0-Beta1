@@ -1,0 +1,9 @@
+[
+  {
+    "id": 6,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\FAModelOnly003.d.ts(line: 23, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\FAModelOnly003.d.ts",
+    "message": "API check error of [wrong order]: JSDoc label order error, please make adjustments"
+  }
+]

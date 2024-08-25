@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_type_complex_type_001.d.ts",
+    "packageName": "ut_type_complex_type_001",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_type_complex_type_001.d.ts/TextOneType",
+    "apiName": "TextOneType",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "TypeAlias",
+    "definedText": "type TextOneType = { a: string & number; b: '123' | 123; c: (false & 123) | number };",
+    "pos": {
+      "line": 16,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

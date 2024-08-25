@@ -1,0 +1,30 @@
+[
+  {
+    "filePath": "ut_decorator_struct.d.ets",
+    "packageName": "ut_decorator_struct.d.ets",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_decorator_struct.d.ets/MyComponent",
+    "apiName": "MyComponent",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Struct",
+    "definedText": " struct MyComponent",
+    "pos": {
+      "line": 15,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [
+      "Component"
+    ],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

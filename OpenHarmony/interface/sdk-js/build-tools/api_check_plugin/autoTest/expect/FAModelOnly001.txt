@@ -1,0 +1,9 @@
+[
+  {
+    "id": 8,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\FAModelOnly001.d.ts(line: 28, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\FAModelOnly001.d.ts",
+    "message": "API check error of [wrong scene]: it was detected that there is an inheritable label [FAModelOnly] in the current file, but there are child nodes without this label"
+  }
+]

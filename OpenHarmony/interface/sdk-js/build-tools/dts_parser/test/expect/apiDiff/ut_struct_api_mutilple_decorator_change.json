@@ -1,0 +1,72 @@
+[
+  {
+    "apiType": "Struct",
+    "statusCode": 24,
+    "oldApiDefinedText": " struct MyComponent",
+    "newApiDefinedText": " struct MyComponent",
+    "oldApiName": "MyComponent",
+    "newApiName": "MyComponent",
+    "oldDtsName": "ut_struct_api_mutilple_decorator_change.d.ets",
+    "newDtsName": "ut_struct_api_mutilple_decorator_change.d.ets",
+    "diffType": 62,
+    "diffMessage": "删除装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_api_mutilple_decorator_change.d.ets",
+      "MyComponent"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_api_mutilple_decorator_change.d.ets",
+      "MyComponent"
+    ],
+    "oldPos": {
+      "line": 15,
+      "character": 1
+    },
+    "newPos": {
+      "line": 15,
+      "character": 1
+    },
+    "oldDescription": "Prop",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Struct",
+    "statusCode": 23,
+    "oldApiDefinedText": " struct MyComponent",
+    "newApiDefinedText": " struct MyComponent",
+    "oldApiName": "MyComponent",
+    "newApiName": "MyComponent",
+    "oldDtsName": "ut_struct_api_mutilple_decorator_change.d.ets",
+    "newDtsName": "ut_struct_api_mutilple_decorator_change.d.ets",
+    "diffType": 61,
+    "diffMessage": "新增装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_api_mutilple_decorator_change.d.ets",
+      "MyComponent"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_api_mutilple_decorator_change.d.ets",
+      "MyComponent"
+    ],
+    "oldPos": {
+      "line": 15,
+      "character": 1
+    },
+    "newPos": {
+      "line": 15,
+      "character": 1
+    },
+    "oldDescription": "",
+    "newDescription": "Props",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

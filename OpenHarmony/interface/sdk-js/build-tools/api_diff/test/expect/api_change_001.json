@@ -1,0 +1,30 @@
+[
+  {
+    "packageName": "api\\api_change_001.d.ts",
+    "className": "networkManager",
+    "rawText": "function getAllNetworkInterfaces(admin: Want, callback: AsyncCallback<Array<string>>): void;",
+    "dtsName": "api_change_001.d.ts",
+    "dtsPath": "api/api_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 16,
+    "status": "函数有变化",
+    "oldMessage": "function getAllNetworkInterfaces(admin: Want, callback: AsyncCallback<Array<string>>): void;",
+    "newMessage": "function getAllNetworkInterfaces(admin: Want, networkInterface: string, callback: AsyncCallback<Array<string>>): void;",
+    "syscap": "Customization"
+  },
+  {
+    "packageName": "api\\api_change_001.d.ts",
+    "className": "networkManager",
+    "rawText": "function getIpAddress(admin: Want, networkInterface: string, callback: AsyncCallback<string>): void;",
+    "dtsName": "api_change_001.d.ts",
+    "dtsPath": "api/api_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 16,
+    "status": "函数有变化",
+    "oldMessage": "function getIpAddress(admin: Want, networkInterface: string, callback: AsyncCallback<string>): void;",
+    "newMessage": "function getIpAddress(admin: Wan, networkInterface: string, callback: AsyncCallback<string>): void;",
+    "syscap": "Customization"
+  }
+]

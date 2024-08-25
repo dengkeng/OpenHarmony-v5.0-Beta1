@@ -1,0 +1,80 @@
+[
+  {
+    "filePath": "ut_enum_in_namespace.d.ts",
+    "packageName": "ut_enum_in_namespace",
+    "parentModuleName": "Valuable",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_in_namespace.d.ts/Test/Valuable/VALUE_ONE",
+    "apiName": "VALUE_ONE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_ONE",
+    "pos": {
+      "line": 18,
+      "character": 5
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_enum_in_namespace.d.ts",
+    "packageName": "ut_enum_in_namespace",
+    "parentModuleName": "Valuable",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_in_namespace.d.ts/Test/Valuable/VALUE_Two",
+    "apiName": "VALUE_Two",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_Two = 'testTwo'",
+    "pos": {
+      "line": 19,
+      "character": 5
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_enum_in_namespace.d.ts",
+    "packageName": "ut_enum_in_namespace",
+    "parentModuleName": "Valuable",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_in_namespace.d.ts/Test/Valuable/VALUE_THREE",
+    "apiName": "VALUE_THREE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_THREE = 'testThree'",
+    "pos": {
+      "line": 20,
+      "character": 5
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

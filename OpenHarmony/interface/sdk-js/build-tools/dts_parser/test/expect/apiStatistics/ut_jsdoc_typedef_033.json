@@ -1,0 +1,80 @@
+[
+  {
+    "filePath": "ut_jsdoc_typedef_033.d.ts",
+    "packageName": "ut_jsdoc_typedef_033",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_typedef_033.d.ts/Test",
+    "apiName": "Test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Interface",
+    "definedText": " export interface Test",
+    "pos": {
+      "line": 21,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_jsdoc_typedef_033.d.ts",
+    "packageName": "ut_jsdoc_typedef_033",
+    "parentModuleName": "Test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_typedef_033.d.ts/Test/key",
+    "apiName": "key",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "key: string;",
+    "pos": {
+      "line": 22,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_jsdoc_typedef_033.d.ts",
+    "packageName": "ut_jsdoc_typedef_033",
+    "parentModuleName": "Test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_typedef_033.d.ts/Test/value",
+    "apiName": "value",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "value: string;",
+    "pos": {
+      "line": 23,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

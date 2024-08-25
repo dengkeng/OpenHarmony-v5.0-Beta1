@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "function fuc(str: string | number): void {}",
+    "newApiDefinedText": "function fuc(str: string | boolean): void {}",
+    "oldApiName": "fuc",
+    "newApiName": "fuc",
+    "oldDtsName": "ut_type_range_change.d.ts",
+    "newDtsName": "ut_type_range_change.d.ts",
+    "diffType": 42,
+    "diffMessage": "函数的参数类型变更",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_type_range_change.d.ts",
+      "test",
+      "fuc"
+    ],
+    "newHierarchicalRelations": [
+      "ut_type_range_change.d.ts",
+      "test",
+      "fuc"
+    ],
+    "oldPos": {
+      "line": 21,
+      "character": 3
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "str: string | number",
+    "newDescription": "str: string | boolean",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

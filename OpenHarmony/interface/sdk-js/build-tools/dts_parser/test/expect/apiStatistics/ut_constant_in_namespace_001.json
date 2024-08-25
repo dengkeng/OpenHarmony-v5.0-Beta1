@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_constant_in_namespace_001.d.ts",
+    "packageName": "ut_constant_in_namespace_001",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_constant_in_namespace_001.d.ts/test/CONSTANT",
+    "apiName": "CONSTANT",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "const CONSTANT: string;",
+    "pos": {
+      "line": 20,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

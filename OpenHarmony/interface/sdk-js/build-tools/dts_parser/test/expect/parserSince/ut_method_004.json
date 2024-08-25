@@ -1,0 +1,52 @@
+[
+  {
+    "apiType": "Method",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "callForm": "test(param1: string, param2?: string): number",
+    "params": [
+      {
+        "apiType": "Param",
+        "name": "param1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isRequired": true
+      },
+      {
+        "apiType": "Param",
+        "name": "param2",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isRequired": false
+      }
+    ],
+    "returnValue": "number",
+    "isStatic": false,
+    "permission": "",
+    "errorCodes": []
+  }
+]

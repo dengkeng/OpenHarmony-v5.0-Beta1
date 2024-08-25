@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_method_same_name_in_namespace.d.ts",
+    "packageName": "ut_method_same_name_in_namespace",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_method_same_name_in_namespace.d.ts/test/func",
+    "apiName": "func",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Method",
+    "definedText": "function func(str: string, str2: string);\nfunction func(str: string);",
+    "pos": {
+      "line": 21,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

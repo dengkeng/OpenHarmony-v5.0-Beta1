@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_permission_017.d.ts",
+    "packageName": "ut_jsdoc_permission_017",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_permission_017.d.ts/test/func",
+    "apiName": "func",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Method",
+    "definedText": "function func(str: string): void;",
+    "pos": {
+      "line": 24,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

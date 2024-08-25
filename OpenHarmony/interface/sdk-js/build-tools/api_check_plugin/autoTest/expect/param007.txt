@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\param007.d.ts(line: 28, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\param007.d.ts",
+    "message": "API check error of [wrong value]: the type of the [1] [param] tag is incorrect. Please check if it matches the type of the [1] parameter"
+  }
+]

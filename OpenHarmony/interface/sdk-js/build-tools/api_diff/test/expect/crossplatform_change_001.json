@@ -1,0 +1,30 @@
+[
+  {
+    "packageName": "api\\crossplatform_change_001.d.ts",
+    "className": "CanvasPattern",
+    "rawText": "export interface CanvasPattern",
+    "dtsName": "crossplatform_change_001.d.ts",
+    "dtsPath": "api/crossplatform_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 20,
+    "status": "跨平台能力有变化",
+    "oldMessage": "",
+    "newMessage": "crossplatform",
+    "syscap": "ArkUI"
+  },
+  {
+    "packageName": "api\\crossplatform_change_001.d.ts",
+    "className": "Matrix2D",
+    "rawText": "scaleX?: number;",
+    "dtsName": "crossplatform_change_001.d.ts",
+    "dtsPath": "api/crossplatform_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 20,
+    "status": "跨平台能力有变化",
+    "oldMessage": "",
+    "newMessage": "crossplatform",
+    "syscap": "ArkUI"
+  }
+]

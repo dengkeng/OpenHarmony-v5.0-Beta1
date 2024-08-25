@@ -1,0 +1,9 @@
+[
+  {
+    "id": 11,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\any001.d.ts(line: 28, col: 50)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\any001.d.ts",
+    "message": "API check error of [illegal any]: Illegal [any] keyword used in the API"
+  }
+]

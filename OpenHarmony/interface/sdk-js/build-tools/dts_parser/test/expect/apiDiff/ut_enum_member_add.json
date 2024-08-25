@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "EnumValue",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "VALUE_THREE",
+    "oldApiName": "",
+    "newApiName": "VALUE_THREE",
+    "oldDtsName": "",
+    "newDtsName": "ut_enum_member_add.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_enum_member_add.d.ts",
+      "Test",
+      "VALUE_THREE"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 24,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "VALUE_THREE",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "apiType": "Namespace",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Method",
+        "name": "testFunction",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "testFunction(param1: string): Promise<Want>",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "param1",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "string",
+            "isRequired": true
+          }
+        ],
+        "returnValue": "Promise<Want>",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      }
+    ]
+  }
+]

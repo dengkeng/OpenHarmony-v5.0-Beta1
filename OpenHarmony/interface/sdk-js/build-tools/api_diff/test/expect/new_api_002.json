@@ -1,0 +1,30 @@
+[
+  {
+    "packageName": "api\\new_api_002.d.ts",
+    "className": "StateType",
+    "rawText": "CONTINUATION = 0",
+    "dtsName": "new_api_002.d.ts",
+    "dtsPath": "api/new_api_002.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "Ability"
+  },
+  {
+    "packageName": "api\\new_api_002.d.ts",
+    "className": "StateType",
+    "rawText": "APP_RECOVERY = 1",
+    "dtsName": "new_api_002.d.ts",
+    "dtsPath": "api/new_api_002.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "Ability"
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "apiType": "Method",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "callForm": "test(): void",
+    "params": [],
+    "returnValue": "",
+    "isStatic": false,
+    "permission": "",
+    "errorCodes": []
+  }
+]

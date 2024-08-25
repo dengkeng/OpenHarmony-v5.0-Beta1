@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_constant_root_005.d.ts",
+    "packageName": "ut_constant_root_005",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_constant_root_005.d.ts/CONSTANT",
+    "apiName": "CONSTANT",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "declare const CONSTANT: PropertyDecorator & ((value: string) => PropertyDecorator);",
+    "pos": {
+      "line": 19,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

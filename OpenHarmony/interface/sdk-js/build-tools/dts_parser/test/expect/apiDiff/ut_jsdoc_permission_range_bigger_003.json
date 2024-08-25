@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 12,
+    "oldApiDefinedText": "function func(str: string): void;",
+    "newApiDefinedText": "function func(str: string): void;",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_jsdoc_permission_range_bigger_003.d.ts",
+    "newDtsName": "ut_jsdoc_permission_range_bigger_003.d.ts",
+    "diffType": 25,
+    "diffMessage": "增加or或减少and权限",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_permission_range_bigger_003.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_permission_range_bigger_003.d.ts",
+      "test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 24,
+      "character": 3
+    },
+    "newPos": {
+      "line": 24,
+      "character": 3
+    },
+    "oldDescription": "ohos.permission.GET_SENSITIVE_PERMISSIONS and ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+    "newDescription": "ohos.permission.GET_SENSITIVE_PERMISSIONS or ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

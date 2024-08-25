@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\two_jsdoc_001.d.ts",
+    "className": "StateType",
+    "rawText": "export enum StateType",
+    "dtsName": "two_jsdoc_001.d.ts",
+    "dtsPath": "api/two_jsdoc_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 13,
+    "status": "model有变化",
+    "oldMessage": "StageModelOnly",
+    "newMessage": "",
+    "syscap": "Ability"
+  }
+]

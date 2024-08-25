@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\new_api_001.d.ts",
+    "className": "formHost",
+    "rawText": "function deleteId(formId: string, callback: AsyncCallback<void>): void;",
+    "dtsName": "new_api_001.d.ts",
+    "dtsPath": "api/new_api_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "Ability"
+  }
+]

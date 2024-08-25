@@ -1,0 +1,244 @@
+[
+  {
+    "syscap": "ArkUI",
+    "subsystem": "ArkUI开发框架",
+    "fileName": "arkui"
+  },
+  {
+    "syscap": "BundleManager",
+    "subsystem": "包管理",
+    "fileName": "bundle"
+  },
+  {
+    "syscap": "Graphic",
+    "subsystem": "图形图像",
+    "fileName": "graphic"
+  },
+  {
+    "syscap": "WindowManager",
+    "subsystem": "窗口管理",
+    "fileName": "window"
+  },
+  {
+    "syscap": "Notification",
+    "subsystem": "事件通知",
+    "fileName": "notification"
+  },
+  {
+    "syscap": "Communication",
+    "subsystem": "基础通信",
+    "fileName": "communication"
+  },
+  {
+    "syscap": "Location",
+    "subsystem": "位置服务",
+    "fileName": "geolocation"
+  },
+  {
+    "syscap": "MultimodalInput",
+    "subsystem": "多模输入",
+    "fileName": "multi-modal-input"
+  },
+  {
+    "syscap": "PowerManager",
+    "subsystem": "电源服务",
+    "fileName": "battery"
+  },
+  {
+    "syscap": "Multimedia",
+    "subsystem": "OS媒体软件",
+    "fileName": "multimedia"
+  },
+  {
+    "syscap": "Telephony",
+    "subsystem": "电话服务",
+    "fileName": "telephony"
+  },
+  {
+    "syscap": "Global",
+    "subsystem": "全球化",
+    "fileName": "global"
+  },
+  {
+    "syscap": "Customization",
+    "subsystem": "定制",
+    "fileName": "customization"
+  },
+  {
+    "syscap": "BarrierFree",
+    "subsystem": "无障碍软件服务",
+    "fileName": "accessibility"
+  },
+  {
+    "syscap": "ResourceSchedule",
+    "subsystem": "资源调度",
+    "fileName": "resource-scheduler"
+  },
+  {
+    "syscap": "Utils",
+    "subsystem": "公共基础类库",
+    "fileName": "compiler-and-runtime"
+  },
+  {
+    "syscap": "HiviewDFX",
+    "subsystem": "DFX",
+    "fileName": "dfx"
+  },
+  {
+    "syscap": "Update",
+    "subsystem": "升级服务",
+    "fileName": "update"
+  },
+  {
+    "syscap": "DistributedHardware",
+    "subsystem": "分布式硬件",
+    "fileName": "distributed-hardware"
+  },
+  {
+    "syscap": "Security",
+    "subsystem": "安全基础能力",
+    "fileName": "security"
+  },
+  {
+    "syscap": "Account",
+    "subsystem": "账号",
+    "fileName": "account"
+  },
+  {
+    "syscap": "UserIAM",
+    "subsystem": "用户IAM",
+    "fileName": "user-iam"
+  },
+  {
+    "syscap": "FileManagement",
+    "subsystem": "文件管理",
+    "fileName": "file-management"
+  },
+  {
+    "syscap": "USB",
+    "subsystem": "USB服务",
+    "fileName": "usb"
+  },
+  {
+    "syscap": "Sensors",
+    "subsystem": "泛sensor服务",
+    "fileName": "sensor"
+  },
+  {
+    "syscap": "Startup",
+    "subsystem": "启动恢复",
+    "fileName": "start-up"
+  },
+  {
+    "syscap": "DistributedDataManager",
+    "subsystem": "分布式数据管理",
+    "fileName": "distributed-data"
+  },
+  {
+    "syscap": "Ability",
+    "subsystem": "元能力",
+    "fileName": "ability"
+  },
+  {
+    "syscap": "Web",
+    "subsystem": "web",
+    "fileName": "web"
+  },
+  {
+    "syscap": "Applications",
+    "subsystem": "应用",
+    "fileName": "application"
+  },
+  {
+    "syscap": "Msdp",
+    "subsystem": "综合传感处理平台",
+    "fileName": "msdp"
+  },
+  {
+    "syscap": "Test",
+    "subsystem": "测试框架",
+    "fileName": "unitest"
+  },
+  {
+    "syscap": "Base",
+    "subsystem": "SDK",
+    "fileName": "sdk"
+  },
+  {
+    "syscap": "AI",
+    "subsystem": "AI业务",
+    "fileName": "ai"
+  },
+  {
+    "syscap": "Request",
+    "subsystem": "上传下载",
+    "fileName": "download-upload"
+  },
+  {
+    "syscap": "Download",
+    "subsystem": "上传下载",
+    "fileName": "download-upload"
+  },
+  {
+    "syscap": "Upload",
+    "subsystem": "上传下载",
+    "fileName": "download-upload"
+  },
+  {
+    "syscap": "Wallpaper",
+    "subsystem": "主题",
+    "fileName": "theme"
+  },
+  {
+    "syscap": "Time",
+    "subsystem": "时间时区",
+    "fileName": "time"
+  },
+  {
+    "syscap": "ScreenLock",
+    "subsystem": "主题",
+    "fileName": "theme"
+  },
+  {
+    "syscap": "Pasteboard",
+    "subsystem": "剪贴板",
+    "fileName": "pasteboard"
+  },
+  {
+    "syscap": "InputMethodFramework",
+    "subsystem": "输入法",
+    "fileName": "input-method-framework"
+  },{
+    "syscap": "Driver",
+    "subsystem": "驱动",
+    "fileName": "driver"
+  },{
+    "syscap": "Developtools",
+    "subsystem": "研发工具链",
+    "fileName": "developtools"
+  },{
+    "syscap": "Bluetooth",
+    "subsystem": "蓝牙",
+    "fileName": "blue-tooth"
+  },{
+    "syscap": "NetManager",
+    "subsystem": "网络管理·",
+    "fileName": "net-manager"
+  },{
+    "syscap": "Print",
+    "subsystem": "打印",
+    "fileName": "print"
+  },{
+    "syscap": "Window",
+    "subsystem": "窗口",
+    "fileName": "window"
+  },{
+    "syscap": "Advertising",
+    "subsystem": "广告服务",
+    "fileName": "advertising"
+  },{
+    "syscap": "XTS",
+    "subsystem": "XTS",
+    "fileName": "xts"
+  }
+]

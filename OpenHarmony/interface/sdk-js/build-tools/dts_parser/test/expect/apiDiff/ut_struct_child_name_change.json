@@ -1,0 +1,68 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 0,
+    "oldApiDefinedText": "@BuilderParam container: () => void;",
+    "newApiDefinedText": "",
+    "oldApiName": "container",
+    "newApiName": "",
+    "oldDtsName": "ut_struct_child_name_change.d.ets",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_struct_child_name_change.d.ets",
+      "MyComponent",
+      "container"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 17,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "@BuilderParam container: () => void;",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Property",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "@BuilderParam containers: () => void;",
+    "oldApiName": "",
+    "newApiName": "containers",
+    "oldDtsName": "",
+    "newDtsName": "ut_struct_child_name_change.d.ets",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_struct_child_name_change.d.ets",
+      "MyComponent",
+      "containers"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 17,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "@BuilderParam containers: () => void;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

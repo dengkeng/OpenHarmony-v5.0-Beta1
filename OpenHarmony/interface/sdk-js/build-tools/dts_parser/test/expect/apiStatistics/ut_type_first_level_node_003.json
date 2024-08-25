@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_type_first_level_node_003.d.ts",
+    "packageName": "ut_type_first_level_node_003",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_type_first_level_node_003.d.ts/TextOneType",
+    "apiName": "TextOneType",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "TypeAlias",
+    "definedText": "type TextOneType = Resoure;",
+    "pos": {
+      "line": 16,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

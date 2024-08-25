@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\extends003.d.ts(line: 25, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\extends003.d.ts",
+    "message": "API check error of [wrong value]: the [extends] tag value is incorrect. Please check if the tag value matches the inherited class name."
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Constant",
+    "statusCode": 16,
+    "oldApiDefinedText": "const CONSTANT = 1;",
+    "newApiDefinedText": "const CONSTANT = 2;",
+    "oldApiName": "CONSTANT",
+    "newApiName": "CONSTANT",
+    "oldDtsName": "ut_constant_value_change.d.ts",
+    "newDtsName": "ut_constant_value_change.d.ts",
+    "diffType": 54,
+    "diffMessage": "常量值发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_constant_value_change.d.ts",
+      "test",
+      "CONSTANT"
+    ],
+    "newHierarchicalRelations": [
+      "ut_constant_value_change.d.ts",
+      "test",
+      "CONSTANT"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "1",
+    "newDescription": "2",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

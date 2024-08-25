@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_deprecated_005.d.ts",
+    "packageName": "ut_jsdoc_deprecated_005",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "7",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_deprecated_005.d.ts/test",
+    "apiName": "test",
+    "deprecatedVersion": "9",
+    "useInstead": "",
+    "apiType": "Class",
+    "definedText": " export class test",
+    "pos": {
+      "line": 22,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

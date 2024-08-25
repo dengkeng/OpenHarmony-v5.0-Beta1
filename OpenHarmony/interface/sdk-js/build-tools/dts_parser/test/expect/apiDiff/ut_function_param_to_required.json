@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "function func(str: string, str2?: string): void {}",
+    "newApiDefinedText": "function func(str: string, str2: string): void {}",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_function_param_to_required.d.ts",
+    "newDtsName": "ut_function_param_to_required.d.ts",
+    "diffType": 40,
+    "diffMessage": "函数中的可选参数变为必选参数",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_function_param_to_required.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_function_param_to_required.d.ts",
+      "test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "str2?: string",
+    "newDescription": "str2: string",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

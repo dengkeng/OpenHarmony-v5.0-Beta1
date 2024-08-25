@@ -1,0 +1,30 @@
+[
+  {
+    "packageName": "ArkUI",
+    "className": "ButtonInterface",
+    "rawText": "(): ButtonAttribute;",
+    "dtsName": "callSignature_node_001.d.ts",
+    "dtsPath": "component/callSignature_node_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 20,
+    "status": "跨平台能力有变化",
+    "oldMessage": "",
+    "newMessage": "crossplatform",
+    "syscap": "ArkUI"
+  },
+  {
+    "packageName": "ArkUI",
+    "className": "ButtonInterface",
+    "rawText": "(options: ButtonOptions): ButtonAttribute;",
+    "dtsName": "callSignature_node_001.d.ts",
+    "dtsPath": "component/callSignature_node_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 9,
+    "status": "访问级别有变化",
+    "oldMessage": "systemapi",
+    "newMessage": "",
+    "syscap": "ArkUI"
+  }
+]

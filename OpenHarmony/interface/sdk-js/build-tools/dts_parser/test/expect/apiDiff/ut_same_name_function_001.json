@@ -1,0 +1,98 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 0,
+    "oldApiDefinedText": "declare function copyDir(src: string, dest: string, callback: AsyncCallback<void>): void;",
+    "newApiDefinedText": "",
+    "oldApiName": "copyDir",
+    "newApiName": "",
+    "oldDtsName": "ut_same_name_function_001.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_same_name_function_001.d.ts",
+      "copyDir"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 24,
+      "character": 1
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "declare function copyDir(src: string, dest: string, callback: AsyncCallback<void>): void;",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "declare function copyDir(src: string, dest: string): Promise<void>;",
+    "oldApiName": "",
+    "newApiName": "copyDir",
+    "oldDtsName": "",
+    "newDtsName": "ut_same_name_function_001.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_same_name_function_001.d.ts",
+      "copyDir"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 22,
+      "character": 1
+    },
+    "oldDescription": "",
+    "newDescription": "declare function copyDir(src: string, dest: string): Promise<void>;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "declare function copyDir(src: string, dest: number, callback: AsyncCallback<void>): void;",
+    "oldApiName": "",
+    "newApiName": "copyDir",
+    "oldDtsName": "",
+    "newDtsName": "ut_same_name_function_001.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_same_name_function_001.d.ts",
+      "copyDir"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 26,
+      "character": 1
+    },
+    "oldDescription": "",
+    "newDescription": "declare function copyDir(src: string, dest: number, callback: AsyncCallback<void>): void;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

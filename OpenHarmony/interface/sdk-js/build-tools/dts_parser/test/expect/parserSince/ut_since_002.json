@@ -1,0 +1,16 @@
+[
+  {
+    "apiType": "Namespace",
+    "name": "ability",
+    "syscap": "",
+    "since": "9",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": []
+  }
+]

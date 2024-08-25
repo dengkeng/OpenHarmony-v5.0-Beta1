@@ -1,0 +1,37 @@
+[
+  {
+    "apiType": "Class",
+    "statusCode": 19,
+    "oldApiDefinedText": " export class Test",
+    "newApiDefinedText": " export class Test",
+    "oldApiName": "Test",
+    "newApiName": "Test",
+    "oldDtsName": "ut_jsdoc_na_to_card.d.ts",
+    "newDtsName": "ut_jsdoc_na_to_card.d.ts",
+    "diffType": 9,
+    "diffMessage": "从不支持卡片到支持卡片",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_na_to_card.d.ts",
+      "Test"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_na_to_card.d.ts",
+      "Test"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 1
+    },
+    "newPos": {
+      "line": 21,
+      "character": 1
+    },
+    "oldDescription": "NA",
+    "newDescription": "form",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

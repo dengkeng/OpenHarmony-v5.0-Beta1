@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\api_change_003.d.ts",
+    "className": "networkManager",
+    "rawText": "function getMac(admin: Want, networkInterface: string): void;",
+    "dtsName": "api_change_003.d.ts",
+    "dtsPath": "api/api_change_003.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "Customization"
+  }
+]

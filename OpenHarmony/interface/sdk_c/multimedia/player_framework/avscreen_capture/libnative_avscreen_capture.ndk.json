@@ -1,0 +1,94 @@
+[
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_Create"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_Init"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_StartScreenCapture"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_StopScreenCapture"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_StartScreenRecording"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_StopScreenRecording"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_AcquireAudioBuffer"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_AcquireVideoBuffer"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_ReleaseAudioBuffer"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_ReleaseVideoBuffer"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_SetCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_Release"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AVScreenCapture_SetMicrophoneEnabled"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_StartScreenCaptureWithSurface"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_SetCanvasRotation"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_SetStateCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_SetDataCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_SetErrorCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_CreateContentFilter"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_ReleaseContentFilter"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_ContentFilter_AddAudioContent"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_ExcludeContent"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVScreenCapture_ContentFilter_AddWindowContent"
+    }
+]

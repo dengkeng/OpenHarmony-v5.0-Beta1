@@ -1,0 +1,30 @@
+[
+  {
+    "packageName": "api\\permission_change_001.d.ts",
+    "className": "privacyManager",
+    "rawText": "function addPermissionUsedRecord(\n    tokenID: number,\n    permissionName: Permissions,\n    successCount: number,\n    failCount: number,\n    callback: AsyncCallback<void>\n  ): void;",
+    "dtsName": "permission_change_001.d.ts",
+    "dtsPath": "api/permission_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 12,
+    "status": "权限有变化",
+    "oldMessage": "ohos.permission.PERMISSION_USED_STAT",
+    "newMessage": "ohos.permission.PERMISSION_USED_STATS",
+    "syscap": "Security"
+  },
+  {
+    "packageName": "api\\permission_change_001.d.ts",
+    "className": "privacyManager",
+    "rawText": "function getPermissionUsedRecord(request: PermissionUsedRequest): Promise<PermissionUsedResponse>;",
+    "dtsName": "permission_change_001.d.ts",
+    "dtsPath": "api/permission_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 12,
+    "status": "权限有变化",
+    "oldMessage": "",
+    "newMessage": "ohos.permission.PERMISSION_USED_STATS",
+    "syscap": "Security"
+  }
+]

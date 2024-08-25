@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_useinstead_034.d.ts",
+    "packageName": "ut_jsdoc_useinstead_034",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "7",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_useinstead_034.d.ts/test",
+    "apiName": "test",
+    "deprecatedVersion": "9",
+    "useInstead": "ohos.app.ability.dataUriUtils/Test",
+    "apiType": "Class",
+    "definedText": " export class test",
+    "pos": {
+      "line": 23,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

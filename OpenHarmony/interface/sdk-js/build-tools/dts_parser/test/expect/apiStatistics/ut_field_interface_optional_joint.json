@@ -1,0 +1,54 @@
+[
+  {
+    "filePath": "ut_field_interface_optional_joint.d.ts",
+    "packageName": "ut_field_interface_optional_joint",
+    "parentModuleName": "testNamespace",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_field_interface_optional_joint.d.ts/testNamespace/TestInterface",
+    "apiName": "TestInterface",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Interface",
+    "definedText": " interface TestInterface",
+    "pos": {
+      "line": 17,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_field_interface_optional_joint.d.ts",
+    "packageName": "ut_field_interface_optional_joint",
+    "parentModuleName": "TestInterface",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_field_interface_optional_joint.d.ts/testNamespace/TestInterface/windowUpdateType",
+    "apiName": "windowUpdateType",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "windowUpdateType?: WindowUpdateType | boolean | number;",
+    "pos": {
+      "line": 18,
+      "character": 5
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

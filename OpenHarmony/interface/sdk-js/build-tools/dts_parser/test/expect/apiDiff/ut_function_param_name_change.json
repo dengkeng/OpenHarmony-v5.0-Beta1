@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "function func(str: string, str2: string): void {}",
+    "newApiDefinedText": "function func(str: string, str3: string): void {}",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_function_param_name_change.d.ts",
+    "newDtsName": "ut_function_param_name_change.d.ts",
+    "diffType": 41,
+    "diffMessage": "函数中的参数名称发生改变",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_function_param_name_change.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_function_param_name_change.d.ts",
+      "test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "str2: string",
+    "newDescription": "str3: string",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

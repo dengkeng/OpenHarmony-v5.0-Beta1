@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\api_change_002.d.ts",
+    "className": "networkManager",
+    "rawText": "function getMac(admin: Want, networkInterface: string): Promise<string>;",
+    "dtsName": "api_change_002.d.ts",
+    "dtsPath": "api/api_change_002.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 16,
+    "status": "函数有变化",
+    "oldMessage": "function getMac(admin: Want, networkInterface: string): Promise<string>;",
+    "newMessage": "function getMac(admin: Want, networkInterface: number): Promise<string>;",
+    "syscap": "Customization"
+  }
+]

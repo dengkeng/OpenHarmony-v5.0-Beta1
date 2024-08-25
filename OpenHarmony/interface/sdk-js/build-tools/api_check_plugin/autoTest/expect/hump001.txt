@@ -1,0 +1,9 @@
+[
+  {
+    "id": 2,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\hump001.d.ts(line: 29, col: 9)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\hump001.d.ts",
+    "message": "API check error of [naming errors]: This name [test] should be named by all uppercase."
+  }
+]

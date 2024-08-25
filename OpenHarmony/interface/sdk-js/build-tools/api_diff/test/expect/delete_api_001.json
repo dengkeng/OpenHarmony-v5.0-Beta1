@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\delete_api_001.d.ts",
+    "className": "Caller",
+    "rawText": "call(method: string, data: rpc.Parcelable): Promise<void>;",
+    "dtsName": "delete_api_001.d.ts",
+    "dtsPath": "api/delete_api_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 0,
+    "status": "删除",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "Ability"
+  }
+]

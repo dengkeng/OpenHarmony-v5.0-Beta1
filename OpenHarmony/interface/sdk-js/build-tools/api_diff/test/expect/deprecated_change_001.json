@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\deprecated_change_001.d.ts",
+    "className": "LaunchParam",
+    "rawText": "launchReason: LaunchReason;",
+    "dtsName": "deprecated_change_001.d.ts",
+    "dtsPath": "api/deprecated_change_001.d.ts",
+    "hint": "useinstead: ohos.app.ability.dataUriUtils/dataUriUtils",
+    "changelogs": [],
+    "statusCode": 5,
+    "status": "废弃版本有变化",
+    "oldMessage": "",
+    "newMessage": "9",
+    "syscap": "Ability"
+  }
+]

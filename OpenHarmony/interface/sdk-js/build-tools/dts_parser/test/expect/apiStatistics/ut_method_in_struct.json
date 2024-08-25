@@ -1,0 +1,56 @@
+[
+  {
+    "filePath": "ut_method_in_struct.d.ets",
+    "packageName": "ut_method_in_struct.d.ets",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_method_in_struct.d.ets/MyComponent",
+    "apiName": "MyComponent",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Struct",
+    "definedText": " struct MyComponent",
+    "pos": {
+      "line": 15,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_method_in_struct.d.ets",
+    "packageName": "ut_method_in_struct.d.ets",
+    "parentModuleName": "MyComponent",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_method_in_struct.d.ets/MyComponent/aBuilder1",
+    "apiName": "aBuilder1",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "@BuilderParam aBuilder1: () => void = GlobalBuilder0;",
+    "pos": {
+      "line": 16,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [
+      "BuilderParam"
+    ],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

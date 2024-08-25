@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_syscap_026.d.ts",
+    "packageName": "ut_jsdoc_syscap_026",
+    "parentModuleName": "global",
+    "syscap": "SystemCapability.Ability.AbilityRuntime.AbilityCore",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_syscap_026.d.ts/test",
+    "apiName": "test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Class",
+    "definedText": " export class test",
+    "pos": {
+      "line": 21,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

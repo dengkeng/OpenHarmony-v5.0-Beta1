@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\decorator001.d.ts(line: 23, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\decorator001.d.ts",
+    "message": "API check error of [wrong value]: the [defaults] tag does not exist. Please use a valid JSDoc tag"
+  }
+]

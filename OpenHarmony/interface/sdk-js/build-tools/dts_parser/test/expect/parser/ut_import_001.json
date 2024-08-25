@@ -1,0 +1,36 @@
+{
+  "ut_import_001.d.ts": [
+    {
+      "filePath": "ut_import_001.d.ts",
+      "apiType": "Import",
+      "definedText": "import { AsyncCallback, Callback } from './@ohos.base';",
+      "pos": {
+        "line": 19,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "'./@ohos.base'",
+      "hierarchicalRelations": [
+        "ut_import_001.d.ts",
+        "'./@ohos.base'"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "",
+      "isJoinType": false,
+      "genericInfo": [],
+      "importValues": [
+        {
+          "key": "AsyncCallback",
+          "value": "AsyncCallback"
+        },
+        {
+          "key": "Callback",
+          "value": "Callback"
+        }
+      ],
+      "importPath": "'./@ohos.base'"
+    }
+  ]
+}

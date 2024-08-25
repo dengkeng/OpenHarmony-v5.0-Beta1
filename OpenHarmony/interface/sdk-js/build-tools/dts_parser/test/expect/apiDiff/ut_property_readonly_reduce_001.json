@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 0,
+    "oldApiDefinedText": "readonly constant2: 2;",
+    "newApiDefinedText": "",
+    "oldApiName": "constant2",
+    "newApiName": "",
+    "oldDtsName": "ut_property_readonly_reduce_001.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_property_readonly_reduce_001.d.ts",
+      "Test",
+      "constant2"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 22,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "readonly constant2: 2;",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

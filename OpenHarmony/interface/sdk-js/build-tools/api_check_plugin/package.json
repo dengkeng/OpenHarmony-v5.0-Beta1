@@ -1,0 +1,27 @@
+{
+  "name": "api-checker",
+  "version": "1.0.0",
+  "checkApiVersion": "12",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && node test.js",
+    "testCase": "mocha ./autoTest/testCase/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "comment-parser": "^1.3.1",
+    "exceljs": "^4.3.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "sync-request": "^6.1.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}

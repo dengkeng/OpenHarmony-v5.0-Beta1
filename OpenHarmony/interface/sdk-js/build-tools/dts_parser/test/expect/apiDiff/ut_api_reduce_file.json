@@ -1,0 +1,67 @@
+[
+  {
+    "apiType": "Namespace",
+    "statusCode": 0,
+    "oldApiDefinedText": " export namespace test",
+    "newApiDefinedText": "",
+    "oldApiName": "test",
+    "newApiName": "",
+    "oldDtsName": "ut_api_reduce_file.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_api_reduce_file.d.ts",
+      "test"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 19,
+      "character": 1
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": " export namespace test",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 0,
+    "oldApiDefinedText": "function func(str: string): void {}",
+    "newApiDefinedText": "",
+    "oldApiName": "func",
+    "newApiName": "",
+    "oldDtsName": "ut_api_reduce_file.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_api_reduce_file.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "function func(str: string): void {}",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

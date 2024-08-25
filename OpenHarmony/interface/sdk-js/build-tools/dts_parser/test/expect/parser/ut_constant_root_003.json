@@ -1,0 +1,52 @@
+{
+  "ut_constant_root_003.d.ts": [
+    {
+      "filePath": "ut_constant_root_003.d.ts",
+      "apiType": "Property",
+      "definedText": "export declare const CONSTANT: string;",
+      "pos": {
+        "line": 19,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "CONSTANT",
+      "hierarchicalRelations": [
+        "ut_constant_root_003.d.ts",
+        "CONSTANT"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "/*\r\n * Copyright (c) 2021-2023 Huawei Device Co., Ltd.\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n\r\n/**\r\n * the ut for constant with export\r\n */\r\n",
+      "isJoinType": false,
+      "genericInfo": [],
+      "jsDocInfos": [
+        {
+          "description": "the ut for constant with export",
+          "syscap": "",
+          "since": "-1",
+          "isForm": false,
+          "isCrossPlatForm": false,
+          "isSystemApi": false,
+          "modelLimitation": "",
+          "deprecatedVersion": "-1",
+          "useinstead": "",
+          "permissions": "",
+          "errorCodes": [],
+          "typeInfo": "",
+          "isConstant": false,
+          "isAtomicService": false,
+          "kit": "",
+          "isFile": false
+        }
+      ],
+      "type": [
+        "string"
+      ],
+      "isReadOnly": true,
+      "isRequired": true,
+      "isStatic": false,
+      "typeKind": -1
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Copyright (c) 2019-2022 Huawei Device Co., Ltd. All rights reserved.
+
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_ndk_headers("zlib_header") {
+  sources = [
+    "./zconf.h",
+    "./zlib.h",
+  ]
+}
+
+ohos_ndk_library("libz_ndk") {
+  output_name = "z"
+  ndk_description_file = "./zlib.ndk.json"
+  output_extension = "so"
+}

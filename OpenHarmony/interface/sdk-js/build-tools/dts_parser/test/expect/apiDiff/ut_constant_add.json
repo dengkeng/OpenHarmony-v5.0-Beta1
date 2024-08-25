@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "Constant",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "const CONSTANT2 = 2;",
+    "oldApiName": "",
+    "newApiName": "CONSTANT2",
+    "oldDtsName": "",
+    "newDtsName": "ut_constant_add.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_constant_add.d.ts",
+      "test",
+      "CONSTANT2"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "const CONSTANT2 = 2;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "filePath": "ut_enum_no_value_002.d.ts",
+    "packageName": "ut_enum_no_value_002",
+    "parentModuleName": "NoValue",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_no_value_002.d.ts/NoValue/VALUE_ONE",
+    "apiName": "VALUE_ONE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_ONE = 1",
+    "pos": {
+      "line": 17,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_enum_no_value_002.d.ts",
+    "packageName": "ut_enum_no_value_002",
+    "parentModuleName": "NoValue",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_no_value_002.d.ts/NoValue/VALUE_TWO",
+    "apiName": "VALUE_TWO",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_TWO",
+    "pos": {
+      "line": 18,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_enum_no_value_002.d.ts",
+    "packageName": "ut_enum_no_value_002",
+    "parentModuleName": "NoValue",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_enum_no_value_002.d.ts/NoValue/VALUE_THREE",
+    "apiName": "VALUE_THREE",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "EnumValue",
+    "definedText": "VALUE_THREE = 4",
+    "pos": {
+      "line": 19,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

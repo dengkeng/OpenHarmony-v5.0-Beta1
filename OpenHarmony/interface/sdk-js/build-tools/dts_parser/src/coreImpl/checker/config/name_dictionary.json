@@ -1,0 +1,7 @@
+[
+  {
+    "badWord": "option",
+    "suggestion": "options",
+    "ignore": ["options", "optionMode", "_OPTION_"]
+  }
+]

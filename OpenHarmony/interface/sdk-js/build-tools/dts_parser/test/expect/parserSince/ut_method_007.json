@@ -1,0 +1,107 @@
+[
+  {
+    "apiType": "Method",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "callForm": "test(param1: string): Promise<Want>",
+    "params": [
+      {
+        "apiType": "Param",
+        "name": "param1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isRequired": true
+      }
+    ],
+    "returnValue": "Promise<Want>",
+    "isStatic": false,
+    "permission": "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+    "errorCodes": []
+  },
+  {
+    "apiType": "Method",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "callForm": "test(param1: string): Promise<Want>",
+    "params": [
+      {
+        "apiType": "Param",
+        "name": "param1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isRequired": true
+      }
+    ],
+    "returnValue": "Promise<Want>",
+    "isStatic": false,
+    "permission": "ohos.permission.GET_SENSITIVE_PERMISSIONS or ohos.permission.GRANT_SENSITIVE_PERMISSIONS or ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
+    "errorCodes": []
+  },
+  {
+    "apiType": "Method",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "callForm": "test(param1: string): Promise<Want>",
+    "params": [
+      {
+        "apiType": "Param",
+        "name": "param1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isRequired": true
+      }
+    ],
+    "returnValue": "Promise<Want>",
+    "isStatic": false,
+    "permission": "",
+    "errorCodes": []
+  }
+]

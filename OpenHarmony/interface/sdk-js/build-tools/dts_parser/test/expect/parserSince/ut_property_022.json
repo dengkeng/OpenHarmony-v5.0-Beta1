@@ -1,0 +1,54 @@
+[
+  {
+    "apiType": "Interface",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Property",
+        "name": "name",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string | Curve",
+        "isReadOnly": false,
+        "isRequired": true,
+        "isStatic": false,
+        "permission": ""
+      },
+      {
+        "apiType": "Property",
+        "name": "name",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string | Curve | ICurve",
+        "isReadOnly": false,
+        "isRequired": false,
+        "isStatic": false,
+        "permission": ""
+      }
+    ],
+    "parentClasses": []
+  }
+]

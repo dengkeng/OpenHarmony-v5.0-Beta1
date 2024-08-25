@@ -1,0 +1,214 @@
+[
+  {
+    "apiType": "Namespace",
+    "statusCode": 4,
+    "oldApiDefinedText": " export namespace test",
+    "newApiDefinedText": " export namespace test",
+    "oldApiName": "test",
+    "newApiName": "test",
+    "oldDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 63,
+    "diffMessage": "起始版本号新增",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test"
+    ],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test"
+    ],
+    "oldPos": {
+      "line": 16,
+      "character": 1
+    },
+    "newPos": {
+      "line": 19,
+      "character": 1
+    },
+    "oldDescription": "-1",
+    "newDescription": "10",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 12,
+    "oldApiDefinedText": "function func(str: string): void;",
+    "newApiDefinedText": "function func(str: string): void;",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 27,
+    "diffMessage": "权限发送改变无法判断范围变化",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": 23,
+      "character": 3
+    },
+    "oldDescription": "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+    "newDescription": "ohos.permission.GET_PERMISSIONS",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "func1(str: string):void;",
+    "newApiDefinedText": "func1(str: string, str1: number): void;",
+    "oldApiName": "func1",
+    "newApiName": "func1",
+    "oldDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 37,
+    "diffMessage": "函数新增必选参数",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "test1",
+      "func1"
+    ],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "test1",
+      "func1"
+    ],
+    "oldPos": {
+      "line": 23,
+      "character": 5
+    },
+    "newPos": {
+      "line": 26,
+      "character": 5
+    },
+    "oldDescription": "",
+    "newDescription": "str1: number",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Enum",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": " enum Test3",
+    "oldApiName": "",
+    "newApiName": "Test3",
+    "oldDtsName": "",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "Test3"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 29,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": " enum Test3",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "EnumValue",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "VALUE_ONE = 1",
+    "oldApiName": "",
+    "newApiName": "VALUE_ONE",
+    "oldDtsName": "",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "Test3",
+      "VALUE_ONE"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 30,
+      "character": 5
+    },
+    "oldDescription": "",
+    "newDescription": "VALUE_ONE = 1",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "EnumValue",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "VALUE_TWO",
+    "oldApiName": "",
+    "newApiName": "VALUE_TWO",
+    "oldDtsName": "",
+    "newDtsName": "ut_multiple_changes_in_single_file.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_multiple_changes_in_single_file.d.ts",
+      "test",
+      "Test3",
+      "VALUE_TWO"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 32,
+      "character": 5
+    },
+    "oldDescription": "",
+    "newDescription": "VALUE_TWO",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

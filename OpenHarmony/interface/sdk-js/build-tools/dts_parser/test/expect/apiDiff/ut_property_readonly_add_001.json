@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "readonly constant2: 2;",
+    "oldApiName": "",
+    "newApiName": "constant2",
+    "oldDtsName": "",
+    "newDtsName": "ut_property_readonly_add_001.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_property_readonly_add_001.d.ts",
+      "Test",
+      "constant2"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 22,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "readonly constant2: 2;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

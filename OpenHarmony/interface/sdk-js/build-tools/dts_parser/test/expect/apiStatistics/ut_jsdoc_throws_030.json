@@ -1,0 +1,58 @@
+[
+  {
+    "filePath": "ut_jsdoc_throws_030.d.ts",
+    "packageName": "ut_jsdoc_throws_030",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_throws_030.d.ts/Test",
+    "apiName": "Test",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Class",
+    "definedText": " export class Test",
+    "pos": {
+      "line": 20,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_jsdoc_throws_030.d.ts",
+    "packageName": "ut_jsdoc_throws_030",
+    "parentModuleName": "Test",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_throws_030.d.ts/Test/func",
+    "apiName": "func",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Method",
+    "definedText": "func(str: string): void;",
+    "pos": {
+      "line": 26,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [
+      201,
+      202,
+      401
+    ],
+    "kitInfo": ""
+  }
+]

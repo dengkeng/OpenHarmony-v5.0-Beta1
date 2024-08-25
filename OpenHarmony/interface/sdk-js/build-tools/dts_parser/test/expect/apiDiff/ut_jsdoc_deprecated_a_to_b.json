@@ -1,0 +1,37 @@
+[
+  {
+    "apiType": "Namespace",
+    "statusCode": 5,
+    "oldApiDefinedText": " export namespace test",
+    "newApiDefinedText": " export namespace test",
+    "oldApiName": "test",
+    "newApiName": "test",
+    "oldDtsName": "ut_jsdoc_deprecated_a_to_b.d.ts",
+    "newDtsName": "ut_jsdoc_deprecated_a_to_b.d.ts",
+    "diffType": 18,
+    "diffMessage": "接口废弃版本发生变化",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_deprecated_a_to_b.d.ts",
+      "test"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_deprecated_a_to_b.d.ts",
+      "test"
+    ],
+    "oldPos": {
+      "line": 22,
+      "character": 1
+    },
+    "newPos": {
+      "line": 22,
+      "character": 1
+    },
+    "oldDescription": "8",
+    "newDescription": "9",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

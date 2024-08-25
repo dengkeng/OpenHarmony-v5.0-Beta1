@@ -1,0 +1,30 @@
+[
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_Create"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_Destroy"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_SetAlgo"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_SetKeyIdAndIv"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_SetSubsampleInfo"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_SetMode"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AVCencInfo_SetAVBuffer"
+    }
+]

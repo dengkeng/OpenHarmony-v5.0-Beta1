@@ -1,0 +1,46 @@
+{
+  "ut_jsdoc_useinstead_034.d.ts": [
+    {
+      "filePath": "ut_jsdoc_useinstead_034.d.ts",
+      "apiType": "Namespace",
+      "definedText": " export namespace test",
+      "pos": {
+        "line": 23,
+        "character": 1
+      },
+      "isExport": true,
+      "apiName": "test",
+      "hierarchicalRelations": [
+        "ut_jsdoc_useinstead_034.d.ts",
+        "test"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "7",
+      "jsDocText": "/*\r\n * Copyright (c) 2021-2023 Huawei Device Co., Ltd.\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n\r\n/**\r\n * the ut for jsdoc about useinstead\r\n *\r\n * @since 7\r\n * @deprecated since 9\r\n * @useinstead ohos.app.ability.dataUriUtils/Test\r\n */\r\n",
+      "isJoinType": false,
+      "genericInfo": [],
+      "jsDocInfos": [
+        {
+          "description": "the ut for jsdoc about useinstead",
+          "syscap": "",
+          "since": "7",
+          "isForm": false,
+          "isCrossPlatForm": false,
+          "isSystemApi": false,
+          "modelLimitation": "",
+          "deprecatedVersion": "9",
+          "useinstead": "ohos.app.ability.dataUriUtils/Test",
+          "permissions": "",
+          "errorCodes": [],
+          "typeInfo": "",
+          "isConstant": false,
+          "isAtomicService": false,
+          "kit": "",
+          "isFile": false
+        }
+      ],
+      "childApis": []
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "apiType": "Interface",
+    "name": "Test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Method",
+        "name": "constructor",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "(): ButtonAttribute",
+        "params": [],
+        "returnValue": "ButtonAttribute",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      },
+      {
+        "apiType": "Method",
+        "name": "constructor",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "(options: ButtonOptions): ButtonAttribute",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "options",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "ButtonOptions",
+            "isRequired": true
+          }
+        ],
+        "returnValue": "ButtonAttribute",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      },
+      {
+        "apiType": "Method",
+        "name": "constructor",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "(label: ResourceStr, options?: ButtonOptions): ButtonAttribute",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "label",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "ResourceStr",
+            "isRequired": true
+          },
+          {
+            "apiType": "Param",
+            "name": "options",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "ButtonOptions",
+            "isRequired": false
+          }
+        ],
+        "returnValue": "ButtonAttribute",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      }
+    ],
+    "parentClasses": []
+  }
+]

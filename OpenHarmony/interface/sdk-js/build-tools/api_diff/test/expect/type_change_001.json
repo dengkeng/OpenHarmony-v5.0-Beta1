@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\type_change_001.d.ts",
+    "className": "PermissionStateChangeInfo",
+    "rawText": "change: PermissionStateChangeType;",
+    "dtsName": "type_change_001.d.ts",
+    "dtsPath": "api/type_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 14,
+    "status": "type有变化",
+    "oldMessage": "PermissionStateChangeType",
+    "newMessage": "PermissionStateChange",
+    "syscap": "Security"
+  }
+]

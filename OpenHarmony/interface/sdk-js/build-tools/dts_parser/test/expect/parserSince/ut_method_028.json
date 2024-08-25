@@ -1,0 +1,128 @@
+[
+  {
+    "apiType": "Class",
+    "name": "Test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Method",
+        "name": "test1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "test1(param1: string): number",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "param1",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "string",
+            "isRequired": true
+          }
+        ],
+        "returnValue": "number",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": [
+          401
+        ]
+      },
+      {
+        "apiType": "Method",
+        "name": "test2",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "test2(param1: string): number",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "param1",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "string",
+            "isRequired": true
+          }
+        ],
+        "returnValue": "number",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": [
+          401,
+          402
+        ]
+      },
+      {
+        "apiType": "Method",
+        "name": "test1",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "test1(param1: string): number",
+        "params": [
+          {
+            "apiType": "Param",
+            "name": "param1",
+            "syscap": "",
+            "since": "-1",
+            "isForm": false,
+            "isCrossPlatForm": false,
+            "isSystemApi": false,
+            "isStageModelOnly": false,
+            "isFaModelOnly": false,
+            "deprecatedVersion": "-1",
+            "useinstead": "",
+            "type": "string",
+            "isRequired": true
+          }
+        ],
+        "returnValue": "number",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      }
+    ],
+    "parentClasses": []
+  }
+]

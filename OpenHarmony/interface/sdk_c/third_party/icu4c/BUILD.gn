@@ -1,0 +1,85 @@
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_ndk_library("libicu_ndk") {
+  ndk_description_file = "./libicu.ndk.json"
+  min_compact_version = "12"
+  output_name = "icu"
+  system_capability = "SystemCapability.Global.I18n"
+  system_capability_headers = [
+    "unicode/parseerr.h",
+    "unicode/platform.h",
+    "unicode/ptypes.h",
+    "unicode/stringoptions.h",
+    "unicode/ubidi.h",
+    "unicode/ubrk.h",
+    "unicode/ucal.h",
+    "unicode/uchar.h",
+    "unicode/ucnv.h",
+    "unicode/ucnv_err.h",
+    "unicode/ucol.h",
+    "unicode/uconfig.h",
+    "unicode/udat.h",
+    "unicode/udisplaycontext.h",
+    "unicode/uenum.h",
+    "unicode/ufieldpositer.h",
+    "unicode/uidna.h",
+    "unicode/uloc.h",
+    "unicode/umachine.h",
+    "unicode/umisc.h",
+    "unicode/unorm2.h",
+    "unicode/unum.h",
+    "unicode/unumberformatter.h",
+    "unicode/uscript.h",
+    "unicode/uset.h",
+    "unicode/utrans.h",
+    "unicode/utypes.h",
+  ]
+  output_extension = "so"
+}
+
+ohos_ndk_headers("icu_unicode_header") {
+  dest_dir = "$ndk_headers_out_dir/unicode"
+  sources = [
+    "ndk_headers/unicode/parseerr.h",
+    "ndk_headers/unicode/platform.h",
+    "ndk_headers/unicode/ptypes.h",
+    "ndk_headers/unicode/stringoptions.h",
+    "ndk_headers/unicode/ubidi.h",
+    "ndk_headers/unicode/ubrk.h",
+    "ndk_headers/unicode/ucal.h",
+    "ndk_headers/unicode/uchar.h",
+    "ndk_headers/unicode/ucnv.h",
+    "ndk_headers/unicode/ucnv_err.h",
+    "ndk_headers/unicode/ucol.h",
+    "ndk_headers/unicode/uconfig.h",
+    "ndk_headers/unicode/udat.h",
+    "ndk_headers/unicode/udisplaycontext.h",
+    "ndk_headers/unicode/uenum.h",
+    "ndk_headers/unicode/ufieldpositer.h",
+    "ndk_headers/unicode/uidna.h",
+    "ndk_headers/unicode/uloc.h",
+    "ndk_headers/unicode/umachine.h",
+    "ndk_headers/unicode/umisc.h",
+    "ndk_headers/unicode/unorm2.h",
+    "ndk_headers/unicode/unum.h",
+    "ndk_headers/unicode/unumberformatter.h",
+    "ndk_headers/unicode/uscript.h",
+    "ndk_headers/unicode/uset.h",
+    "ndk_headers/unicode/utrans.h",
+    "ndk_headers/unicode/utypes.h",
+  ]
+}

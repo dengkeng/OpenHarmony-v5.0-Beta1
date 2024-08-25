@@ -1,0 +1,58 @@
+[
+  {
+    "packageName": "api\\api_change_004.d.ts",
+    "className": "defaultAppManager",
+    "rawText": "function isDefaultApplication(type: string, callback: AsyncCallback<boolean>): void;",
+    "dtsName": "api_change_004.d.ts",
+    "dtsPath": "api/api_change_004.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 0,
+    "status": "删除",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "BundleManager"
+  },
+  {
+    "packageName": "api\\api_change_004.d.ts",
+    "className": "defaultAppManager",
+    "rawText": "function isDefaultApplication(type: string, aaa:string, callback: AsyncCallback<boolean>): void;",
+    "dtsName": "api_change_004.d.ts",
+    "dtsPath": "api/api_change_004.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 0,
+    "status": "删除",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "BundleManager"
+  },
+  {
+    "packageName": "api\\api_change_004.d.ts",
+    "className": "defaultAppManager",
+    "rawText": "function isDefaultApplication(type: number, callback: AsyncCallback<boolean>): void;",
+    "dtsName": "api_change_004.d.ts",
+    "dtsPath": "api/api_change_004.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "BundleManager"
+  },
+  {
+    "packageName": "api\\api_change_004.d.ts",
+    "className": "defaultAppManager",
+    "rawText": "function isDefaultApplication(type: string, bbb:string, callback: AsyncCallback<boolean>): void;",
+    "dtsName": "api_change_004.d.ts",
+    "dtsPath": "api/api_change_004.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 3,
+    "status": "新增",
+    "oldMessage": "",
+    "newMessage": "",
+    "syscap": "BundleManager"
+  }
+]

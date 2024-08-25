@@ -1,0 +1,76 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 24,
+    "oldApiDefinedText": "@Prop containers: () => void;",
+    "newApiDefinedText": "@BuilderParam containers: () => void;",
+    "oldApiName": "containers",
+    "newApiName": "containers",
+    "oldDtsName": "ut_struct_child_decorator_change.d.ets",
+    "newDtsName": "ut_struct_child_decorator_change.d.ets",
+    "diffType": 62,
+    "diffMessage": "删除装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_child_decorator_change.d.ets",
+      "MyComponent",
+      "containers"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_child_decorator_change.d.ets",
+      "MyComponent",
+      "containers"
+    ],
+    "oldPos": {
+      "line": 18,
+      "character": 3
+    },
+    "newPos": {
+      "line": 19,
+      "character": 3
+    },
+    "oldDescription": "Prop",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Property",
+    "statusCode": 23,
+    "oldApiDefinedText": "@Prop containers: () => void;",
+    "newApiDefinedText": "@BuilderParam containers: () => void;",
+    "oldApiName": "containers",
+    "newApiName": "containers",
+    "oldDtsName": "ut_struct_child_decorator_change.d.ets",
+    "newDtsName": "ut_struct_child_decorator_change.d.ets",
+    "diffType": 61,
+    "diffMessage": "新增装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_child_decorator_change.d.ets",
+      "MyComponent",
+      "containers"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_child_decorator_change.d.ets",
+      "MyComponent",
+      "containers"
+    ],
+    "oldPos": {
+      "line": 18,
+      "character": 3
+    },
+    "newPos": {
+      "line": 19,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "BuilderParam",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

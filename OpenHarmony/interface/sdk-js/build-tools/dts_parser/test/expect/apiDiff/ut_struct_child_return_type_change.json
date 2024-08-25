@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 16,
+    "oldApiDefinedText": "@Prop primaryText: ResourceStr;",
+    "newApiDefinedText": "@Prop primaryText: ResourceStrs;",
+    "oldApiName": "primaryText",
+    "newApiName": "primaryText",
+    "oldDtsName": "ut_struct_child_return_type_change.d.ets",
+    "newDtsName": "ut_struct_child_return_type_change.d.ets",
+    "diffType": 52,
+    "diffMessage": "可写属性类型范围扩大",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_struct_child_return_type_change.d.ets",
+      "MyComponent",
+      "primaryText"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_child_return_type_change.d.ets",
+      "MyComponent",
+      "primaryText"
+    ],
+    "oldPos": {
+      "line": 17,
+      "character": 3
+    },
+    "newPos": {
+      "line": 17,
+      "character": 3
+    },
+    "oldDescription": "ResourceStr",
+    "newDescription": "ResourceStrs",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

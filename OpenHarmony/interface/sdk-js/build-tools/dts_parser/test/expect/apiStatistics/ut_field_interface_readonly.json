@@ -1,0 +1,54 @@
+[
+  {
+    "filePath": "ut_field_interface_readonly.d.ts",
+    "packageName": "ut_field_interface_readonly",
+    "parentModuleName": "testNamespace",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_field_interface_readonly.d.ts/testNamespace/TestInterface",
+    "apiName": "TestInterface",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Interface",
+    "definedText": " interface TestInterface",
+    "pos": {
+      "line": 17,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_field_interface_readonly.d.ts",
+    "packageName": "ut_field_interface_readonly",
+    "parentModuleName": "TestInterface",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_field_interface_readonly.d.ts/testNamespace/TestInterface/id",
+    "apiName": "id",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "readonly id: string;",
+    "pos": {
+      "line": 18,
+      "character": 5
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "apiType": "UnionType",
+    "name": "Capability",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "valueRange": [
+      "retrieve",
+      "touchGuide",
+      "keyEventObserver"
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "ut_type_first_level_node_007.d.ts": [
+    {
+      "filePath": "ut_type_first_level_node_007.d.ts",
+      "apiType": "Import",
+      "definedText": "import { ValueType } from 'exceljs';",
+      "pos": {
+        "line": 16,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "'exceljs'",
+      "hierarchicalRelations": [
+        "ut_type_first_level_node_007.d.ts",
+        "'exceljs'"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "",
+      "isJoinType": false,
+      "genericInfo": [],
+      "importValues": [
+        {
+          "key": "ValueType",
+          "value": "ValueType"
+        }
+      ],
+      "importPath": "'exceljs'"
+    },
+    {
+      "filePath": "ut_type_first_level_node_007.d.ts",
+      "apiType": "TypeAlias",
+      "definedText": "type TextOneType = { [key: string]: ValueType | Uint8Array | null };",
+      "pos": {
+        "line": 18,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "TextOneType",
+      "hierarchicalRelations": [
+        "ut_type_first_level_node_007.d.ts",
+        "TextOneType"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "\r\n\r\n",
+      "isJoinType": false,
+      "genericInfo": [],
+      "jsDocInfos": [],
+      "type": [
+        "{ [key: string]: ValueType | Uint8Array | null }"
+      ],
+      "typeName": "ObjectType"
+    }
+  ]
+}

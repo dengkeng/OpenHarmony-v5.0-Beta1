@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 10,
+    "oldApiDefinedText": "function func(str: string): void;",
+    "newApiDefinedText": "function func(str: string): void;",
+    "oldApiName": "func",
+    "newApiName": "func",
+    "oldDtsName": "ut_jsdoc_permission_have_to_na.d.ts",
+    "newDtsName": "ut_jsdoc_permission_have_to_na.d.ts",
+    "diffType": 24,
+    "diffMessage": "权限从有到无",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_jsdoc_permission_have_to_na.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [
+      "ut_jsdoc_permission_have_to_na.d.ts",
+      "test",
+      "func"
+    ],
+    "oldPos": {
+      "line": 24,
+      "character": 3
+    },
+    "newPos": {
+      "line": 24,
+      "character": 3
+    },
+    "oldDescription": "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

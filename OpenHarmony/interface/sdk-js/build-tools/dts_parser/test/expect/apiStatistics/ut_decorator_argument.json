@@ -1,0 +1,58 @@
+[
+  {
+    "filePath": "ut_decorator_argument.d.ets",
+    "packageName": "ut_decorator_argument.d.ets",
+    "parentModuleName": "global",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_decorator_argument.d.ets/MyComponent",
+    "apiName": "MyComponent",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Struct",
+    "definedText": " struct MyComponent",
+    "pos": {
+      "line": 15,
+      "character": 1
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [
+      "Component"
+    ],
+    "errorCodes": [],
+    "kitInfo": ""
+  },
+  {
+    "filePath": "ut_decorator_argument.d.ets",
+    "packageName": "ut_decorator_argument.d.ets",
+    "parentModuleName": "MyComponent",
+    "syscap": "",
+    "permissions": "",
+    "since": "",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_decorator_argument.d.ets/MyComponent/count",
+    "apiName": "count",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "@Provide('a') count: number = 0;",
+    "pos": {
+      "line": 17,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [
+      "Provide"
+    ],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

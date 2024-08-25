@@ -1,0 +1,66 @@
+[
+  {
+    "apiType": "Struct",
+    "statusCode": 0,
+    "oldApiDefinedText": " struct MyComponent",
+    "newApiDefinedText": "",
+    "oldApiName": "MyComponent",
+    "newApiName": "",
+    "oldDtsName": "ut_struct_api.d.ets",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_struct_api.d.ets",
+      "MyComponent"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 15,
+      "character": 1
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": " struct MyComponent",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Struct",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": " struct MyComponents",
+    "oldApiName": "",
+    "newApiName": "MyComponents",
+    "oldDtsName": "",
+    "newDtsName": "ut_struct_api.d.ets",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_struct_api.d.ets",
+      "MyComponents"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 15,
+      "character": 1
+    },
+    "oldDescription": "",
+    "newDescription": " struct MyComponents",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

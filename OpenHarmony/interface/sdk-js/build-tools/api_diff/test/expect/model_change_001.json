@@ -1,0 +1,44 @@
+[
+  {
+    "packageName": "api\\model_change_001.d.ts",
+    "className": "Ability",
+    "rawText": "onMemoryLevel(level: AbilityConstant.MemoryLevel): void;",
+    "dtsName": "model_change_001.d.ts",
+    "dtsPath": "api/model_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 13,
+    "status": "model有变化",
+    "oldMessage": "",
+    "newMessage": "StageModelOnly",
+    "syscap": "Ability"
+  },
+  {
+    "packageName": "api\\model_change_002.d.ts",
+    "className": "ability",
+    "rawText": "declare ability",
+    "dtsName": "model_change_002.d.ts",
+    "dtsPath": "api/model_change_002.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 13,
+    "status": "model有变化",
+    "oldMessage": "",
+    "newMessage": "FAModelOnly",
+    "syscap": "Ability"
+  },
+  {
+    "packageName": "api\\model_change_002.d.ts",
+    "className": "ability",
+    "rawText": "export type DataAbilityResult = _DataAbilityResult",
+    "dtsName": "model_change_002.d.ts",
+    "dtsPath": "api/model_change_002.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 13,
+    "status": "model有变化",
+    "oldMessage": "",
+    "newMessage": "FAModelOnly",
+    "syscap": "Ability"
+  }
+]

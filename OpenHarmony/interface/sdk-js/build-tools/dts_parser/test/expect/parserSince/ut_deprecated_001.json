@@ -1,0 +1,16 @@
+[
+  {
+    "apiType": "Namespace",
+    "name": "dataUriUtils",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "9",
+    "useinstead": "",
+    "childApis": []
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_param_016.d.ts",
+    "packageName": "ut_jsdoc_param_016",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_param_016.d.ts/test/func",
+    "apiName": "func",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Method",
+    "definedText": "function func(str: string, str2: string): void;",
+    "pos": {
+      "line": 25,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

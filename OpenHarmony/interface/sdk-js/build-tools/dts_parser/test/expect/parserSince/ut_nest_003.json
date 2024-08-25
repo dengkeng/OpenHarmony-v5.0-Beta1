@@ -1,0 +1,72 @@
+[
+  {
+    "apiType": "Class",
+    "name": "Test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Property",
+        "name": "id",
+        "syscap": "",
+        "since": "6",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "number",
+        "isReadOnly": false,
+        "isRequired": true,
+        "isStatic": false,
+        "permission": ""
+      },
+      {
+        "apiType": "Property",
+        "name": "name",
+        "syscap": "",
+        "since": "7",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "string",
+        "isReadOnly": false,
+        "isRequired": true,
+        "isStatic": false,
+        "permission": ""
+      },
+      {
+        "apiType": "Property",
+        "name": "age",
+        "syscap": "",
+        "since": "8",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "type": "number",
+        "isReadOnly": false,
+        "isRequired": true,
+        "isStatic": false,
+        "permission": ""
+      }
+    ],
+    "parentClasses": []
+  }
+]

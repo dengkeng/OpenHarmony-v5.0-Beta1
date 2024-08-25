@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\returns002.d.ts(line: 28, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\returns002.d.ts",
+    "message": "API check error of [wrong value]: the [returns] tag was used incorrectly. The returns tag should not be used when the return type is void"
+  }
+]

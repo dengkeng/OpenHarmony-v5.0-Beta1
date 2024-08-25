@@ -1,0 +1,43 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+ohos_ndk_library("libohweb") {
+  cflags = [ "-fstack-protector-all" ]
+  output_name = "ohweb"
+  output_extension = "so"
+  ndk_description_file = "./libohweb.ndk.json"
+  system_capability = "SystemCapability.Web.Webview.Core"
+  system_capability_headers = [
+    "web/arkweb_error_code.h",
+    "web/arkweb_interface.h",
+    "web/arkweb_net_error_list.h",
+    "web/arkweb_scheme_handler.h",
+    "web/arkweb_type.h",
+    "web/native_interface_arkweb.h",
+  ]
+  min_compact_version = "11"
+}
+
+ohos_ndk_headers("web_header") {
+  dest_dir = "$ndk_headers_out_dir/web/"
+  sources = [
+    "arkweb_error_code.h",
+    "arkweb_interface.h",
+    "arkweb_net_error_list.h",
+    "arkweb_scheme_handler.h",
+    "arkweb_type.h",
+    "native_interface_arkweb.h",
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "ut_import_005.d.ts": [
+    {
+      "filePath": "ut_import_005.d.ts",
+      "apiType": "Import",
+      "definedText": "import { ShortcutInfo as _ShortcutInfo, ShortcutWant as _ShortcutWant } from './bundleManager/ShortcutInfo';",
+      "pos": {
+        "line": 19,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "'./bundleManager/ShortcutInfo'",
+      "hierarchicalRelations": [
+        "ut_import_005.d.ts",
+        "'./bundleManager/ShortcutInfo'"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "",
+      "isJoinType": false,
+      "genericInfo": [],
+      "importValues": [
+        {
+          "key": "_ShortcutInfo",
+          "value": "ShortcutInfo"
+        },
+        {
+          "key": "_ShortcutWant",
+          "value": "ShortcutWant"
+        }
+      ],
+      "importPath": "'./bundleManager/ShortcutInfo'"
+    }
+  ]
+}

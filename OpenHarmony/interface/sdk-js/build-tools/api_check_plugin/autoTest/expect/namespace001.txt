@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\namespace001.d.ts(line: 24, col: 1)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\namespace001.d.ts",
+    "message": "API check error of [wrong value]: the [namespace] tag value is incorrect. Please check if it matches the namespace name"
+  }
+]

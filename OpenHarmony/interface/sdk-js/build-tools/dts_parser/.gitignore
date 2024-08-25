@@ -1,0 +1,11 @@
+#忽略node依赖包及相关安装
+node_modules
+package-lock.json
+#忽略执行测试用例的输出数据
+test/output
+#忽略执行测试用例失败的相关输出文件
+mochawesome-report 
+#忽略本地typescript离线包
+deps/*
+#sdk
+api

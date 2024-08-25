@@ -1,0 +1,16 @@
+[
+  {
+    "packageName": "api\\form_change_001.d.ts",
+    "className": "CanvasPattern",
+    "rawText": "setTransform(transform?: Matrix2D): void;",
+    "dtsName": "form_change_001.d.ts",
+    "dtsPath": "api/form_change_001.d.ts",
+    "hint": "",
+    "changelogs": [],
+    "statusCode": 19,
+    "status": "卡片应用支持性有变化",
+    "oldMessage": "form",
+    "newMessage": "",
+    "syscap": "ArkUI"
+  }
+]

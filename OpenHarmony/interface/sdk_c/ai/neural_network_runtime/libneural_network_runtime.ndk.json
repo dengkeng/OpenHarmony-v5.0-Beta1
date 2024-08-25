@@ -1,0 +1,77 @@
+[
+    {
+        "name": "OH_NNQuantParam_Create"
+    },
+    {
+        "name": "OH_NNQuantParam_SetScales"
+    },
+    {
+        "name": "OH_NNQuantParam_SetZeroPoints"
+    },
+    {
+        "name": "OH_NNQuantParam_SetNumBits"
+    },
+    {
+        "name": "OH_NNQuantParam_Destroy"
+    },
+    {
+        "name": "OH_NNModel_Construct"
+    },
+    {
+        "name": "OH_NNModel_AddTensor"
+    },
+    {
+        "name": "OH_NNModel_AddTensorToModel"
+    },
+    {
+        "name": "OH_NNModel_SetTensorData"
+    },
+    {
+        "name": "OH_NNModel_SetTensorQuantParams"
+    },
+    {
+        "name": "OH_NNModel_SetTensorType"
+    },
+    {
+        "name": "OH_NNModel_AddOperation"
+    },
+    {
+        "name": "OH_NNModel_SpecifyInputsAndOutputs"
+    },
+    {
+        "name": "OH_NNModel_Finish"
+    },
+    {
+        "name": "OH_NNModel_Destroy"
+    },
+    {
+        "name": "OH_NNModel_GetAvailableOperations"
+    },
+    {
+        "name": "OH_NNExecutor_SetInput"
+    },
+    {
+        "name": "OH_NNExecutor_SetOutput"
+    },
+    {
+        "name": "OH_NNExecutor_Run"
+    },
+    {
+        "name": "OH_NNExecutor_AllocateInputMemory"
+    },
+    {
+        "name": "OH_NNExecutor_AllocateOutputMemory"
+    },
+    {
+        "name": "OH_NNExecutor_DestroyInputMemory"
+    },
+    {
+        "name": "OH_NNExecutor_DestroyOutputMemory"
+    },
+    {
+        "name": "OH_NNExecutor_SetInputWithMemory"
+    },
+    {
+        "name": "OH_NNExecutor_SetOutputWithMemory"
+    }
+]

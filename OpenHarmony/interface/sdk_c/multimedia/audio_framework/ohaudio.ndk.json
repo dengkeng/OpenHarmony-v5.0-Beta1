@@ -1,0 +1,314 @@
+[
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_Create"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_Destroy"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetSamplingRate"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetChannelCount"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetSampleFormat"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetEncodingType"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetLatencyMode"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetRendererInfo"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetCapturerInfo"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetRendererCallback"
+    },
+    {
+        "first_introduced": "11",
+        "name": "OH_AudioStreamBuilder_SetRendererOutputDeviceChangeCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_SetCapturerCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_GenerateRenderer"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioStreamBuilder_GenerateCapturer"
+    },
+    {
+        "first_introduced": "11",
+        "name": "OH_AudioStreamBuilder_SetFrameSizeInCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_Release"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_Start"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_Pause"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_Stop"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_Flush"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetCurrentState"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetSamplingRate"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetStreamId"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetChannelCount"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetSampleFormat"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetLatencyMode"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetRendererInfo"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetEncodingType"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetFramesWritten"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetTimestamp"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioRenderer_GetFrameSizeInCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_Release"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_Start"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_Pause"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_Stop"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_Flush"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetCurrentState"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetLatencyMode"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetStreamId"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetSamplingRate"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetChannelCount"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetSampleFormat"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetEncodingType"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetCapturerInfo"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetFrameSizeInCallback"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetTimestamp"
+    },
+    {
+        "first_introduced": "10",
+        "name": "OH_AudioCapturer_GetFramesRead"
+    },
+    {
+        "first_introduced": "11",
+        "name": "OH_AudioRenderer_GetSpeed"
+    },
+    {
+        "first_introduced": "11",
+        "name": "OH_AudioRenderer_SetSpeed"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_SetVolume"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_SetVolumeWithRamp"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_GetVolume"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_SetMarkPosition"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_CancelMark"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_GetUnderflowCount"
+    },
+    {
+        "first_introduced":"12",
+        "name": "OH_AudioCapturer_GetOverflowCount"
+    },
+    {
+        "first_introduced":"12",
+        "name": "OH_AudioStreamBuilder_SetRendererInterruptMode"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioManager_GetAudioRoutingManager"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRoutingManager_GetDevices"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRoutingManager_RegisterDeviceChangeCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRoutingManager_UnregisterDeviceChangeCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRoutingManager_ReleaseDevices"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceRole"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceType"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceId"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceName"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceAddress"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceSampleRates"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceChannelCounts"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceDisplayName"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioDeviceDescriptor_GetDeviceEncodingTypes"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_GetEffectMode"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_SetEffectMode"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_GetChannelLayout"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioStreamBuilder_SetChannelLayout"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioStreamBuilder_SetWriteDataWithMetadataCallback"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioStreamBuilder_SetRendererPrivacy"
+    },
+    {
+        "first_introduced": "12",
+        "name": "OH_AudioRenderer_GetRendererPrivacy"
+    }
+]

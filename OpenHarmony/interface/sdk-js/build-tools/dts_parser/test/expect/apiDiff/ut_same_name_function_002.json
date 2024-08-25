@@ -1,0 +1,72 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "declare function copyDir(src: string, dest: string, mode?: number): Promise<void>;",
+    "newApiDefinedText": "declare function copyDir(src: number, dest: string, mode?: number): Promise<void>;",
+    "oldApiName": "copyDir",
+    "newApiName": "copyDir",
+    "oldDtsName": "ut_same_name_function_002.d.ts",
+    "newDtsName": "ut_same_name_function_002.d.ts",
+    "diffType": 42,
+    "diffMessage": "函数的参数类型变更",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_same_name_function_002.d.ts",
+      "copyDir"
+    ],
+    "newHierarchicalRelations": [
+      "ut_same_name_function_002.d.ts",
+      "copyDir"
+    ],
+    "oldPos": {
+      "line": 22,
+      "character": 1
+    },
+    "newPos": {
+      "line": 22,
+      "character": 1
+    },
+    "oldDescription": "src: string",
+    "newDescription": "src: number",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 16,
+    "oldApiDefinedText": "declare function copyDir(src: string, dest: string, callback: AsyncCallback<void>): void;",
+    "newApiDefinedText": "declare function copyDir(src: string, dest: string, callback: AsyncCallback<void>): ConflictFiles;",
+    "oldApiName": "copyDir",
+    "newApiName": "copyDir",
+    "oldDtsName": "ut_same_name_function_002.d.ts",
+    "newDtsName": "ut_same_name_function_002.d.ts",
+    "diffType": 32,
+    "diffMessage": "函数返回值类型扩大",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_same_name_function_002.d.ts",
+      "copyDir"
+    ],
+    "newHierarchicalRelations": [
+      "ut_same_name_function_002.d.ts",
+      "copyDir"
+    ],
+    "oldPos": {
+      "line": 24,
+      "character": 1
+    },
+    "newPos": {
+      "line": 24,
+      "character": 1
+    },
+    "oldDescription": "",
+    "newDescription": "ConflictFiles",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

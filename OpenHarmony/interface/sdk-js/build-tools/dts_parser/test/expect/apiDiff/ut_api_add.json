@@ -1,0 +1,35 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "function func2(str: string): void {}",
+    "oldApiName": "",
+    "newApiName": "func2",
+    "oldDtsName": "",
+    "newDtsName": "ut_api_add.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_api_add.d.ts",
+      "test",
+      "func2"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "function func2(str: string): void {}",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

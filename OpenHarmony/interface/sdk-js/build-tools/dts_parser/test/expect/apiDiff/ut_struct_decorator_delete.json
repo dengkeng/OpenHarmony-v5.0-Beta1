@@ -1,0 +1,37 @@
+[
+  {
+    "apiType": "Struct",
+    "statusCode": 24,
+    "oldApiDefinedText": " struct MyComponent",
+    "newApiDefinedText": " struct MyComponent",
+    "oldApiName": "MyComponent",
+    "newApiName": "MyComponent",
+    "oldDtsName": "ut_struct_decorator_delete.d.ets",
+    "newDtsName": "ut_struct_decorator_delete.d.ets",
+    "diffType": 62,
+    "diffMessage": "删除装饰器",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [
+      "ut_struct_decorator_delete.d.ets",
+      "MyComponent"
+    ],
+    "newHierarchicalRelations": [
+      "ut_struct_decorator_delete.d.ets",
+      "MyComponent"
+    ],
+    "oldPos": {
+      "line": 15,
+      "character": 1
+    },
+    "newPos": {
+      "line": 16,
+      "character": 1
+    },
+    "oldDescription": "Component",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "filePath": "ut_jsdoc_test_029.d.ts",
+    "packageName": "ut_jsdoc_test_029",
+    "parentModuleName": "test",
+    "syscap": "",
+    "permissions": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isAutomicService": false,
+    "hierarchicalRelations": "ut_jsdoc_test_029.d.ts/test/testStr",
+    "apiName": "testStr",
+    "deprecatedVersion": "",
+    "useInstead": "",
+    "apiType": "Property",
+    "definedText": "const testStr: string;",
+    "pos": {
+      "line": 24,
+      "character": 3
+    },
+    "isSystemapi": false,
+    "modelLimitation": "",
+    "decorators": [],
+    "errorCodes": [],
+    "kitInfo": ""
+  }
+]

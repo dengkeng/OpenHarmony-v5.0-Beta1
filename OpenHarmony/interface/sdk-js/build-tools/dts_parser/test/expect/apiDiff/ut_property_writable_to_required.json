@@ -1,0 +1,39 @@
+[
+  {
+    "apiType": "Property",
+    "statusCode": 16,
+    "oldApiDefinedText": "str?: string;",
+    "newApiDefinedText": "str: string;",
+    "oldApiName": "str",
+    "newApiName": "str",
+    "oldDtsName": "ut_property_writable_to_required.d.ts",
+    "newDtsName": "ut_property_writable_to_required.d.ts",
+    "diffType": 48,
+    "diffMessage": "可写属性由可选变为必选",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_property_writable_to_required.d.ts",
+      "Test",
+      "str"
+    ],
+    "newHierarchicalRelations": [
+      "ut_property_writable_to_required.d.ts",
+      "Test",
+      "str"
+    ],
+    "oldPos": {
+      "line": 21,
+      "character": 3
+    },
+    "newPos": {
+      "line": 21,
+      "character": 3
+    },
+    "oldDescription": "str?: string;",
+    "newDescription": "str: string;",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

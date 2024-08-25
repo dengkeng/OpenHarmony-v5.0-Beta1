@@ -1,0 +1,68 @@
+[
+  {
+    "apiType": "Method",
+    "statusCode": 0,
+    "oldApiDefinedText": "function func(str: string): void {}",
+    "newApiDefinedText": "",
+    "oldApiName": "func",
+    "newApiName": "",
+    "oldDtsName": "ut_api_name_change.d.ts",
+    "newDtsName": "",
+    "diffType": 60,
+    "diffMessage": "删除API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": false,
+    "oldHierarchicalRelations": [
+      "ut_api_name_change.d.ts",
+      "test",
+      "func"
+    ],
+    "newHierarchicalRelations": [],
+    "oldPos": {
+      "line": 20,
+      "character": 3
+    },
+    "newPos": {
+      "line": -1,
+      "character": -1
+    },
+    "oldDescription": "function func(str: string): void {}",
+    "newDescription": "",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  },
+  {
+    "apiType": "Method",
+    "statusCode": 3,
+    "oldApiDefinedText": "",
+    "newApiDefinedText": "function func2(str: string): void {}",
+    "oldApiName": "",
+    "newApiName": "func2",
+    "oldDtsName": "",
+    "newDtsName": "ut_api_name_change.d.ts",
+    "diffType": 59,
+    "diffMessage": "新增API",
+    "changeLogUrl": "",
+    "changeLogs": [],
+    "isCompatible": true,
+    "oldHierarchicalRelations": [],
+    "newHierarchicalRelations": [
+      "ut_api_name_change.d.ts",
+      "test",
+      "func2"
+    ],
+    "oldPos": {
+      "line": -1,
+      "character": -1
+    },
+    "newPos": {
+      "line": 20,
+      "character": 3
+    },
+    "oldDescription": "",
+    "newDescription": "function func2(str: string): void {}",
+    "oldSyscapField": "",
+    "newSyscapField": ""
+  }
+]

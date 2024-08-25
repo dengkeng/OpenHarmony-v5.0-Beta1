@@ -1,0 +1,9 @@
+[
+  {
+    "id": 8,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\returns001.d.ts(line: 27, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\returns001.d.ts",
+    "message": "API check error of [wrong scene]: JSDoc tag validity verification failed. Please confirm if the [returns] tag is missing"
+  }
+]

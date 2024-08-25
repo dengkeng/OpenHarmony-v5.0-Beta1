@@ -1,0 +1,9 @@
+[
+  {
+    "id": 2,
+    "level": 2,
+    "location": "api_check_plugin\\autoTest\\ut\\hump002.d.ts(line: 27, col: 3)",
+    "filePath": "api_check_plugin\\autoTest\\ut\\hump002.d.ts",
+    "message": "API check error of [naming errors]: This name [GETID] should be named by small hump."
+  }
+]

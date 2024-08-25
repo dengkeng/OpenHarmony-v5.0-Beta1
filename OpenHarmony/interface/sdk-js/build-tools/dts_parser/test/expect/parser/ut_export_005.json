@@ -1,0 +1,35 @@
+{
+  "ut_export_005.d.ts": [
+    {
+      "filePath": "ut_export_005.d.ts",
+      "apiType": "Export",
+      "definedText": "export { getUserName as get, setName as set } from 'test';",
+      "pos": {
+        "line": 19,
+        "character": 1
+      },
+      "isExport": false,
+      "apiName": "export_get_set",
+      "hierarchicalRelations": [
+        "ut_export_005.d.ts",
+        "export_get_set"
+      ],
+      "isStruct": false,
+      "syscap": "",
+      "currentVersion": "-1",
+      "jsDocText": "",
+      "isJoinType": false,
+      "genericInfo": [],
+      "exportValues": [
+        {
+          "key": "get",
+          "value": "getUserName"
+        },
+        {
+          "key": "set",
+          "value": "setName"
+        }
+      ]
+    }
+  ]
+}

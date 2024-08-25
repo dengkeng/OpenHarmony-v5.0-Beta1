@@ -1,0 +1,36 @@
+[
+  {
+    "apiType": "Namespace",
+    "name": "test",
+    "syscap": "",
+    "since": "-1",
+    "isForm": false,
+    "isCrossPlatForm": false,
+    "isSystemApi": false,
+    "isStageModelOnly": false,
+    "isFaModelOnly": false,
+    "deprecatedVersion": "-1",
+    "useinstead": "",
+    "childApis": [
+      {
+        "apiType": "Method",
+        "name": "testFunction",
+        "syscap": "",
+        "since": "-1",
+        "isForm": false,
+        "isCrossPlatForm": false,
+        "isSystemApi": false,
+        "isStageModelOnly": false,
+        "isFaModelOnly": false,
+        "deprecatedVersion": "-1",
+        "useinstead": "",
+        "callForm": "testFunction(): number",
+        "params": [],
+        "returnValue": "number",
+        "isStatic": false,
+        "permission": "",
+        "errorCodes": []
+      }
+    ]
+  }
+]
