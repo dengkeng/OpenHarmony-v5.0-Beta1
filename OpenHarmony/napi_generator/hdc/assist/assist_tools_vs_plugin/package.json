@@ -1,0 +1,26 @@
+{
+  "name": "assist_tools",
+  "version": "1.0.0",
+  "description": "This is the Kaihong assistance tools unified entrance for OpenHarmony OS developer.",
+  "main": "./src/extension.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "mocha": "^9.2.1",
+    "node-gyp": "^8.4.1",
+    "stdio": "^2.1.1",
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+  },
+  "author": "",
+  "license": "ISC",
+  "pkg": {
+    "assets": [
+    ]
+  }
+}

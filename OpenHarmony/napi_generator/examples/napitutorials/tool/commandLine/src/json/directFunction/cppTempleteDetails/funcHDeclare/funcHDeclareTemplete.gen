@@ -1,0 +1,9 @@
+
+#ifndef NAPITUTORIALS_[h_file_name_replace]_H
+#define NAPITUTORIALS_[h_file_name_replace]_H
+
+#include "[h_filename_replace]common.h"
+
+[func_declare_replace]
+
+#endif //NAPITUTORIALS_[h_file_name_replace]_H

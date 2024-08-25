@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napi</title>
+</head>
+<style type="text/css">
+    body {
+        background-color: #000000;
+        margin: 0 auto;
+        font-family: Consolas, sans-serif;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    button.button {
+        background-color: #ffffff;
+        font-family: Consolas, sans-serif;
+        font-size: 16px;
+        border-radius: 3px;
+        border-color: #C4C4C4;
+        align-self: center;
+        border: 1px solid #C4C4C4;
+        outline: none;
+        width: 100px;
+        height: 24px
+    }
+
+    button.button:hover {
+        background: #4B97D9;
+        color: #fff;
+        border: 0px;
+        font-family: Consolas, sans-serif;
+        font-size: 16px;
+        width: 100px;
+        height: 24px
+    }
+
+    input.text:focus {
+        outline: 2px solid #4B97D9;
+        border: 0px;
+    }
+
+    input.text {
+        outline: 2px solid #C4C4C4;
+        border: 0px;
+    }
+
+    .tabs {
+        position: relative;
+        height: 800px;
+        min-height: 800px;
+        max-height: 800px;
+        clear: both;
+        margin: 25px 0;
+        overflow: hidden;
+    }
+
+    .tab {
+        float: left;
+        margin: 25px 0;
+    }
+
+    .tab label {
+        background: #eee;
+        padding: 10px 20px;
+        position: relative;
+        left: 1px;
+        border: 0px solid;
+        margin-left: -1px;
+        z-index: 2;
+        color: #333333;
+        background: white;
+    }
+
+    input.text {
+        width: 250px;
+        height: 18px;
+        vertical-align: middle;
+    }
+
+    .content {
+        position: absolute;
+        top: 61px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: black;
+        padding: 20px 20px;
+        border: 0px solid #ccc;
+        max-height: 800px;
+        overflow: scroll;
+    }
+
+    [type=radio]:checked~label {
+        color: white;
+        background: #3288e9;
+        border: 0px solid #ccc;
+        z-index: 3;
+    }
+
+    [type=radio]:checked~label~.content {
+        z-index: 1;
+    }
+</style>
+<script type="text/javascript">
+    var mode = 0;
+    let vscode = acquireVsCodeApi();
+    function sendApiscanParamMsg() {
+        var fileNames = document.getElementById("asFilePath").value;
+        var genDir = document.getElementById("genASResultDir").value;
+        var buttonName = document.getElementById("okButton").textContent;
+        var result = {
+            msg: "api_scan",
+            fileNames: fileNames,
+            genDir: genDir,
+            buttonName: buttonName,
+        }
+        vscode.postMessage(result);
+    }
+
+    function selectASFilePath() {
+        var fileNames = document.getElementById("asFilePath").value;     
+        var result = {
+            msg: "selectASFilePath",
+            filePath: fileNames,
+        }
+        vscode.postMessage(result);
+    }
+
+    function selectPath(message) {
+        var genDir = document.getElementById("genASResultDir").value;
+        var result = {
+            msg: message,
+            filePath: genDir
+        }
+        vscode.postMessage(result);
+    }
+
+    function cancel() {
+        var result = {
+            msg: "cancel"
+        }
+        vscode.postMessage(result);
+    }
+
+    window.addEventListener('message', event => {
+
+        const message = event.data.msg;
+        const path = event.data.path;
+
+        if (message == "selectASFilePath") {
+            document.getElementById("asFilePath").value = path;
+            document.getElementById("genASResultDir").value = path;
+        } else if (message == "selectASResultDir") {
+            document.getElementById("genASResultDir").value = path;
+        } else {
+            console.log("param is error");
+        }
+    })
+
+</script>
+
+<body>
+    <div class="tabs">
+        <div class="tab">
+            <input type="radio" style="display: none;" id="tab" name="group-1">
+            <label for="tab">api-scan</label>
+            <div class="content">
+                <div id="interface" style="margin-top: 10px;">
+                    扫描项目路径:
+                    <input class="text" accept="text" id="asFilePath">
+                    <img src="./images/file.png" width="20px" height="20px" style="vertical-align:middle;"
+                        onclick="selectASFilePath('selectASFilePath')">
+                </div>
+
+                <div style="margin-top: 10px;">
+                    结果输出路径:
+                    <input class="text" accept="text" id="genASResultDir">
+                    <img src="./images/path.png" width="20px" height="20px" style="vertical-align:middle;"
+                        onclick="selectPath('selectASResultDir')">
+                </div>
+
+                <div style="margin-top: 20px; text-align: left;">
+                    <button type="button" class="button" onclick="cancel()"
+                        style="background-color: #333333; border: 1px solid #333333; color: #fff;">Cancel</button>
+                    <button id="okButton" type="button" class="button" onclick="sendApiscanParamMsg()"
+                        style="background-color: #4B97D9; border: 1px solid #4B97D9; color: #fff;">Ok</button>
+                    <a href="https://gitee.com/openharmony/napi_generator" target="_blank">
+                        <button type="button"
+                            style="background-color: #333333; width: 20px; height: 20px; border-radius: 50%;border: none; color: #fff;">?</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+    napi_valuetype valuetype[param_name_replace];
+    /* [NAPI_GEN]: 获取入参类型，第[param_index_replace]个入参
+     * env: N-API环境的句柄，表示当前的上下文
+     * value: 要检查类型的js值
+     * result: 是一个指针，指向napi_valuetype枚举的值，函数会将结果存储在这里
+     */
+    status = napi_typeof(env, args[[param_index_replace]], &valuetype[param_name_replace]);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_typeof", tag);
+        return nullptr;
+    }
+[getParam_replace]

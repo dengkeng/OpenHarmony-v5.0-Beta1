@@ -1,0 +1,11 @@
+    uint32_t [param_name_replace]In = 0;
+    /* [NAPI_GEN]: napi_get_value_uint32将一个napi_value类型的js布尔值转换成一个C语言的uint32_t类型的数值，第[param_index_replace]个入参
+     * env: N-API环境的句柄，表示当前的上下文
+     * value：要转换的JavaScript值
+     * result：指向 uint32_t 类型的指针，在这里函数将存储转换后的无符号整数
+     */
+    status = napi_get_value_uint32(env, args[[param_index_replace]], &[param_name_replace]In);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_get_value_uint32", tag);
+        return nullptr;
+    }

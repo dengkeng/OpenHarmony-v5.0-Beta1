@@ -1,0 +1,19 @@
+{
+  "name": "service-gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "stdio": "^2.1.1",
+    "typescript": "^4.8.3"
+  },
+  "bin": "./src/gen/main.js",
+  "pkg": {
+    "assets": []
+  }
+}

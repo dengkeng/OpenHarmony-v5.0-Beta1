@@ -1,0 +1,5 @@
+/* [NAPI_GEN]:对应[file_introduce_replace]中：[func_introduce_replace]方法的dts接口
+ * 输入: [input_introduce_replace]
+ * 输出: [output_introduce_replace]
+ */
+[tab_replace][export_replace][func_name_replace]:([func_param_replace]) => [func_return_replace];

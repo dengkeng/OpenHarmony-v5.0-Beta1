@@ -1,0 +1,11 @@
+    napi_value [return_name_replace]Out;
+    /* [NAPI_GEN]: 返回值是bool类型时，napi_get_boolean创建一个表示布尔值的js Boolean对象
+     * env: 当前环境的句柄
+     * value: 希望表示的布尔值（C中的true或者false）,这里以传入true为例，用例新增业务代码时可根据自身需求修改
+     * result: 函数返回一个napi_value，它是对应于js Boolean对象的C语言表示
+     */
+    status = napi_get_boolean(env, true, &[return_name_replace]Out);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_get_boolean", tag);
+        return nullptr;
+    }

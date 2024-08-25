@@ -1,0 +1,75 @@
+{
+	"name": "ts-gen",
+	"displayName": "ts-gen",
+	"description": "Generate TS interface file for OpenHarmony",
+	"keywords": [
+		"ts",
+		"ts_generator"
+	],
+	"icon": "images/napi.png",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.62.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"publisher": "kaihong",
+	"contributes": {
+		"commands": [
+			{
+				"command": "generate_ts",
+				"title": "Generate Ts Frame"
+			},
+			{
+				"command": "generate_ts_menu",
+				"title": "Generate Ts Frame"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"when": "resourceExtname == .h",
+					"command": "generate_ts"
+				}
+			],
+			"editor/context": [
+				{
+					"command": "generate_ts_menu"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.4",
+		"@types/mocha": "^9.0.0",
+		"@types/node": "14.x",
+		"@types/vscode": "^1.62.0",
+		"@vscode/test-electron": "^1.6.2",
+		"eslint": "^8.1.0",
+		"glob": "^7.1.7",
+		"mocha": "^9.1.3",
+		"webpack": "^5.64.4",
+		"webpack-cli": "^4.9.1"
+	},
+	"dependencies": {
+		"compressing": "^1.5.1",
+		"node-gyp": "^9.0.0",
+		"stdio": "^2.1.1",
+		"typescript": "^4.9.5",
+		"vsce": "^2.15.0"
+	},
+	"repository": {
+		"type": "gitee",
+		"url": "https://gitee.com/openharmony/napi_generator/tree/master/hdc/ts"
+	}
+}

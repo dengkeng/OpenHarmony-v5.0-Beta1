@@ -1,0 +1,49 @@
+{
+  "directFunction": {
+    "dtsTemplete": "../json/directFunction/dtsTempleteDetails/declareTemplete.gen",
+    "initTempleteDetails":{
+      "cppInitTemplete": "../json/directFunction/initTempleteDetails/cppInitTemplete.gen",
+      "funcInitTemplete": "../json/directFunction/initTempleteDetails/funcInitTemplete.gen"
+    },
+    "cppTempleteDetails": {
+      "funcBody":{
+        "funcBodyTemplete": "../json/directFunction/cppTempleteDetails/funcBody/funcBodyTemplete.gen",
+        "funcParamIn":{
+          "funcParamType": {
+            "int32_t": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/int32_t.gen",
+            "int64_t": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/int64_t.gen",
+            "uint32_t": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/uint32_t.gen",
+            "double": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/double.gen",
+            "bool": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/bool.gen",
+            "string": "../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/string.gen"
+          },
+          "funcGetParamTemplete":"../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcGetParamTemplete.gen",
+          "paramGenTemplete":"../json/directFunction/cppTempleteDetails/funcBody/funcParamIn/paramGenTemplete.gen"
+        },
+        "funcReturnOut":{
+          "funcReturnType": {
+            "int32_t": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/int32_t.gen",
+            "int64_t": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/int64_t.gen",
+            "uint32_t": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/uint32_t.gen",
+            "double": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/double.gen",
+            "bool": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/bool.gen",
+            "string": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/string.gen",
+            "returnObj":{
+              "object": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/returnObj/object.gen",
+              "funcReturnObjectToSet": "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/returnObj/funcReturnObjectToSet.gen"
+            }
+          },
+          "funcReturnTemplete" : "../json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnTemplete.gen"
+        }
+      },
+      "funcHDeclare": {
+        "funcHDeclare": "../json/directFunction/cppTempleteDetails/funcHDeclare/funcHDeclare.gen",
+        "funcHDeclareTemplete": "../json/directFunction/cppTempleteDetails/funcHDeclare/funcHDeclareTemplete.gen"
+      }
+    },
+    "testTempleteDetails": {
+      "abilityTestTemplete": "../json/directFunction/testTempleteDetails/abilityTestTemplete.gen",
+      "abilityTestFirstGenTemplete": "../json/directFunction/testTempleteDetails/abilityTestFirstGenTemplete.gen"
+    }
+  }
+}

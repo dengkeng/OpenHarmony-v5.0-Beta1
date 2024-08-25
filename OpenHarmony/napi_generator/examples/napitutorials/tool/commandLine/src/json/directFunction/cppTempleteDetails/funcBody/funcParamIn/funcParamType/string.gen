@@ -1,0 +1,23 @@
+    size_t strSize[param_index_replace] = 0;
+    /* [NAPI_GEN]: napi_get_value_string_utf8用于将Js字符串转换为UTF-8编码的C字符串
+     * env: N-API环境的句柄，表示当前的上下文
+     * value: 要转换的JavaScript字符串
+     * buf: 用于存储结果的字符数组的指针
+     * bufsize: 缓冲区大小，以字节为单位
+     * result: 转换后的字符串的字节长度(不包括空终止符)。若干buf是NULL,则返回所需的缓冲区大小(包括空终止符)
+     */
+    /* [NAPI_GEN]: buf参数是NULL时，用于获取所需缓冲区大小*/
+    status = napi_get_value_string_utf8(env, args[[param_index_replace]], NULL, 0, &strSize[param_index_replace]);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "get value string", tag);
+        return nullptr;
+    }
+    char *[param_name_replace]In = new char[strSize[param_index_replace] + 1];
+    /* [NAPI_GEN]: 用于获取字符串*/
+    status = napi_get_value_string_utf8(env, args[[param_index_replace]], [param_name_replace]In, strSize[param_index_replace] + 1, &strSize[param_index_replace]);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "get value string", tag);
+        delete[] [param_name_replace]In;
+        return nullptr;
+    }
+    // delete[] [param_name_replace]In;  // remember to delete memory 

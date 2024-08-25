@@ -1,0 +1,5 @@
+/* [NAPI_GEN]:对应[file_introduce_replace]中：[func_introduce_replace]的napi方法，
+ * 输入：[input_introduce_replace]
+ * 输出：[output_introduce_replace]
+ */ 
+napi_value [funcName](napi_env env, napi_callback_info info);

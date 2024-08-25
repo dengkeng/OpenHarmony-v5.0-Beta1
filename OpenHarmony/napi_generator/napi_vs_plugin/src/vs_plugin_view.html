@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Napi</title>
+</head>
+<style type="text/css">
+        body {
+			background-color: #000000;
+			margin:0 auto;
+			font-family: Consolas, sans-serif;
+		}
+        a  {
+			text-decoration: none;
+		}
+
+		button.button {
+			background-color: #ffffff;
+            font-family: Consolas, sans-serif;
+            font-size: 16px;
+            border-radius: 3px;
+            border-color: #C4C4C4;
+            align-self: center;
+            border: 1px solid #C4C4C4;
+            outline: none;
+			width: 100px; 
+			height:24px
+		}
+
+		button.button:hover {
+			background: #4B97D9;
+			color: #fff;
+			border: 0px;
+			font-family: Consolas, sans-serif;
+            font-size: 16px;
+			width: 100px; 
+			height: 24px
+		}
+
+		input.text:focus {
+			outline: 2px solid #4B97D9;
+  			border: 0px;
+        }
+
+		input.text {
+			outline: 2px solid #C4C4C4;
+			border: 0px;
+		}
+    .tabs{
+        position: relative;
+        height: 800px;
+        min-height: 800px;
+        max-height: 800px;
+        clear: both;
+        margin: 25px 0;
+        overflow: hidden;
+    }
+    .tab{
+        float: left;
+        margin: 25px 0;
+    }
+    .tab label{
+        background: #eee;
+        padding: 10px 20px;
+        position: relative;
+        left: 1px;
+        border: 0px solid;
+        margin-left: -1px;
+        z-index: 2;
+        color: #333333;
+        background: white;
+    }
+    input.text {
+		width: 250px;
+        height: 18px; 
+        vertical-align:middle;
+		}
+    .content{
+        position: absolute;
+        top: 61px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: black;
+        padding: 20px 20px;
+        border: 0px solid #ccc;
+        max-height: 800px;
+        overflow: scroll;
+    }
+    [type=radio]:checked ~ label{
+        color: white;
+        background: #3288e9;
+        border: 0px solid #ccc;
+        z-index: 3;
+    }
+    [type=radio]:checked ~ label ~ .content{
+        z-index: 1;
+    }
+</style>
+<script type="text/javascript">
+    var mode = 0;
+    let vscode = acquireVsCodeApi();
+    let importCheck = false;
+    window.onload = function () {
+        document.getElementById("selectMode").addEventListener("change", function (e) {
+            if (e.target.value === '1') {
+                mode = 1;
+            } else {
+                mode = 0;
+            }
+        });
+    }
+
+    function sendParamMsg() {
+        var fileNames = document.getElementById("interfaceFile").value;
+        var genDir = document.getElementById("genFile").value;
+        var numberType = document.getElementById("numberTypeid").value;
+        var buttonName = document.getElementById("okButton").textContent;
+        var result = {
+            msg: "param",
+            mode: mode,
+            fileNames: fileNames,
+            genDir: genDir,
+            numberType: numberType,
+            importIsCheck: importCheck,
+            buttonName: buttonName,
+        }
+        vscode.postMessage(result);
+    }
+
+    function selectInterPath() {
+        var result = {
+            msg: "selectInterPath",
+            mode: mode
+        }
+        vscode.postMessage(result);
+    }
+
+    function selectPath(message) {
+        var result = {
+            msg: message
+        }
+        vscode.postMessage(result);
+    }
+
+    function cancel() {
+        var result = {
+            msg: "cancel"
+        }
+        vscode.postMessage(result);
+    }
+
+    // 只能在单个文件时配置
+    function config() {
+      // 配置业务代码之前需要获取生成框架代码的路径
+      var genDir = document.getElementById("genFile").value;
+      var result = {
+        msg: "config",
+        genDir: genDir,
+        mode: mode,
+        interFile: document.getElementById("interfaceFile").value
+      }
+      vscode.postMessage(result);
+    }
+
+    function checkbox(obj) {
+        importCheck = obj.checked;
+    }
+
+    window.addEventListener('message', event => {
+        
+        const message = event.data.msg;
+        const path = event.data.path;
+        if(message == "selectInterPath") {
+            document.getElementById("interfaceFile").value = path;
+            fillInputDir(path, message);
+        } else if(message == "selectGenPath") {
+            document.getElementById("genFile").value = path;
+        } else if(message == "selectBuildPath") {
+            document.getElementById("buildFile").value = path;
+        } else {
+            console.log("param is error");
+        }
+    })
+
+    function inputChange() {
+        var fileNames = document.getElementById("interfaceFile").value;
+        fillInputDir(fileNames);
+    }
+
+    function fillInputDir(fileNames, message) {
+        var dir;
+        var fileName;
+        if (mode == 0) {
+            if (fileNames.indexOf(",") != -1) {
+                fileName = fileNames.substring(0, fileNames.indexOf(","));
+            } else {
+                fileName = fileNames;
+            }
+            dir = fileName.substring(0, fileName.lastIndexOf("\\"));
+        } else {
+            dir = fileNames;
+        }
+        document.getElementById("genFile").value = dir;
+        document.getElementById("buildFile").value = dir;
+    }
+
+</script>
+<body>
+<div class="tabs">
+    <div class="tab">
+        <input type="radio" style="display: none;" id="tab" name="group-1">
+        <label for="tab">Napi-Gen</label>
+        <div class="content">
+            <table style="border-spacing:0px 5px; margin-left: 20px; margin-top: 38px; width: 500px;">
+                <tr id="selectMode">
+                    <td width="110px">选择生成方式:</td>
+                    <td width="340px">
+                        <input class="radio" type="radio" name="mode" value="0" id="files" checked="checked"> .d.ts文件</input>
+                        <input class="radio" type="radio" name="mode" value="1" id="dir"> 文件夹</input>
+                    </td>
+                </tr>
+               <tr>
+                    <td>选择接口文件:</td>
+                    <td>
+                        <input class="text" type="text" id="interfaceFile" onchange="inputChange()" onporpertychange="inputChange() ">
+                        <img src="./images/file.png" width="20px" height="20px" style="vertical-align:middle;" onclick="selectInterPath()">
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>生成框架路径:</td>
+                    <td>
+                        <input class="text" accept="text" id="genFile">
+                        <img src="./images/path.png" width="20px" height="20px" style="vertical-align:middle;" onclick="selectPath('selectGenPath')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>编译脚本路径:</td>
+                    <td>
+                        <input class="text" type="text" id="buildFile">
+                        <img src="./images/path.png" width="20px" height="20px" style="vertical-align:middle;" onclick="selectPath('selectBuildPath')">    
+                    </td>
+                </tr>
+                <tr>
+                    <td>number目的类型:</td>
+                    <td>
+                        <select id="numberTypeid" name = "numberType" style="width: 100px; height: 23px; margin-left: -1px;">
+                            <option selected value = "uint32_t">uint32_t</option>
+                            <option value = "int">int</option>
+                            <option value = "double">double</option>
+                            <option value = "float">float</option>
+                            <option value = "char">char</option>
+                            <option value = "bool">bool</option>
+                            <option value = "void">void</option>
+                            <option value = "wchar_t">wchar_t</option>
+                          </select>
+                    </td>
+                </tr>
+
+                <tr>
+                  <td>配置业务代码:</td>
+                  <td>
+                    <button type="button" class="button" onclick="config()" style="background-color: #333333; border: 1px solid #333333; color: #fff;">配置</button>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td>启用import功能:</td>
+                    <td>
+                        <input id= "importCheck" type="checkbox" name="import" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px;" onclick="checkbox(this)">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="button" onclick="cancel()" style="background-color: #333333; border: 1px solid #333333; color: #fff;">Cancel</button>
+                        <button id="okButton" type="button" class="button" onclick="sendParamMsg()" style="background-color: #4B97D9; border: 1px solid #4B97D9; color: #fff;">Ok</button>
+                        <a href="https://gitee.com/openharmony/napi_generator" target="_blank">
+                            <button type="button" style="background-color: #333333; width: 20px; height: 20px; border-radius: 50%;border: none; color: #fff;">?</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

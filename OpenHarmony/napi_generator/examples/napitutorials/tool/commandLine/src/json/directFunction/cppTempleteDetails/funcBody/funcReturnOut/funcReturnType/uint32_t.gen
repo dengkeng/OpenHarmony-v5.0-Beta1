@@ -1,0 +1,12 @@
+    napi_value [return_name_replace]Out;
+    /* [NAPI_GEN]: 返回值是uint32_t类型时，napi_create_uint32创建一个包含32位无符号整数(uint32_t)的js数值对象
+     * env: 当前环境的句柄
+     * value: 要转换成js数值的uint32_t值,这里以传入1为例，用例新增业务代码时可根据自身需求修改
+     * result: 指向napi_value的指针,函数执行成功后这个指针将指向新创建的js数值对象
+     */
+    status = napi_create_uint32(env, 1, &[return_name_replace]Out);
+    if (status != napi_ok) {
+        /*错误处理*/
+        getErrMessage(status, env, extended_error_info, "napi_create_uint32", tag);
+        return nullptr;
+    }

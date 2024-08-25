@@ -1,0 +1,23 @@
+/* [NAPI_GEN]:对应[file_introduce_replace]中：[func_introduce_replace]的napi方法，
+ * 输入：[input_introduce_replace]
+ * 输出：[output_introduce_replace]
+ */ 
+napi_value [funcName](napi_env env, napi_callback_info info)
+{
+    OH_LOG_Print(LOG_APP, LOG_INFO, LOG_PRINT_DOMAIN, "[funcName]", "[funcName] begins");
+    napi_status status;
+    /* [NAPI_GEN]: Node.js在其N-API中用来提供错误的扩展信息的结构体,结构体包含以下字段
+     * error_message: 一个指向错误详细字符串的指针，提供了关于错误的文本描述
+     * engin_reserved: 一个保留给Js引擎使用的指针
+     * error_code: 错误码，指示了错误的种类，比如napi_pending_exception表示有一个JavaScript异常未被清理。
+     * engine_error_code：一个引擎特定的错误码，为引擎实现保留，具体含义依赖于使用的JavaScript引擎。
+     * error_message_len：错误消息字符串的长度。
+     */
+    const napi_extended_error_info *extended_error_info;
+    /* [NAPI_GEN]: tag: 日志打印标签*/
+    const char *tag = "[[get_error_msg_tag]]";
+    /* [NAPI_GEN]: get function param in*/
+[func_getParam_replace]
+    OH_LOG_Print(LOG_APP, LOG_INFO, LOG_PRINT_DOMAIN, "[funcName]", "[funcName] get return info begins");
+[func_return_replace]
+}

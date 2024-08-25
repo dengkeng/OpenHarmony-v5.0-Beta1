@@ -1,0 +1,45 @@
+{
+  "name": "native_gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "stdio": "^2.1.3",
+    "typescript": "^5.4.3"
+  },
+  "bin": "./src/main.js",
+  "pkg": {
+    "assets": [
+	"./src/json/directFunction/dtsTempleteDetails/declareTemplete.gen",
+	"./src/json/directFunction/initTempleteDetails/cppInitTemplete.gen",
+        "./src/json/directFunction/initTempleteDetails/funcInitTemplete.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcBodyTemplete.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/int32_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/int64_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/uint32_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/double.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/bool.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcParamType/string.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/funcGetParamTemplete.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcParamIn/paramGenTemplete.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/int32_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/int64_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/uint32_t.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/double.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/bool.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/string.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/returnObj/object.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnType/returnObj/funcReturnObjectToSet.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcBody/funcReturnOut/funcReturnTemplete.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcHDeclare/funcHDeclare.gen",
+        "./src/json/directFunction/cppTempleteDetails/funcHDeclare/funcHDeclareTemplete.gen",
+        "./src/json/directFunction/testTempleteDetails/abilityTestTemplete.gen",
+        "./src/json/directFunction/testTempleteDetails/abilityTestFirstGenTemplete.gen"
+	]
+  }
+}

@@ -1,0 +1,11 @@
+    int64_t [param_name_replace]In = 0;
+    /* [NAPI_GEN]: napi_get_value_int64将一个 napi_value 类型的 js 布尔值转换成一个 C 语言的 int64_t 类型的数值
+     * env: N-API环境的句柄，表示当前的上下文
+     * value：要转换的JavaScript值
+     * result：指向 int64_t 类型的指针，在这里函数将存储转换后的整数值
+     */
+    status = napi_get_value_int64(env, args[[param_index_replace]], &[param_name_replace]In);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_get_value_int64", tag);
+        return nullptr;
+    }

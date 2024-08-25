@@ -1,0 +1,13 @@
+    napi_value [return_name_replace]Out;
+    /* [NAPI_GEN]: 返回值是字符串时，napi_create_string_utf8用于在原生代码中创建一个新的js字符串。这个函数会根据提供的UTF-8编码的字符串创建一个等价的js字符串
+     * env: 当前环境的句柄
+     * str: 指向以null结尾的UTF-8编码的C字符串的指针，这里以[return_name_replace]举例，用户可根据需求修改
+     * length: 字符串的长度，可以是具体的字节数，或者使用特殊的值NAPI_AUTO_LENGTH来让函数自己计算长度(假定字符串以null结尾)
+     * result: 指向napi_value的指针，函数执行成功后这个指针将指向新创建的js字符串
+     */
+    status = napi_create_string_utf8(env, "[return_name_replace]", NAPI_AUTO_LENGTH, &[return_name_replace]Out);
+    if (status != napi_ok) {
+        /*错误处理*/
+        getErrMessage(status, env, extended_error_info, "napi_create_string_utf8", tag);
+        return nullptr;
+    }

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport3" content="width=device-width, initial-scale=1.0">
+	<title>Napi</title>
+</head>
+<style type="text/css">
+        body {
+			background-color: #000000;
+			margin:0 auto;
+			font-family: Consolas, sans-serif;
+		}
+        a  {
+			text-decoration: none;
+		}
+
+		button.button {
+			background-color: #ffffff;
+            font-family: Consolas, sans-serif;
+            font-size: 16px;
+            border-radius: 3px;
+            border-color: #C4C4C4;
+            align-self: center;
+            border: 1px solid #C4C4C4;
+            outline: none;
+			width: 100px; 
+			height:24px
+		}
+
+		button.button:hover {
+			background: #4B97D9;
+			color: #fff;
+			border: 0px;
+			font-family: Consolas, sans-serif;
+            font-size: 16px;
+			width: 100px; 
+			height: 24px
+		}
+
+		input.text:focus {
+			outline: 2px solid #4B97D9;
+  			border: 0px;
+        }
+
+		input.text {
+			outline: 2px solid #C4C4C4;
+			border: 0px;
+		}
+    .tabs{
+        position: relative;
+        height: 800px;
+        min-height: 800px;
+        max-height: 800px;
+        clear: both;
+        margin: 25px 0;
+        overflow: hidden;
+    }
+    .tab{
+        float: left;
+        margin: 25px 0;
+    }
+    .tab label{
+        background: #eee;
+        padding: 10px 20px;
+        position: relative;
+        left: 1px;
+        border: 0px solid;
+        margin-left: -1px;
+        z-index: 2;
+        color: #333333;
+        background: white;
+    }
+    input.text {
+		width: 250px;
+        height: 18px; 
+        vertical-align:middle;
+		}
+    .content{
+        position: absolute;
+        top: 61px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: black;
+        padding: 20px 20px;
+        border: 0px solid #ccc;
+        max-height: 800px;
+        overflow: scroll;
+    }
+    [type=radio]:checked ~ label{
+        color: white;
+        background: #3288e9;
+        border: 0px solid #ccc;
+        z-index: 3;
+    }
+    [type=radio]:checked ~ label ~ .content{
+        z-index: 1;
+    }
+</style>
+<script type="text/javascript">
+    let vscode = acquireVsCodeApi();
+    let clickIndex = -1;
+    let type = '';
+
+    function sendCfgParamMsg() {
+      let includeName = document.getElementById("includeName").value;
+      let cppName = document.getElementById("cppName").value;
+      let interfaceName = document.getElementById("interfaceName").value;
+      let serviceCode = document.getElementById("serviceCode").value;
+      let data = {includeName, cppName, interfaceName, serviceCode};
+      vscode.postMessage({
+        msg: 'saveData',
+        cfgInfo: data,
+        type: type,
+        index: getIndex()
+      });
+    }
+
+    // 数据是否为空
+    function validate(includeName, cppName, interfaceName, serviceCode) {
+      if (!isEmptyStr(includeName) && !isEmptyStr(cppName) && !isEmptyStr(interfaceName) && !isEmptyStr(serviceCode)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function isEmptyStr(str) {
+      if (str.length !== 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function selectIncludeName() {
+      var result = {
+        msg: "selectIncludeName",
+        mode: 2
+      }
+      vscode.postMessage(result);
+    }
+
+    function selectCppName() {
+      var result = {
+        msg: "selectCppName",
+        mode: 3
+      }
+      vscode.postMessage(result);
+    }
+
+    function cancel() {
+      var result = {
+        msg: "cancelShowInfo"
+      }
+      vscode.postMessage(result);
+    }
+
+    function setIndex(index) {
+      clickIndex = index
+    }
+
+    function getIndex() {
+      return clickIndex
+    }
+    
+    window.addEventListener('message', event => {
+      const message = event.data.msg;
+      const path = event.data.path;
+     
+      if(message === "selectIncludeName") {
+        document.getElementById("includeName").value = path;
+      } else if (message === "selectCppName") {
+        document.getElementById("cppName").value = path;
+      } else if (message === "updateData") {
+        type = event.data.type;
+        document.getElementById("genPath").value = event.data.genPath;
+        // 从showInfo界面过来，显示要修改的那一项数据
+        if (event.data.type === 'update') {
+          // 界面显示要修改的那一项数据
+          setIndex(event.data.index);
+          document.getElementById("includeName").value = event.data.updateInfo.updateIncludeName;
+          document.getElementById("cppName").value = event.data.updateInfo.updateCppName;
+          document.getElementById("interfaceName").value = event.data.updateInfo.updateInterfaceName;
+          document.getElementById("serviceCode").value = event.data.updateInfo.updateServiceCode;
+        }
+      } 
+    })
+
+</script>
+<body>
+<div class="tabs">
+    <div class="tab">
+        <input type="radio" style="display: none;" id="tab" name="group-1">
+        <label for="tab">Config</label>
+        <div class="content">
+            <table style="border-spacing:0px 5px; margin-left: 20px; margin-top: 38px; width: 500px;">
+                <tr>
+                    <td>genPath:</td>
+                    <td>
+                        <input class="text" type="text" id="genPath" readonly = "true">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>includeName:</td>
+                    <td>
+                        <input class="text" type="text" id="includeName">
+                        <img src="./images/file.png" width="20px" height="20px" style="vertical-align:middle;" onclick="selectIncludeName()">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>cppName:</td>
+                    <td>
+                        <input class="text" accept="text" id="cppName">
+                        <img src="./images/file.png" width="20px" height="20px" style="vertical-align:middle;" onclick="selectCppName()">
+                    </td>
+                </tr>
+
+                <tr>
+                  <td>interfaceName:</td>
+                  <td>
+                      <input class="text" type="string" id="interfaceName" placeholder="请配置接口名"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>serviceCode:</td>
+                  <td>
+                      <input class="text" type="string" id="serviceCode" placeholder="请配置业务代码"/>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="button" onclick="cancel()" style="background-color: #333333; border: 1px solid #333333; color: #fff;">Cancel</button>
+                        <button id="okButton" type="button" class="button" onclick="sendCfgParamMsg()" style="background-color: #4B97D9; border: 1px solid #4B97D9; color: #fff;">Ok</button>
+                        <a href="https://gitee.com/openharmony/napi_generator" target="_blank">
+                            <button type="button" style="background-color: #333333; width: 20px; height: 20px; border-radius: 50%;border: none; color: #fff;">?</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

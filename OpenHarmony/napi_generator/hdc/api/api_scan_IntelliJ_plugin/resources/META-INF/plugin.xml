@@ -1,0 +1,41 @@
+<!--
+  Copyright (c) 2023 Shenzhen Kaihong Digital Industry Development Co., Ltd. 
+  Licensed under the Apache License, Version 2.0 (the "License"); 
+  you may not use this file except in compliance with the License. 
+  You may obtain a copy of the License at 
+ 
+  http://www.apache.org/licenses/LICENSE-2.0 
+ 
+  Unless required by applicable law or agreed to in writing, software 
+  distributed under the License is distributed on an "AS IS" BASIS, 
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+  See the License for the specific language governing permissions and 
+  limitations under the License. 
+-->
+<idea-plugin>
+    <id>com.kh.scan</id>
+    <name>API Scan </name>
+    <version>1.0</version>
+    <vendor email="zhaojunxia@kaihong.com" url="http://kaihong.com/">深圳开鸿数字产业发展有限公司</vendor>
+
+    <idea-version since-build="113.0"/>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="ApiScan.meneGen" text="API Scan">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+
+        <action class="com.kh.scan.ng.ApiScanMenu" id="apiScan" text="API Scan">
+            <add-to-group group-id="ApiScan.meneGen" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift alt Y"/>
+        </action>
+
+    </actions>
+
+</idea-plugin>

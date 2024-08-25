@@ -1,0 +1,20 @@
+
+#include "cjsoncommon.h"
+
+/*[NAPI_GEN]:错误处理,获取错误详细信息*/
+void getErrMessage(napi_status &status, napi_env &env, const napi_extended_error_info *&extended_error_info,
+  const char *info, const char *tag)
+{
+  status = napi_get_last_error_info(env, &extended_error_info);
+  if (status == napi_ok && extended_error_info != NULL) {
+      const char *errorMessage =
+          extended_error_info->error_message != NULL ? extended_error_info->error_message : "Unknown error";
+      OH_LOG_Print(LOG_APP, LOG_ERROR, GLOBAL_RESMGR, tag, "errmsg %{public}s!, engine_err_code %{public}d!.",
+                   std::to_string(extended_error_info->engine_error_code).c_str(), extended_error_info->error_code);
+      std::string myInfo = info;
+      std::string res = "Failed to " + myInfo + " em = " + errorMessage +
+                        ", eec = " + std::to_string(extended_error_info->engine_error_code) +
+                        ", ec = " + std::to_string(extended_error_info->error_code);
+      napi_throw_error(env, NULL, res.c_str());
+  }
+}

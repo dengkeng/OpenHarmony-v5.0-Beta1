@@ -1,0 +1,11 @@
+    napi_value [return_name_replace]Out;
+    /* [NAPI_GEN]: 返回值是double类型时，napi_create_double 创建一个包含双精度浮点数的js数值（Number）对象
+     * env: 当前环境的句柄
+     * value: 要传递给js的双精度浮点数值,这里以传入1.0为例，用例新增业务代码时可根据自身需求修改
+     * result: 指向napi_value的指针，这个指针会被设置为新创建的js数值对象
+     */
+    status = napi_create_double(env, 1.0, &[return_name_replace]Out);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_create_double", tag);
+        return nullptr;
+    }

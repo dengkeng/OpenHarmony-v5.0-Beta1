@@ -1,0 +1,64 @@
+<!--
+  Copyright (c) 2023 Shenzhen Kaihong Digital Industry Development Co., Ltd. 
+  Licensed under the Apache License, Version 2.0 (the "License"); 
+  you may not use this file except in compliance with the License. 
+  You may obtain a copy of the License at 
+ 
+  http://www.apache.org/licenses/LICENSE-2.0 
+ 
+  Unless required by applicable law or agreed to in writing, software 
+  distributed under the License is distributed on an "AS IS" BASIS, 
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+  See the License for the specific language governing permissions and 
+  limitations under the License. 
+-->
+<idea-plugin>
+  <id>com.sk.ts</id>
+  <name>Ts Generator</name>
+  <version>1.0.1</version>
+  <vendor email="zhaojunxia@kaihong.com" url="http://kaihong.com/">深圳开鸿数字产业发展有限公司</vendor>
+
+  <description><![CDATA[
+    <h2>Introduction</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;One-click generation of NAPI framework code, business code framework, GN file, etc. according to the ts (typescript) interface file in the user-specified path.<br/></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;When developing the interface between JS applications and NAPI, the developers of the underlying framework do not need to pay attention to the upper-level application conversion logic such as Nodejs syntax, data type conversion between C++ and JS, and only focus on the underlying business logic. Professional people do professional things. Thus, the development efficiency can be greatly improved</p>
+        <p><a href="https://gitee.com/openharmony/napi_generator">Sources on Gitee</a></p>
+    ]]>
+  </description>
+
+  <change-notes><![CDATA[
+    <h2>Features</h2>
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="211.0"/>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.sk.ng</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+<!--    <notificationGroup displayType="BALLOON" id="Generate.Result.Group"/>-->
+<!--    <toolWindow id="Generator window" anchor="right" factoryClass="com.sk.dialog.ResutlToolWindowFactory" secondary="true"/>-->
+    <notificationGroup id="Generate.Result.Group"
+                       displayType="STICKY_BALLOON"/>
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="TsGenerate.gen" class="com.sk.ts.ng.GenDTS" text="Generate Ts Frame" description="generate ts files">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+    </action>
+
+    <group id="TsGenerate.meneGen" text="Generate Ts" >
+      <add-to-group group-id="ToolsMenu" anchor="last" />
+    </group>
+
+    <action class="com.sk.ts.ng.GenMenuDTS" id="tsToolsGen" text="Generate Ts Frame">
+      <add-to-group group-id="TsGenerate.meneGen" anchor="last" />
+      <keyboard-shortcut keymap="$default" first-keystroke="shift alt G"/>
+    </action>
+
+  </actions>
+
+</idea-plugin>

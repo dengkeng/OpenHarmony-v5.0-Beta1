@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kaihong Assist Tools</title>
+</head>
+<style type="text/css">
+        body {
+			background-color: #333333;
+			margin:0 auto;
+			font-family: Consolas, sans-serif;
+		}
+        a  {
+			text-decoration: none;
+		}
+
+		button.button {
+			background-color: #ffffff;
+            font-family: Consolas, sans-serif;
+            font-size: 16px;
+            border-radius: 3px;
+            border-color: #C4C4C4;
+            align-self: center;
+            border: 1px solid #C4C4C4;
+            outline: none;
+			width: 100px; 
+			height:24px
+		}
+
+		button.button:hover {
+			background: #4B97D9;
+			color: #fff;
+			border: 0px;
+			font-family: Consolas, sans-serif;
+            font-size: 16px;
+			width: 100px; 
+			height: 24px
+		}
+
+		input.text:focus {
+			outline: 2px solid #4B97D9;
+  			border: 0px;
+        }
+
+		input.text {
+			outline: 2px solid #C4C4C4;
+			border: 0px;
+		}
+    .tabs{
+        position: relative;
+        height: 800px;
+        min-height: 800px;
+        max-height: 800px;
+        clear: both;
+        margin: 25px 0;
+        overflow: hidden;
+    }
+    .tab{
+        float: left;
+        margin: 25px 0;
+    }
+    .tab label{
+        background: #333333;
+        padding: 10px 20px;
+        position: relative;
+        left: 1px;
+        border: 0px solid;
+        margin-left: -1px;
+        z-index: 2;
+        color: #eee;
+    }
+    input.text {
+		width: 250px;
+        height: 18px; 
+        vertical-align:middle;
+		}
+    .highlight {
+        border: 2px solid #4a88c7;
+        padding: 2px;
+    }
+    .content{
+        position: absolute;
+        top: 61px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #333333;
+        padding: 20px 20px;
+        border: 0px solid #ccc;
+        max-height: 800px;
+        overflow: hidden;
+    }
+    [type=radio]:checked ~ label{
+        color: white;
+        background: #3288e9;
+        border: 0px solid #ccc;
+        z-index: 3;
+    }
+    [type=radio]:checked ~ label ~ .content{
+        z-index: 1;
+    }
+</style>
+<script type="text/javascript">
+    var mode = 0;
+    let vscode = acquireVsCodeApi();
+    var importCheck = false;
+    var chooseApi = false;
+    var chooseGn = false;
+    var chooseService = false;
+    var chooseTs = false;
+    var chooseNapi = false;
+
+    function onInput(event) {
+        var value = event.target.value;
+        value.replace(/\s*/g,"").toLowerCase();
+        checkInput(value);
+    }
+
+    // 匹配子串
+    function matchSubString(userInput) {
+      const keywords = ["apiscan", "gngen", "servicegen", "tsgen", "napi"];
+      let matchedKeyword = null;
+      for (let i = 0; i < keywords.length; i++) {
+        if (keywords[i].startsWith(userInput)) {
+          matchedKeyword = keywords[i];
+          break;
+        }
+      }
+      if (matchedKeyword) {
+        console.log(matchedKeyword);
+      } else {
+        console.log("未找到匹配的字符串");
+      }
+      return matchedKeyword;
+    }
+
+    function checkInput(value) {
+        if (matchSubString(value) === "apiscan") {
+            document.getElementById("api").style.display="flex";
+            document.getElementById("gn").style.display="none";
+            document.getElementById("service").style.display="none";
+            document.getElementById("ts").style.display="none";
+            document.getElementById("napi").style.display="none";
+        } else if (matchSubString(value) === "gngen") {
+            document.getElementById("api").style.display="none";
+            document.getElementById("gn").style.display="flex";
+            document.getElementById("service").style.display="none";
+            document.getElementById("ts").style.display="none";
+            document.getElementById("napi").style.display="none";
+        } else if (matchSubString(value) === "servicegen") {
+            document.getElementById("api").style.display="none";
+            document.getElementById("gn").style.display="none";
+            document.getElementById("service").style.display="flex";
+            document.getElementById("ts").style.display="none";
+            document.getElementById("napi").style.display="none";
+        } else if (matchSubString(value) === "tsgen") {
+            document.getElementById("api").style.display="none";
+            document.getElementById("gn").style.display="none";
+            document.getElementById("service").style.display="none";
+            document.getElementById("ts").style.display="flex";
+            document.getElementById("napi").style.display="none";
+        } else if (matchSubString(value) === "napi") {
+            document.getElementById("api").style.display="none";
+            document.getElementById("gn").style.display="none";
+            document.getElementById("service").style.display="none";
+            document.getElementById("ts").style.display="none";
+            document.getElementById("napi").style.display="flex";
+        } else if (value.trim() === '') {
+            clearSelect();
+        }
+    }
+
+    function clearSelect() {
+        document.getElementById("api").style.display="flex";
+        document.getElementById("gn").style.display="flex";
+        document.getElementById("service").style.display="flex";
+        document.getElementById("ts").style.display="flex";
+        document.getElementById("napi").style.display="flex";
+    }
+
+    function cancel() {
+        var result = {
+            msg: "cancel"
+        }
+        vscode.postMessage(result);
+    }
+
+    function sendParamMsg() {
+        if (importCheck) {
+            let checkApi = document.getElementById("isCheckApi").checked;
+            let checkGn = document.getElementById("isCheckGn").checked;
+            let checkService = document.getElementById("isCheckService").checked;
+            let checkTs = document.getElementById("isCheckTs").checked;
+            let checkNapi = document.getElementById("isCheckNapi").checked;
+            var result = {
+                msg: "param",
+                importIsCheck: importCheck,
+                checkApi: checkApi,
+                checkGn: checkGn,
+                checkService: checkService,
+                checkTs: checkTs,
+                checkNapi: checkNapi,
+            }
+            vscode.postMessage(result);
+        } else {
+            sendParamMsg2();
+        }
+    }
+
+    function sendParamMsg2() {
+        if (chooseApi) {
+            var result = {
+                 msg: "startApi"
+            }
+        } else if (chooseGn) {
+            var result = {
+                msg: "startGn"
+            }
+        } else if (chooseService) {
+            var result = {
+                msg: "startService"
+            }
+        } else if (chooseTs) {
+            var result = {
+                msg: "startTs"
+            }
+        } else if (chooseNapi) {
+            var result = {
+                msg: "startNapi"
+            }
+        } else {
+            console.error("ERROR!")
+        }
+        vscode.postMessage(result);
+    }
+
+    function checkBox(obj) {
+        importCheck = obj.checked;
+        removeHighlight();
+        if (importCheck) {
+            document.getElementById("isCheckApi").style.display="";
+            document.getElementById("isCheckGn").style.display="";
+            document.getElementById("isCheckService").style.display="";
+            document.getElementById("isCheckTs").style.display="";
+            document.getElementById("isCheckNapi").style.display="";
+
+            document.getElementById("isCheckApi").checked = false;
+            document.getElementById("isCheckGn").checked = false;
+            document.getElementById("isCheckService").checked = false;
+            document.getElementById("isCheckTs").checked = false;
+            document.getElementById("isCheckNapi").checked = false;
+        } else {
+            document.getElementById("isCheckApi").style.display="none";
+            document.getElementById("isCheckGn").style.display="none";
+            document.getElementById("isCheckService").style.display="none";
+            document.getElementById("isCheckTs").style.display="none";
+            document.getElementById("isCheckNapi").style.display="none";
+        }
+    }
+
+    function chooseApiTool() {
+        document.getElementById("apiDescriptions").style.display="flex";
+        document.getElementById("gnDescriptions").style.display="none";
+        document.getElementById("serviceDescriptions").style.display="none";
+        document.getElementById("tsDescriptions").style.display="none";
+        document.getElementById("napiDescriptions").style.display="none";
+        chooseApi = true;
+        chooseGn = false;
+        chooseService = false;
+        chooseTs = false;
+        chooseNapi = false;
+    }
+
+    function chooseGnTool() {
+        document.getElementById("apiDescriptions").style.display="none";
+        document.getElementById("gnDescriptions").style.display="flex";
+        document.getElementById("serviceDescriptions").style.display="none";
+        document.getElementById("tsDescriptions").style.display="none";
+        document.getElementById("napiDescriptions").style.display="none";
+        chooseApi = false;
+        chooseGn = true;
+        chooseService = false;
+        chooseTs = false;
+        chooseNapi = false;
+    }
+
+    function chooseServiceTool() {
+        document.getElementById("apiDescriptions").style.display="none";
+        document.getElementById("gnDescriptions").style.display="none";
+        document.getElementById("serviceDescriptions").style.display="flex";
+        document.getElementById("tsDescriptions").style.display="none";
+        document.getElementById("napiDescriptions").style.display="none";
+        chooseApi = false;
+        chooseGn = false;
+        chooseService = true;
+        chooseTs = false;
+        chooseNapi = false;
+    }
+
+    function chooseTsTool() {
+        document.getElementById("apiDescriptions").style.display="none";
+        document.getElementById("gnDescriptions").style.display="none";
+        document.getElementById("serviceDescriptions").style.display="none";
+        document.getElementById("tsDescriptions").style.display="flex";
+        document.getElementById("napiDescriptions").style.display="none";
+        chooseApi = false;
+        chooseGn = false;
+        chooseService = false;
+        chooseTs = true;
+        chooseNapi = false;
+    }
+
+    function chooseNapiTool() {
+        document.getElementById("apiDescriptions").style.display="none";
+        document.getElementById("gnDescriptions").style.display="none";
+        document.getElementById("serviceDescriptions").style.display="none";
+        document.getElementById("tsDescriptions").style.display="none";
+        document.getElementById("napiDescriptions").style.display="flex";
+        chooseApi = false;
+        chooseGn = false;
+        chooseService = false;
+        chooseTs = false;
+        chooseNapi = true;
+    }
+
+    function chooseTool(obj, element) {
+        // 对点击的图片高亮， 同时需要对未点击的图片取消高亮
+        if (!importCheck) {
+          highlight(element);
+        }
+        
+        if (obj == "isChooseApi") {
+            chooseApiTool();
+        } else if (obj == "isChooseGn") {
+            chooseGnTool();
+        } else if (obj == "isChooseService") {
+            chooseServiceTool();
+        } else if (obj == "isChooseTs") {
+            chooseTsTool();
+        } else if (obj == "isChooseNapi") {
+            chooseNapiTool();
+        } else {
+            console.error("ERROR!")
+        }
+    }
+
+    function highlightTools(checked, image) {
+      if (checked) {
+        image.classList.toggle('highlight');
+      } else {
+        image.classList.remove('highlight');
+      }
+    }
+
+    function checkTool(obj, name) {
+        if (name == "isCheckApi") {
+            let image =  document.getElementById("isChooseApi")
+            highlightTools(obj.checked, image);
+        } else if (name == "isCheckGn") {
+            let image =  document.getElementById("isChooseGn")
+            highlightTools(obj.checked, image);
+        } else if (name == "isCheckService") {
+            let image =  document.getElementById("isChooseService")
+            highlightTools(obj.checked, image);
+        } else if (name == "isCheckTs") {
+            let image =  document.getElementById("isChooseTs")
+            highlightTools(obj.checked, image);
+        } else if (name == "isCheckNapi") {
+            let image =  document.getElementById("isChooseNapi")
+            highlightTools(obj.checked, image);
+        } else {
+            console.error("ERROR!")
+        }
+    }
+
+    // 移除对所有图片的高亮
+    function removeHighlight() {
+      let images = document.querySelectorAll('.image');
+      images.forEach(function(image) {
+        image.classList.remove('highlight');
+      });
+    }
+
+    // 对图片高亮
+    function highlight(obj) {
+      // 移除所有图片的高亮状态
+      removeHighlight();
+      // 高亮选中图片
+      obj.classList.toggle('highlight');
+    }
+
+</script>
+<body>
+<div class="tabs">
+    <div class="tab">
+        <label for="tab2" style="font-size: x-large;">Choose Your Tool</label>
+        <div class="content">
+            <div style="float: right;" class="search">
+                <img src="./images/search.png" width="20px" height="20px" style="vertical-align:middle;">
+                <input class="text" accept="text" id="searchInput" placeholder="Search" oninput="onInput(event)" onpropertychange="onInput(event)">
+                <img src="./images/clear.png" id="clearInput" width="20px" height="20px" style="vertical-align:middle;" onclick="clearSelect()">
+            </div>
+            <div style="display: flex; flex-direction: row; margin-top: 50px;">
+                <div id="api" style="display: flex; flex-direction: column;">
+                    <img id="isChooseApi" src="./images/api.png" width="120px" height="150px" style="vertical-align:middle;" class="image"
+                    onclick="chooseTool('isChooseApi', this)"> 
+                    <label id="checkApiLabel" style="text-align: center;"><input id="isCheckApi" type="checkbox" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px; display: none;" 
+                        onclick="checkTool(this, 'isCheckApi')">API Scan</label>
+                </div>
+                <div id="gn" style="display: flex; flex-direction: column; margin-left: 25px;">
+                    <img id="isChooseGn" src="./images/gn.png" width="120px" height="150px" style="vertical-align:middle;" class="image"
+                                    onclick="chooseTool('isChooseGn', this)">
+                    <label id="checkGnLabel" style="text-align: center;"><input id="isCheckGn" type="checkbox" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px; display: none;" 
+                        onclick="checkTool(this, 'isCheckGn')">GN</label>
+                </div>
+                <div id="service" style="display: flex; flex-direction: column; margin-left: 25px;">
+                    <img id="isChooseService" src="./images/service.png" width="120px" height="150px" style="vertical-align:middle;" class="image"
+                                    onclick="chooseTool('isChooseService', this)">
+                    <label id="checkServiceLabel" style="text-align: center;"><input id="isCheckService" type="checkbox" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px; display: none;" 
+                        onclick="checkTool(this, 'isCheckService')">SERVICE</label>
+                </div>
+                <div id="ts" style="display: flex; flex-direction: column; margin-left: 25px;">
+                    <img id="isChooseTs" src="./images/h2ts.png" width="120px" height="150px" style="vertical-align:middle;" class="image"
+                                    onclick="chooseTool('isChooseTs', this)">
+                    <label id="checkTsLabel" style="text-align: center;"><input id="isCheckTs" type="checkbox" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px; display: none;" 
+                        onclick="checkTool(this, 'isCheckTs')">TS</label>
+                </div>
+                <div id="napi" style="display: flex; flex-direction: column; margin-left: 25px;">
+                    <img id="isChooseNapi" src="./images/napi.png" width="120px" height="150px" style="vertical-align:middle;" class="image"
+                                    onclick="chooseTool('isChooseNapi', this)">
+                    <label id="checkNapiLabel" style="text-align: center;"><input id="isCheckNapi" type="checkbox" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px; display: none;" 
+                        onclick="checkTool(this, 'isCheckNapi')">NAPI</label>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <label style="color: #BBBBBB;">是否启用工具链:</label>
+                <input id= "importCheck" type="checkbox" name="import" style="vertical-align:middle; width: 20px; height: 20px; margin-left: -1px;"
+                    onclick="checkBox(this)">
+            </div>
+
+            <div style="margin-top: 50px;">
+                <div id="apiDescriptions" style="display: flex; flex-direction: column;">
+                    <label style="font-size: large;">API Scan</label>
+                    <label style="color: #BBBBBB;">This tool can scan the Android APIs in OpenHarmony Projects</label>
+                </div>
+                <div id="gnDescriptions" style="display: none; flex-direction: column;">
+                    <label style="font-size: large;">GN Gen</label>
+                    <label style="color: #BBBBBB;">gn generate tool</label>
+                </div>
+                <div id="serviceDescriptions" style="display: none; flex-direction: column;">
+                    <label style="font-size: large;">SERVICE Gen</label>
+                    <label style="color: #BBBBBB;">Generate IPC service framework code for OpenHarmony</label>
+                </div>
+                <div id="tsDescriptions" style="display: none; flex-direction: column;">
+                    <label style="font-size: large;">TS Gen</label>
+                    <label style="color: #BBBBBB;">Generate TS interface file for OpenHarmony</label>
+                </div>
+                <div id="napiDescriptions" style="display: none; flex-direction: column;">
+                    <label style="font-size: large;">NAPI Gen</label>
+                    <label style="color: #BBBBBB;">Generate NAPI definition code and framework code for OpenHarmony</label>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div style="text-align: left;">
+                    <a href="https://gitee.com/openharmony/napi_generator" target="_blank">
+                        <button type="button" style="background-color: #333333; width: 20px; height: 20px; border-radius: 50%;border: none; color: #BBBBBB;">?</button>
+                    </a>
+                </div>
+                <div style="text-align: right;">
+                    <button type="button" class="button" onclick="cancel()" style="background-color: #333333; border: 1px solid #333333; color: #fff;">Cancel</button>
+                    <button type="button" class="button" onclick="sendParamMsg()" style="background-color: #4B97D9; border: 1px solid #4B97D9; color: #fff;">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

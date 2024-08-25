@@ -1,0 +1,2 @@
+    // [NAPI_GEN]:方法注册后，js方法与native方法映射
+    { "[func_name_replace]" , nullptr, [func_name_replace], nullptr, nullptr, nullptr, napi_default, nullptr },

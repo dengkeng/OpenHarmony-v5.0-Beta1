@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+	<html lang="en">
+	
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Napi</title>
+	</head>
+	
+	<body>
+		<style>
+			body {
+				background-color: #778899;
+				padding: 100px;
+			}
+	
+			a {
+				text-decoration: none;
+			}
+	
+			.input {
+				color: blue;
+			}
+		</style>
+		<script type="text/javascript">
+			var mode = 0;
+			let vscode = acquireVsCodeApi();
+			window.onload = function () {
+				document.getElementById("selectMode").addEventListener("change", function (e) {
+					if (e.target.value == 1) {
+						mode = 1;
+					} else {
+						mode = 0;
+					}
+				});
+			}
+	
+			function sendMsg() {
+				var fileNames = document.getElementById("interfaceFile").value;
+				var genDir = document.getElementById("genFile").value;
+				var result = {
+					mode: mode,
+					fileNames: fileNames,
+					genDir: genDir,
+				}
+				vscode.postMessage(result);
+			}
+	
+			function cancel() {
+				vscode.postMessage("cancel");
+			}
+	
+			window.addEventListener('message', event => {
+				const message = event.data;
+				document.getElementById("interfaceFile").value = message;
+			})
+		</script>
+		<div id="selectMode">
+			选择方式：
+			<input type="radio" name="mode" value="0" id="files" checked="checked">.d.ts文件(多个文件之间用,号分割)</input>
+			<input type="radio" name="mode" value="1" id="dir">文件夹</input>
+		</div>
+		</br>
+		<div id="interface">
+			选择接口文件: <input type="text" id="interfaceFile">
+		</div>
+	
+		<div style="margin-top: 10px;">
+			生成框架路径: <input accept="text" id="genFile">
+		</div>
+	
+		<div style="margin-top: 10px;">
+			编译脚本路径: <input type="text" id="buildFile">
+		</div>
+		<div style="margin-top: 10px;">
+			<a href="https://gitee.com/openharmony/napi_generator" target="_blank">
+				<button style="width: 90px;">Help</button>
+			</a>
+			<button type="button" style="width: 90px;" onclick="cancel()">Cancel</button>
+			<button type="button" style="width: 90px;" onclick="sendMsg()">Ok</button>
+		</div>
+	</body>
+	
+	</html>

@@ -1,0 +1,16 @@
+[
+  {
+    "includeName": "../aaa.h",
+    "cppName": "../aaa.cpp",
+    "interfaceName": "TestClass::fun1",
+    "serviceCode": "out = codeTestFunc(v);",
+    "description": "includeName: 引入的业务代码.h文件相对路径, cppName: 引入的业务代码.cpp文件相对路径, interfaceName: ts文件中的使用接口名,业务代码就在该接口中调用;格式为：类名::方法名(如: TestClass::fun1)，若无类名，则格式为：方法名(如： fun2), serviceCode: 在接口中调用业务代码的调用语句。（该属性只做注释使用）"
+  },
+  {
+    "includeName": "../bbb.h",
+    "cppName": "../bbb.cpp",
+    "interfaceName": "fun2",
+    "serviceCode": "test(v);",
+    "description": "includeName: 引入的业务代码.h文件相对路径, cppName: 引入的业务代码.cpp文件相对路径, interfaceName: ts文件中的使用接口名,业务代码就在该接口中调用;格式为：类名::方法名(如: TestClass::fun1)，若无类名，则格式为：方法名(如： fun2), serviceCode: 在接口中调用业务代码的调用语句。（该属性只做注释使用）"
+  }
+]

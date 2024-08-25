@@ -1,0 +1,11 @@
+    double [param_name_replace]In = 0;
+    /* [NAPI_GEN]: napi_get_value_double将一个 napi_value 类型的 js 数值转换成一个 C 语言的 double 类型的数值
+     * env: N-API环境的句柄，表示当前的上下文
+     * value：要转换的JavaScript值
+     * result：指向 double 类型的指针，在这里函数将存储转换后的双精度浮点数
+     */
+    status = napi_get_value_double(env, args[[param_index_replace]], &[param_name_replace]In);
+    if (status != napi_ok) {
+        getErrMessage(status, env, extended_error_info, "napi_get_value_double", tag);
+        return nullptr;
+    }

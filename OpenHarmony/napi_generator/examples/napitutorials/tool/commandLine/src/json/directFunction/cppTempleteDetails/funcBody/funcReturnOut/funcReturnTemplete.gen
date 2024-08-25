@@ -1,0 +1,7 @@
+    // Todo: add business logic. 在这前后代码为框架所生成
+
+    /* [NAPI_GEN]: function return value*/ 
+[return_replace]
+    OH_LOG_Print(LOG_APP, LOG_INFO, LOG_PRINT_DOMAIN, "[funcName]", "[funcName] get return info ends");
+    OH_LOG_Print(LOG_APP, LOG_INFO, LOG_PRINT_DOMAIN, "[funcName]", "[funcName] ends");
+    return [return_name]Out;

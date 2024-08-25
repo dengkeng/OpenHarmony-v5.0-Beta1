@@ -1,0 +1,74 @@
+type cJSON_bool = number;
+export interface cJSON {
+    next: cJSON;
+    prev: cJSON;
+    child: cJSON;
+    type: number;
+    valuestring: string;
+    valueint: number;
+    valuedouble: number;
+    string: string;
+}
+
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_Parse方法的dts接口
+ * 输入: value: string
+ * 输出: cJSON
+ */
+export const KH727_cJSON_Parse:(value: string) => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_GetArraySize方法的dts接口
+ * 输入: array: cJSON
+ * 输出: number
+ */
+export const KH373_cJSON_GetArraySize:(array: cJSON) => number;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_Print方法的dts接口
+ * 输入: item: cJSON
+ * 输出: string
+ */
+export const KH735_cJSON_Print:(item: cJSON) => string;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_CreateObject方法的dts接口
+ * 输入: void
+ * 输出: cJSON
+ */
+export const KH578_cJSON_CreateObject:() => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_CreateString方法的dts接口
+ * 输入: string: string
+ * 输出: cJSON
+ */
+export const KH515_cJSON_CreateString:(string: string) => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_AddStringToObject方法的dts接口
+ * 输入: object: cJSON, name: string, string: string
+ * 输出: cJSON
+ */
+export const KH526_cJSON_AddStringToObject:(object: cJSON, name: string, string: string) => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_AddNumberToObject方法的dts接口
+ * 输入: object: cJSON, name: string, number: number
+ * 输出: cJSON
+ */
+export const KH206_cJSON_AddNumberToObject:(object: cJSON, name: string, number: number) => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_AddFalseToObject方法的dts接口
+ * 输入: object: cJSON, name: string
+ * 输出: cJSON
+ */
+export const KH545_cJSON_AddFalseToObject:(object: cJSON, name: string) => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_AddItemToArray方法的dts接口
+ * 输入: array: cJSON, item: cJSON
+ * 输出: cJSON_bool
+ */
+export const KH802_cJSON_AddItemToArray:(array: cJSON, item: cJSON) => cJSON_bool;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_AddItemToObject方法的dts接口
+ * 输入: object: cJSON, string: string, item: cJSON
+ * 输出: cJSON_bool
+ */
+export const KH180_cJSON_AddItemToObject:(object: cJSON, string: string, item: cJSON) => cJSON_bool;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_CreateArray方法的dts接口
+ * 输入: void
+ * 输出: cJSON
+ */
+export const KH386_cJSON_CreateArray:() => cJSON;
+/* [NAPI_GEN]:对应cJSON.h中：cJSON_CreateIntArray方法的dts接口
+ * 输入: numbers: number, count: number
+ * 输出: cJSON
+ */
+export const KH767_cJSON_CreateIntArray:(numbers: number, count: number) => cJSON;
+
+
