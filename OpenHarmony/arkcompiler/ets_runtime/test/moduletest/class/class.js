@@ -1,0 +1,140 @@
+/*
+ * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * @tc.name:class
+ * @tc.desc:test class
+ * @tc.type: FUNC
+ * @tc.require: issueI5NO8G
+ */
+class Parent {
+    constructor(x) {
+        this.x = x;
+    }
+
+    static toString() {
+        return 'parent';
+    }
+}
+
+class Child extends Parent {
+    constructor(x, y) {
+        super(x);
+        this.y = y;
+    }
+
+    value() {
+        return this.x * this.y;
+    }
+
+    static toString() {
+        return super.toString() + ' child';
+    }
+}
+
+var c = new Child(2, 3);
+print(c.value());
+print(Child.toString());
+
+try {
+    class C {
+        a = 1;
+    }
+    class D extends C {
+        constructo() {
+            delete super.a;
+        }
+    }
+    d = new D();
+} catch (err) {
+    print("PASS");
+}
+
+class A {
+    a = 10;
+}
+class B extends A {
+    constructor() {
+        let a = "a";
+        super[a]  = 1;
+    }
+}
+var par = new A;
+print(par.a);
+
+for (let i = 0; i < 2; i++) {
+    class Cls{
+        foo() { }
+    }
+    if (i == 0) {
+        Cls.prototype.foo.x = 1;
+    }
+    print(Cls.prototype.foo.x);
+}
+
+class Class2022 {
+    public = 12;
+    #private = 34;
+    static static_public = 56;
+    static #static_private = 78;
+    static test(obj) {
+        print(obj.public);
+        print(obj.#private);
+        print(obj.static_public);
+        print(obj.#static_private);
+    }
+}
+var class2022 = new Class2022();
+try {
+    Class2022.test(class2022);
+} catch(err) {
+    print(err.name);
+}
+try {
+    Class2022.test(new Proxy(class2022, {}));
+} catch(err) {
+    print(err.name);
+}
+
+function foo() {
+
+}
+class Class2024 {
+    static #g;
+    a = [1, 2, 3];
+    #c = foo;
+}
+var class2024 = new Class2024();
+print("test successful!");
+
+class StaticTest {
+    static set a(a) {
+        print(a);
+    }
+    static a = 1;  // expect no print
+    static length = 1;  // expect no TypeError
+}
+
+let o = {
+    toString() {
+        class C {
+            #p(a, b) { }
+        }
+    }
+}
+let o1 = {
+    [o](a, b) { }
+}
+print("test privateproperty class sucecess")

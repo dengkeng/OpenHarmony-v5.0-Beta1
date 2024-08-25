@@ -1,0 +1,8 @@
+{
+  "IdentifierCache": {
+    "#__function": "n",
+    "$0#a": "o",
+    "#ExpFunc:16:19": "m"
+  },
+  "MemberMethodCache": {}
+}

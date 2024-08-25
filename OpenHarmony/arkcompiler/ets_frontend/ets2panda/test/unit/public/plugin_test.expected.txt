@@ -1,0 +1,11 @@
+Hi there!
+After parse
+main
+m
+n
+console
+log
+m
+n
+After check
+After lowerings

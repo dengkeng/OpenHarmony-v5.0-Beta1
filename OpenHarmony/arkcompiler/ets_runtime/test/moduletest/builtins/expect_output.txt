@@ -1,0 +1,140 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+builtins test start
+builtins string start
+A
+ABBA
+—
+—
+true
+builtins string end
+builtins ir start
+112
+119
+NaN
+NaN
+100
+0
+1
+-1
+-1
+-1
+5
+-1
+-1
+Bill Gates,1,2
+1
+1
+1
+1
+1
+NaN
+false
+false
+false
+false
+builtins ir end
+builtins number start
+parseInt result = 16947500000
+0.7999999999999999
+-Infinity
+builtins number parsefloat
+NaN
+123
+-0.12
+10.123
+0
+0
+-1000
+-1000
+-0.12
+1
+1234560000000000
+1234560000000000
+1
+1
+10
+10
+1000
+builtins global parsefloat
+NaN
+123
+-0.12
+10.123
+0
+0
+-1000
+-1000
+-0.12
+1
+1234560000000000
+1234560000000000
+builtins number tostring
+3.1622776601683794e+21
+3.1622776601683794e+21
+0
+0
+0
+0
+-1
+-1
+-1000000000
+-1000000000
+-1000000000.1233444
+-1000000000.1233444
+10000.1234
+10000.1234
+1000
+1000
+10000123456
+10000123456
+1.0000123456e-11
+1.0000123456e-11
+0.10000123456
+0.10000123456
+1234560000000000
+1234560000000000
+TypeError: Cannot convert a BigInt value to a number
+0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000034lmua2oev
+4294967294
+2147483648
+1e+22
+builtins number end
+builtins regexp start
+20210608_5V0J5lVh4xVNYx0AUE.jpg,.jpg
+.jpg
+st2
+a
+
+undefined
+AAA
+AAA
+AAA
+true
+true
+1234
+builtins regexp end
+builtins object begin
+true
+false
+false
+builtins object end
+builtins object add property begin
+1106
+builtins object add property end
+builtins reflect start
+false
+true
+v56.length 102630708
+builtins reflect end
