@@ -1,0 +1,120 @@
+# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/request/request/request_aafwk.gni")
+import("//build/ohos.gni")
+
+ohos_static_library("download_server_cxx") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  stack_protector_ret = true
+
+  sources = [
+    "src/cxx/application_state_observer.cpp",
+    "src/cxx/background_notification.cpp",
+    "src/cxx/c_check_permission.cpp",
+    "src/cxx/c_event_handler.cpp",
+    "src/cxx/c_request_database.cpp",
+    "src/cxx/c_string_wrapper.cpp",
+    "src/cxx/c_task_config.cpp",
+    "src/cxx/c_task_info.cpp",
+    "src/cxx/common_event_notify.cpp",
+    "src/cxx/get_calling_bundle.cpp",
+    "src/cxx/get_proxy.cpp",
+    "src/cxx/get_top_bundle.cpp",
+    "src/cxx/network_adapter.cpp",
+    "src/cxx/request_cert_mgr_adapter.cpp",
+  ]
+
+  include_dirs = [
+    "include",
+    "../common/include",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "certificate_manager:cert_manager_sdk",
+    "common_event_service:cesfwk_innerkits",
+    "distributed_notification_service:ans_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "netmanager_base:net_conn_manager_if",
+    "relational_store:native_appdatafwk",
+    "relational_store:native_dataability",
+    "relational_store:native_rdb",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  deps = [ "//third_party/rust/crates/cxx:cxx_cppdeps" ]
+
+  defines = []
+  if (request_telephony_core_service && request_telephony_cellular_data) {
+    external_deps += [
+      "cellular_data:tel_cellular_data_api",
+      "core_service:tel_core_service_api",
+    ]
+    defines += [ "REQUEST_TELEPHONY_CORE_SERVICE" ]
+  }
+
+  subsystem_name = "request"
+  part_name = "request"
+}
+
+ohos_rust_shared_library("download_server") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  sources = [ "src/lib.rs" ]
+
+  deps = [
+    ":download_server_cxx",
+    "//third_party/rust/crates/cxx:lib",
+  ]
+
+  external_deps = [
+    "hilog:hilog_rust",
+    "hilog:libhilog",
+    "hisysevent:hisysevent_rust",
+    "hitrace:hitrace_meter_rust",
+    "ipc:ipc_rust",
+    "netstack:ylong_http_client",
+    "safwk:system_ability_fwk_rust",
+    "samgr:samgr_rust",
+    "ylong_runtime:ylong_runtime",
+  ]
+
+  crate_name = "download_server"
+  subsystem_name = "request"
+  part_name = "request"
+}

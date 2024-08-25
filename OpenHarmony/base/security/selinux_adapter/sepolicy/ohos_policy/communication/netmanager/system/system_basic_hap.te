@@ -1,0 +1,33 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow system_basic_hap_attr sa_comm_net_tethering_manager_service:samgr_class { get };
+
+allow system_basic_hap_attr fwmark_service:sock_file { write };
+allow system_basic_hap_attr netmanager:binder { call transfer };
+
+allow system_basic_hap_attr netsysnative:unix_stream_socket { connectto read write };
+allow system_basic_hap_attr system_basic_hap_attr:tcp_socket { getattr create setopt bind connect getopt read write shutdown };
+allow system_basic_hap_attr system_basic_hap_attr:udp_socket { getattr create setopt bind connect getopt read write shutdown };
+
+allow system_basic_hap_attr netmsg:tcp_socket { node_bind name_connect };
+allow system_basic_hap_attr sa_comm_vpn_manager_service:samgr_class { get };
+allow system_basic_hap_attr netsysnative:fd { use };
+allow system_basic_hap_attr dev_tun_file:chr_file { read write };
+
+allow system_basic_hap_attr sa_comm_net_stats_manager_service:samgr_class { get };
+
+allow system_basic_hap_attr sa_netsys_ext_service:samgr_class { add get };
+allow system_basic_hap_attr sa_distributed_net_service:samgr_class { add get };
+
+allow system_basic_hap_attr sa_net_policy_manager:samgr_class { add get };

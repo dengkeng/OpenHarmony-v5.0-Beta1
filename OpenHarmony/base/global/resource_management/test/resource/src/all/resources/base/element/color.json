@@ -1,0 +1,64 @@
+{
+  "color": [
+    {
+      "name": "color_aboutPage_title_primary",
+      "value": "#191919"
+    },
+    {
+      "name": "color_aboutPage_title_secondary",
+      "value": "#99000000"
+    },
+    {
+      "name": "textColor_secondary",
+      "value": "#99000000"
+    },
+    {
+      "name": "textColor_primary",
+      "value": "#E6000000"
+    },
+    {
+      "name": "divider_color",
+      "value": "#10000000"
+    },
+    {
+      "name": "touched_background_color",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "normal_background_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "grey_background",
+      "value": "#F5F5F5"
+    },
+    {
+      "name": "color_ref",
+      "value": "$color:grey_background"
+    },
+    {
+      "name": "base_dark",
+      "value": "#00000000"
+    },
+    {
+      "name": "base_light",
+      "value": "#00000000"
+    },
+    {
+      "name": "base_light_dark",
+      "value": "#00000000"
+    },
+    {
+      "name": "base_light_ldpi",
+      "value": "#00000000"
+    },
+    {
+      "name": "base_light_phone",
+      "value": "#00000000"
+    },
+    {
+      "name": "base_only",
+      "value": "#00000000"
+    }
+  ]
+}

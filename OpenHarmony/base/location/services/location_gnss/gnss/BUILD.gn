@@ -1,0 +1,136 @@
+# Copyright (C) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/location/config.gni")
+import("//build/ohos.gni")
+
+if (location_feature_with_gnss) {
+  ohos_shared_library("lbsservice_gnss") {
+    sources = [
+      "$LOCATION_GNSS_ROOT/source/agnss_event_callback.cpp",
+      "$LOCATION_GNSS_ROOT/source/agnss_ni_manager.cpp",
+      "$LOCATION_GNSS_ROOT/source/geofence_event_callback.cpp",
+      "$LOCATION_GNSS_ROOT/source/gnss_ability.cpp",
+      "$LOCATION_GNSS_ROOT/source/gnss_ability_skeleton.cpp",
+      "$LOCATION_GNSS_ROOT/source/gnss_common_event_subscriber.cpp",
+      "$LOCATION_GNSS_ROOT/source/gnss_event_callback.cpp",
+      "$LOCATION_GNSS_ROOT/source/string_utils.cpp",
+      "$LOCATION_GNSS_ROOT/source/ui_extension_ability_connection.cpp",
+      "$LOCATION_LOCATOR_ROOT/source/location_config_manager.cpp",
+      "$LOCATION_LOCATOR_ROOT/source/subability_common.cpp",
+      "$LOCATION_LOCATOR_ROOT/source/work_record.cpp",
+      "$LOCATION_LOCATOR_ROOT/source/work_record_statistic.cpp",
+    ]
+
+    include_dirs = [
+      "$LOCATION_ROOT_DIR/interfaces/inner_api/include",
+      "$LOCATION_GNSS_ROOT/include",
+      "$LOCATION_LOCATOR_ROOT/include",
+    ]
+
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    branch_protector_ret = "pac_ret"
+
+    deps = [
+      "$LOCATION_ROOT_DIR/frameworks/location_common/common:lbsservice_common",
+    ]
+
+    external_deps = [
+      "ability_base:want",
+      "c_utils:utils",
+      "eventhandler:libeventhandler",
+      "hdf_core:libhdi",
+      "hilog:libhilog",
+      "init:libbegetutil",
+      "ipc:ipc_single",
+      "safwk:system_ability_fwk",
+      "samgr:samgr_proxy",
+    ]
+
+    defines = []
+
+    if (telephony_core_service_enable) {
+      external_deps += [ "core_service:tel_core_service_api" ]
+      defines += [ "TEL_CORE_SERVICE_ENABLE" ]
+    }
+
+    if (telephony_cellular_data_enable) {
+      external_deps += [ "cellular_data:tel_cellular_data_api" ]
+      defines += [ "TEL_CELLULAR_DATA_ENABLE" ]
+    }
+
+    if (hdf_drivers_interface_location_agnss_enable) {
+      external_deps +=
+          [ "drivers_interface_location_agnss:liblocation_agnss_proxy_2.0" ]
+      defines += [ "HDF_DRIVERS_INTERFACE_AGNSS_ENABLE" ]
+    }
+
+    if (location_feature_with_gnss &&
+        hdf_drivers_interface_location_gnss_enable) {
+      external_deps +=
+          [ "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0" ]
+      defines += [ "FEATURE_GNSS_SUPPORT" ]
+    }
+
+    if (location_feature_with_passive) {
+      defines += [ "FEATURE_PASSIVE_SUPPORT" ]
+    }
+
+    if (communication_wifi_enable) {
+      external_deps += [ "wifi:wifi_sdk" ]
+      defines += [ "WIFI_ENABLE" ]
+    }
+
+    if (call_manager_enable) {
+      external_deps += [ "call_manager:tel_call_manager_api" ]
+      defines += [ "CALL_MANAGER_ENABLE" ]
+    }
+
+    if (common_event_service_enable) {
+      external_deps += [
+        "ability_runtime:extension_manager",
+        "common_event_service:cesfwk_innerkits",
+      ]
+      defines += [ "COMMON_EVENT_SERVICE_ENABLE" ]
+    }
+
+    if (sms_mms_enable) {
+      external_deps += [ "sms_mms:tel_sms_mms_api" ]
+      defines += [ "SMS_MMS_ENABLE" ]
+    }
+
+    if (notification_distributed_notification_service_enable) {
+      external_deps += [ "distributed_notification_service:ans_innerkits" ]
+      defines += [ "NOTIFICATION_ENABLE" ]
+    }
+
+    if (hdf_drivers_interface_location_geofence_enable) {
+      external_deps += [
+        "drivers_interface_location_geofence:liblocation_geofence_proxy_2.0",
+      ]
+      defines += [ "HDF_DRIVERS_INTERFACE_GEOFENCE_ENABLE" ]
+    }
+
+    part_name = "location"
+    subsystem_name = "location"
+  }
+} else {
+  ohos_shared_library("lbsservice_gnss") {
+    part_name = "location"
+    subsystem_name = "location"
+  }
+}

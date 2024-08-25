@@ -1,0 +1,162 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../web_aafwk.gni")
+
+webview_root_path = webview_path
+if (target_cpu == "arm64") {
+  web_source = "prebuilts/arm64/NWeb.hap"
+  defines = [ "webview_arm64" ]
+} else if (target_cpu == "arm") {
+  web_source = "prebuilts/arm/NWeb.hap"
+} else if (target_cpu == "x86_64") {
+  web_source = "prebuilts/arm64/NWeb.hap"
+  defines = [ "webview_x86_64" ]
+}
+
+config("nweb_config") {
+  include_dirs = [ "include" ]
+
+  cflags = [
+    "-Wall",
+    "-Werror",
+    "-g3",
+  ]
+}
+
+config("nweb_public_interface") {
+  include_dirs = [ "include" ]
+}
+
+config("nweb_glue_interface") {
+  include_dirs = [
+    "${webview_path}/ohos_glue",
+    "${webview_path}/ohos_glue/ohos_nweb/bridge",
+  ]
+}
+
+ohos_shared_library("libnweb") {
+  branch_protector_ret = "pac_ret"
+  branch_protector_frt = "bti"
+
+  configs = [
+    ":nweb_config",
+    ":nweb_glue_interface",
+  ]
+  public_configs = [ ":nweb_public_interface" ]
+  sources = [
+    "src/nweb_enhance_surface_adapter.cpp",
+    "src/nweb_helper.cpp",
+    "src/nweb_hisysevent.cpp",
+    "src/nweb_surface_adapter.cpp",
+  ]
+
+  deps = [
+    ":alias",
+    ":context-menu",
+    ":web.para",
+    ":web.para.dac",
+    ":web_config",
+    "${webview_path}/ohos_glue:ohos_nweb_glue_source",
+    "//third_party/libxml2:libxml2",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_context",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "config_policy:configpolicy_util",
+    "graphic_2d:libcomposer",
+    "graphic_2d:librender_service_client",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "i18n:intl_util",
+    "init:libbegetutil",
+    "input:libmmi-client",
+    "ipc:ipc_core",
+    "window_manager:libwm",
+  ]
+
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "webview"
+  subsystem_name = "web"
+}
+
+ohos_prebuilt_etc("nweb_hap") {
+  source = web_source
+  module_install_dir = "app/com.ohos.nweb"
+  part_name = "webview"
+  subsystem_name = "web"
+  license_file = "./prebuilts/NOTICE"
+}
+
+ohos_prebuilt_etc("web_config") {
+  source = "${webview_root_path}/ohos_nweb/etc/web_config.xml"
+  subsystem_name = "web"
+  part_name = "webview"
+  module_install_dir = "etc/web"
+}
+
+ohos_prebuilt_etc("web.para") {
+  source = "${webview_root_path}/ohos_nweb/etc/para/web.para"
+  subsystem_name = "web"
+  part_name = "webview"
+  module_install_dir = "etc/param"
+}
+
+ohos_prebuilt_etc("web.para.dac") {
+  source = "${webview_root_path}/ohos_nweb/etc/para/web.para.dac"
+  subsystem_name = "web"
+  part_name = "webview"
+  module_install_dir = "etc/param"
+}
+
+ohos_prebuilt_etc("alias") {
+  source = "${webview_root_path}/ohos_nweb/etc/alias.svg"
+  subsystem_name = "web"
+  part_name = "webview"
+  relative_install_dir = "webview/ohos_nweb"
+}
+
+ohos_prebuilt_etc("context-menu") {
+  source = "${webview_root_path}/ohos_nweb/etc/context-menu.svg"
+  subsystem_name = "web"
+  part_name = "webview"
+  relative_install_dir = "webview/ohos_nweb"
+}
+
+ohos_executable("chrome_crashpad_handler") {
+  install_enable = true
+
+  include_dirs = [ "include" ]
+
+  sources = [ "src/nweb_crashpad_handler_main.cpp" ]
+
+  external_deps = [ "hilog:libhilog" ]
+
+  defines = []
+  if (target_cpu == "arm64") {
+    defines += [ "webview_arm64" ]
+  } else if (target_cpu == "arm") {
+    defines += [ "webview_arm" ]
+  } else if (target_cpu == "x86_64") {
+    defines += [ "webview_x86_64" ]
+  }
+
+  subsystem_name = "web"
+  part_name = "webview"
+}

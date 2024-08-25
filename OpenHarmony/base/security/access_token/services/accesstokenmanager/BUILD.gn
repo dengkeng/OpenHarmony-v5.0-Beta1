@@ -1,0 +1,169 @@
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../access_token.gni")
+
+ohos_prebuilt_etc("access_token.rc") {
+  source = "access_token.cfg"
+  relative_install_dir = "init"
+  subsystem_name = "security"
+  part_name = "access_token"
+}
+
+ohos_prebuilt_etc("permission_definition_config") {
+  source = "permission_definitions.json"
+  part_name = "access_token"
+  subsystem_name = "security"
+  relative_install_dir = "access_token"
+}
+
+if (is_standard_system) {
+  ohos_shared_library("accesstoken_manager_service") {
+    subsystem_name = "security"
+    part_name = "access_token"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    branch_protector_ret = "pac_ret"
+    if (!use_clang_coverage) {
+      version_script = "accesstoken_manager_service.map"
+      shlib_type = "sa"
+    }
+
+    include_dirs = [
+      "${access_token_path}/frameworks/accesstoken/include",
+      "${access_token_path}/frameworks/common/include",
+      "${access_token_path}/frameworks/privacy/include",
+      "${access_token_path}/interfaces/innerkits/accesstoken/include",
+      "${access_token_path}/interfaces/innerkits/privacy/include",
+      "${access_token_path}/interfaces/innerkits/tokensync/src",
+      "${access_token_path}/services/common/app_manager/include",
+      "${access_token_path}/services/common/database/include",
+      "${access_token_path}/services/common/handler/include",
+      "${access_token_path}/services/common/libraryloader/include",
+      "main/cpp/include/callback",
+      "main/cpp/include/service",
+      "main/cpp/include/token",
+      "main/cpp/include/permission",
+      "main/cpp/include/database",
+    ]
+
+    include_dirs += access_token_impl_include_dirs
+
+    sources = [
+      "main/cpp/src/callback/accesstoken_callback_proxys.cpp",
+      "main/cpp/src/callback/callback_death_recipients.cpp",
+      "main/cpp/src/callback/callback_manager.cpp",
+      "main/cpp/src/database/access_token_db.cpp",
+      "main/cpp/src/database/data_translator.cpp",
+      "main/cpp/src/database/token_field_const.cpp",
+      "main/cpp/src/permission/permission_definition_cache.cpp",
+      "main/cpp/src/permission/permission_definition_parser.cpp",
+      "main/cpp/src/permission/permission_grant_event.cpp",
+      "main/cpp/src/permission/permission_manager.cpp",
+      "main/cpp/src/permission/permission_policy_set.cpp",
+      "main/cpp/src/permission/permission_validator.cpp",
+      "main/cpp/src/permission/temp_permission_observer.cpp",
+      "main/cpp/src/service/accesstoken_manager_service.cpp",
+      "main/cpp/src/service/accesstoken_manager_stub.cpp",
+      "main/cpp/src/token/accesstoken_id_manager.cpp",
+      "main/cpp/src/token/accesstoken_info_manager.cpp",
+      "main/cpp/src/token/hap_token_info_inner.cpp",
+      "main/cpp/src/token/native_token_info_inner.cpp",
+      "main/cpp/src/token/native_token_receptor.cpp",
+    ]
+    sources += access_token_impl_sources
+
+    cflags_cc = [ "-DHILOG_ENABLE" ]
+    configs = [ "../../config:coverage_flags" ]
+
+    if (dlp_permission_enable == true) {
+      cflags_cc += [ "-DSUPPORT_SANDBOX_APP" ]
+      sources += [
+        "main/cpp/src/permission/dlp_permission_set_manager.cpp",
+        "main/cpp/src/permission/dlp_permission_set_parser.cpp",
+      ]
+    }
+
+    if (build_variant == "user") {
+      cflags_cc += [ "-DATM_BUILD_VARIANT_USER_ENABLE" ]
+    }
+
+    deps = [
+      "${access_token_path}/frameworks/accesstoken:accesstoken_communication_adapter_cxx",
+      "${access_token_path}/frameworks/common:accesstoken_common_cxx",
+      "${access_token_path}/interfaces/innerkits/accesstoken:libtokenid_sdk",
+      "${access_token_path}/interfaces/innerkits/privacy:libprivacy_sdk",
+      "${access_token_path}/interfaces/innerkits/token_setproc:libperm_setproc",
+      "${access_token_path}/interfaces/innerkits/token_setproc:libtoken_setproc",
+      "${access_token_path}/services/accesstokenmanager:access_token.rc",
+      "${access_token_path}/services/accesstokenmanager:permission_definition_config",
+      "${access_token_path}/services/common:accesstoken_service_common",
+    ]
+
+    deps += [ "etc:param_files" ]
+
+    external_deps = [
+      "c_utils:utils",
+      "dsoftbus:softbus_client",
+      "hilog:libhilog",
+      "hisysevent:libhisysevent",
+      "init:libbegetutil",
+      "ipc:ipc_core",
+      "json:nlohmann_json_static",
+      "safwk:system_ability_fwk",
+      "samgr:samgr_proxy",
+      "sqlite:sqlite",
+    ]
+
+    if (ohos_indep_compiler_enable) {
+      external_deps += [ "bounds_checking_function:libsec_shared" ]
+    }
+
+    if (eventhandler_enable == true) {
+      cflags_cc += [ "-DEVENTHANDLER_ENABLE" ]
+      external_deps += [ "eventhandler:libeventhandler" ]
+    }
+
+    if (hicollie_enable == true) {
+      external_deps += [ "hicollie:libhicollie" ]
+      cflags_cc += [ "-DHICOLLIE_ENABLE" ]
+    }
+
+    if (token_sync_enable == true) {
+      cflags_cc += [ "-DTOKEN_SYNC_ENABLE" ]
+
+      sources += [
+        "main/cpp/src/token/accesstoken_remote_token_manager.cpp",
+        "main/cpp/src/token/token_modify_notifier.cpp",
+      ]
+
+      include_dirs +=
+          [ "${access_token_path}/interfaces/innerkits/tokensync/include" ]
+    }
+
+    if (hiviewdfx_hitrace_native_enable == true) {
+      cflags_cc += [ "-DHITRACE_NATIVE_ENABLE" ]
+
+      external_deps += [ "hitrace:hitrace_meter" ]
+    }
+
+    if (resourceschedule_ffrt_enable) {
+      external_deps += [ "ffrt:libffrt" ]
+      cflags_cc += [ "-DRESOURCESCHEDULE_FFRT_ENABLE" ]
+    }
+  }
+}

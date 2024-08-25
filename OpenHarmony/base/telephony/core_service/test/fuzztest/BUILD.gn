@@ -1,0 +1,43 @@
+# Copyright (C) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/features.gni")
+import("//build/test.gni")
+
+group("fuzztest") {
+  testonly = true
+  deps = []
+  deps += [ "setshownumber_fuzzer:fuzztest" ]
+  deps += [ "setshowname_fuzzer:fuzztest" ]
+  deps += [ "addiccdiallingnumbers_fuzzer:fuzztest" ]
+  deps += [ "updateiccdiallingnumbers_fuzzer:fuzztest" ]
+  deps += [ "setvoicemailinfo_fuzzer:fuzztest" ]
+  deps += [ "sendterminalresponsecmd_fuzzer:fuzztest" ]
+  deps += [ "sendenvelopecmd_fuzzer:fuzztest" ]
+  deps += [ "getsimeons_fuzzer:fuzztest" ]
+  deps += [ "simauthentication_fuzzer:fuzztest" ]
+  deps += [ "setaccesslimit_fuzzer:fuzztest" ]
+  deps += [ "unmarshalling_fuzzer:fuzztest" ]
+  deps += [ "isvalidnumberstring_fuzzer:fuzztest" ]
+  deps += [ "hexvectohexstr_fuzzer:fuzztest" ]
+  deps += [ "isshowableasciionly_fuzzer:fuzztest" ]
+  deps += [ "updatesmsicc_fuzzer:fuzztest" ]
+  deps += [ "updatevoicemail_fuzzer:fuzztest" ]
+  deps += [ "satellitecore_fuzzer:fuzztest" ]
+  deps += [ "sendsmsmoremode_fuzzer:fuzztest" ]
+  deps += [ "setradiostate_fuzzer:fuzztest" ]
+  deps += [ "imsregcallback_fuzzer:fuzztest" ]
+  deps += [ "mcccountrycode_fuzzer:fuzztest" ]
+  deps += [ "vcard_fuzzer:fuzztest" ]
+  deps += [ "unlockpin_fuzzer:fuzztest" ]
+}

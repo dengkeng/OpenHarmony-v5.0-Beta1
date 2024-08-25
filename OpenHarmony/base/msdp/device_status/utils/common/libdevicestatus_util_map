@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ 1.0{
+    global:
+        extern "C++" {
+            "OHOS::Msdp::DeviceStatus::GetThisThreadId()";
+            "OHOS::Msdp::DeviceStatus::GetPid()";
+            "OHOS::Msdp::DeviceStatus::GetProgramName()";
+            "OHOS::Msdp::DeviceStatus::IsValidSvgFile(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::IsNum(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::SetThreadName(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::GetMillisTime()";
+            "OHOS::Msdp::UtilNapi::TypeOf(napi_env__*, napi_value__*, napi_valuetype)";
+            "OHOS::Msdp::DeviceStatus::UtilNapiError::GetErrorMsg(int, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>&)";
+            "OHOS::Msdp::DeviceStatus::UtilNapiError::HandleExecuteResult(napi_env__*, int, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>)";
+            "OHOS::Msdp::DeviceStatus::Utility::ShowUserAndGroup()";
+            "OHOS::Msdp::DeviceStatus::Utility::ShowFileAttributes(char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::IsInteger(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::Utility::Anonymize(char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::GetSysClockTime()";
+            "OHOS::Msdp::DeviceStatus::Utility::DoesFileExist(char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::GetFileSize(char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::GetFileSize(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::Utility::RemoveSpace(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>&)";
+            "OHOS::Msdp::DeviceStatus::Utility::CopyNulstr(char*, unsigned long, char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::CopyNulstr(char*, unsigned int, char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::StartWith(char const*, char const*)";
+            "OHOS::Msdp::DeviceStatus::Utility::StartWith(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::Utility::RemoveTrailingChars(char, char*)";
+            "OHOS::Msdp::DeviceStatus::Utility::RemoveTrailingChars(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>&)";
+            "OHOS::Msdp::DeviceStatus::GetTimeStamp(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>&)";
+            "OHOS::Msdp::DeviceStatus::StringSplit(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&, std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&, std::__h::vector<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, std::__h::allocator<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>>>&)";
+            "OHOS::Msdp::DeviceStatus::StringPrintf(char const*, ...)";
+            "OHOS::Msdp::DeviceStatus::GetAnonyString(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&)";
+            "OHOS::Msdp::DeviceStatus::DragDataPacker::Marshalling(OHOS::Msdp::DeviceStatus::DragData const&, OHOS::Parcel&, bool)";
+            "OHOS::Msdp::DeviceStatus::DragDataPacker::UnMarshalling(OHOS::Parcel&, OHOS::Msdp::DeviceStatus::DragData&, bool)";
+            "OHOS::Msdp::DeviceStatus::DragDataPacker::CheckDragData(OHOS::Msdp::DeviceStatus::DragData const&)";
+            "OHOS::Msdp::DeviceStatus::ShadowPacker::PackUpShadowInfo(OHOS::Msdp::DeviceStatus::ShadowInfo const&, OHOS::Parcel&, bool)";
+            "OHOS::Msdp::DeviceStatus::ShadowPacker::UnPackShadowInfo(OHOS::Parcel&, OHOS::Msdp::DeviceStatus::ShadowInfo&, bool)";
+            "OHOS::Msdp::DeviceStatus::ShadowPacker::CheckShadowInfo(OHOS::Msdp::DeviceStatus::ShadowInfo const&)";
+            "OHOS::Msdp::DeviceStatus::ShadowOffsetPacker::Marshalling(OHOS::Msdp::DeviceStatus::ShadowOffset const&, OHOS::Parcel&)";
+            "OHOS::Msdp::DeviceStatus::ShadowOffsetPacker::UnMarshalling(OHOS::Parcel&, OHOS::Msdp::DeviceStatus::ShadowOffset&)";
+            "OHOS::Msdp::DeviceStatus::SummaryPacker::UnMarshalling(OHOS::Parcel&, std::__h::map<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, long long, std::__h::less<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>>, std::__h::allocator<std::__h::pair<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const, long long>>>&)";
+            "OHOS::Msdp::DeviceStatus::SummaryPacker::Marshalling(std::__h::map<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, long long, std::__h::less<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>>, std::__h::allocator<std::__h::pair<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const, long long>>> const&, OHOS::Parcel&)";
+            "OHOS::Msdp::DeviceStatus::SummaryPacker::UnMarshalling(OHOS::Parcel&, std::__h::map<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, long, std::__h::less<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>>, std::__h::allocator<std::__h::pair<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const, long>>>&)";
+            "OHOS::Msdp::DeviceStatus::SummaryPacker::Marshalling(std::__h::map<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>, long, std::__h::less<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>>>, std::__h::allocator<std::__h::pair<std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const, long>>> const&, OHOS::Parcel&)";
+            "OHOS::Msdp::DeviceStatus::PreviewStylePacker::Marshalling(OHOS::Msdp::DeviceStatus::PreviewStyle const&, OHOS::Parcel&)";
+            "OHOS::Msdp::DeviceStatus::PreviewStylePacker::UnMarshalling(OHOS::Parcel&, OHOS::Msdp::DeviceStatus::PreviewStyle&)";
+            "OHOS::Msdp::DeviceStatus::PreviewAnimationPacker::Marshalling(OHOS::Msdp::DeviceStatus::PreviewAnimation const&, OHOS::Parcel&)";
+            "OHOS::Msdp::DeviceStatus::PreviewAnimationPacker::UnMarshalling(OHOS::Parcel&, OHOS::Msdp::DeviceStatus::PreviewAnimation&)";
+            "OHOS::Msdp::DeviceStatus::AnimationCurve::CreateCurve(std::__h::basic_string<char, std::__h::char_traits<char>, std::__h::allocator<char>> const&, std::__h::vector<float, std::__h::allocator<float>> const&)";
+        };
+    local:
+        *;
+ };

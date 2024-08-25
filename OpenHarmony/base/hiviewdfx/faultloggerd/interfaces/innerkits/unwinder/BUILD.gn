@@ -1,0 +1,357 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/hiviewdfx/faultloggerd/faultloggerd.gni")
+
+dfx_unwinder_sources = [
+  "arch_util.cpp",
+  "dfx_accessors.cpp",
+  "dfx_ark.cpp",
+  "dfx_config.cpp",
+  "dfx_elf.cpp",
+  "dfx_elf_parser.cpp",
+  "dfx_frame_formatter.cpp",
+  "dfx_hap.cpp",
+  "dfx_instr_statistic.cpp",
+  "dfx_instructions.cpp",
+  "dfx_map.cpp",
+  "dfx_maps.cpp",
+  "dfx_memory.cpp",
+  "dfx_mmap.cpp",
+  "dfx_ptrace.cpp",
+  "dfx_regs.cpp",
+  "dfx_regs_arm.cpp",
+  "dfx_regs_arm64.cpp",
+  "dfx_regs_riscv64.cpp",
+  "dfx_regs_x86_64.cpp",
+  "dfx_signal.cpp",
+  "dfx_symbols.cpp",
+  "getcontext_x86_64.S",
+  "thread_context.cpp",
+  "unwinder.cpp",
+  "unwinder_config.cpp",
+]
+
+dfx_exidx_sources = [ "arm_exidx.cpp" ]
+
+dfx_dwarf_sources = [
+  "dwarf_cfa_instructions.cpp",
+  "dwarf_op.cpp",
+  "dwarf_section.cpp",
+]
+
+if (defined(ohos_lite)) {
+  config("ohos_lite_config") {
+    defines = [
+      "is_ohos=${is_ohos}",
+      "is_ohos_lite",
+    ]
+  }
+
+  shared_library("libunwinder") {
+    visibility = [ "*:*" ]
+
+    public_configs = [ ":ohos_lite_config" ]
+
+    include_dirs = [
+      "include",
+      "$c_utils_include_path",
+      "$faultloggerd_common_path/dfxlog",
+      "$faultloggerd_common_path/dfxutil",
+      "$faultloggerd_interfaces_path/common",
+      "$hilog_lite_include_path",
+    ]
+
+    dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+    sources += [ "$c_utils_src_path/directory_ex.cpp" ]
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog",
+      "$faultloggerd_common_path/dfxutil:dfx_util",
+      "$hilog_lite_deps_path",
+    ]
+
+    external_deps = [ "bounds_checking_function:libsec_shared" ]
+  }
+
+  static_library("libunwinder_static") {
+    visibility = [ "*:*" ]
+
+    public_configs = [ ":ohos_lite_config" ]
+
+    include_dirs = [
+      "include",
+      "$c_utils_include_path",
+      "$faultloggerd_common_path/dfxlog",
+      "$faultloggerd_common_path/dfxutil",
+      "$faultloggerd_interfaces_path/common",
+      "$hilog_lite_include_path",
+    ]
+
+    dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+    sources += [ "$c_utils_src_path/directory_ex.cpp" ]
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog",
+      "$faultloggerd_common_path/dfxutil:dfx_util",
+      "$hilog_lite_deps_path",
+    ]
+    external_deps = [ "bounds_checking_function:libsec_shared" ]
+  }
+
+  static_library("unwinder_host") {
+    # empty
+  }
+} else {
+  config("dfx_unwinder_config") {
+    visibility = [ "*:*" ]
+
+    include_dirs = [
+      "include",
+      "$faultloggerd_common_path/dfxlog",
+      "$faultloggerd_common_path/dfxutil",
+      "$faultloggerd_interfaces_path/common",
+    ]
+
+    defines = [
+      "is_ohos=${is_ohos}",
+      "is_linux=${is_linux}",
+      "is_mingw=${is_mingw}",
+      "RUSTC_DEMANGLE",
+    ]
+
+    if (libunwinder_debug) {
+      defines += [ "DFX_LOG_UNWIND" ]
+    }
+  }
+
+  config("mixstack_config") {
+    if (target_cpu == "arm64") {
+      defines = [ "ENABLE_MIXSTACK" ]
+      defines += [ "ONLINE_MIXSTACK" ]
+    }
+  }
+
+  config("offline_mixstack_config") {
+    if (target_cpu == "arm64") {
+      defines = [ "ENABLE_MIXSTACK" ]
+      defines += [ "OFFLINE_MIXSTACK" ]
+    }
+  }
+
+  config("lzma_config") {
+    if (is_ohos && !is_mingw && !is_emulator) {
+      defines = [ "ENABLE_MINIDEBUGINFO" ]
+    }
+  }
+
+  ohos_shared_library("libunwinder") {
+    public_configs = [
+      ":dfx_unwinder_config",
+      ":lzma_config",
+      ":offline_mixstack_config",
+      "$faultloggerd_common_path/build:coverage_flags",
+    ]
+    defines = [ "DFX_UNWIND_ERROR" ]
+    if (target_cpu == "arm64") {
+      defines += [ "ENABLE_PARAMETER" ]
+    }
+
+    if (target_cpu != "x86_64") {
+      dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    }
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog",
+      "$faultloggerd_common_path/dfxutil:dfx_util",
+    ]
+
+    if (is_ohos && !is_mingw && !is_emulator) {
+      sources += [ "dfx_xz_utils.cpp" ]
+    }
+    public_external_deps = [ "lzma:lzma_shared" ]
+    external_deps = [
+      "bounds_checking_function:libsec_shared",
+      "c_utils:utils",
+      "hilog:libhilog",
+      "init:libbegetutil",
+    ]
+    install_images = [
+      "system",
+      "updater",
+    ]
+    innerapi_tags = [
+      "chipsetsdk_indirect",
+      "platformsdk_indirect",
+    ]
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+
+  ohos_static_library("libunwinder_static") {
+    public_configs = [
+      ":dfx_unwinder_config",
+      ":lzma_config",
+      ":offline_mixstack_config",
+    ]
+
+    if (target_cpu != "x86_64") {
+      dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    }
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog",
+      "$faultloggerd_common_path/dfxutil:dfx_util",
+    ]
+
+    if (is_ohos && !is_mingw && !is_emulator) {
+      sources += [ "dfx_xz_utils.cpp" ]
+    }
+    public_external_deps = [ "lzma:lzma_shared" ]
+    external_deps = [
+      "bounds_checking_function:libsec_shared",
+      "c_utils:utils",
+      "hilog:libhilog",
+    ]
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+
+  ohos_static_library("libunwinder_base") {
+    public_configs = [
+      ":dfx_unwinder_config",
+      ":lzma_config",
+      ":offline_mixstack_config",
+    ]
+    defines = [ "DFX_LOG_HILOG_BASE" ]
+
+    if (target_cpu != "x86_64") {
+      dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    }
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog_base",
+      "$faultloggerd_common_path/dfxutil:dfx_util_static",
+    ]
+
+    if (is_ohos && !is_mingw && !is_emulator) {
+      sources += [ "dfx_xz_utils.cpp" ]
+    }
+    public_external_deps = [ "lzma:lzma_static" ]
+    external_deps = [
+      "bounds_checking_function:libsec_static",
+      "c_utils:utilsbase",
+      "hilog:libhilog_base",
+    ]
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+
+  ohos_source_set("libunwinder_src") {
+    public_configs = [
+      ":dfx_unwinder_config",
+      ":lzma_config",
+      ":mixstack_config",
+    ]
+    defines = [
+      "DFX_LOG_UNWIND",
+      "DFX_UNWIND_ERROR",
+      "INSTR_STATISTIC_ENABLE",
+    ]
+
+    if (target_cpu != "x86_64") {
+      dfx_unwinder_sources -= [ "getcontext_x86_64.S" ]
+    }
+    sources = dfx_unwinder_sources
+    sources += dfx_exidx_sources
+    sources += dfx_dwarf_sources
+
+    deps = [
+      "$faultloggerd_common_path/dfxlog:dfx_hilog",
+      "$faultloggerd_common_path/dfxutil:dfx_util",
+    ]
+
+    if (is_ohos && !is_mingw && !is_emulator) {
+      sources += [ "dfx_xz_utils.cpp" ]
+    }
+    public_external_deps = [ "lzma:lzma_shared" ]
+    external_deps = [
+      "bounds_checking_function:libsec_shared",
+      "c_utils:utils",
+      "hilog:libhilog",
+    ]
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+
+  config("unwinder_host_config") {
+    visibility = [ "*:*" ]
+
+    include_dirs = [
+      "include",
+      "$faultloggerd_common_path/dfxlog",
+      "$faultloggerd_common_path/dfxutil",
+      "$faultloggerd_interfaces_path/common",
+      "$faultloggerd_interfaces_path/nonlinux",
+    ]
+
+    defines = [
+      "is_ohos=${is_ohos}",
+      "is_linux=${is_linux}",
+      "is_mingw=${is_mingw}",
+      "is_emulator=${is_emulator}",
+      "DFX_NO_PRINT_LOG",
+    ]
+  }
+
+  ohos_static_library("unwinder_host") {
+    public_configs = [ ":unwinder_host_config" ]
+    sources = [
+      "dfx_elf.cpp",
+      "dfx_elf_parser.cpp",
+      "dfx_hap.cpp",
+      "dfx_map.cpp",
+      "dfx_maps.cpp",
+      "dfx_memory.cpp",
+      "dfx_mmap.cpp",
+      "dfx_symbols.cpp",
+      "unwinder_config.cpp",
+    ]
+    if (is_ohos && !is_mingw && !is_emulator) {
+      sources += [ "dfx_xz_utils.cpp" ]
+      public_external_deps = [ "lzma:lzma_static" ]
+    }
+    deps = [ "$faultloggerd_common_path/dfxutil:dfx_util_host" ]
+    external_deps = [ "bounds_checking_function:libsec_static" ]
+    if (is_ohos) {
+      external_deps += [ "c_utils:utils" ]
+    }
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+}

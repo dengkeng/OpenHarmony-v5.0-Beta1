@@ -1,0 +1,70 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("fuzztest") {
+  testonly = true
+  deps = []
+
+  deps += [
+    # deps file
+    "activateosaccount_fuzzer:ActivateOsAccountFuzzTest",
+    "addserverconfig_fuzzer:AddServerConfigFuzzTest",
+    "createosaccount_fuzzer:CreateOsAccountFuzzTest",
+    "deactivateosaccount_fuzzer:DeactivateOsAccountFuzzTest",
+    "getaccountserverconfig_fuzzer:GetAccountServerConfigFuzzTest",
+    "getbundleidfromuid_fuzzer:GetBundleIdFromUidFuzzTest",
+    "getcreatedosaccountnumfromdatabase_fuzzer:GetCreatedOsAccountNumFromDatabaseFuzzTest",
+    "getcreatedosaccountscount_fuzzer:GetCreatedOsAccountsCountFuzzTest",
+    "getdefaultactivatedosaccount_fuzzer:GetDefaultActivatedOsAccountFuzzTest",
+    "getdistributedvirtualdeviceid_fuzzer:GetDistributedVirtualDeviceIdFuzzTest",
+    "getforegroundosaccountlocalid_fuzzer:GetForegroundOsAccountLocalIdFuzzTest",
+    "getmaxallowcreateidfromdatabase_fuzzer:GetMaxAllowCreateIdFromDatabaseFuzzTest",
+    "getosaccountallconstraints_fuzzer:GetOsAccountAllConstraintsFuzzTest",
+    "getosaccountfromdatabase_fuzzer:GetOsAccountFromDatabaseFuzzTest",
+    "getosaccountlistfromdatabase_fuzzer:GetOsAccountListFromDatabaseFuzzTest",
+    "getosaccountlocalidbyserialnumber_fuzzer:GetOsAccountLocalIdBySerialNumberFuzzTest",
+    "getosaccountlocalidfromdomain_fuzzer:GetOsAccountLocalIdFromDomainFuzzTest",
+    "getosaccountlocalidfromprocess_fuzzer:GetOsAccountLocalIdFromProcessFuzzTest",
+    "getosaccountlocalidfromuid_fuzzer:GetOsAccountLocalIdFromUidFuzzTest",
+    "getosaccountprofilephoto_fuzzer:GetOsAccountProfilePhotoFuzzTest",
+    "getosaccountshortname_fuzzer:GetOsAccountShortNameFuzzTest",
+    "getosaccountswitchmod_fuzzer:GetOsAccountSwitchModFuzzTest",
+    "getosaccounttype_fuzzer:GetOsAccountTypeFuzzTest",
+    "getosaccounttypefromprocess_fuzzer:GetOsAccountTypeFromProcessFuzzTest",
+    "getserialnumberbyosaccountlocalid_fuzzer:GetSerialNumberByOsAccountLocalIdFuzzTest",
+    "getserialnumberfromdatabase_fuzzer:GetSerialNumberFromDatabaseFuzzTest",
+    "iscurrentosaccountverified_fuzzer:IsCurrentOsAccountVerifiedFuzzTest",
+    "ismainosaccount_fuzzer:IsMainOsAccountFuzzTest",
+    "ismultiosaccountenable_fuzzer:IsMultiOsAccountEnableFuzzTest",
+    "isosaccountactived_fuzzer:IsOsAccountActivedFuzzTest",
+    "isosaccountcompleted_fuzzer:IsOsAccountCompletedFuzzTest",
+    "isosaccountconstraintenable_fuzzer:IsOsAccountConstraintEnableFuzzTest",
+    "isosaccountexists_fuzzer:IsOsAccountExistsFuzzTest",
+    "isosaccountforeground_fuzzer:IsOsAccountForegroundFuzzTest",
+    "isosaccountverified_fuzzer:IsOsAccountVerifiedFuzzTest",
+    "queryaccountinfo_fuzzer:QueryAccountInfoFuzzTest",
+    "removeosaccount_fuzzer:RemoveOsAccountFuzzTest",
+    "removeserverconfig_fuzzer:RemoveServerConfigFuzzTest",
+    "setcurrentosaccountisverified_fuzzer:SetCurrentOsAccountIsVerifiedFuzzTest",
+    "setdefaultactivatedosaccount_fuzzer:SetDefaultActivatedOsAccountFuzzTest",
+    "setglobalosaccountconstraints_fuzzer:SetGlobalOsAccountConstraintsFuzzTest",
+    "setosaccountconstraints_fuzzer:SetOsAccountConstraintsFuzzTest",
+    "setosaccountisverified_fuzzer:SetOsAccountIsVerifiedFuzzTest",
+    "setosaccountname_fuzzer:SetOsAccountNameFuzzTest",
+    "setosaccountprofilephoto_fuzzer:SetOsAccountProfilePhotoFuzzTest",
+    "setosaccounttoberemoved_fuzzer:SetOsAccountToBeRemovedFuzzTest",
+    "setspecificosaccountconstraints_fuzzer:SetSpecificOsAccountConstraintsFuzzTest",
+    "startosaccount_fuzzer:StartOsAccountFuzzTest",
+    "subscribeosaccount_fuzzer:SubscribeOsAccountFuzzTest",
+  ]
+}

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2022 Huawei Device Co., Ltd.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<configuration ver="2.0">
+    <target name="InputMethodSwitchTest">
+        <preparer>
+            <option name="push" value="extImfBundle/extImf.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/extImf.hap"/>
+            <option name="push" value="newTestIme/newTestIme.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/newTestIme.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.testIme"/>
+            <option name="shell" value="bm uninstall -n com.example.newTestIme"/>
+            <option name="shell" value="aa stop-service -a InputMethod -b com.ohos.inputmethodchoosedialog"/>
+        </cleaner>
+    </target>
+    <target name="InputMethodDfxTest">
+        <preparer>
+            <option name="push" value="extImfBundle/extImf.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/extImf.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.testIme"/>
+        </cleaner>
+    </target>
+    <target name="InputMethodPanelTest">
+        <preparer>
+            <option name="push" value="extImfBundle/extImf.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/extImf.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.testIme"/>
+        </cleaner>
+    </target>
+    <target name="NewImeSwitchTest">
+        <preparer>
+            <option name="push" value="newTestIme/newTestIme.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/newTestIme.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.newTestIme"/>
+        </cleaner>
+    </target>
+    <target name="GetInputMethodJsTest">
+        <preparer>
+            <option name="push" value="newTestIme/newTestIme.hap -> /data/test/resource/imf" src="res"/>
+            <option name="push" value="extImfBundle/extImf.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/extImf.hap"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/newTestIme.hap"/>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+            <option name="shell" value="aa start -a MainAbility -b com.example.testIme"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="aa stop -a MainAbility -b com.example.testIme"/>
+            <option name="shell" value="bm uninstall -n com.example.newTestIme"/>
+            <option name="shell" value="bm uninstall -n com.example.testIme"/>
+        </cleaner>
+    </target>
+    <target name="InputMethodAbilityTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+        </preparer>
+    </target>
+    <target name="InputMethodControllerTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+        </preparer>
+    </target>
+    <target name="InputMethodDfxTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+        </preparer>
+    </target>
+    <target name="InputMethodEditorTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+        </preparer>
+    </target>
+    <target name="InputMethodServiceTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+        </preparer>
+    </target>
+    <target name="ImeProxyTest">
+        <preparer>
+            <option name="shell" value="power-shell wakeup"/>
+            <option name="shell" value="power-shell setmode 602"/>
+            <option name="shell" value="uinput -T -m 300 720 300 360 200"/>
+            <option name="shell" value="uinput -T -m 650 2760 650 1380 200"/>
+            <option name="push" value="editorBox/editorBox.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/editorBox.hap"/>
+            <option name="push" value="extImfBundle/extImf.hap -> /data/test/resource/imf" src="res"/>
+            <option name="shell" value="bm install -r -p /data/test/resource/imf/extImf.hap"/>
+        </preparer>
+        <cleaner>
+            <option name="shell" value="bm uninstall -n com.example.editorbox"/>
+            <option name="shell" value="bm uninstall -n com.example.testIme"/>
+        </cleaner>
+    </target>
+</configuration>

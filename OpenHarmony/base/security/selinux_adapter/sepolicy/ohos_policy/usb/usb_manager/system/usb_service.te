@@ -1,0 +1,105 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow usb_service accessibility_param:file { map open read };
+debug_only(`
+    allow usb_service console:binder { call };
+    allow usb_service console:fd { use };
+')
+allow usb_service sa_enterprise_device_manager_service:samgr_class { get };
+allow usb_service edm_sa:binder { call };
+allow usb_service data_file:dir { search };
+allow usb_service dev_unix_socket:dir { search };
+allow usb_service dev_unix_socket:sock_file { write };
+allow usb_service foundation:binder { call };
+allow usb_service hdf_devmgr:binder { call };
+allow usb_service hdf_usbd:hdf_devmgr_class { get };
+allow usb_service hdf_usb_interface_service:hdf_devmgr_class { get };
+allow usb_service init:binder { call transfer };
+allow usb_service param_watcher:binder { call transfer };
+allow usb_service sa_device_service_manager:samgr_class { get };
+allow usb_service sa_foundation_bms:samgr_class { get };
+allow usb_service sa_foundation_cesfwk_service:samgr_class { get };
+allow usb_service sa_param_watcher:samgr_class { get };
+allow usb_service sa_usb_service:samgr_class { get add };
+allow usb_service samain_exec:file { entrypoint execute };
+allow usb_service samgr:binder { call transfer };
+allow usb_service system_bin_file:dir { search };
+allow usb_service system_etc_file:dir { getattr open read };
+allow usb_service system_lib_file:lnk_file { read };
+allow usb_service system_profile_file:dir { search };
+allow usb_service tracefs:dir { search };
+allow usb_service tracefs_trace_marker_file:file { open write };
+allow usb_service usb_host:binder { call transfer };
+allow usb_service usb_service:dir { search };
+allow usb_service usb_service:lnk_file { read };
+allow usb_service vendor_file:file { execute getattr map open read };
+allow usb_service vendor_lib_file:dir { search };
+allow usb_service vendor_lib_file:file { execute map getattr open read };
+allow usb_service dev_console_file:chr_file { read write };
+allow usb_service sa_foundation_dms:samgr_class { get };
+allow usb_service sa_subsys_ace_service:samgr_class { get };
+allow usb_service ui_service:binder { transfer call };
+allow usb_service sa_foundation_abilityms:samgr_class { get };
+allow usb_service foundation:binder { transfer };
+allow usb_service musl_param:file { read };
+allow usb_service system_core_hap_attr:binder { call };
+allow usb_service data_service_file:dir { search };
+allow usb_service data_service_el1_file:dir { search };
+allow usb_service data_service_el1_file:file { ioctl open read write getattr };
+neverallow { domain developer_only(`-SP_daemon') -system_core_hap_attr -system_basic_hap_attr -usb_service } usb_setting_param:file { map open read };
+neverallow { domain -system_core_hap_attr -system_basic_hap_attr } usb_setting_param:parameter_service {set};
+allow usb_service bootevent_param:file { map read open };
+allow usb_service bootevent_samgr_param:file { map open read };
+allow usb_service build_version_param:file { map open read };
+allow usb_service const_allow_mock_param:file { map open read };
+allow usb_service const_allow_param:file { map open read };
+allow usb_service const_build_param:file { map open read };
+allow usb_service const_display_brightness_param:file { map open read };
+allow usb_service const_param:file { map open read };
+allow usb_service const_postinstall_fstab_param:file { map open read };
+allow usb_service const_postinstall_param:file { map open read };
+allow usb_service const_product_param:file { map open read };
+allow usb_service debug_param:file { map open read };
+allow usb_service default_param:file { map open read };
+allow usb_service distributedsche_param:file { map open read };
+allow usb_service hilog_param:file { map open read };
+allow usb_service hw_sc_build_os_param:file { map open read };
+allow usb_service hw_sc_build_param:file { map read open };
+allow usb_service hw_sc_param:file { map open read };
+allow usb_service init_param:file { map open read };
+allow usb_service init_svc_param:file { map open read };
+allow usb_service input_pointer_device_param:file { map open read };
+allow usb_service net_param:file { map open read };
+allow usb_service net_tcp_param:file { map open read };
+allow usb_service ohos_boot_param:file { map open read };
+allow usb_service ohos_param:file { map open read };
+allow usb_service persist_param:file { map open read };
+allow usb_service persist_sys_param:file { map open read };
+allow usb_service security_param:file { map open read };
+allow usb_service startup_param:file { map open read };
+allow usb_service sys_param:file { map open read };
+allow usb_service sys_usb_param:file { map open read };
+allow usb_service data_service_file:dir { search };
+allow usb_service data_service_el1_file:dir { search add_name open write read remove_name };
+allow usb_service data_service_el1_file:file { ioctl open read write getattr create lock map unlink };
+allow usb_service dev_ashmem_file:chr_file { open };
+allow usb_service usb_setting_param:file { map open read };
+allow usb_service sa_distributeddata_service:samgr_class { get };
+allow usb_service data_service_el1_file:file { setattr };
+allow usb_service distributeddata:binder { call };
+allow usb_service developtools_hdc_control_param:file { map open read };
+allow usb_service sa_foundation_ans:samgr_class { get };
+allow usb_service sa_accountmgr:samgr_class { get };
+allow usb_service accountmgr:binder { call transfer };
+allow usb_service system_basic_hap:binder { call transfer };

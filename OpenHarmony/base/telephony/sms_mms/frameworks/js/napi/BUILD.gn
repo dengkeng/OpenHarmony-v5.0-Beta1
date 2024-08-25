@@ -1,0 +1,63 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//build/ohos.gni")
+SUBSYSTEM_DIR = "../../../../"
+ohos_shared_library("sms") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "//third_party/node/src",
+    "include",
+    "$SUBSYSTEM_DIR/sms_mms/frameworks/js/napi/include",
+  ]
+
+  sources = [
+    "src/delivery_callback.cpp",
+    "src/napi_mms.cpp",
+    "src/napi_mms_pdu.cpp",
+    "src/napi_mms_pdu_helper.cpp",
+    "src/napi_send_recv_mms.cpp",
+    "src/napi_sms.cpp",
+    "src/send_callback.cpp",
+  ]
+
+  defines = [
+    "TELEPHONY_LOG_TAG = \"SmsMmsJsApi\"",
+    "LOG_DOMAIN = 0xD001F06",
+  ]
+
+  deps = [ "$SUBSYSTEM_DIR/sms_mms/frameworks/native:tel_sms_mms_api" ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:data_ability_helper",
+    "ability_runtime:napi_base_context",
+    "c_utils:utils",
+    "core_service:libtel_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "telephony_data:tel_telephony_data",
+  ]
+
+  relative_install_dir = "module/telephony"
+  part_name = "sms_mms"
+  subsystem_name = "telephony"
+}

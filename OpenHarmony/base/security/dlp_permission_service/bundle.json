@@ -1,0 +1,104 @@
+{
+  "name": "@ohos/dlp_permission_service",
+  "description": "dlp_permission_service",
+  "version": "3.1.0",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "base/security/dlp_permission_service"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "dlp_permission_service",
+    "subsystem": "security",
+    "syscap": [
+      "SystemCapability.Security.DataLossPrevention"
+    ],
+    "hisysevent_config": [
+      "//base/security/dlp_permission_service/hisysevent.yaml",
+      "//base/security/dlp_permission_service/hisysevent-DLP_UE.yaml"
+    ],
+    "features": [
+      "dlp_permission_service_feature_coverage",
+      "dlp_permission_service_gathering_policy",
+      "dlp_permission_service_credential_connection_enable"
+    ],
+    "adapted_system_type": [
+      "standard"
+    ],
+    "rom": "2048KB",
+    "ram": "5102KB",
+    "deps": {
+      "components": [
+        "hitrace",
+        "ipc",
+        "os_account",
+        "access_token",
+        "bundle_framework",
+        "file_api",
+        "app_file_service",
+        "dlp_credential_service",
+        "common_event_service",
+        "init",
+        "ability_base",
+        "ability_runtime",
+        "hilog",
+        "hisysevent",
+        "napi",
+        "safwk",
+        "samgr",
+        "c_utils",
+        "config_policy",
+        "kv_store",
+        "ace_engine",
+        "json",
+        "zlib",
+        "openssl",
+        "libfuse"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//base/security/dlp_permission_service:dlp_permission_build_module"
+      ],
+      "inner_kits": [
+        {
+          "name": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_permission:libdlp_permission_sdk",
+          "header": {
+            "header_files": [
+              "dlp_permission_kit.h"
+            ],
+            "header_base": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_permission/include"
+          }
+        },
+        {
+          "name": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_parse:libdlpparse",
+          "header": {
+            "header_files": [
+              "dlp_crypt.h",
+              "dlp_file_kits.h"
+            ],
+            "header_base": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_parse/include"
+          }
+        },
+        {
+          "name": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_parse:libdlpparse_inner",
+          "header": {
+            "header_files": [
+              "dlp_crypt.h",
+              "dlp_file_kits.h"
+            ],
+            "header_base": "//base/security/dlp_permission_service/interfaces/inner_api/dlp_parse/include"
+          }
+        }
+
+      ],
+      "test": [
+        "//base/security/dlp_permission_service:dlp_permission_build_module_test",
+        "//base/security/dlp_permission_service:dlp_permission_build_fuzz_test"
+      ]
+    }
+  }
+}

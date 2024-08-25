@@ -1,0 +1,86 @@
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/hiviewdfx/hiview/hiview.gni")
+import("//build/ohos.gni")
+
+config("event_export_engine_config") {
+  visibility = [ "*:*" ]
+
+  include_dirs = [
+    "config/include",
+    "include",
+    "task/include",
+    "database/include",
+    "$hiview_adapter/service/idl/include",
+    "$hiview_interfaces/inner_api/unified_collection",
+  ]
+}
+
+ohos_shared_library("event_export_engine") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    cfi_vcall_icall_only = true
+    debug = false
+  }
+
+  public_configs = [ ":event_export_engine_config" ]
+
+  configs = [ ":event_export_engine_config" ]
+
+  sources = [
+    "config/export_config_manager.cpp",
+    "config/export_config_parser.cpp",
+    "config/export_event_list_parser.cpp",
+    "database/adapter/export_db_storage.cpp",
+    "database/export_db_manager.cpp",
+    "event_export_engine.cpp",
+    "setting_observer_manager.cpp",
+    "task/expire/event_delete_handler.cpp",
+    "task/expire/event_expire_task.cpp",
+    "task/expire/event_scan_handler.cpp",
+    "task/export/event_export_task.cpp",
+    "task/export/event_read_handler.cpp",
+    "task/export/event_write_handler.cpp",
+    "task/export/export_json_file_writer.cpp",
+    "task/export_base_task.cpp",
+  ]
+
+  deps = [
+    "$hiview_adapter/plugins/eventservice/service:sys_event_service_adapter",
+    "$hiview_base:hiview_base",
+    "$hiview_base:logger",
+    "$hiview_base/utility:hiview_utility",
+  ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:dataobs_manager",
+    "cJSON:cjson",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "ffrt:libffrt",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "relational_store:native_rdb",
+    "samgr:samgr_proxy",
+  ]
+
+  part_name = "hiview"
+
+  subsystem_name = "hiviewdfx"
+}

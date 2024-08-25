@@ -1,0 +1,886 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/features.gni")
+import("//build/test.gni")
+import("./../../usbmgr.gni")
+
+module_output_path = "usb_manager/usb_manager"
+
+config("module_private_config") {
+  visibility = [ ":*" ]
+
+  configs = [ "${utils_path}:utils_config" ]
+
+  cflags = [
+    "-g",
+    "-O0",
+    "-Wno-unused-variable",
+    "-fno-omit-frame-pointer",
+  ]
+  include_dirs = [
+    "include",
+    "common/include",
+    "${usb_manager_path}/test/common/include/",
+    "${usb_manager_path}/test/native/service_unittest/include/",
+    "./../../../../security_access_token/interfaces/innerkits/accesstoken/include/",
+  ]
+}
+
+ohos_fuzztest("UsbMgrRequestRightFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrrequestright_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrrequestright_fuzzer/usbmgrrequestright_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrHasRightFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgrhasright_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrhasright_fuzzer/usbmgrhasright_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrRemoveRightFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrremoveright_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrremoveright_fuzzer/usbmgrremoveright_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrGetSupportedModesFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrgetsupportedmodes_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrgetsupportedmodes_fuzzer/usbmgrgetsupportedmodes_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrSetPortRoleFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrsetportrole_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrsetportrole_fuzzer/usbmgrsetportrole_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrSetCurrentFunctionsFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrsetcurrentfunctions_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [
+    "usbmgrsetcurrentfunctions_fuzzer/usbmgrsetcurrentfunctions_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrUsbFunctionsFromStringFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrusbfunctionsfromstring_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrusbfunctionsfromstring_fuzzer/usbmgrusbfunctionsfromstring_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrUsbFunctionsToStringFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrusbfunctionstostring_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [
+    "usbmgrusbfunctionstostring_fuzzer/usbmgrusbfunctionstostring_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrClaimInterfaceFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrclaiminterface_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrclaiminterface_fuzzer/usbmgrclaiminterface_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrReleaseInterfaceFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrreleaseinterface_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrreleaseinterface_fuzzer/usbmgrreleaseinterface_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrBulkTransferFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrbulktransfer_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrbulktransfer_fuzzer/usbmgrbulktransfer_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrControlTransferFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrcontroltransfer_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrcontroltransfer_fuzzer/usbmgrcontroltransfer_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrSetConfigurationFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrsetconfiguration_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrsetconfiguration_fuzzer/usbmgrsetconfiguration_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrSetInterfaceFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrsetinterface_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrsetinterface_fuzzer/usbmgrsetinterface_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrGetRawDescriptorsFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrgetrawdescriptors_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrgetrawdescriptors_fuzzer/usbmgrgetrawdescriptors_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrGetFileDescriptorFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrgetfiledescriptor_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrgetfiledescriptor_fuzzer/usbmgrgetfiledescriptor_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrCloseFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgrclose_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrclose_fuzzer/usbmgrclose_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrPipeRequestWaitFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrpiperequestwait_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrpiperequestwait_fuzzer/usbmgrpiperequestwait_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrRequestInitializeFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrrequestinitialize_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrrequestinitialize_fuzzer/usbmgrrequestinitialize_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrRequestQueueFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrrequestqueue_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrrequestqueue_fuzzer/usbmgrrequestqueue_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrRequestFreeFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrrequestfree_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrrequestfree_fuzzer/usbmgrrequestfree_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrRegBulkCallbackFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrregbulkcallback_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [
+    "common/src/usb_common_fuzz.cpp",
+    "usbmgrregbulkcallback_fuzzer/usbmgrregbulkcallback_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrUnRegBulkCallbackFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrunregbulkcallback_fuzzer"
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":module_private_config",
+  ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  sources = [
+    "${usb_manager_path}/test/common/src/usb_callback_test.cpp",
+    "common/src/usb_common_fuzz.cpp",
+    "usbmgrunregbulkcallback_fuzzer/usbmgrunregbulkcallback_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrBulkReadFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgrbulkread_fuzzer"
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":module_private_config",
+  ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  sources = [
+    "${usb_manager_path}/test/common/src/usb_callback_test.cpp",
+    "common/src/usb_common_fuzz.cpp",
+    "usbmgrbulkread_fuzzer/usbmgrbulkread_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrBulkWriteFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgrbulkwrite_fuzzer"
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":module_private_config",
+  ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  sources = [
+    "${usb_manager_path}/test/common/src/usb_callback_test.cpp",
+    "common/src/usb_common_fuzz.cpp",
+    "usbmgrbulkwrite_fuzzer/usbmgrbulkwrite_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrBulkCancelFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgrbulkcancel_fuzzer"
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":module_private_config",
+  ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  sources = [
+    "${usb_manager_path}/test/common/src/usb_callback_test.cpp",
+    "common/src/usb_common_fuzz.cpp",
+    "usbmgrbulkcancel_fuzzer/usbmgrbulkcancel_fuzzer.cpp",
+  ]
+}
+
+ohos_fuzztest("UsbMgrFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "${usb_manager_path}/test/fuzztest/usbmgr_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "c_utils:utils",
+    "drivers_interface_usb:usb_idl_headers_1.1",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgr_fuzzer/usbmgr_fuzzer.cpp" ]
+}
+
+ohos_fuzztest("UsbMgrManageGlobalInterfaceFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrmanageglobalinterface_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [
+    "usbmgrmanageglobalinterface_fuzzer/usbmgrmanageglobalinterface_fuzzer.cpp",
+  ]
+}
+ohos_fuzztest("UsbMgrManageDeviceFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrmanagedevice_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrmanagedevice_fuzzer/usbmgrmanagedevice_fuzzer.cpp" ]
+}
+ohos_fuzztest("UsbMgrManageManageInterfaceTypeFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrmanageinterfacetype_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [
+    "usbmgrmanageinterfacetype_fuzzer/usbmgrmanageinterfacetype_fuzzer.cpp",
+  ]
+}
+ohos_fuzztest("UsbMgrGetDeviceSpeedFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrgetdevicespeed_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources = [ "usbmgrgetdevicespeed_fuzzer/usbmgrgetdevicespeed_fuzzer.cpp" ]
+}
+ohos_fuzztest("UsbMgrGetInterfaceStatusFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file =
+      "${usb_manager_path}/test/fuzztest/usbmgrgetinterfacestatus_fuzzer"
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${usb_manager_path}/interfaces/innerkits:usbsrv_client",
+    "${usb_manager_path}/services:usbservice",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:libusb_proxy_1.0",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  sources =
+      [ "usbmgrgetinterfacestatus_fuzzer/usbmgrgetinterfacestatus_fuzzer.cpp" ]
+}
+
+group("fuzztest") {
+  testonly = true
+  deps = []
+  deps += [
+    ":UsbMgrBulkCancelFuzzTest",
+    ":UsbMgrBulkReadFuzzTest",
+    ":UsbMgrBulkTransferFuzzTest",
+    ":UsbMgrBulkWriteFuzzTest",
+    ":UsbMgrClaimInterfaceFuzzTest",
+    ":UsbMgrCloseFuzzTest",
+    ":UsbMgrControlTransferFuzzTest",
+    ":UsbMgrFuzzTest",
+    ":UsbMgrGetDeviceSpeedFuzzTest",
+    ":UsbMgrGetFileDescriptorFuzzTest",
+    ":UsbMgrGetInterfaceStatusFuzzTest",
+    ":UsbMgrGetRawDescriptorsFuzzTest",
+    ":UsbMgrGetSupportedModesFuzzTest",
+    ":UsbMgrHasRightFuzzTest",
+    ":UsbMgrManageDeviceFuzzTest",
+    ":UsbMgrManageGlobalInterfaceFuzzTest",
+    ":UsbMgrManageManageInterfaceTypeFuzzTest",
+    ":UsbMgrPipeRequestWaitFuzzTest",
+    ":UsbMgrRegBulkCallbackFuzzTest",
+    ":UsbMgrReleaseInterfaceFuzzTest",
+    ":UsbMgrRemoveRightFuzzTest",
+    ":UsbMgrRequestFreeFuzzTest",
+    ":UsbMgrRequestInitializeFuzzTest",
+    ":UsbMgrRequestQueueFuzzTest",
+    ":UsbMgrRequestRightFuzzTest",
+    ":UsbMgrSetConfigurationFuzzTest",
+    ":UsbMgrSetCurrentFunctionsFuzzTest",
+    ":UsbMgrSetInterfaceFuzzTest",
+    ":UsbMgrSetPortRoleFuzzTest",
+    ":UsbMgrUnRegBulkCallbackFuzzTest",
+    ":UsbMgrUsbFunctionsFromStringFuzzTest",
+    ":UsbMgrUsbFunctionsToStringFuzzTest",
+  ]
+}

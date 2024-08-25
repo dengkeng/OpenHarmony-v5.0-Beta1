@@ -1,0 +1,148 @@
+{
+    "string": [
+        {
+            "name": "delete_record_title",
+            "value": "删除面部数据"
+        },
+        {
+            "name": "enroll_button_content",
+            "value": "重新录入"
+        },
+        {
+            "name": "enroll_face_guide_title",
+            "value": "如何录入面部数据"
+        },
+        {
+            "name": "enroll_info_fail",
+            "value": "请确保摄像头清洁，面部无遮挡，在光线充足、无阳光直射的环境里录入。"
+        },
+        {
+            "name": "enroll_success",
+            "value": "录入成功"
+        },
+        {
+            "name": "enrolling",
+            "value": "正在录入"
+        },
+        {
+            "name": "enrolling_fail",
+            "value": "录入失败"
+        },
+        {
+            "name": "face_3dguide_info_2",
+            "value": "人脸识别可基于您的面部特征信息进行身份识别，了解"
+        },
+        {
+            "name": "face_announce_tip1_item2_3d",
+            "value": "2.人脸识别的安全性低于图案密码、数字密码、混合密码；"
+        },
+        {
+            "name": "face_checker",
+            "value": "人脸识别"
+        },
+        {
+            "name": "face_feature_desc",
+            "value": "功能介绍"
+        },
+        {
+            "name": "face_guide_2d_announce",
+            "value": "点击“开始录入”即表示您同意"
+        },
+        {
+            "name": "face_guide_2d_announce_link",
+            "value": "关于人脸识别的声明"
+        },
+        {
+            "name": "face_guide_2d_way",
+            "value": "首先，确保摄像头清洁、面部无遮挡，录入环境光线充足、无阳光直射。然后，正对屏幕，将面部完整移入识别区。"
+        },
+        {
+            "name": "face_intro",
+            "value": "正对屏幕，将面部置于取景框内"
+        },
+        {
+            "name": "face_recognition_guide",
+            "value": "开始录入"
+        },
+        {
+            "name": "face_recognize_announce_message_01",
+            "value": "人脸识别是一种基于人的脸部特征信息进行身份识别的生物识别技术。它通过手机前置摄像头捕捉人脸面部数据，进而快速完成面部特征比对和身份认证。可用于解锁屏幕、访问应用锁等场景。"
+        },
+        {
+            "name": "face_recognize_announce_message_02",
+            "value": "录入面部数据时，需注意以下事项："
+        },
+        {
+            "name": "face_recognize_announce_message_03",
+            "value": "1.确保摄像头清洁；"
+        },
+        {
+            "name": "face_recognize_announce_message_04",
+            "value": "2.在光线充足的环境下录入，但需避免强光直射；"
+        },
+        {
+            "name": "face_recognize_announce_message_05",
+            "value": "3.勿用衣帽、头发、墨镜、口罩、浓妆等遮挡面部；"
+        },
+        {
+            "name": "face_recognize_announce_message_06",
+            "value": "4.确保面部正面完整清晰地出现在提示框内，不要闭眼、大幅度仰头或低头；"
+        },
+        {
+            "name": "face_recognize_announce_message_07",
+            "value": "5.避免其他人出现在录入画面中。"
+        },
+        {
+            "name": "face_recognize_announce_message_08",
+            "value": "任何技术都存在一定局限和风险，使用人脸识别时，需注意以下事项："
+        },
+        {
+            "name": "face_recognize_announce_message_09",
+            "value": "1.在暗光、强光、逆光或角度过大等场景下，人脸识别的成功率会有所降低；"
+        },
+        {
+            "name": "face_recognize_announce_message_10",
+            "value": "3.您的设备可能会被容貌、外形与您相近的人或物品解锁；"
+        },
+        {
+            "name": "face_recognize_announce_message_11",
+            "value": "4.请勿将设备随意交给他人使用，避免人脸识别功能被恶意利用；"
+        },
+        {
+            "name": "face_recognize_announce_message_12",
+            "value": "5.除以上事项外，您还需注意其他可能影响人脸识别功能正常使用的情况。"
+        },
+        {
+            "name": "face_recognize_announce_message_13",
+            "value": "隐私声明"
+        },
+        {
+            "name": "face_recognize_announce_message_14_1",
+            "value": "您的"
+        },
+        {
+            "name": "face_recognize_announce_message_14_2",
+            "value": "将受到严格保护。该数据仅加密保存于本设备的安全隔离区域，且不会备份，其他应用也无法访问或备份。"
+        },
+        {
+            "name": "face_recognize_announce_message_14_3",
+            "value": "面部数据"
+        },
+        {
+            "name": "face_record_cancel",
+            "value": "取消"
+        },
+        {
+            "name": "face_record_delete",
+            "value": "删除"
+        },
+        {
+            "name": "period",
+            "value": "。"
+        },
+        {
+            "name": "wether_delete_face_data",
+            "value": "删除后，基于面部数据的功能将不可用。是否删除？"
+        }
+    ]
+}

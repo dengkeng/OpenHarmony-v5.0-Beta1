@@ -1,0 +1,70 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+RIL_ADAPTER = "../../"
+RIL_HRIL = "../../services/hril/src"
+
+config("ril_hril_config") {
+  include_dirs = [ "$RIL_ADAPTER/services/hril/include" ]
+}
+
+ohos_shared_library("hril") {
+  sources = [
+    "$RIL_HRIL/hril_base.cpp",
+    "$RIL_HRIL/hril_call.cpp",
+    "$RIL_HRIL/hril_data.cpp",
+    "$RIL_HRIL/hril_event.cpp",
+    "$RIL_HRIL/hril_manager.cpp",
+    "$RIL_HRIL/hril_modem.cpp",
+    "$RIL_HRIL/hril_network.cpp",
+    "$RIL_HRIL/hril_sim.cpp",
+    "$RIL_HRIL/hril_sms.cpp",
+    "$RIL_HRIL/hril_timer_callback.cpp",
+  ]
+
+  version_script = "$RIL_ADAPTER/services/hril/libhril.versionscript"
+
+  public_configs = [ ":ril_hril_config" ]
+
+  configs = [ "$RIL_ADAPTER/utils:utils_config" ]
+
+  defines = [
+    "TELEPHONY_LOG_TAG = \"Hril\"",
+    "LOG_DOMAIN = 0xD001F08",
+  ]
+
+  deps = [ "$RIL_ADAPTER/interfaces/innerkits:hril_innerkits" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_ril:libril_proxy_1.3",
+    "hdf_core:libhdf_ipc_adapter",
+    "hdf_core:libhdf_utils",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+  ]
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.hdf_drivers_interface_power) &&
+      global_parts_info.hdf_drivers_interface_power) {
+    external_deps += [ "drivers_interface_power:libpower_proxy_1.2" ]
+    defines += [ "ABILITY_POWER_SUPPORT" ]
+  }
+
+  install_images = [ chipset_base_dir ]
+  part_name = "ril_adapter"
+  subsystem_name = "telephony"
+}

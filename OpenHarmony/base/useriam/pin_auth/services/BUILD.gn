@@ -1,0 +1,109 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../pin_auth.gni")
+
+config("pin_auth_services_config") {
+  include_dirs = [
+    "sa/inc",
+    "modules/common/inc",
+    "modules/driver/inc",
+    "modules/executors/inc",
+    "modules/inputters/inc",
+  ]
+}
+
+ohos_source_set("pinauthservice_source_set") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "modules/driver/src/pin_auth_driver_hdi.cpp",
+    "modules/driver/src/pin_auth_interface_adapter.cpp",
+    "modules/executors/src/pin_auth_all_in_one_hdi.cpp",
+    "modules/executors/src/pin_auth_collector_hdi.cpp",
+    "modules/executors/src/pin_auth_executor_callback_hdi.cpp",
+    "modules/executors/src/pin_auth_executor_hdi_common.cpp",
+    "modules/executors/src/pin_auth_verifier_hdi.cpp",
+    "modules/inputters/src/i_inputer_data_impl.cpp",
+    "modules/inputters/src/pin_auth_manager.cpp",
+    "sa/src/pin_auth_service.cpp",
+  ]
+
+  configs = [
+    ":pin_auth_services_config",
+    "../common:iam_log_config",
+    "../common:iam_utils_config",
+  ]
+
+  public_configs = [ ":pin_auth_services_config" ]
+
+  deps = [ "../frameworks:pinauth_ipc" ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "drivers_interface_pin_auth:libpin_auth_proxy_2.0",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_single",
+    "openssl:libcrypto_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "user_auth_framework:userauth_executors",
+  ]
+
+  defines = []
+  if (sensors_miscdevice_enable) {
+    external_deps += [ "miscdevice:vibrator_interface_native" ]
+    defines += [ "SENSORS_MISCDEVICE_ENABLE" ]
+  }
+
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+
+  subsystem_name = "useriam"
+  part_name = "pin_auth"
+}
+
+ohos_shared_library("pinauthservice") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  deps = [ ":pinauthservice_source_set" ]
+
+  external_deps = [ "hilog:libhilog" ]
+
+  public_configs = [ ":pin_auth_services_config" ]
+
+  if (use_musl) {
+    version_script = "pin_auth_service_map"
+  }
+
+  subsystem_name = "useriam"
+  part_name = "pin_auth"
+}

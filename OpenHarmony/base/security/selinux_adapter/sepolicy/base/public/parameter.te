@@ -1,0 +1,75 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type ohos_param, parameter_attr;
+type ohos_boot_param, parameter_attr;
+type ohos_dev_param, parameter_attr;
+type sys_param, parameter_attr;
+type sys_usb_param, parameter_attr;
+type net_param, parameter_attr;
+type net_tcp_param, parameter_attr;
+type hw_sc_param, parameter_attr;
+type hw_sc_build_param, parameter_attr;
+type hw_sc_build_os_param, parameter_attr;
+type init_param, parameter_attr;
+type init_svc_param, parameter_attr;
+type const_param, parameter_attr;
+type const_postinstall_param, parameter_attr;
+type const_postinstall_fstab_param, parameter_attr;
+type const_allow_param, parameter_attr;
+type const_allow_mock_param, parameter_attr;
+type const_build_param, parameter_attr;
+type const_product_param, parameter_attr;
+type security_param, parameter_attr;
+type hilog_param, parameter_attr;
+type hook_param, parameter_attr;
+type persist_param, parameter_attr;
+type persist_sys_param, parameter_attr;
+type debug_param, parameter_attr;
+type default_param, parameter_attr;
+type accessibility_param, parameter_attr;
+type musl_param, parameter_attr;
+
+type build_version_param, parameter_attr;
+type startup_param, parameter_attr;
+type bootevent_param, parameter_attr;
+type servicectrl_param, parameter_attr;
+type servicectrl_reboot_param, parameter_attr;
+type startup_init_param, parameter_attr;
+type startup_appspawn_param, parameter_attr;
+type startup_uevent_param, parameter_attr;
+type devinfo_private_param, parameter_attr;
+type devinfo_public_param, parameter_attr;
+type const_telephony_param, parameter_attr;
+type telephony_param, parameter_attr;
+type bootevent_wms_param, parameter_attr;
+type dhardware_dm_param, parameter_attr;
+type persist_audio_param, parameter_attr;
+type arkcompiler_param, parameter_attr;
+type arkui_param, parameter_attr;
+type inputmethod_param, parameter_attr;
+type pasteboard_param, parameter_attr;
+type time_param, parameter_attr;
+type accesstoken_perm_param, parameter_attr;
+type ffrt_param, parameter_attr;
+type hiviewdfx_profiler_param, parameter_attr;
+type hiviewdfx_hiview_param, parameter_attr;
+type bluetooth_param, parameter_attr;
+type print_param, parameter_attr;
+type i18n_param, parameter_attr;
+type const_i18n_param, parameter_attr;
+type hichecker_writable_param, parameter_attr;
+# avc:  denied  { relabelfrom } for  pid=1 comm="init" path="/dev/__paramerters__/u:object_r:hilog_private_param:s0" dev=""ino=218 scontext=u:r:init:s0 tcontext=u:object_r:hilog_private_param:s0 tclass=file permissive=0
+allow init parameter_attr:file { relabelto relabelfrom };
+allow parameter_attr tmpfs:filesystem associate;
+

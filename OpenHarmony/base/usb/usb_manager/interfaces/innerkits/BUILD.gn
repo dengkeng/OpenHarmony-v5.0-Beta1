@@ -1,0 +1,62 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("./../../usbmgr.gni")
+
+config("usbsrv_private_config") {
+  include_dirs = [ "${usb_manager_path}/services/zidl/include" ]
+}
+
+config("usbsrv_public_config") {
+  include_dirs = [
+    "native/include",
+    "${usb_manager_path}/utils/native/include",
+  ]
+}
+
+ohos_shared_library("usbsrv_client") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+  }
+
+  sources = [
+    "${usb_manager_path}/services/zidl/src/usb_srv_proxy.cpp",
+    "native/src/usb_device_pipe.cpp",
+    "native/src/usb_request.cpp",
+    "native/src/usb_srv_client.cpp",
+    "native/src/usbd_bulk_callback.cpp",
+  ]
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":usbsrv_private_config",
+    ":usbsrv_public_config",
+  ]
+
+  public_configs = [ ":usbsrv_public_config" ]
+
+  public_deps = [ "//third_party/cJSON:cjson" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_usb:usb_idl_headers_1.1",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+  subsystem_name = "usb"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "usb_manager"
+}

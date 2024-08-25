@@ -1,0 +1,63 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow samgr bootevent_param:file { map open read };
+allow samgr bootevent_samgr_param:file { map open read };
+allow samgr build_version_param:file { map open read };
+allow samgr const_allow_mock_param:file { map open read };
+allow samgr const_allow_param:file { map open read };
+allow samgr const_build_param:file { map open read };
+allow samgr const_display_brightness_param:file { map open read };
+allow samgr const_param:file { map open read };
+allow samgr const_postinstall_fstab_param:file { map open read };
+allow samgr const_postinstall_param:file { map open read };
+allow samgr const_product_param:file { map open read };
+allow samgr debug_param:file { map open read };
+allow samgr default_param:file { map open read };
+allow samgr dev_kmsg_file:chr_file { open write };
+allow samgr dev_unix_socket:sock_file { write };
+allow samgr distributedsche_param:file { map open read };
+allow samgr data_samgr:dir { add_name search write remove_name };
+allow samgr data_samgr:file { create getattr ioctl read write lock map open rename setattr unlink };
+allow samgr hilog_param:file { map open read };
+allow samgr hw_sc_build_os_param:file { map open read };
+allow samgr hw_sc_build_param:file { map open read };
+allow samgr hw_sc_param:file { map open read };
+allow samgr init_param:file { map open read };
+allow samgr init_svc_param:file { map open read };
+allow samgr input_pointer_device_param:file { map open read };
+allow samgr net_param:file { map open read };
+allow samgr net_tcp_param:file { map open read };
+allow samgr normal_hap_attr:binder { call };
+allow samgr ohos_boot_param:file { map open read };
+allow samgr ohos_param:file { map open read };
+allow samgr ohos_param:parameter_service { set };
+allow samgr persist_param:file { map open read };
+allow samgr persist_sys_param:file { map open read };
+allow samgr processdump:binder { transfer };
+allow samgr processdump:dir { search };
+allow samgr processdump:file { open read };
+allow samgr processdump:process { getattr };
+allow samgr samgr:unix_dgram_socket { getopt setopt };
+allow samgr sa_softbus_service:samgr_class { get };
+allow samgr security_param:file { map open read };
+allow samgr startup_param:file { map open read };
+allow samgr sys_param:file { map open read };
+allow samgr system_basic_hap_attr:binder { call };
+allow samgr system_core_hap_attr:binder { call };
+allow samgr sys_usb_param:file { map open read };
+allow samgr tracefs:dir { search };
+allow samgr tracefs_trace_marker_file:file { open write };
+allow samgr vendor_etc_file:dir { search };
+allow samgr appspawn:process { getattr };
+allowxperm samgr data_samgr:file ioctl { 0x5413 };

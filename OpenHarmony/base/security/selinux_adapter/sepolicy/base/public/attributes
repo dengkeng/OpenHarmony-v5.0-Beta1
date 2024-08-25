@@ -1,0 +1,259 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# Type of all devices.
+# i.e. /dev/camera_dev
+attribute dev_attr;
+
+# Type of all processes, including the hap process and native process.
+# i.e. hdbd, media
+attribute domain;
+
+# Type of all virtual file system files.
+# i.e. /sys/block,
+#      /sys/bus,
+#      /proc/mtd,
+#      /dev/camera_dev
+attribute fs_attr;
+
+# Type of all proc files.
+# i.e. /proc/mtd
+attribute proc_attr;
+
+# Type of all common files.
+# i.e. /data/user,
+#      /system/bin
+attribute file_attr;
+
+# Type of all rootfs files.
+# i.e. /*
+attribute rootfs_file_attr;
+
+# Type of all system files.
+# i.e. /system/*
+attribute system_file_attr;
+
+# Type of all sys_prod files.
+# i.e. /sys_prod/*
+attribute sys_prod_file_attr;
+
+# Type of all vendor files.
+# i.e. /vendor/*
+attribute vendor_file_attr;
+
+# Type of all chip_prod files.
+# i.e. /chip_prod/*
+attribute chip_prod_file_attr;
+
+# Type of all chip_ckm files.
+# i.e. /chip_ckm/*
+attribute chip_ckm_file_attr;
+
+# Type of all domain access points, which is used in domain trasition.
+# i.e. vold_exec,
+#      appspawn_exec
+attribute exec_attr;
+
+# Types of all files in the /data directory.
+# i.e. /data/user
+attribute data_file_attr;
+
+# All types in the sysfs file system.
+# i.e. /sys/firmware
+attribute sysfs_attr;
+
+# All types in the debugfs file system.
+# i.e. /sys/kernel/debug/*
+attribute debugfs_attr;
+
+# All types of parameters.
+# i.e. ohos_param
+attribute parameter_attr;
+
+# All types of services.
+# i.e. bms_service
+attribute sa_service_attr;
+
+# All types of hdf_services.
+# i.e. camera_service
+attribute hdf_service_attr;
+
+# Type of all processes in the hap format.
+# i.e. com.ohos.setting
+attribute hap_domain;
+
+# Type of all haps in apl normal.
+attribute normal_hap_attr;
+
+# Type of all haps in apl system_basic.
+attribute system_basic_hap_attr;
+
+# Type of all haps in apl system_core.
+attribute system_core_hap_attr;
+
+# File type of all processes in the hap format.
+# i.e. com.ohos.setting
+attribute hap_file_attr;
+
+# File type of all haps in apl normal.
+attribute normal_hap_data_file_attr;
+
+# File type of all haps in apl system_basic.
+attribute system_basic_hap_data_file_attr;
+
+# File type of all haps in apl system_core.
+attribute system_core_hap_data_file_attr;
+
+# Type of hdf processes.
+# i.e. hdv_devmgr,
+attribute hdfdomain;
+
+# Type of all native processes.
+# i.e. at,
+attribute sadomain;
+
+# Type of all native system processes not in sadomain.
+# i.e. init,
+attribute native_system_domain;
+
+# Type of all native chipset processes not in sadomain.
+# i.e. chipset-init,
+attribute native_chipset_domain;
+
+#define some violator attribute for neverallows.
+attribute cap_violator_chown;
+attribute cap_violator_dacoverride;
+attribute cap_violator_dacreadsearch;
+attribute cap_violator_fowner;
+attribute cap_violator_fsetid;
+attribute cap_violator_kill;
+attribute cap_violator_setuid;
+attribute cap_violator_setgid;
+attribute cap_violator_netbindservice;
+attribute cap_violator_netadmin;
+attribute cap_violator_netraw;
+attribute cap_violator_sysptrace;
+attribute cap_violator_sysadmin;
+attribute cap_violator_wakealarm;
+attribute cap_violator_sysnice;
+attribute cap_violator_perfmon;
+attribute cap_violator_sysmodule;
+attribute cap_violator_syslog;
+attribute cap_violator_sysrawio;
+
+attribute data_local_tmp_violator_file_open;
+attribute system_core_hap_data_file_attr_violator_dir;
+attribute system_basic_hap_data_file_attr_violator_dir;
+attribute normal_hap_data_file_attr_violator_dir;
+attribute normal_hap_data_file_attr_violator_dir_file_create_unlink;
+attribute normal_hap_data_file_attr_violator_file_open;
+attribute accesstoken_data_file_violator_dir;
+attribute accesstoken_data_file_violator_file;
+attribute module_update_file_violator_file_dir;
+attribute module_update_binary_file_violator_file_dir;
+attribute normal_hap_data_file_attr_violator_relabel;
+attribute file_migrate_hap_data_file_attr_violator_opt;
+
+attribute data_user_file_dir_violator;
+attribute data_user_file_file_violator;
+
+attribute dev_fuse_file_violator;
+
+attribute proc_violator;
+attribute sh_exec_violator;
+attribute proc_sys_writer;
+
+attribute hdf_public_domain;
+
+attribute modem_file_attr;
+
+attribute cgroup_creator;
+
+# Type of all module_update file
+# i.e. /module_update/*
+attribute module_update_file_attr;
+
+attribute dev_attr_violator;
+attribute dev_file_violator;
+attribute dev_attr_violator_chr_file_rw;
+attribute samgr_binder_violator;
+attribute installs_binder_violator;
+attribute binder_call_installs_violators;
+attribute permissions_mount_file_attr;
+attribute log_file_attr;
+attribute appspawn_unmount_filesystem_violators;
+attribute hap_domain_lnk_file_violators;
+
+attribute filesystem_violator;
+
+# Type of develop process
+# i.e. sh
+attribute develop_domain;
+
+# define some violator attribute for neverallows.
+attribute vendor_file_violator_dir;
+attribute vendor_file_violator_dir_getattr;
+attribute vendor_file_violator_dir_relabelto;
+attribute vendor_file_violator_dir_read;
+attribute vendor_file_violator_dir_open;
+attribute vendor_file_violator_file;
+attribute vendor_file_violator_file_map;
+attribute vendor_file_violator_file_open;
+attribute vendor_file_violator_file_read;
+attribute vendor_file_violator_file_getattr;
+attribute vendor_file_violator_file_execute;
+attribute vendor_bin_file_violator_dir;
+attribute vendor_bin_file_violator_dir_search;
+attribute vendor_bin_file_violator_file;
+attribute vendor_bin_file_violator_file_entrypoint;
+attribute vendor_bin_file_violator_file_execute;
+attribute vendor_bin_file_violator_file_map;
+attribute vendor_bin_file_violator_file_read;
+attribute vendor_bin_file_violator_file_getattr;
+attribute vendor_bin_file_violator_file_open;
+attribute vendor_etc_file_violator_dir;
+attribute vendor_etc_file_violator_dir_search;
+attribute vendor_etc_file_violator_dir_getattr;
+attribute vendor_etc_file_violator_dir_read;
+attribute vendor_etc_file_violator_dir_open;
+attribute vendor_etc_file_violator_file;
+attribute vendor_etc_file_violator_file_map;
+attribute vendor_etc_file_violator_file_open;
+attribute vendor_etc_file_violator_file_read;
+attribute vendor_etc_file_violator_file_getattr;
+
+attribute system_file_violator_dir;
+attribute system_file_violator_file;
+attribute system_bin_file_violator_dir;
+attribute system_bin_file_violator_dir_search;
+attribute system_bin_file_violator_dir_getattr;
+attribute system_bin_file_violator_file;
+attribute system_bin_file_violator_file_execute;
+attribute system_bin_file_violator_file_execute_no_trans;
+attribute system_bin_file_violator_file_map;
+attribute system_bin_file_violator_file_read;
+attribute system_bin_file_violator_file_open;
+attribute system_bin_file_violator_file_getattr;
+attribute system_bin_file_violator_lnk_file;
+attribute system_bin_file_violator_lnk_file_read;
+attribute system_etc_file_violator_dir;
+attribute system_etc_file_violator_file;
+attribute system_etc_file_violator_lnk_file;
+attribute system_profile_file_violator_dir;
+
+attribute hdf_service_violators;
+
+attribute binder_call_hdfdomain_violators;
+
+attribute hiview_host;

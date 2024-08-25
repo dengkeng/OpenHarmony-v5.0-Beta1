@@ -1,0 +1,122 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+debug_only(`
+	allow native_daemon self:capability setgid;
+        allow domain dev_unix_socket:sock_file write;
+        allow domain dev_unix_file:sock_file write;
+        allow native_daemon sh_exec:file execute;
+        allow native_daemon sh:fd use;
+        allow native_daemon sh:file read;
+')
+allow domain hiprofiler_socket:sock_file { getattr write unlink };
+allow init hiprofiler_socket:sock_file { relabelto };
+
+allow native_daemon data_local_tmp:file { create read open write lock getattr ioctl map };
+allow native_daemon data_local_tmp:dir { search add_name write getattr };
+allow native_daemon self:capability { kill sys_ptrace };
+
+allow native_daemon data_file:dir search;
+allow native_daemon data_local:dir search;
+allow native_daemon devpts:chr_file { read write };
+allow native_daemon hilog_param:file { map open read };
+allow native_daemon musl_param:file { map open read };
+
+allow native_daemon hdcd:fd use;
+allow native_daemon hdcd:unix_stream_socket { read write };
+
+allow native_daemon tty_device:chr_file { ioctl open read write };
+allow native_daemon hiprofilerd:fd use;
+allow native_daemon hiview:process signal;
+allow native_daemon hiview_exec:file { getattr map open read };
+allow native_daemon rootfs:file read;
+allow native_daemon system_bin_file:dir search;
+
+allow native_daemon hiview:dir search;
+allow native_daemon hiview:file { open read };
+allow native_daemon tty_device:chr_file { ioctl open };
+allow native_daemon sh_exec:file { execute_no_trans map open read };
+allow native_daemon hilog_param:file read;
+allow native_daemon paramservice_socket:sock_file write;
+allow native_daemon system_bin_file:lnk_file read;
+allow native_daemon system_bin_file:file { execute execute_no_trans getattr map open read };
+
+allow native_daemon domain:dir { open read getattr search };
+allow native_daemon domain:file { open read getattr };
+allow domain native_daemon:fd use;
+allow domain native_daemon:unix_stream_socket connectto;
+allow domain hiprofilerd:unix_stream_socket connectto;
+allow native_daemon dev_unix_socket:dir { add_name remove_name write search };
+allow native_daemon dev_unix_socket:sock_file { unlink create getattr setattr write };
+allow native_daemon domain:process signal;
+allow native_daemon appspawn_exec:file read;
+allow native_daemon kernel:unix_stream_socket connectto;
+allow native_daemon dev_unix_file:sock_file unlink;
+allow native_daemon hook_param:parameter_service set;
+allow native_daemon dev_unix_file:sock_file write;
+allow native_daemon appspawn_exec:file open;
+allow native_daemon appspawn_exec:file getattr;
+allow native_daemon appspawn_exec:file map;
+allow native_daemon dev_ashmem_file:chr_file { open };
+allow native_daemon dev_console_file:chr_file { read write };
+allow native_daemon proc_file:file { open read getattr };
+
+neverallow native_daemon *:process ptrace;
+
+allow native_daemon sa_foundation_bms:samgr_class get;
+allow native_daemon sa_param_watcher:samgr_class get;
+allow native_daemon samgr:binder { call };
+allow native_daemon debug_param:file { map open read };
+allow native_daemon foundation:binder call;
+allow native_daemon param_watcher:binder call;
+allow native_daemon tracefs:dir search;
+allow native_daemon tracefs_trace_marker_file:file { open write };
+allow native_daemon param_watcher:binder transfer;
+allow native_daemon appspawn:lnk_file read;
+allowxperm native_daemon devpts:chr_file ioctl { 0x5413 };
+allow native_daemon devpts:chr_file { ioctl };
+allow native_daemon data_app_el1_file:dir search;
+allow native_daemon data_app_el1_file:file { getattr map open read };
+allow native_daemon native_daemon:unix_dgram_socket { ioctl };
+allow native_daemon dev_file:dir getattr;
+allow native_daemon hap_domain:lnk_file { getattr map open read };
+allow native_daemon app_el1_bundle_public:dir { read search open getattr };
+allow native_daemon app_el1_bundle_public:file { map getattr read open };
+allow native_daemon sa_native_daemon:samgr_class { add };
+allow native_daemon hiviewdfx_profiler_param:parameter_service { set };
+allow native_daemon hdcd_exec:file { read open getattr };
+
+allow native_daemon hilog_exec:file { getattr map open read };
+allow native_daemon data_local_arkcache:dir { search };
+allow native_daemon data_local_arkcache:file { getattr open read };
+allow native_daemon SP_daemon_exec:file { getattr open read };
+allow native_daemon hilogd_exec:file { getattr map open read };
+allow native_daemon render_service_exec:file { getattr map open read };
+allow native_daemon samain_exec:file { getattr map open read };
+allow native_daemon storage_daemon_exec:file { getattr map open read };
+allow native_daemon wifi_hal_service_exec:file { getattr map open read };
+allow native_daemon watchdog_service_exec:file { getattr map open read };
+allow native_daemon ueventd_exec:file { getattr map open read };
+allow native_daemon deviceauth_service_exec:file { getattr map open read };
+allow native_daemon faultloggerd_exec:file { getattr map open read };
+allow native_daemon hidumper_exec:file { getattr map open read };
+allow native_daemon hiprofiler_cmd_exec:file { getattr map open read };
+allow native_daemon hiprofiler_plugins_exec:file { getattr map open read };
+allow native_daemon hiprofilerd_exec:file { getattr map open read };
+allow native_daemon hisysevent_exec:file { getattr map open read };
+allow native_daemon hitrace_exec:file { getattr map open read };
+allow native_daemon init_exec:file { getattr map open read };
+allow native_daemon sys_prod_file:dir { search };
+allow native_daemon sys_prod_file:file { getattr map open read };
+allow native_daemon system_usr_file:file { getattr map open read };
+allow native_daemon data_service_el1_file:file { getattr map open read };

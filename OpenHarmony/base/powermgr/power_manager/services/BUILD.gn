@@ -1,0 +1,223 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../powermgr.gni")
+
+config("powermgr_public_config") {
+  include_dirs = [
+    "native/include",
+    "zidl/include",
+    "${powermgr_inner_api}/native/include",
+  ]
+}
+
+config("powermgr_private_config") {
+  include_dirs = [
+    "native/src",
+    "native/src/runninglock",
+    "native/src/setting",
+    "native/src/shutdown",
+    "native/src/suspend",
+    "native/src/wakeup",
+    "native/src/hibernate",
+    "native/src/screenoffpre",
+  ]
+
+  if (power_manager_feature_wakeup_action) {
+    include_dirs += [ "native/src/wakeup_action" ]
+  }
+}
+
+ohos_shared_library("powermgrservice") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  sources = [
+    "native/src/hibernate/hibernate_controller.cpp",
+    "native/src/power_hdi_callback.cpp",
+    "native/src/power_mgr_dumper.cpp",
+    "native/src/power_mgr_factory.cpp",
+    "native/src/power_mgr_notify.cpp",
+    "native/src/power_mgr_service.cpp",
+    "native/src/power_mode_module.cpp",
+    "native/src/power_mode_policy.cpp",
+    "native/src/power_save_mode.cpp",
+    "native/src/power_state_machine.cpp",
+    "native/src/runninglock/running_lock_inner.cpp",
+    "native/src/runninglock/running_lock_mgr.cpp",
+    "native/src/runninglock/running_lock_proxy.cpp",
+    "native/src/runninglock/running_lock_timer_handler.cpp",
+    "native/src/screenoffpre/screen_off_pre_controller.cpp",
+    "native/src/setting/setting_helper.cpp",
+    "native/src/shutdown/shutdown_callback_holer.cpp",
+    "native/src/shutdown/shutdown_controller.cpp",
+    "native/src/shutdown/shutdown_dialog.cpp",
+    "native/src/suspend/sleep_callback_holder.cpp",
+    "native/src/suspend/suspend_controller.cpp",
+    "native/src/suspend/suspend_source_parser.cpp",
+    "native/src/suspend/suspend_sources.cpp",
+    "native/src/wakeup/wakeup_controller.cpp",
+    "native/src/wakeup/wakeup_source_parser.cpp",
+    "native/src/wakeup/wakeup_sources.cpp",
+  ]
+
+  configs = [
+    ":powermgr_private_config",
+    "${powermgr_utils_path}:utils_config",
+    "${powermgr_utils_path}:coverage_flags",
+  ]
+
+  public_configs = [ ":powermgr_public_config" ]
+
+  public_deps = [ "${powermgr_utils_path}/setting:power_setting" ]
+
+  deps = [
+    ":powermgr_stub",
+    "${powermgr_inner_api}:powermgr_client",
+    "${powermgr_utils_path}:power_utils",
+    "${powermgr_utils_path}/ffrt:power_ffrt",
+    "${powermgr_utils_path}/param:power_sysparam",
+    "${powermgr_utils_path}/permission:power_permission",
+    "${powermgr_utils_path}/vibrator:power_vibrator",
+    "native/src/actions:powermgr_actions",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "data_share:datashare_consumer",
+    "drivers_interface_power:libpower_proxy_1.2",
+    "ffrt:libffrt",
+    "hdf_core:libhdi",
+    "hdf_core:libpub_utils",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "image_framework:image_native",
+    "ipc:ipc_core",
+    "jsoncpp:jsoncpp",
+    "libxml2:libxml2",
+    "safwk:system_ability_fwk",
+  ]
+
+  defines = []
+
+  if (power_manager_feature_screen_on_timeout_check) {
+    defines += [ "SCREEN_ON_TIMEOUT_CHECK" ]
+    external_deps += [
+      "ability_runtime:app_manager",
+      "window_manager:libwm",
+    ]
+  }
+
+  if (has_display_manager_part) {
+    defines += [ "HAS_DISPLAY_MANAGER" ]
+    external_deps += [
+      "display_manager:displaymgr",
+      "window_manager:libdm",
+    ]
+  }
+
+  if (has_device_standby_part) {
+    external_deps += [ "device_standby:standby_innerkits" ]
+  }
+
+  if (has_multimodalinput_input_part) {
+    external_deps += [ "input:libmmi-client" ]
+  }
+
+  if (has_sensors_sensor_part) {
+    external_deps += [ "sensor:sensor_interface_native" ]
+  }
+
+  if (power_manager_feature_poweroff_charge) {
+    external_deps += [ "battery_manager:batterysrv_client" ]
+
+    defines += [ "POWER_MANAGER_POWEROFF_CHARGE" ]
+  }
+
+  if (power_manager_feature_wakeup_action) {
+    sources += [
+      "native/src/wakeup_action/wakeup_action_controller.cpp",
+      "native/src/wakeup_action/wakeup_action_source_parser.cpp",
+      "native/src/wakeup_action/wakeup_action_sources.cpp",
+    ]
+
+    defines += [ "POWER_MANAGER_WAKEUP_ACTION" ]
+  }
+
+  if (power_manager_feature_power_dialog) {
+    defines += [ "POWER_MANAGER_POWER_DIALOG" ]
+  }
+
+  if (factory == true) {
+    defines += [ "CONFIG_FACTORY_MODE" ]
+  }
+
+  subsystem_name = "powermgr"
+  part_name = "${powermgr_part_name}"
+}
+
+config("zidl_private_config") {
+  include_dirs = [ "zidl/src/shutdown" ]
+}
+
+ohos_shared_library("powermgr_stub") {
+  sources = [
+    "zidl/src/power_mgr_stub.cpp",
+    "zidl/src/power_mode_callback_stub.cpp",
+    "zidl/src/power_runninglock_callback_stub.cpp",
+    "zidl/src/power_state_callback_stub.cpp",
+    "zidl/src/screen_off_pre_callback_stub.cpp",
+    "zidl/src/shutdown/shutdown_stub_delegator.cpp",
+    "zidl/src/sync_sleep_callback_stub.cpp",
+  ]
+
+  configs = [
+    "${powermgr_utils_path}:utils_config",
+    "${powermgr_utils_path}:coverage_flags",
+    ":zidl_private_config",
+  ]
+
+  public_configs = [ ":powermgr_public_config" ]
+
+  deps = [ "${powermgr_inner_api}:powermgr_client" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  subsystem_name = "powermgr"
+  part_name = "${powermgr_part_name}"
+}
+
+group("service") {
+  deps = [
+    ":powermgr_stub",
+    ":powermgrservice",
+    "native/profile:power_service_config",
+  ]
+}

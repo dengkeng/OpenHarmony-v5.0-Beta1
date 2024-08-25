@@ -1,0 +1,156 @@
+{
+  "string": [
+    {
+      "name": "entry_MainAbility",
+      "value": "entry_MainAbility"
+    },
+    {
+      "name": "MainAbility_desc",
+      "value": "UT TEST"
+    },
+    {
+      "name": "app_name",
+      "value": "About"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Phone_About Feature Ability"
+    },
+    {
+      "name": "title",
+      "value": "About"
+    },
+    {
+      "name": "aboutPage_title_primary",
+      "value": "AboutPageFA"
+    },
+    {
+      "name": "aboutPage_title_secondary",
+      "value": "Version: 0.0.0"
+    },
+    {
+      "name": "copyright_text",
+      "value": "XXXXXX Technologies Co., Ltd. All rights reserved. ©2011-2019"
+    },
+    {
+      "name": "technicalSupport_text",
+      "value": "Technical support: XXXXXXX"
+    },
+    {
+      "name": "hello",
+      "value": "Helloooo"
+    },
+    {
+      "name": "string_ref",
+      "value": "$string:copyright_text"
+    },
+    {
+      "name": "string_ref2",
+      "value": "$string:string_ref"
+    },
+    {
+      "name":"same_name",
+      "value":"StringSameName"
+    },
+    {
+      "name": "ohos_app_name",
+      "value": "System"
+    },
+    {
+      "name": "ohos_lab_answer_call",
+      "value": "Answer phone calls"
+    },
+    {
+      "name": "ohos_desc_camera",
+      "value": "Allows an application to take photos and shoot videos."
+    },
+    {
+      "name": "test_string0",
+      "value": "向前兼容"
+    },
+    {
+      "name": "test_string1",
+      "value": "%%%d%%d%%%%d%%%%"
+    },
+    {
+      "name": "test_string2",
+      "value": "%f%s"
+    },
+    {
+      "name": "test_string3",
+      "value": "abc%fabc%%%%%sabc"
+    },
+    {
+      "name": "test_string4",
+      "value": "%a%da%%%"
+    },
+    {
+      "name": "mccmnc_str",
+      "value": "str_base"
+    },
+    {
+      "name": "res_one",
+      "value": "$string:res_two"
+    },
+    {
+      "name": "res_two",
+      "value": "$string:res_one"
+    },
+    {
+      "name": "test_string9",
+      "value": "%d-%d1$d"
+    },
+    {
+      "name": "test_string10",
+      "value": "%d%%%%%%"
+    },
+    {
+      "name": "test_string11",
+      "value": "%1$d"
+    },
+    {
+      "name": "test_string12",
+      "value": "%2$d-%1$d===%4$f-%3$f===%6$s%5$s===%%hh%%%%%%"
+    },
+    {
+      "name": "test_string13",
+      "value": "%d%1$d"
+    },
+    {
+      "name": "test_string14",
+      "value": "%2$d"
+    },
+    {
+      "name": "test_string15",
+      "value": "%1$d"
+    },
+    {
+      "name": "test_string16",
+      "value": "%1$f"
+    },
+    {
+      "name": "test_string17",
+      "value": "%1$s"
+    },
+    {
+      "name": "test_string18",
+      "value": "%d%d"
+    },
+    {
+      "name": "test_string19",
+      "value": "%1$d%1$d"
+    },
+    {
+      "name": "test_string20",
+      "value": "%184467440737095516150$d"
+    },
+    {
+      "name": "test_string21",
+      "value": "%18446744073709551616$d"
+    },
+    {
+      "name": "test_string22",
+      "value": "%d%1$d%d"
+    }
+  ]
+}

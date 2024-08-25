@@ -1,0 +1,199 @@
+/*
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef INNERKITS_WALLPAPER_MANAGER_H
+#define INNERKITS_WALLPAPER_MANAGER_H
+
+#include <list>
+#include <map>
+#include <mutex>
+#include <string>
+#include <vector>
+
+#include "avmetadatahelper.h"
+#include "fault_reporter.h"
+#include "i_wallpaper_service.h"
+#include "ipc_skeleton.h"
+#include "singleton.h"
+#include "wallpaper_common.h"
+#include "wallpaper_manager_kits.h"
+
+using JScallback = bool (*)(int32_t);
+namespace OHOS {
+using namespace MiscServices;
+namespace WallpaperMgrService {
+class WallpaperManager final : public WallpaperManagerkits, public DelayedRefSingleton<WallpaperManager> {
+    DECLARE_DELAYED_REF_SINGLETON(WallpaperManager);
+
+public:
+    DISALLOW_COPY_AND_MOVE(WallpaperManager);
+
+    /**
+    * Wallpaper set.
+    * @param  uriOrPixelMap Wallpaper picture; wallpaperType Wallpaper type,
+    * values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+    * @return  ErrorCode
+    */
+    ErrorCode SetWallpaper(std::string uri, int32_t wallpaperType, const ApiInfo &apiInfo) final;
+
+    /**
+    * Wallpaper set.
+    * @param  pixelMap:picture pixelMap struct; wallpaperType Wallpaper type,
+    * values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+    * @return  ErrorCode
+    */
+    ErrorCode SetWallpaper(std::shared_ptr<OHOS::Media::PixelMap> pixelMap, int32_t wallpaperType,
+        const ApiInfo &apiInfo) final;
+
+    /**
+        *Obtains the default pixel map of a wallpaper of the specified type.
+        * @param wallpaperType Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN;
+        * Obtains image.PixelMap png type The bitmap file of wallpaper
+        * @return ErrorCode
+        * @permission ohos.permission.GET_WALLPAPER
+        * @systemapi Hide this for inner system use.
+    */
+    ErrorCode GetPixelMap(int32_t wallpaperType, const ApiInfo &apiInfo,
+        std::shared_ptr<OHOS::Media::PixelMap> &PixelMap) final;
+
+    /**
+     * Obtains the WallpaperColorsCollection instance for the wallpaper of the specified type.
+     * @param wallpaperType Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+     * @return number type of array callback function
+     */
+    ErrorCode GetColors(int32_t wallpaperType, const ApiInfo &apiInfo, std::vector<uint64_t> &colors) final;
+
+    /**
+     * Obtains the ID of the wallpaper of the specified type.
+     * @param wallpaperType Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+     * @return number type of callback function
+     */
+    int32_t GetWallpaperId(int32_t wallpaperType) final;
+
+    ErrorCode GetFile(int32_t wallpaperType, int32_t &wallpaperFd) final;
+
+    /**
+     * Obtains the minimum height of the wallpaper.
+     * @return number type of callback function
+     */
+    ErrorCode GetWallpaperMinHeight(const ApiInfo &apiInfo, int32_t &minHeight) final;
+
+    /**
+     * Obtains the minimum width of the wallpaper.
+     * @return number type of callback function
+     */
+    ErrorCode GetWallpaperMinWidth(const ApiInfo &apiInfo, int32_t &minWidth) final;
+
+    /**
+     * Checks whether to allow the application to change the wallpaper for the current user.
+     * @return boolean type of callback function
+     */
+    bool IsChangePermitted() final;
+
+    /**
+     * Checks whether a user is allowed to set wallpapers.
+     * @return boolean type of callback function
+     */
+    bool IsOperationAllowed() final;
+
+    /**
+     * Removes a wallpaper of the specified type and restores the default one.
+     * @param wallpaperType  Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+     * @permission ohos.permission.SET_WALLPAPER
+     */
+    ErrorCode ResetWallpaper(std::int32_t wallpaperType, const ApiInfo &apiInfo) final;
+
+    /**
+     * Registers a listener for wallpaper event to receive notifications about the changes.
+     * @param type event type
+     * @param listener event listener
+     * @return error code
+     */
+    ErrorCode On(const std::string &type, std::shared_ptr<WallpaperEventListener> listener) final;
+
+    /**
+     * Unregisters a listener for wallpaper event to receive notifications about the changes.
+     * @param type event type
+     * @param listener event listener
+     * @return error code
+     */
+    ErrorCode Off(const std::string &type, std::shared_ptr<WallpaperEventListener> listener) final;
+
+    /**
+     * Sets live wallpaper of the specified type based on the uri path of the MP4 file.
+     * @param uri Indicates the uri path of the MP4 file.
+     * @param wallpaperType Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+     * @return ErrorCode
+     * @permission ohos.permission.SET_WALLPAPER
+     */
+    ErrorCode SetVideo(const std::string &uri, const int32_t wallpaperType) final;
+
+    /**
+     * Sets custom wallpaper of the specified type based on the uri path.
+     * @param uri Indicates the uri path.
+     * @param wallpaperType Wallpaper type, values for WALLPAPER_SYSTEM or WALLPAPER_LOCKSCREEN
+     * @return ErrorCode
+     * @permission ohos.permission.SET_WALLPAPER
+     */
+    ErrorCode SetCustomWallpaper(const std::string &uri, int32_t wallpaperType) final;
+
+    /**
+     * The application sends the event to the wallpaper service.
+     * @param eventType Event type, values for SHOW_SYSTEMSCREEN or SHOW_LOCKSCREEN
+     * @return ErrorCode
+     * @permission ohos.permission.SET_WALLPAPER
+     */
+    ErrorCode SendEvent(const std::string &eventType) final;
+    bool RegisterWallpaperCallback(JScallback callback) final;
+
+    JScallback GetCallback() final;
+
+    void SetCallback(JScallback cb) final;
+
+    void ReporterFault(FaultType faultType, FaultCode faultCode);
+
+    void CloseWallpaperFd(int32_t wallpaperType);
+
+    bool RegisterWallpaperListener();
+private:
+    class DeathRecipient final : public IRemoteObject::DeathRecipient {
+    public:
+        DeathRecipient() = default;
+        ~DeathRecipient() final = default;
+        DISALLOW_COPY_AND_MOVE(DeathRecipient);
+
+        void OnRemoteDied(const wptr<IRemoteObject> &remote) final;
+    };
+
+    template<typename F, typename... Args>
+    ErrCode CallService(F func, Args &&...args);
+    bool CheckVideoFormat(const std::string &fileName);
+    void ResetService(const wptr<IRemoteObject> &remote);
+    sptr<IWallpaperService> GetService();
+    int64_t WritePixelMapToStream(std::ostream &outputStream, std::shared_ptr<OHOS::Media::PixelMap> pixelMap);
+    bool OpenFile(const std::string &fileName, int32_t &fd, int64_t &fileSize);
+    ErrorCode CheckWallpaperFormat(const std::string &realPath, bool isLive, long &length);
+    sptr<IWallpaperService> wallpaperProxy_{};
+    sptr<IRemoteObject::DeathRecipient> deathRecipient_{};
+    std::mutex wallpaperFdLock_;
+    std::map<int32_t, int32_t> wallpaperFdMap_;
+    std::mutex wallpaperProxyLock_;
+    std::mutex listenerMapLock_;
+    std::map<std::string, sptr<WallpaperEventListenerClient>> listenerMap_;
+    bool (*callback)(int32_t);
+};
+} // namespace WallpaperMgrService
+} // namespace OHOS
+#endif

@@ -1,0 +1,153 @@
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("../../../../common/config/common.gni")
+
+module_output_path = "enterprise_device_management/enterprise_device_management"
+
+ohos_unittest("EdmInnerApiUnitTest") {
+  module_out_path = module_output_path
+
+  include_dirs = [
+    "./proxy/mock/include",
+    "../../common/mock/include",
+  ]
+
+  sources = [
+    "../../common/mock/src/edm_sys_manager_mock.cpp",
+    "./common/ent_info_test.cpp",
+  ]
+
+  configs = [ "../../../../common/config:coverage_flags" ]
+
+  deps = [
+    "../../../../common/native:edm_commom",
+    "../../../../interfaces/inner_api:edmservice_kits",
+    "../../utils:edm_unittest_utils",
+    "//third_party/googletest:gmock_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utilsbase",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = []
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable) {
+    external_deps += [
+      "netmanager_base:net_conn_manager_if",
+      "os_account:os_account_innerkits",
+    ]
+    sources += [
+      "./proxy/account_manager_proxy_test.cpp",
+      "./proxy/bundle_manager_proxy_test.cpp",
+      "./proxy/device_info_proxy_test.cpp",
+      "./proxy/enterprise_device_mgr_proxy_test.cpp",
+      "./proxy/mock/src/enterprise_device_mgr_stub_mock.cpp",
+      "./proxy/network_manager_proxy_test.cpp",
+      "./proxy/security_manager_proxy_test.cpp",
+      "./proxy/system_manager_proxy_test.cpp",
+    ]
+    defines += [
+      "OS_ACCOUNT_EDM_ENABLE",
+      "NETMANAGER_BASE_EDM_ENABLE",
+    ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && ability_runtime_edm_enable) {
+    sources += [ "./proxy/application_manager_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && bluetooth_edm_enable) {
+    sources += [ "./proxy/bluetooth_manager_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && common_event_service_edm_enable) {
+    sources += [ "./proxy/browser_proxy_test.cpp" ]
+  }
+
+  if (time_service_edm_enable && os_account_edm_enable &&
+      netmanager_base_edm_enable && netmanager_ext_edm_enable) {
+    sources += [ "./proxy/datetime_manager_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && screenlock_mgr_edm_enable &&
+      power_manager_edm_enable && update_service_edm_enable) {
+    sources += [ "./proxy/device_control_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && certificate_manager_edm_enable) {
+    sources += [ "./proxy/device_settings_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && location_edm_enable) {
+    sources += [ "./proxy/location_manager_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && audio_framework_edm_enable) {
+    sources += [ "./proxy/restrictions_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && drivers_interface_usb_edm_enable &&
+      usb_manager_edm_enable && storage_service_edm_enable) {
+    sources += [ "./proxy/usb_manager_proxy_test.cpp" ]
+  }
+
+  if (os_account_edm_enable && netmanager_base_edm_enable &&
+      netmanager_ext_edm_enable && wifi_edm_enable) {
+    external_deps += [ "wifi:wifi_sdk" ]
+    sources += [ "./proxy/wifi_manager_proxy_test.cpp" ]
+    defines += [ "WIFI_EDM_ENABLE" ]
+  }
+
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+    blocklist = "../../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}
+
+group("unittest") {
+  testonly = true
+
+  deps = [
+    # deps file
+    ":EdmInnerApiUnitTest",
+  ]
+}

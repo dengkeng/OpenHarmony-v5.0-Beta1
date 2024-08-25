@@ -1,0 +1,208 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../dlp_permission_service.gni")
+
+ohos_prebuilt_etc("dlp_permission_service.rc") {
+  source = "dlp_permission_service.cfg"
+  relative_install_dir = "init"
+  subsystem_name = "security"
+  part_name = "dlp_permission_service"
+}
+
+ohos_static_library("dlp_hex_string_static") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "security"
+  part_name = "dlp_permission_service"
+
+  include_dirs = [
+    "${dlp_root_dir}/interfaces/inner_api/dlp_permission/include",
+    "${dlp_root_dir}/frameworks/common/include",
+  ]
+
+  sources = [ "${dlp_root_dir}/frameworks/common/src/hex_string.cpp" ]
+
+  configs = [ "${dlp_root_dir}/config:coverage_flags" ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  external_deps = [ "hilog:libhilog" ]
+}
+
+ohos_static_library("dlp_permission_serializer_static") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "security"
+  part_name = "dlp_permission_service"
+
+  include_dirs = [
+    "sa_common",
+    "${dlp_root_dir}/interfaces/inner_api/dlp_permission/include",
+    "${dlp_root_dir}/frameworks/common/include",
+    "${dlp_root_dir}/frameworks/dlp_permission/include",
+  ]
+
+  sources = [ "sa_common/dlp_permission_serializer.cpp" ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  configs = [ "${dlp_root_dir}/config:coverage_flags" ]
+
+  deps = [ ":dlp_hex_string_static" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "json:nlohmann_json_static",
+  ]
+
+  if (dlp_credential_enable == true &&
+      dlp_permission_service_credential_connection_enable == true) {
+    external_deps += [ "dlp_credential_service:dlp_credential_sdk" ]
+  } else {
+    include_dirs += [ "mock" ]
+  }
+}
+
+ohos_shared_library("dlp_permission_service") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  subsystem_name = "security"
+  part_name = "dlp_permission_service"
+
+  include_dirs = [
+    "adapt",
+    "callback/dlp_sandbox_change_callback",
+    "callback/open_dlp_file_callback",
+    "sa_main",
+    "sa_common",
+    "storage/include",
+    "${dlp_root_dir}/frameworks/common/include",
+    "${dlp_root_dir}/frameworks/dlp_permission/include",
+    "${dlp_root_dir}/interfaces/inner_api/dlp_parse/include",
+    "${dlp_root_dir}/interfaces/inner_api/dlp_permission/include",
+  ]
+
+  sources = [
+    "${dlp_root_dir}/frameworks/common/src/cert_parcel.cpp",
+    "${dlp_root_dir}/frameworks/common/src/permission_policy.cpp",
+    "${dlp_root_dir}/frameworks/common/src/retention_sandbox_info.cpp",
+    "${dlp_root_dir}/frameworks/common/src/visited_dlp_file_info.cpp",
+    "${dlp_root_dir}/frameworks/dlp_permission/src/auth_user_info_parcel.cpp",
+    "${dlp_root_dir}/frameworks/dlp_permission/src/dlp_permission_info_parcel.cpp",
+    "${dlp_root_dir}/frameworks/dlp_permission/src/dlp_policy_parcel.cpp",
+    "${dlp_root_dir}/frameworks/dlp_permission/src/dlp_sandbox_callback_info_parcel.cpp",
+    "${dlp_root_dir}/frameworks/dlp_permission/src/open_dlp_file_callback_info_parcel.cpp",
+    "adapt/account_adapt.cpp",
+    "adapt/app_state_observer.cpp",
+    "adapt/app_uninstall_observer.cpp",
+    "adapt/file_operator.cpp",
+    "adapt/retention_file_manager.cpp",
+    "adapt/sandbox_json_manager.cpp",
+    "adapt/visit_record_file_manager.cpp",
+    "adapt/visit_record_json_manager.cpp",
+    "callback/dlp_sandbox_change_callback/dlp_sandbox_change_callback_death_recipient.cpp",
+    "callback/dlp_sandbox_change_callback/dlp_sandbox_change_callback_manager.cpp",
+    "callback/dlp_sandbox_change_callback/dlp_sandbox_change_callback_proxy.cpp",
+    "callback/open_dlp_file_callback/open_dlp_file_callback_death_recipient.cpp",
+    "callback/open_dlp_file_callback/open_dlp_file_callback_manager.cpp",
+    "callback/open_dlp_file_callback/open_dlp_file_callback_proxy.cpp",
+    "sa_common/bundle_manager_adapter.cpp",
+    "sa_main/dlp_credential.cpp",
+    "sa_main/dlp_permission_async_proxy.cpp",
+    "sa_main/dlp_permission_service.cpp",
+    "sa_main/dlp_permission_stub.cpp",
+    "storage/src/dlp_kv_data_storage.cpp",
+    "storage/src/sandbox_config_kv_data_storage.cpp",
+  ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+  cflags = [ "-DHILOG_ENABLE" ]
+
+  if (build_variant == "user") {
+    cflags_cc += [ "-DDLP_DEBUG_ENABLE=0" ]
+    cflags += [ "-DDLP_DEBUG_ENABLE=0" ]
+  } else if (build_variant == "root") {
+    cflags_cc += [ "-DDLP_DEBUG_ENABLE=1" ]
+    cflags += [ "-DDLP_DEBUG_ENABLE=1" ]
+  } else {
+    cflags_cc += [ "-DDLP_DEBUG_ENABLE=1" ]
+    cflags += [ "-DDLP_DEBUG_ENABLE=1" ]
+  }
+
+  if (dlp_permission_service_gathering_policy) {
+    cflags_cc += [ "-DDLP_GATHERING_SANDBOX" ]
+    cflags += [ "-DDLP_GATHERING_SANDBOX" ]
+  }
+
+  deps = [
+    ":dlp_hex_string_static",
+    ":dlp_permission_serializer_static",
+    ":dlp_permission_service.rc",
+  ]
+
+  deps += [ "etc:param_files" ]
+
+  configs = [ "${dlp_root_dir}/config:coverage_flags" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:app_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_core",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "json:nlohmann_json_static",
+    "kv_store:distributeddata_inner",
+    "os_account:libaccountkits",
+    "os_account:os_account_innerkits",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  if (dlp_credential_enable == true &&
+      dlp_permission_service_credential_connection_enable == true) {
+    cflags_cc += [ "-DSUPPORT_DLP_CREDENTIAL" ]
+    external_deps += [ "dlp_credential_service:dlp_credential_sdk" ]
+  } else {
+    include_dirs += [ "mock" ]
+    sources += [ "mock/dlp_credential_service.c" ]
+  }
+}

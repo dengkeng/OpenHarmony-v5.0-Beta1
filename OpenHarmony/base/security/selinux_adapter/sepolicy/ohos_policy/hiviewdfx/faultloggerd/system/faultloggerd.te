@@ -1,0 +1,78 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+###################
+## Macro define: ##
+###################
+define(`use_faultloggerd', `
+    allow $1 faultloggerd:fd use;
+    allow $1 faultloggerd:unix_stream_socket connectto;
+    allow $1 faultloggerd_socket:sock_file { getattr write };
+')
+
+define(`use_faultloggerd_file', `
+    allow $1 faultloggerd_temp_file:dir { getattr setattr open read search watch };
+    allow $1 faultloggerd_temp_file:file { getattr open read write };
+    allow $1 faultloggerd:fifo_file read;
+')
+
+define(`use_faultloggerd_crash', `
+    allow $1 faultloggerd:fd use;
+    allow $1 faultloggerd:unix_stream_socket connectto;
+    allow $1 faultloggerd_socket_crash:sock_file { getattr write };
+')
+
+define(`use_faultloggerd_sdkdump', `
+    allow $1 faultloggerd:fd use;
+    allow $1 faultloggerd:unix_stream_socket connectto;
+    allow $1 faultloggerd_socket_sdkdump:sock_file { getattr write };
+')
+
+##########################################
+## Read/Use/Control faultloggerd rules: ##
+##########################################
+use_faultloggerd(domain)
+use_faultloggerd_crash({ processdump })
+use_faultloggerd_file({ hiview hidumper })
+use_faultloggerd_sdkdump({ hiview hidumper foundation })
+
+#########################
+## faultloggerd rules: ##
+#########################
+allow faultloggerd init:unix_stream_socket { accept getattr getopt listen setopt };
+
+allow faultloggerd domain:file { open read };
+allow faultloggerd domain:dir { getattr search };
+allow faultloggerd domain:process signal;
+
+allow faultloggerd data_file:dir search;
+allow faultloggerd data_init_agent:dir search;
+allow faultloggerd dev_unix_socket:dir search;
+allow faultloggerd data_log:dir search;
+
+allow faultloggerd tty_device:chr_file { open read write };
+allow faultloggerd system_bin_file:file { execute execute_no_trans getattr map open read };
+allow faultloggerd system_bin_file:lnk_file read;
+
+allow faultloggerd data_init_agent:file { append ioctl open read };
+allow faultloggerd dev_unix_socket:sock_file unlink;
+allow faultloggerd faultloggerd_socket:sock_file unlink;
+allow faultloggerd faultloggerd_socket_crash:sock_file unlink;
+allow faultloggerd faultloggerd_socket_sdkdump:sock_file unlink;
+allow faultloggerd faultloggerd_temp_file:dir { add_name remove_name write open read search };
+allow faultloggerd faultloggerd_temp_file:file { create getattr setattr write open read unlink };
+
+allow faultloggerd_temp_file labeledfs:filesystem { associate };
+
+# allow hap apply pipe fd for mix stack
+allow hap_domain faultloggerd:fifo_file write;

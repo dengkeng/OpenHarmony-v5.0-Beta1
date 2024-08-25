@@ -1,0 +1,67 @@
+# Copyright (C) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../thermalmgr.gni")
+
+config("thermal_protector_public_config") {
+  include_dirs = [
+    "include",
+    "include/policy",
+    "include/action",
+  ]
+}
+
+ohos_executable("thermal_protector") {
+  sources = [
+    "src/action/cpu_action.cpp",
+    "src/action/current_action.cpp",
+    "src/action/device_control_factory.cpp",
+    "src/action/thermal_device_control.cpp",
+    "src/action/voltage_action.cpp",
+    "src/main.cpp",
+    "src/policy/protector_thermal_zone_info.cpp",
+    "src/policy/thermal_kernel_config_file.cpp",
+    "src/policy/thermal_kernel_policy.cpp",
+    "src/thermal_kernel_service.cpp",
+    "src/thermal_protector_timer.cpp",
+    "src/thermal_protector_utils.cpp",
+    "src/thermal_sensor_provision.cpp",
+  ]
+
+  public_configs = [ ":thermal_protector_public_config" ]
+
+  configs = [
+    "${utils_path}:utils_config",
+    "${utils_path}:coverage_flags",
+  ]
+
+  deps = [ "${utils_path}:thermal_utils" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "config_policy:configpolicy_util",
+    "hilog:libhilog",
+    "libxml2:libxml2",
+  ]
+
+  install_enable = true
+  part_name = "thermal_manager"
+  subsystem_name = "powermgr"
+}
+
+group("thermal_protector_group") {
+  deps = [
+    ":thermal_protector",
+    "profile:thermal_kernel_config",
+  ]
+}

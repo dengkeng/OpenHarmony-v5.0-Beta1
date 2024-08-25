@@ -1,0 +1,46 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("web_inner_kit_config") {
+  include_dirs = [ "include" ]
+}
+
+ohos_shared_library("web_inner_kit") {
+  branch_protector_ret = "pac_ret"
+  branch_protector_frt = "bti"
+
+  include_dirs = [ "../../ohos_nweb/include" ]
+
+  public_configs = [ ":web_inner_kit_config" ]
+
+  sources = [ "src/web_clipboard_controller.cpp" ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "image_framework:image_native",
+    "pasteboard:pasteboard_client",
+  ]
+
+  cflags = [
+    "-Wall",
+    "-Werror",
+    "-g3",
+  ]
+
+  part_name = "webview"
+  subsystem_name = "web"
+}

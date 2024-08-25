@@ -1,0 +1,206 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#avc:  denied  { get_remote } for service=4801 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dhardware_service:samgr_class { get_remote };
+
+#avc:  denied  { get } for service=4607 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_foundation_dms:s0 tclass=samgr_class permissive=1
+allow dhardware sa_foundation_dms:samgr_class { get };
+
+#avc:  denied  { get } for service=4803 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dcamera_source_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dcamera_source_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4804 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dcamera_sink_service:samgr_class { get };
+
+#avc:  denied  { get } for service=3901 pid=1881 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
+allow dhardware sa_param_watcher:samgr_class { get };
+
+#avc:  denied  { get } for service=1301 pid=1881 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_distributeddata_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_distributeddata_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4802 pid=1915 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_foundation_devicemanager_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_foundation_devicemanager_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4700 pid=1915 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_softbus_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_softbus_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=1966 comm="dhardware" name="socket" dev="tmpfs" ino=40 scontext=u:r:dhardware:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
+allow dhardware dev_unix_socket:dir { search };
+
+#avc:  denied  { add } for service=4801 pid=2409 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dhardware_service:samgr_class { add };
+
+#avc:  denied  { get } for service=4808 pid=2498 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dscreen_sink_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dscreen_sink_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4807 pid=2498 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dscreen_source_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dscreen_source_service:samgr_class { get };
+
+#avc:  denied  { call } for  pid=2315 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=1
+allow dhardware dcamera:binder { call };
+
+#avc:  denied  { transfer } for  pid=2315 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=1
+allow dhardware dcamera:binder { transfer };
+
+#avc:  denied  { get } for service=3002 pid=2447 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_media_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_media_service:samgr_class { get };
+
+#avc:  denied  { use } for  pid=535 comm="THREAD_POOL" scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=fd permissive=1
+allow dhardware softbus_server:fd { use };
+
+#avc:  denied  { read write } for  pid=535 comm="THREAD_POOL" scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { setopt } for  pid=2338 comm="dhardware"  scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { shutdown } for  pid=2343 comm="THREAD_POOL" scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+allow dhardware softbus_server:tcp_socket { setopt read write shutdown };
+
+#avc:  denied  { get } for service=3008 pid=2324 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_camera_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_camera_service:samgr_class { get };
+
+#avc:  denied  { call } for  pid=2329 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:camera_service:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2329 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:camera_service:s0 tclass=binder permissive=1
+allow dhardware camera_service:binder { transfer call };
+
+#avc:  denied  { getopt } for  pid=2302 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dhardware:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { setopt } for  pid=2302 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dhardware:s0 tclass=unix_dgram_socket permissive=1
+allow dhardware dhardware:unix_dgram_socket { setopt getopt };
+
+#avc:  denied  { call } for  pid=2343 comm="DHEventbusHandl" scontext=u:r:dhardware:s0 tcontext=u:r:distributeddata:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2225 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:distributeddata:s0 tclass=binder permissive=1
+allow dhardware distributeddata:binder { call transfer };
+
+#avc:  denied  { call } for  pid=2225 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:foundation:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2225 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:foundation:s0 tclass=binder permissive=1
+allow dhardware foundation:binder { call transfer };
+
+#avc:  denied  { call } for  pid=2154 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2154 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+allow dhardware media_service:binder { call transfer };
+
+#avc:  denied  { read } for  pid=2507 comm="sa_main" name="u:object_r:distributedsche_param:s0" dev="tmpfs" ino=57 scontext=u:r:dhardware:s0 tcontext=u:object_r:distributedsche_param:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=2507 comm="sa_main" path="/dev/__parameters__/u:object_r:distributedsche_param:s0" dev="tmpfs" ino=57 scontext=u:r:dhardware:s0 tcontext=u:object_r:distributedsche_param:s0 tclass=file permissive=
+#avc:  denied  { map } for  pid=2507 comm="sa_main" path="/dev/__parameters__/u:object_r:distributedsche_param:s0" dev="tmpfs" ino=57 scontext=u:r:dhardware:s0 tcontext=u:object_r:distributedsche_param:s0 tclass=file permissive=1
+allow dhardware distributedsche_param:file { read open map };
+
+#avc:  denied  { get } for service=3503 pid=2451 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_accesstoken_manager_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_accesstoken_manager_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="/" dev="mmcblk0p11" ino=2 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow dhardware data_file:dir { search };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="service" dev="mmcblk0p11" ino=1436161 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_file:s0 tclass=dir permissive=1
+allow dhardware data_service_file:dir { search };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="el1" dev="mmcblk0p11" ino=1436165 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { write } for  pid=2451 comm="dhardware" name="dtbhardware_manager_service" dev="mmcblk0p11" ino=1436923 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { add_name } for  pid=2451 comm="dhardware" name="kvdb" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { create } for  pid=2451 comm="dhardware" name="kvdb" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { getattr } for  pid=2451 comm="dhardware" path="/data/xxx/kvdb" dev="mmcblk0p11" ino=1436925 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { read } for  pid=2812 comm="dhardware" name="single_ver" dev="mmcblk0p11" ino=131322 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=0
+#avc:  denied  { open } for  pid=2593 comm="dhardware" path="/data/xxx/single_ver" dev="mmcblk0p11" ino=784131 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=0
+#avc:  denied  { remove_name } for  pid=2403 comm="dhardware" name="gen_natural_store.db-journal" dev="mmcblk0p11" ino=784138 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+allow dhardware data_service_el1_file:dir { search write add_name create getattr read open remove_name };
+
+#avc:  denied  { create } for  pid=2451 comm="dhardware" name="single_ver_db_incomplete.lock" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { write open } for  pid=2451 comm="dhardware" path="/data/xxx/single_ver_db_incomplete.lock" dev="mmcblk0p11" ino=1436928 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { read } for  pid=2451 comm="dhardware" path="/data/xxx/gen_natural_store.db" dev="mmcblk0p11" ino=1436932 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { getattr } for  pid=2812 comm="dhardware" path="/data/xxx/gen_natural_store.db" dev="mmcblk0p11" ino=131327 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
+#avc:  denied  { ioctl } for  pid=2593 comm="dhardware" path="/data/xxx/gen_natural_store.db" dev="mmcblk0p11" ino=784137 ioctlcmd=0xf50c scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
+#avc:  denied  { lock } for  pid=2593 comm="dhardware" path="/data/xxx/gen_natural_store.db" dev="mmcblk0p11" ino=784137 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
+#avc:  denied  { unlink } for  pid=2403 comm="dhardware" name="gen_natural_store.db-journal" dev="mmcblk0p11" ino=784138 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { map } for  pid=2403 comm="dhardware" path="/data/xxx//main/gen_natural_store.db-shm" dev="mmcblk0p11" ino=784139 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { setattr } for  pid=2455 comm="dhardware" name="gen_natural_store.db" dev="mmcblk0p11" ino=1175817 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+allow dhardware data_service_el1_file:file { create write open read getattr ioctl lock unlink map setattr };
+
+#avc:  denied  { call } for  pid=2451 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:accesstoken_service:s0 tclass=binder permissive=1
+allow dhardware accesstoken_service:binder { call };
+debug_only(`
+    #avc:  denied  { call } for  pid=2003 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:sh:s0 tclass=binder permissive=0
+    allow dhardware sh:binder { call };
+')
+
+
+#avc:  denied  { search } for  pid=2694 comm="dhardware" name="etc" dev="mmcblk0p7" ino=19 scontext=u:r:dhardware:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=dir permissive=1
+allow dhardware vendor_etc_file:dir { search };
+
+#avc:  denied  { read } for  pid=2490 comm="dhardware" name="distributed_hardware_components_cfg.json" dev="mmcblk0p7" ino=96 scontext=u:r:dhardware:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=2490 comm="dhardware" path="/vendor/etc/distributedhardware/distributed_hardware_components_cfg.json" dev="mmcblk0p7" ino=96 scontext=u:r:dhardware:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=file permissive=1
+allow dhardware vendor_etc_file:file { read open };
+
+#avc:  denied  { read } for  pid=2128 comm="sa_main" name="u:object_r:accessibility_param:s0" dev="tmpfs" ino=52 scontext=u:r:dhardware:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=2128 comm="sa_main" path="/dev/__parameters__/u:object_r:accessibility_param:s0" dev="tmpfs" ino=52 scontext=u:r:dhardware:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=1
+#avc:  denied  { map } for  pid=2128 comm="sa_main" path="/dev/__parameters__/u:object_r:accessibility_param:s0" dev="tmpfs" ino=52 scontext=u:r:dhardware:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=1
+allow dhardware accessibility_param:file { read open map };
+
+#avc:  denied  { get } for service=4801 pid=551 scontext=u:r:hidumper_service:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=1
+allow hidumper_service sa_dhardware_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=2662 comm="sa_main" name="bin" dev="sdd72" ino=12 scontext=u:r:dcamera:s0 tcontext=u:object_r:vendor_bin_file:s0 tclass=dir permissive=0
+allow dhardware vendor_bin_file:dir { search };
+
+#avc:  denied  { get } for service=5100 pid=2376 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_device_service_manager:s0 tclass=samgr_class permissive=1
+allow dhardware sa_device_service_manager:samgr_class { get };
+
+#avc:  denied  { get } for service=codec_hdi_omx_service pid=1690 scontext=u:r:dhardware:s0 tcontext=u:object_r:hdf_codec_hdi_omx_service:s0 tclass=hdf_devmgr_class permissive=1
+allow dhardware hdf_codec_hdi_omx_service:hdf_devmgr_class { get };
+
+#avc:  denied  { read } for  pid=2292 comm="dhardware" name="online" dev="sysfs" ino=4917 scontext=u:r:dhardware:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=0
+#avc:  denied  { open } for  pid=2954 comm="dhardware" path="/sys/devices/system/cpu/online" dev="sysfs" ino=4917 scontext=u:r:dhardware:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=1
+#avc:  denied  { getattr } for  pid=2954 comm="dhardware" path="/sys/devices/system/cpu/online" dev="sysfs" ino=4917 scontext=u:r:dhardware:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=1
+allow dhardware sysfs_devices_system_cpu:file { read open getattr };
+
+#avc:  denied  { read } for  pid=2292 comm="SendOnLine" name="histreamer_plugins" dev="mmcblk0p7" ino=2372 scontext=u:r:dhardware:s0 tcontext=u:object_r:system_lib_file:s0 tclass=dir permissive=0
+#avc:  denied  { open } for  pid=2954 comm="SendOnLine" path="/system/lib/media/histreamer_plugins" dev="mmcblk0p7" ino=2372 scontext=u:r:dhardware:s0 tcontext=u:object_r:system_lib_file:s0 tclass=dir permissive=1
+allow dhardware system_lib_file:dir { read open };
+
+#avc:  denied  { call } for  pid=2954 comm="SendOnLine" scontext=u:r:dhardware:s0 tcontext=u:r:hdf_devmgr:s0 tclass=binder permissive=1
+allow dhardware hdf_devmgr:binder { call };
+
+#avc:  denied  { search } for  pid=239 comm="IPC_3_485" name="2954" dev="proc" ino=33347 scontext=u:r:hdf_devmgr:s0 tcontext=u:r:dhardware:s0 tclass=dir permissive=1
+allow hdf_devmgr dhardware:dir { search };
+
+#avc:  denied  { read } for  pid=254 comm="IPC_2_482" name="current" dev="proc" ino=34925 scontext=u:r:hdf_devmgr:s0 tcontext=u:r:dhardware:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=254 comm="IPC_2_482" path="/proc/3100/attr/current" dev="proc" ino=34925 scontext=u:r:hdf_devmgr:s0 tcontext=u:r:dhardware:s0 tclass=file permissive=1
+allow hdf_devmgr dhardware:file { read open };
+
+#avc:  denied  { getattr } for  pid=254 comm="IPC_2_482" scontext=u:r:hdf_devmgr:s0 tcontext=u:r:dhardware:s0 tclass=process permissive=1
+allow hdf_devmgr dhardware:process { getattr };
+
+#avc:  denied  { transfer } for  pid=254 comm="IPC_2_482" scontext=u:r:hdf_devmgr:s0 tcontext=u:r:dhardware:s0 tclass=binder permissive=1
+allow hdf_devmgr dhardware:binder { transfer };
+
+#avc:  denied  { call } for  pid=3100 comm="SendOnLine" scontext=u:r:dhardware:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+allow dhardware codec_host:binder { call };
+
+#avc:  denied  { get } for service=3011 pid=6484 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_av_codec_service:s0 tclass=samgr_class permissive=0
+#avc:  denied  { get } for service=3011 pid=6484 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_av_codec_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_av_codec_service:samgr_class { get };
+
+#avc:  denied  { call } for pid=4347 comm="SendOnLine" scontext=u:r:dhardware:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=0
+#avc:  denied  { call } for pid=4445 comm="SendOnLine" scontext=u:r:dhardware:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for pid=4445 comm="SendOnLine" scontext=u:r:dhardware:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=1
+allow dhardware av_codec_service:binder { call transfer };
+
+
+allow dhardware sa_foundation_abilityms:samgr_class{ get };
+allow dhardware dev_kmsg_file:chr_file{ open write };
+
+allow dhardware sa_foundation_wms:samgr_class { get };
+
+allow dhardware paramservice_socket:sock_file { write };
+
+binder_call(dhardware, powermgr);
+
+#avc:  denied  { get } for service=3301 pid=4564 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_powermgr_powermgr_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_powermgr_powermgr_service:samgr_class { get };
+

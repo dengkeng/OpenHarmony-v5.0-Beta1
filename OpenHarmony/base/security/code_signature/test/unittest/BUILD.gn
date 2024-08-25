@@ -1,0 +1,259 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("../../code_signature.gni")
+
+ohos_source_set("key_enable_src_set") {
+  sources = [
+    "${code_signature_root_dir}/services/key_enable/utils/src/cert_path.cpp",
+    "utils/src/enable_key_utils.cpp",
+  ]
+  include_dirs = [
+    "utils/include",
+    "${code_signature_root_dir}/services/key_enable/utils/include",
+  ]
+  configs = [
+    "${code_signature_root_dir}:common_utils_config",
+    "${code_signature_root_dir}:common_public_config",
+  ]
+  external_deps = [
+    "hilog:libhilog",
+    "init:libbegetutil",
+  ]
+  part_name = "code_signature"
+  subsystem_name = "security"
+}
+
+ohos_unittest("add_cert_path_unittest") {
+  module_out_path = "security/code_signature"
+  sources = [ "add_cert_path_test.cpp" ]
+}
+
+ohos_unittest("code_sign_utils_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [ "code_sign_utils_test.cpp" ]
+
+  deps = [
+    ":key_enable_src_set",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils:libcode_sign_utils",
+  ]
+
+  include_dirs = [
+    "utils/include",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils/include",
+    "${code_signature_root_dir}/utils/include",
+  ]
+
+  external_deps = [
+    "appverify:libhapverify",
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+}
+
+ohos_unittest("local_code_sign_unittest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [ "local_code_sign_test.cpp" ]
+  deps = [
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils:libcode_sign_utils",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign:liblocal_code_sign_sdk",
+  ]
+
+  include_dirs = [
+    "utils/include",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign/include",
+    "${code_signature_root_dir}/services/local_code_sign/include",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils/include",
+  ]
+  configs = [ "${code_signature_root_dir}:common_utils_config" ]
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "openssl:libcrypto_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("local_code_sign_utils_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [
+    "${code_signature_root_dir}/services/local_code_sign/src/local_sign_key.cpp",
+    "${code_signature_root_dir}/utils/src/cert_utils.cpp",
+    "local_code_sign_utils_test.cpp",
+    "mock/src/hks_api.cpp",
+    "mock/src/hks_api_mock_helper.cpp",
+  ]
+  deps = [ "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils:libcode_sign_utils" ]
+
+  include_dirs = [
+    "mock/include",
+    "utils/include",
+    "${code_signature_root_dir}/services/local_code_sign/include",
+  ]
+
+  configs = [ "${code_signature_root_dir}:common_utils_config" ]
+  external_deps = [
+    "c_utils:utils",
+    "fsverity-utils:libfsverity_utils",
+    "hilog:libhilog",
+    "huks:libhukssdk",
+    "openssl:libcrypto_shared",
+  ]
+}
+
+ohos_unittest("sign_and_enforce_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [ "sign_and_enforce_test.cpp" ]
+  deps = [
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils:libcode_sign_utils",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign:liblocal_code_sign_sdk",
+  ]
+
+  include_dirs = [
+    "utils/include",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign/include",
+    "${code_signature_root_dir}/services/local_code_sign/include",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils/include",
+  ]
+  configs = [ "${code_signature_root_dir}:common_utils_config" ]
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "openssl:libcrypto_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("multi_thread_local_sign_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [ "multi_thread_local_sign_test.cpp" ]
+  deps = [
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils:libcode_sign_utils",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign:liblocal_code_sign_sdk",
+  ]
+
+  include_dirs = [
+    "utils/include",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign/include",
+    "${code_signature_root_dir}/services/local_code_sign/include",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_utils/include",
+  ]
+  configs = [ "${code_signature_root_dir}:common_utils_config" ]
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "openssl:libcrypto_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_rust_static_library("rust_key_enable_lib") {
+  sources = [ "${code_signature_root_dir}/services/key_enable/src/lib.rs" ]
+  deps = [
+    "${code_signature_root_dir}/services/key_enable/utils:libkey_enable_utils",
+    "${rust_openssl_dir}/openssl:lib",
+    "//third_party/rust/crates/cxx:lib",
+  ]
+  external_deps = [
+    "c_utils:utils_rust",
+    "hilog:hilog_rust",
+    "hisysevent:hisysevent_rust",
+    "ylong_json:lib",
+  ]
+  if (build_variant == "root") {
+    rustenv = [ "code_signature_debuggable=on" ]
+  } else {
+    rustenv = [ "code_signature_debuggable=off" ]
+  }
+  crate_name = "key_enable"
+  crate_type = "rlib"
+  subsystem_name = "security"
+  part_name = "code_signature"
+}
+
+ohos_rust_unittest("rust_key_enable_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  crate_root = "./rust_key_enable_test.rs"
+  sources = [ "./rust_key_enable_test.rs" ]
+  deps = [ ":rust_key_enable_lib" ]
+  subsystem_name = "security"
+  part_name = "code_signature"
+}
+
+ohos_unittest("enable_verity_ioctl_unittest") {
+  module_out_path = "security/code_signature"
+  resource_config_file = "resources/ohos_test.xml"
+  sources = [
+    "enable_verity_test.cpp",
+    "utils/src/xpm_common.cpp",
+  ]
+
+  include_dirs = [ "utils/include" ]
+  configs = [
+    "${code_signature_root_dir}:common_utils_config",
+    "${code_signature_root_dir}:common_public_config",
+  ]
+  deps = [
+    ":key_enable_src_set",
+    "${code_signature_root_dir}/interfaces/innerkits/code_sign_attr_utils:libcode_sign_attr_utils",
+    "${selinux_dir}:libselinux",
+  ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+}
+
+group("unittest_group") {
+  testonly = true
+  if (!defined(ohos_lite)) {
+    deps = [
+      ":add_cert_path_unittest",
+      ":code_sign_utils_unittest",
+      ":enable_verity_ioctl_unittest",
+      ":local_code_sign_unittest",
+      ":local_code_sign_utils_unittest",
+      ":multi_thread_local_sign_unittest",
+      ":rust_key_enable_unittest",
+      ":sign_and_enforce_unittest",
+    ]
+  }
+}

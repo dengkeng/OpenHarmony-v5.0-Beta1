@@ -1,0 +1,91 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("fingerprintauthservice_config") {
+  include_dirs = [
+    "inc",
+    "../common/inc",
+    "../common/logs",
+    "../common/utils",
+  ]
+}
+
+ohos_source_set("fingerprintauthservice_source_set") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "src/fingerprint_auth_all_in_one_executor_hdi.cpp",
+    "src/fingerprint_auth_driver_hdi.cpp",
+    "src/fingerprint_auth_executor_callback_hdi.cpp",
+    "src/fingerprint_auth_interface_adapter.cpp",
+    "src/fingerprint_auth_service.cpp",
+    "src/memory_guard.cpp",
+    "src/sa_command_manager.cpp",
+    "src/sensor_illumination_manager.cpp",
+    "src/service_ex_manager.cpp",
+  ]
+
+  public_configs = [ ":fingerprintauthservice_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_fingerprint_auth:libfingerprint_auth_proxy_2.0",
+    "hilog:libhilog",
+    "miscdevice:vibrator_interface_native",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "user_auth_framework:userauth_executors",
+  ]
+
+  if (use_musl) {
+    if (use_jemalloc && use_jemalloc_dfx_intf) {
+      defines = [ "CONFIG_USE_JEMALLOC_DFX_INTF" ]
+    }
+  }
+
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+
+  subsystem_name = "useriam"
+  part_name = "fingerprint_auth"
+}
+
+ohos_shared_library("fingerprintauthservice") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  deps = [ ":fingerprintauthservice_source_set" ]
+
+  external_deps = [ "hilog:libhilog" ]
+
+  if (use_musl) {
+    version_script = "fingerprint_auth_service_map"
+  }
+
+  subsystem_name = "useriam"
+  part_name = "fingerprint_auth"
+}

@@ -1,0 +1,560 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+import("../../../../../os_account.gni")
+import("../../../os_account_service.gni")
+
+module_output_path = "os_account/services/os_account"
+
+config("os_account_manager_service_test_config") {
+  include_dirs = [
+    "${services_path}/accountmgr/test/mock/common",
+    "${services_path}/accountmgr/test/mock/os_account",
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/osaccount",
+    "${common_path}/log/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+  ]
+}
+
+ohos_moduletest("inner_os_account_manager_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "inner_os_account_manager_test.cpp" ]
+
+  configs = [ "${services_path}/accountmgr/test:accountmgr_test_config" ]
+
+  include_dirs = [
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/osaccount",
+    "${common_path}/log/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+  ]
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+ohos_moduletest("os_account_manager_service_module_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+  include_dirs = [
+    "${app_account_services_path}/test/mock/common",
+    "${services_path}/accountmgr/include/domain_account",
+    "${app_account_innerkits_native_path}/include",
+  ]
+  sources = [ "os_account_manager_service_module_test.cpp" ]
+  sources += [
+    "${app_account_services_path}/src/appaccount/app_account_control_manager.cpp",
+    "${app_account_services_path}/src/appaccount/app_account_manager_service.cpp",
+    "${app_account_services_path}/src/appaccount/app_account_stub.cpp",
+    "${app_account_services_path}/src/appaccount/inner_app_account_manager.cpp",
+    "${services_path}/accountmgr/test/mock/common/bundle_manager_adapter.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  sources += [
+    "${common_path}/utils/src/account_permission_manager.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_proxy.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_service.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_stub.cpp",
+    "${domain_account_framework_path}/src/domain_account_common.cpp",
+    "${innerkits_native_path}/src/account_info_parcel.cpp",
+    "${os_account_core_path}/src/os_account_event_proxy.cpp",
+    "${os_account_dfx_path}/hidumper_adapter/account_dump_helper.cpp",
+    "${os_account_dfx_path}/hisysevent_adapter/account_hisysevent_adapter.cpp",
+    "${os_account_dfx_path}/hitrace_adapter/hitrace_adapter.cpp",
+  ]
+  sources += account_service_sources_mock
+  sources += ability_base_sources
+  sources += account_data_storage_source
+  sources += account_iam_source
+  sources += app_account_sources_mock
+
+  configs = [
+    ":os_account_manager_service_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+
+    "${app_account_services_path}/test/mock:mock_accountmgr_config",
+    "${app_account_services_path}/test/mock:accountmgr_config",
+    "${app_account_services_path}/test/mock:ability_manager_config",
+  ]
+
+  version_script = "${services_path}/accountmgr/libaccountmgr.map"
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${innerkits_native_path}:libaccountkits",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+    "mbedtls:mbedtls_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  external_deps += [
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtoken_setproc",
+    "access_token:libtokenid_sdk",
+    "hicollie:libhicollie",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "huks:libhukssdk",
+    "init:libbegetutil",
+    "selinux_adapter:librestorecon",
+    "storage_service:storage_manager_sa_proxy",
+    "user_auth_framework:userauth_client",
+  ]
+
+  use_exceptions = true
+
+  part_name = "os_account"
+  cflags_cc = [ "-DACCOUNT_TEST" ]
+
+  if (security_guard_enabled) {
+    external_deps += [
+      "security_guard:libsg_collect_sdk",
+      "time_service:time_client",
+    ]
+  }
+}
+
+config("os_account_manager_service_create_os_account_test_config") {
+  include_dirs = [
+    "${services_path}/accountmgr/test/mock/os_account",
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/osaccount",
+    "${common_path}/log/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+  ]
+}
+
+ohos_moduletest("os_account_manager_service_create_os_account_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "os_account_manager_service_create_os_account_test.cpp" ]
+  sources += [
+    "${services_path}/accountmgr/test/mock/common/bundle_manager_adapter.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  configs = [
+    ":os_account_manager_service_create_os_account_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+  ]
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+config("os_account_manager_service_subscribe_test_config") {
+  include_dirs = [
+    "${services_path}/accountmgr/test/mock/os_account",
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/osaccount",
+    "${common_path}/log/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+    "${account_iam_interfaces_native_path}/include",
+    "${account_iam_framework_path}/test/unittest/include",
+  ]
+}
+
+ohos_moduletest("os_account_manager_service_subscribe_module_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "${os_account_path}/cfi_blocklist.txt"
+  }
+
+  module_out_path = module_output_path
+
+  include_dirs = [
+    "${app_account_services_path}/test/mock/common",
+    "${services_path}/accountmgr/include/domain_account",
+    "${app_account_innerkits_native_path}/include",
+  ]
+
+  sources = [ "os_account_manager_service_subscribe_module_test.cpp" ]
+  sources += [
+    "${app_account_services_path}/src/appaccount/app_account_control_manager.cpp",
+    "${app_account_services_path}/src/appaccount/app_account_manager_service.cpp",
+    "${app_account_services_path}/src/appaccount/app_account_stub.cpp",
+    "${app_account_services_path}/src/appaccount/inner_app_account_manager.cpp",
+    "${services_path}/accountmgr/test/mock/common/bundle_manager_adapter.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+
+  sources += [
+    "${common_path}/utils/src/account_permission_manager.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_proxy.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_service.cpp",
+    "${domain_account_framework_path}/src/domain_account_callback_stub.cpp",
+    "${domain_account_framework_path}/src/domain_account_common.cpp",
+    "${innerkits_native_path}/src/account_info_parcel.cpp",
+    "${os_account_core_path}/src/os_account_event_proxy.cpp",
+    "${os_account_dfx_path}/hidumper_adapter/account_dump_helper.cpp",
+    "${os_account_dfx_path}/hisysevent_adapter/account_hisysevent_adapter.cpp",
+    "${os_account_dfx_path}/hitrace_adapter/hitrace_adapter.cpp",
+  ]
+  sources += account_service_sources_mock
+  sources += ability_base_sources
+  sources += account_data_storage_source
+  sources += account_iam_source
+  sources += app_account_sources_mock
+
+  configs = [
+    ":os_account_manager_service_subscribe_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+
+    "${app_account_services_path}/test/mock:mock_accountmgr_config",
+    "${app_account_services_path}/test/mock:accountmgr_config",
+    "${app_account_services_path}/test/mock:ability_manager_config",
+  ]
+
+  version_script = "${services_path}/accountmgr/libaccountmgr.map"
+
+  deps = [
+    "${account_iam_framework_path}:account_iam_innerkits",
+    "${account_iam_framework_path}/test/unittest:account_iam_client_test",
+    "${common_path}:libaccount_common",
+    "${innerkits_native_path}:libaccountkits",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+    "mbedtls:mbedtls_shared",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+  part_name = "os_account"
+
+  external_deps += [
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtoken_setproc",
+    "access_token:libtokenid_sdk",
+    "hicollie:libhicollie",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "huks:libhukssdk",
+    "init:libbegetutil",
+    "selinux_adapter:librestorecon",
+    "storage_service:storage_manager_sa_proxy",
+    "user_auth_framework:userauth_client",
+  ]
+
+  use_exceptions = true
+
+  cflags_cc = []
+
+  if (has_pin_auth_part) {
+    cflags_cc += [ "-DHAS_PIN_AUTH_PART" ]
+    external_deps += [ "pin_auth:pinauth_framework" ]
+  }
+
+  if (has_user_auth_part) {
+    cflags_cc += [ "-DHAS_USER_AUTH_PART" ]
+    external_deps += [ "user_auth_framework:userauth_client" ]
+  }
+
+  if (security_guard_enabled) {
+    external_deps += [
+      "security_guard:libsg_collect_sdk",
+      "time_service:time_client",
+    ]
+  }
+  cflags_cc += [ "-DACCOUNT_TEST" ]
+}
+
+ohos_moduletest("os_account_control_file_manager_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "os_account_control_file_manager_test.cpp" ]
+  sources += [
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  configs = [
+    ":os_account_manager_service_subscribe_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+  ]
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+ohos_moduletest("os_account_database_operator_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "os_account_database_operator_test.cpp" ]
+  sources += [
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  configs = [
+    ":os_account_manager_service_subscribe_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+  ]
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+ohos_moduletest("os_account_file_operator_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "os_account_file_operator_test.cpp" ]
+  sources += [
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  configs = [
+    ":os_account_manager_service_subscribe_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+  ]
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+config("os_account_photo_operator_test_config") {
+  include_dirs = [
+    "${services_path}/accountmgr/test/mock/common",
+    "${services_path}/accountmgr/test/mock/os_account",
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/osaccount",
+    "${common_path}/log/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+  ]
+}
+
+ohos_moduletest("os_account_photo_operator_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  sources = [ "os_account_photo_operator_test.cpp" ]
+  sources += [
+    "${services_path}/accountmgr/src/osaccount/os_account_photo_operator.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/os_account_interface.cpp",
+    "${services_path}/accountmgr/test/mock/os_account/permission_kit.cpp",
+  ]
+  configs = [
+    ":os_account_photo_operator_test_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+  ]
+  deps = [
+    "${common_path}:libaccount_common",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "kv_store:distributeddata_inner",
+  ]
+  part_name = "os_account"
+}
+
+group("moduletest") {
+  testonly = true
+
+  deps = [
+    ":inner_os_account_manager_test",
+    ":os_account_control_file_manager_test",
+    ":os_account_database_operator_test",
+    ":os_account_file_operator_test",
+    ":os_account_manager_service_module_test",
+    ":os_account_photo_operator_test",
+  ]
+  if (os_account_enable_multiple_os_accounts || use_clang_coverage) {
+    deps += [ ":os_account_manager_service_subscribe_module_test" ]
+  }
+}

@@ -1,0 +1,47 @@
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+
+sec_comp_root_dir = "../../.."
+
+ohos_unittest("sec_comp_enhance_adapter_test") {
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+  module_out_path = part_name + "/" + part_name
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [ "unittest/src" ]
+
+  sources = [ "unittest/src/sec_comp_enhance_adapter_test.cpp" ]
+
+  configs = [ "${sec_comp_root_dir}/config:coverage_flags" ]
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  deps = [ "${sec_comp_root_dir}/frameworks:security_component_enhance_adapter_src_set" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+  ]
+}
+
+group("unittest") {
+  testonly = true
+  deps = [ ":sec_comp_enhance_adapter_test" ]
+}

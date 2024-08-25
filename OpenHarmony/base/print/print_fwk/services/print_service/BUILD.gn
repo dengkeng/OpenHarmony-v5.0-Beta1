@@ -1,0 +1,102 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/print/print_fwk/print.gni")
+import("//build/ohos.gni")
+
+cflags_cc = []
+
+config("print_service_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${print_path}/frameworks/models/print_models/include",
+  ]
+
+  cflags_cc += [ "-fno-exceptions" ]
+}
+
+ohos_shared_library("print_service") {
+  sources = [
+    "src/hisys_event_util.cpp",
+    "src/print_bms_death_recipient.cpp",
+    "src/print_bms_helper.cpp",
+    "src/print_callback_proxy.cpp",
+    "src/print_extension_callback_proxy.cpp",
+    "src/print_security_guard_info.cpp",
+    "src/print_security_guard_manager.cpp",
+    "src/print_service_ability.cpp",
+    "src/print_service_helper.cpp",
+    "src/print_service_stub.cpp",
+  ]
+
+  public_configs = [
+    "${c_utils_path}/base:utils_config",
+    ":print_service_config",
+  ]
+  include_dirs = [
+    "${print_path}/frameworks/innerkitsimpl/print_impl/include",
+    "${print_utils_path}/include",
+  ]
+  deps = [ "${print_path}/frameworks/models/print_models:print_models" ]
+
+  if (cups_enable) {
+    include_dirs += [ "//third_party/cups/cups-2.4.0" ]
+    sources += [ "src/print_cups_client.cpp" ]
+    cflags_cc += [ "-DCUPS_ENABLE" ]
+    deps += [
+      "//third_party/cups:third_party_cups",
+      "//third_party/cups-filters:third_party_cupsfilters",
+    ]
+  }
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:abilitykit_native",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "core_service:tel_core_service_api",
+    "distributed_notification_service:ans_innerkits",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+    "netmanager_base:net_conn_manager_if",
+    "os_account:os_account_innerkits",
+    "relational_store:native_rdb",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "wifi:wifi_sdk",
+  ]
+
+  if (security_guard_enabled) {
+    external_deps += [
+      "security_guard:libsg_collect_sdk",
+      "time_service:time_client",
+    ]
+
+    cflags_cc += [ "-DSECURITY_GUARDE_ENABLE" ]
+  }
+
+  subsystem_name = "print"
+  part_name = "print_fwk"
+}

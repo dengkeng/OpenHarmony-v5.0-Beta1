@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/powerDialog",
+    "pages/thermalHighDialog",
+    "pages/thermalLowDialog",
+    "pages/inputDialog"
+  ]
+}

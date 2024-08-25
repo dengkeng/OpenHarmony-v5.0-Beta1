@@ -1,0 +1,113 @@
+# Copyright (C) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+ohos_shared_library("tel_cellular_call") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "services/common/src/cellular_call_dump_helper.cpp",
+    "services/common/src/cellular_call_hisysevent.cpp",
+    "services/common/src/cellular_call_rdb_helper.cpp",
+    "services/common/src/emergency_utils.cpp",
+    "services/common/src/mmi_code_utils.cpp",
+    "services/common/src/module_service_utils.cpp",
+    "services/common/src/standardize_utils.cpp",
+    "services/connection/src/base_connection.cpp",
+    "services/connection/src/base_request.cpp",
+    "services/connection/src/cellular_call_connection_cs.cpp",
+    "services/connection/src/cellular_call_connection_ims.cpp",
+    "services/connection/src/cellular_call_connection_satellite.cpp",
+    "services/connection/src/config_request.cpp",
+    "services/connection/src/supplement_request_cs.cpp",
+    "services/connection/src/supplement_request_ims.cpp",
+    "services/control/src/cellular_call_config.cpp",
+    "services/control/src/cellular_call_supplement.cpp",
+    "services/control/src/control_base.cpp",
+    "services/control/src/cs_control.cpp",
+    "services/control/src/ims_control.cpp",
+    "services/control/src/ims_video_call_control.cpp",
+    "services/control/src/mmi_code_message.cpp",
+    "services/control/src/satellite_control.cpp",
+    "services/ims_service_interaction/src/ims_call_callback_stub.cpp",
+    "services/ims_service_interaction/src/ims_call_client.cpp",
+    "services/ims_service_interaction/src/ims_call_proxy.cpp",
+    "services/manager/src/cellular_call_callback.cpp",
+    "services/manager/src/cellular_call_handler.cpp",
+    "services/manager/src/cellular_call_register.cpp",
+    "services/manager/src/cellular_call_service.cpp",
+    "services/manager/src/cellular_call_stub.cpp",
+    "services/satellite_service_interaction/src/satellite_call_callback_stub.cpp",
+    "services/satellite_service_interaction/src/satellite_call_client.cpp",
+    "services/satellite_service_interaction/src/satellite_call_proxy.cpp",
+  ]
+
+  include_dirs = [
+    "interfaces/innerkits/ims",
+    "interfaces/innerkits/satellite",
+    "services/common/include",
+    "services/manager/include",
+    "services/control/include",
+    "services/connection/include",
+    "//third_party/libphonenumber/cpp/src",
+    "//third_party/libphonenumber/cpp/src/phonenumbers",
+  ]
+
+  defines = [
+    "TELEPHONY_LOG_TAG = \"CellularCall\"",
+    "LOG_DOMAIN = 0xD001F11",
+  ]
+
+  deps = [ "//third_party/libphonenumber/cpp:phonenumber_standard" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_base:zuri",
+    "c_utils:utils",
+    "call_manager:tel_call_manager_api",
+    "common_event_service:cesfwk_innerkits",
+    "core_service:libtel_common",
+    "core_service:tel_core_service_api",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "eventhandler:libeventhandler",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "resource_management:global_resmgr",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "telephony_data:tel_telephony_data",
+  ]
+
+  cflags_cc = [
+    "-fstack-protector-all",
+    "-O2",
+    "-D_FORTIFY_SOURCE=2",
+  ]
+
+  if (device_name == "rk3568") {
+    defines += [ "CALL_MANAGER_AUTO_START_OPTIMIZE" ]
+  }
+
+  part_name = "cellular_call"
+  subsystem_name = "telephony"
+}

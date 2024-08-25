@@ -1,0 +1,196 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the License);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+init_daemon_domain(audio_server);
+
+debug_only(`
+    allow audio_server sh:binder { call transfer };
+')
+
+# core func
+
+allow audio_server sa_audio_policy_service:samgr_class { add get };
+
+allow audio_server sa_pulseaudio_audio_service:samgr_class { get add };
+
+allow audio_server audio_server:binder { call transfer };
+allow audio_server audio_server:fd { use };
+
+allow audio_server dev_unix_socket:dir { search };
+allow audio_server dev_unix_socket:sock_file { write };
+
+allow audio_server native_socket:sock_file { write };
+
+allow audio_server init:unix_stream_socket { accept connectto getattr getopt listen setopt };
+
+allow audio_server kernel:unix_stream_socket { connectto };
+
+allow audio_server audio_server:unix_dgram_socket { getopt setopt };
+
+allow audio_server audio_server:netlink_kobject_uevent_socket { getattr read bind create setopt };
+
+# dir or file access
+
+allow audio_server data_data_pulse_dir:dir { add_name getattr open read remove_name search setattr write };
+allow audio_server data_data_pulse_dir:fifo_file { create getattr open read write setattr unlink };
+allow audio_server data_data_pulse_dir:file { create getattr ioctl read write open lock setattr unlink };
+allow audio_server data_data_pulse_dir:sock_file { create setattr unlink write };
+allowxperm audio_server data_data_pulse_dir:file ioctl { 0x5413 };
+
+allow audio_server system_bin_file:dir { getattr search };
+
+allow audio_server data_file:dir { search };
+
+allow audio_server data_data_file:dir { search };
+
+allow audio_server data_init_agent:dir { search };
+allow audio_server data_init_agent:file { ioctl open read append };
+allowxperm audio_server data_init_agent:file ioctl { 0x5413 };
+
+allow audio_server data_service_file:dir { search };
+allow audio_server data_service_el1_file:dir { add_name create getattr open read remove_name rmdir search setattr write };
+allow audio_server data_service_el1_file:file { create getattr ioctl lock map open read rename setattr unlink write };
+
+allow audio_server tracefs:dir { search };
+allow audio_server tracefs:file { open write };
+allow audio_server tracefs_trace_marker_file:file { open write };
+
+allow audio_server vendor_file:file { execute getattr map open read };
+
+allow audio_server vendor_bin_file:dir { search };
+
+allow audio_server vendor_etc_file:dir { search };
+allow audio_server vendor_etc_file:file { getattr read open };
+
+allow audio_server vendor_lib_file:file { read open getattr map execute };
+allow audio_server vendor_lib_file:dir { search };
+
+allow audio_server musl_param:file { open map read };
+
+allow audio_server dev_ashmem_file:chr_file { open };
+
+# /dev/input/
+allow audio_server dev_input_file:dir { search };
+allow audio_server dev_input_file:chr_file { read open };
+
+# /dev/bus/
+allow audio_server dev_bus:dir { search };
+allow audio_server dev_bus_usb_file:dir { open read search };
+allow audio_server dev_bus_usb_file:chr_file { getattr read open };
+
+# /sys/class/switch/
+allow audio_server sysfs_switch:file { open read getattr };
+
+# for application call
+
+allow audio_server normal_hap_attr:binder { call transfer };
+
+allow audio_server system_core_hap_attr:binder { call transfer };
+
+allow audio_server system_basic_hap_attr:binder { call transfer };
+
+# for audio hdf
+
+allow audio_server hdf_audio_hdi_service:hdf_devmgr_class { get };
+
+allow audio_server hdf_audio_hdi_usb_service:hdf_devmgr_class { get };
+
+allow audio_server hdf_audio_hdi_a2dp_service:hdf_devmgr_class { get };
+
+allow audio_server hdf_audio_bluetooth_hdi_service:hdf_devmgr_class { get };
+
+allow audio_server hdf_audio_manager_service:hdf_devmgr_class { get };
+
+allow audio_server hdf_effect_model_service:hdf_devmgr_class { get };
+
+allow audio_server audio_host:binder { call transfer };
+allow audio_server audio_host:fd { use };
+
+allow audio_server a2dp_host:binder { call };
+
+allow audio_server hdf_devmgr:binder { call transfer };
+
+# interact with others
+
+allow audio_server media_service:binder { call transfer };
+
+allow audio_server sa_media_monitor:samgr_class { get };
+allow audio_server media_monitor:binder { call };
+
+allow audio_server bluetooth_service:binder { call transfer };
+
+allow audio_server intell_voice_service:binder { call transfer };
+
+allow audio_server sa_distributeddata_service:samgr_class { get };
+allow audio_server distributeddata:binder { call transfer };
+allow audio_server distributeddata:fd { use };
+
+allow audio_server hdcd:binder { call };
+
+allow audio_server hidumper_service:fd { use };
+allow audio_server hidumper_service:fifo_file { write };
+
+allow audio_server sa_multimodalinput_service:samgr_class { get };
+allow audio_server multimodalinput:binder { call };
+allow audio_server multimodalinput:fd { use };
+allow audio_server multimodalinput:unix_stream_socket { read write };
+
+allow audio_server sa_param_watcher:samgr_class { get };
+allow audio_server param_watcher:binder { call transfer };
+
+allow audio_server sa_accesstoken_manager_service:samgr_class { get };
+
+allow audio_server sa_powermgr_powermgr_service:samgr_class { get };
+binder_call(audio_server, powermgr);
+
+allow audio_server sa_device_service_manager:samgr_class { get };
+
+allow audio_server accesstoken_service:binder { call transfer };
+
+allow audio_server sa_accessibleabilityms:samgr_class { get };
+allow audio_server accessibility:binder { call transfer };
+allow audio_server accessibility_param:file { map open read };
+
+allow audio_server privacy_service:binder { call transfer };
+allow audio_server sa_privacy_service:samgr_class { get };
+
+allow audio_server persist_audio_param:parameter_service { set };
+allow audio_server persist_param:parameter_service { set };
+
+allow audio_server paramservice_socket:sock_file { write };
+
+allow audio_server sa_foundation_devicemanager_service:samgr_class { get };
+allow audio_server foundation:binder { call transfer };
+
+allow audio_server sa_foundation_abilityms:samgr_class { get };
+
+allow audio_server sa_foundation_bms:samgr_class { get };
+
+allow audio_server sa_foundation_dms:samgr_class { get };
+
+allow audio_server sa_dataobs_mgr_service_service:samgr_class { get };
+
+allow audio_server device_manager:binder { transfer call };
+
+allow audio_server sa_resource_schedule:samgr_class { get };
+
+allow audio_server sa_sensor_service:samgr_class { get };
+allow audio_server sensors:binder { call transfer };
+
+allow audio_server sa_accountmgr:samgr_class { get };
+allow audio_server accountmgr:binder { call transfer };
+
+# others
+allow domain persist_audio_param:file { map open read };
+
+allow foundation audio_server:binder { call transfer };

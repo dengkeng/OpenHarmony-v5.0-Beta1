@@ -1,0 +1,96 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/update/sys_installer/sys_installer_default_cfg.gni")
+import("//build/ohos.gni")
+
+sys_installer_path = rebase_path("${sys_installer_absolutely_path}", ".")
+config("utils_exported_header") {
+  visibility = [ ":*" ]
+  include_dirs = [ "${sys_installer_path}/services/module_update/util/include" ]
+}
+
+ohos_static_library("module_update_utils") {
+  sources = [
+    "${sys_installer_path}/services/module_update/util/src/module_file.cpp",
+    "${sys_installer_path}/services/module_update/util/src/module_utils.cpp",
+    "${sys_installer_path}/services/module_update/util/src/module_zip_helper.cpp",
+  ]
+
+  public_configs = [ ":utils_exported_header" ]
+
+  public_external_deps = [
+    "cJSON:cjson",
+    "zlib:shared_libz",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "updater:libmiscinfo",
+    "updater:libpackageExt",
+    "updater:libupdaterlog",
+    "updater:libutils",
+  ]
+
+  if (defined(global_parts_info.startup_hvb)) {
+    sources += [ "${sys_installer_path}/services/module_update/util/src/module_hvb_ops.cpp" ]
+
+    defines = [ "SUPPORT_HVB" ]
+
+    external_deps += [
+      "hvb:libhvb_static",
+      "init:libfsmanager_static",
+    ]
+  }
+
+  part_name = "sys_installer"
+  subsystem_name = "updater"
+}
+
+config("module_update_exported_header") {
+  visibility = [ ":*" ]
+  include_dirs = [ "${sys_installer_path}/services/module_update/include" ]
+}
+
+ohos_static_library("module_update_static") {
+  sources = [
+    "${sys_installer_path}/services/module_update/src/module_dm.cpp",
+    "${sys_installer_path}/services/module_update/src/module_file_repository.cpp",
+    "${sys_installer_path}/services/module_update/src/module_loop.cpp",
+    "${sys_installer_path}/services/module_update/src/module_update.cpp",
+  ]
+
+  public_configs = [ ":module_update_exported_header" ]
+
+  public_deps = [
+    ":module_update_utils",
+    "${sys_installer_path}/interfaces/innerkits/ipc_client:module_update_client",
+  ]
+
+  external_deps = [
+    "samgr:samgr_common",
+    "updater:libupdaterlog",
+  ]
+
+  if (defined(global_parts_info.startup_hvb)) {
+    defines = [ "SUPPORT_HVB" ]
+
+    external_deps += [
+      "hvb:libhvb_static",
+      "init:libfsmanager_static",
+    ]
+  }
+
+  part_name = "sys_installer"
+  subsystem_name = "updater"
+}

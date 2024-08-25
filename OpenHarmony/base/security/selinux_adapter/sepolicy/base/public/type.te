@@ -1,0 +1,118 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type samgr, sadomain, domain;
+type accesstoken_service, sadomain, domain;
+type socperf_service, sadomain, domain;
+type distributedsche, sadomain, domain;
+type bluetooth_service, sadomain, domain;
+type accountmgr, sadomain, domain;
+type ui_service, sadomain, domain;
+type d_bms, sadomain, domain;
+type wifi_manager_service, sadomain, domain;
+type softbus_server, sadomain, domain;
+type usb_service, sadomain, domain;
+type medialibrary_service, sadomain, domain;
+type netdnative, domain;
+type netmanager, sadomain, domain;
+type sensors, sadomain, domain;
+type telephony_sa, sadomain, domain;
+type camera_service, sadomain, domain;
+type drm_service, sadomain, domain;
+type media_service, sadomain, domain;
+type param_watcher, sadomain, domain;
+type foundation, sadomain, domain;
+type powermgr, sadomain, domain;
+type token_sync_service, sadomain, domain;
+type memmgrservice, sadomain, domain;
+type accessibility, sadomain, domain;
+type distributedsched, sadomain, domain;
+type distributedfile, sadomain, domain;
+type deviceinfoservice, sadomain, domain;
+type distributedhardware_fwk, sadomain, domain;
+type nwebspawn, sadomain, domain;
+type upms, sadomain, domain;
+type mmi_uinput_service, sadomain, domain;
+type download_server, sadomain, domain;
+type msdp_sa, sadomain, domain;
+type misc, sadomain, domain;
+type netsysnative, sadomain, domain;
+type mdnsmanager, sadomain, domain;
+type hidumper_service, sadomain, domain;
+type bootanimation, sadomain, domain;
+type limit_domain, develop_domain;
+type device_usage_statistics_service, sadomain, domain;
+type thermal_sa, sadomain, domain;
+type nfc_service, sadomain, domain;
+
+type watchdog_service, sadomain, domain;
+type watchdog_service_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, watchdog_service_exec, watchdog_service);
+
+type lmks, sadomain, domain;
+type lmks_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, lmks_exec, lmks);
+
+type wifi_hal_service, sadomain,  domain;
+type wifi_hal_service_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, wifi_hal_service_exec, wifi_hal_service);
+
+type ispserver, sadomain, domain;
+type ispserver_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, ispserver_exec, ispserver);
+
+#domain_auto_transition_pattern(init, storage_daemon_exec, storage_daemon);
+
+type thermal_protector, sadomain, domain;
+type thermal_protector_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, thermal_protector_exec, thermal_protector);
+
+type sh, develop_domain;
+type sh_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, sh_exec, sh);
+
+type hdcd, native_system_domain, domain;
+type hdcd_exec, exec_attr, file_attr, system_file_attr;
+#domain_auto_transition_pattern(init, hdcd_exec, hdcd);
+
+type atm, native_system_domain, domain;
+type atm_exec, exec_attr, file_attr, system_file_attr;
+
+type bm, native_system_domain, domain;
+type bm_exec, exec_attr, file_attr, system_file_attr;
+
+type updater, native_system_domain, domain;
+type cupsd, sadomain,  domain;
+type file_guard_server, sadomain,  domain;
+
+type uitest_exec, exec_attr, file_attr, system_file_attr;
+type uitest, native_system_domain, domain;
+
+type wukong, native_system_domain, domain;
+type wukong_exec, exec_attr, file_attr, system_file_attr;
+
+type SP_daemon, native_system_domain, domain;
+type SP_daemon_exec, exec_attr, file_attr, system_file_attr;
+
+type aa, native_system_domain, domain;
+type aa_exec, exec_attr, file_attr, system_file_attr;
+
+type ark_aot_compiler, native_system_domain, domain;
+type ark_aot_compiler_exec, exec_attr, file_attr, system_file_attr;
+
+type compiler_service, sadomain, domain;
+
+debug_only(`
+    type console, sadomain, domain;
+    type su, native_system_domain, domain;
+')

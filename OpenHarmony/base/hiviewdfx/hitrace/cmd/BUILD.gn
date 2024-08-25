@@ -1,0 +1,151 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/hiviewdfx/hitrace/hitrace.gni")
+import("//build/ohos.gni")
+
+config("hitrace_osal_inner_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "./include",
+    "../interfaces/native/innerkits/include/hitrace_meter",
+    "../interfaces/native/innerkits/include/",
+  ]
+}
+
+ohos_static_library("hitrace_osal_inner") {
+  sources = [ "./src/hitrace_osal.cpp" ]
+  public_configs = [ ":hitrace_osal_inner_config" ]
+  external_deps = [ "init:libbegetutil" ]
+
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+ohos_executable("hitrace") {
+  install_enable = true
+
+  sources = [
+    "../frameworks/native/common_utils.cpp",
+    "./src/hitrace_cmd.cpp",
+  ]
+
+  deps = [
+    ":hitrace_osal_inner",
+    "../config:hitrace_utils",
+  ]
+
+  external_deps = []
+
+  if (defined(ohos_lite)) {
+    external_deps += [ "hilog_lite:hilog_lite" ]
+  } else {
+    external_deps += [ "hilog:libhilog" ]
+  }
+
+  if (device_company != "qemu" && support_executable_file) {
+    external_deps += [ "hiview:libucollection_client" ]
+  }
+  external_deps += [
+    "bounds_checking_function:libsec_static",
+    "cJSON:cjson",
+    "zlib:libz",
+  ]
+
+  include_dirs = [
+    "./include",
+    "../frameworks/include/",
+    "../interfaces/native/innerkits/include/hitrace_meter",
+  ]
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+ohos_executable("bytrace") {
+  install_enable = true
+  sources = [
+    "../frameworks/native/common_utils.cpp",
+    "./src/hitrace_cmd.cpp",
+  ]
+
+  deps = [
+    ":hitrace_osal_inner",
+    "../config:hitrace_utils",
+  ]
+
+  external_deps = []
+
+  if (defined(ohos_lite)) {
+    external_deps += [ "hilog_lite:hilog_lite" ]
+  } else {
+    external_deps += [ "hilog:libhilog" ]
+  }
+
+  if (device_company != "qemu" && support_executable_file) {
+    external_deps += [ "hiview:libucollection_client" ]
+  }
+  external_deps += [
+    "bounds_checking_function:libsec_static",
+    "cJSON:cjson",
+    "zlib:libz",
+  ]
+
+  include_dirs = [
+    "./include",
+    "../frameworks/include/",
+    "../interfaces/native/innerkits/include/hitrace_meter",
+  ]
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+ohos_prebuilt_etc("hitrace.cfg") {
+  source = "./config/hitrace.cfg"
+  relative_install_dir = "init"
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+ohos_executable("hitrace_example") {
+  sources = [ "example/hitrace_example.cpp" ]
+  deps = [ "../interfaces/native/innerkits:hitrace_meter" ]
+
+  external_deps = []
+  if (defined(ohos_lite)) {
+    external_deps += [ "hilog_lite:hilog_lite" ]
+  } else {
+    external_deps += [ "hilog:libhilog" ]
+  }
+  install_enable = false
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+ohos_rust_executable("hitrace_example_rust") {
+  sources = [ "example/rust/main.rs" ]
+
+  deps = [ "../interfaces/rust/innerkits/hitrace_meter:hitrace_meter_rust" ]
+  install_enable = false
+  subsystem_name = "hiviewdfx"
+  part_name = "hitrace"
+}
+
+group("hitrace_target") {
+  if (device_company != "qemu" && support_executable_file) {
+    deps = [
+      ":bytrace",
+      ":hitrace",
+      ":hitrace_example",
+    ]
+  }
+}

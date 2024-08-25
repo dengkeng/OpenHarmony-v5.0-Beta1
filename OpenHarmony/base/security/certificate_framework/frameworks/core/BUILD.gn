@@ -1,0 +1,64 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("cert_framework_config") {
+  include_dirs = [
+    "../../interfaces/innerkits/certificate",
+    "../../interfaces/innerkits/common",
+    "../../interfaces/innerkits/include",
+  ]
+}
+
+ohos_shared_library("certificate_framework_core") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    boundary_sanitize = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  subsystem_name = "security"
+  innerapi_tags = [ "platformsdk" ]
+  part_name = "certificate_framework"
+  public_configs = [ ":cert_framework_config" ]
+  configs = [ "../../config/build:coverage_flag" ]
+  include_dirs = [ "life/inc" ]
+  sources = [ "life/cf_api.c" ]
+
+  deps = [
+    "../ability:libcertificate_framework_ability",
+    "../adapter:libcertificate_framework_adapter",
+    "../common:libcertificate_framework_common_static",
+    "cert:libcertificate_framework_cert_object",
+    "extension:libcertificate_framework_extension_object",
+    "v1.0:libcertificate_framework_vesion1",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "crypto_framework:crypto_framework_lib",
+    "hilog:libhilog",
+  ]
+
+  ldflags = [ "-Wl,--whole-archive" ]
+
+  cflags = [
+    "-DHILOG_ENABLE",
+    "-Wall",
+    "-Werror",
+  ]
+}

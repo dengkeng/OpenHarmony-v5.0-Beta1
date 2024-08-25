@@ -1,0 +1,84 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#####################hydra-fuzz###################
+import("//base/request/request/request_aafwk.gni")
+import("//build/config/features.gni")
+import("//build/ohos.gni")
+import("//build/test.gni")
+
+##############################fuzztest##########################################
+ohos_fuzztest("DownloadUploadManagerFuzzTest") {
+  module_out_path = "request/request"
+
+  fuzz_config_file = "../../../test/fuzztest/downloaduploadmanager_fuzzer"
+
+  include_dirs = [
+    "../../../frameworks/js/napi/include",
+    "../../../frameworks/native/include",
+  ]
+
+  cflags = [
+    "-g",
+    "-O0",
+    "-Wno-unused-variable",
+    "-fno-omit-frame-pointer",
+  ]
+
+  sources = [
+    "../../../frameworks/native/src/request.cpp",
+    "../../../frameworks/native/src/request_manager.cpp",
+    "../../../frameworks/native/src/request_manager_impl.cpp",
+    "../../../frameworks/native/src/request_running_task_count.cpp",
+    "../../../frameworks/native/src/request_sync_load_callback.cpp",
+    "../../../frameworks/native/src/response_message_receiver.cpp",
+    "../../../frameworks/native/src/runcount_notify_stub.cpp",
+    "downloaduploadmanager_fuzzer.cpp",
+  ]
+
+  deps = [
+    "../../../common:request_common_static",
+    "../../../frameworks/js/napi:request_static",
+    "../../../frameworks/native:request_native",
+  ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:data_ability_helper",
+    "ability_runtime:napi_base_context",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "relational_store:native_dataability",
+    "relational_store:native_rdb",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+###############################################################################
+group("fuzztest") {
+  testonly = true
+  deps = []
+  deps += [
+    # deps file
+    ":DownloadUploadManagerFuzzTest",
+  ]
+}
+###############################################################################

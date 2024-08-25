@@ -1,0 +1,46 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../services/engine/engine_sa.gni")
+
+ohos_prebuilt_etc("dupdate_config.json") {
+  source = "$update_service_dupdate_config_path"
+  relative_install_dir = "update"
+  install_images = [
+    "updater",
+    "system",
+  ]
+  part_name = "$updateengine_part_name"
+  subsystem_name = "updater"
+}
+
+ohos_prebuilt_etc("updater_sa.cfg") {
+  source = "$update_service_updater_sa_cfg_path"
+  relative_install_dir = "init"
+  part_name = "$updateengine_part_name"
+  subsystem_name = "updater"
+}
+
+ohos_shared_library("$updateengine_library_name") {
+  shlib_type = "sa"
+  include_dirs = sa_include_dirs
+  sources = sa_sources
+  deps = sa_deps
+  external_deps = sa_external_deps
+  public_deps = sa_public_deps
+  part_name = "$updateengine_part_name"
+  subsystem_name = "updater"
+  defines = sa_defines
+  cflags = sa_cflags
+}

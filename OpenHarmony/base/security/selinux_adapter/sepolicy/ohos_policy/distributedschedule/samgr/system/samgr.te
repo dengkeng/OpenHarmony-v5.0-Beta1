@@ -1,0 +1,101 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+init_daemon_domain(samgr);
+
+allow samgr sadomain:binder { call transfer };
+allow samgr sadomain:dir { search };
+allow samgr sadomain:file { open read };
+allow samgr sadomain:process { getattr };
+
+allow samgr hdfdomain:binder { transfer };
+allow samgr hdfdomain:dir { search };
+allow samgr hdfdomain:file { open read };
+allow samgr hdfdomain:process { getattr };
+
+debug_only(`
+    allow samgr sh:dir { search };
+    allow samgr sh:file { open read };
+    allow samgr sh:process { getattr };
+    allow samgr sh:binder { call transfer };
+')
+
+allow samgr bootevent_samgr_param:parameter_service { set };
+
+allow samgr data_file:dir { search };
+
+allow samgr dev_binder_file:chr_file { ioctl };
+
+allow samgr dev_unix_socket:dir { search };
+
+allow samgr dslm_service:file { getattr open read };
+
+allow samgr kernel:unix_stream_socket { connectto };
+
+allow samgr normal_hap_attr:binder { call };
+allow samgr normal_hap_attr:dir { search };
+allow samgr normal_hap_attr:file { open read };
+allow samgr normal_hap_attr:process { getattr };
+allow samgr ohos_param:parameter_service { set };
+
+allow samgr paramservice_socket:sock_file { write };
+
+allow samgr softbus_server:tcp_socket { read setopt shutdown write };
+
+allow samgr samgr:binder { set_context_mgr };
+allow samgr samgr:unix_dgram_socket { getopt setopt };
+
+allow samgr security:security { check_context compute_av };
+
+allow samgr selinuxfs:dir { open read search };
+allow samgr selinuxfs:file { map open read write };
+
+#avc:  denied  { use } for  pid=677 comm="THREAD_POOL" path="socket:[36108]" dev="sockfs" ino=36108 scontext=u:r:samgr:s0 tcontext=u:r:softbus_server:s0 tclass=fd permissive=1
+#avc:  denied  { shutdown } for  pid=246 comm="THREAD_POOL" laddr=192.168.43.222 lport=34003 faddr=192.168.43.64 fport=39734 scontext=u:r:samgr:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { shutdown } for  pid=246 comm="samgr" laddr=192.168.43.222 lport=48160 faddr=192.168.43.64 fport=40605 scontext=u:r:samgr:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+allow samgr softbus_server:tcp_socket { read write setopt shutdown };
+allow samgr softbus_server:fd { use };
+
+#avc:  denied  { get } for service=4700 pid=245 scontext=u:r:samgr:s0 tcontext=u:object_r:sa_softbus_service:s0 tclass=samgr_class permissive=1
+allow samgr sa_softbus_service:samgr_class { get };
+
+allow samgr system_basic_hap_attr:binder { call };
+allow samgr system_basic_hap_attr:dir { search };
+allow samgr system_basic_hap_attr:file { open read };
+allow samgr system_basic_hap_attr:process { getattr };
+
+allow samgr system_core_hap_attr:binder { call };
+allow samgr system_core_hap_attr:dir { search };
+allow samgr system_core_hap_attr:file { open read };
+allow samgr system_core_hap_attr:process { getattr };
+
+allow samgr system_bin_file:dir { search };
+
+allow samgr system_file:file { getattr map open read };
+
+allow samgr system_profile_file:dir { open read };
+
+#avc:  denied  { getopt } for  pid=245 comm="samgr" scontext=u:r:samgr:s0 tcontext=u:r:samgr:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { setopt } for  pid=245 comm="samgr" scontext=u:r:samgr:s0 tcontext=u:r:samgr:s0 tclass=unix_dgram_socket permissive=1
+allow samgr samgr:unix_dgram_socket { getopt setopt };
+
+#avc:  denied  { set } for parameter=bootevent.samgr.ready.true pid=254 uid=5555 gid=5555 scontext=u:r:samgr:s0 tcontext=u:object_r:bootevent_param:s0 tclass=parameter_service permissive=0
+allow samgr bootevent_param:parameter_service { set };
+
+allowxperm samgr dev_binder_file:chr_file ioctl { 0x6207 };
+
+allow samgr samgr_perf_param:file { map open read };
+
+allow samgr samgr_writable_param:parameter_service { set };
+
+allow domain samgr_writable_param:file { map open read };

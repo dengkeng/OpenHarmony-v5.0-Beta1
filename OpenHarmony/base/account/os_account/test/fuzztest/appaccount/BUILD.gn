@@ -1,0 +1,62 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("fuzztest") {
+  testonly = true
+  deps = []
+
+  deps += [
+    # deps file
+    "addaccount_fuzzer:AddAccountFuzzTest",
+    "addaccountimplicitly_fuzzer:AddAccountImplicitlyFuzzTest",
+    "authenticate_fuzzer:AuthenticateFuzzTest",
+    "checkaccountlabels_fuzzer:CheckAccountLabelsFuzzTest",
+    "checkappaccess_fuzzer:CheckAppAccessFuzzTest",
+    "checkappaccountsyncenable_fuzzer:CheckAppAccountSyncEnableFuzzTest",
+    "checkauthtokenvisibility_fuzzer:CheckAuthTokenVisibilityFuzzTest",
+    "checkoauthtokenvisibility_fuzzer:CheckOAuthTokenVisibilityFuzzTest",
+    "createaccount_fuzzer:CreateAccountFuzzTest",
+    "createaccountimplicitly_fuzzer:CreateAccountImplicitlyFuzzTest",
+    "deleteaccount_fuzzer:DeleteAccountFuzzTest",
+    "deleteaccountcredential_fuzzer:DeleteAccountCredentialFuzzTest",
+    "deleteauthtoken_fuzzer:DeleteAuthTokenFuzzTest",
+    "deleteoauthtoken_fuzzer:DeleteOAuthTokenFuzzTest",
+    "disableappaccess_fuzzer:DisableAppAccessFuzzTest",
+    "enableappaccess_fuzzer:EnableAppAccessFuzzTest",
+    "getaccountcredential_fuzzer:GetAccountCredentialFuzzTest",
+    "getaccountextrainfo_fuzzer:GetAccountExtraInfoFuzzTest",
+    "getallaccessibleaccounts_fuzzer:GetAllAccessibleAccountsFuzzTest",
+    "getallaccounts_fuzzer:GetAllAccountsFuzzTest",
+    "getalloauthtokens_fuzzer:GetAllOAuthTokensFuzzTest",
+    "getassociateddata_fuzzer:GetAssociatedDataFuzzTest",
+    "getauthenticatorcallback_fuzzer:GetAuthenticatorCallbackFuzzTest",
+    "getauthenticatorinfo_fuzzer:GetAuthenticatorInfoFuzzTest",
+    "getauthlist_fuzzer:GetAuthListFuzzTest",
+    "getauthtoken_fuzzer:GetAuthTokenFuzzTest",
+    "getoauthlist_fuzzer:GetOAuthListFuzzTest",
+    "getoauthtoken_fuzzer:GetOAuthTokenFuzzTest",
+    "selectaccountsbyoptions_fuzzer:SelectAccountsByOptionsFuzzTest",
+    "setaccountcredential_fuzzer:SetAccountCredentialFuzzTest",
+    "setaccountextrainfo_fuzzer:SetAccountExtraInfoFuzzTest",
+    "setappaccess_fuzzer:SetAppAccessFuzzTest",
+    "setappaccountsyncenable_fuzzer:SetAppAccountSyncEnableFuzzTest",
+    "setassociateddata_fuzzer:SetAssociatedDataFuzzTest",
+    "setauthenticatorproperties_fuzzer:SetAuthenticatorPropertiesFuzzTest",
+    "setauthtokenvisibility_fuzzer:SetAuthTokenVisibilityFuzzTest",
+    "setoauthtoken_fuzzer:SetOAuthTokenFuzzTest",
+    "setoauthtokenvisibility_fuzzer:SetOAuthTokenVisibilityFuzzTest",
+    "subscribeappaccount_fuzzer:SubscribeAppAccountFuzzTest",
+    "unsubscribeappaccount_fuzzer:UnsubscribeAppAccountFuzzTest",
+    "verifycredential_fuzzer:VerifyCredentialFuzzTest",
+  ]
+}

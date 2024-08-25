@@ -1,0 +1,92 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#####################hydra-fuzz###################
+import("//build/config/features.gni")
+import("//build/ohos.gni")
+import("//build/test.gni")
+CELLULAR_CALL_PATH = "../../.."
+
+##############################fuzztest##########################################
+ohos_fuzztest("RegisterCallManagerCallBackFuzzTest") {
+  module_output_path = "cellular_call/cellular_call"
+  module_out_path = module_output_path
+  fuzz_config_file =
+      "${CELLULAR_CALL_PATH}/test/fuzztest/registercallmanagercallback_fuzzer"
+
+  include_dirs = [
+    "${CELLULAR_CALL_PATH}/test/fuzztest/common_fuzzer",
+    "${CELLULAR_CALL_PATH}/services/common/include",
+    "${CELLULAR_CALL_PATH}/services/manager/include",
+    "${CELLULAR_CALL_PATH}/services/control/include",
+    "${CELLULAR_CALL_PATH}/services/connection/include",
+    "//third_party/libphonenumber/cpp/src",
+    "//third_party/libphonenumber/cpp/src/phonenumbers",
+  ]
+
+  deps = [
+    "${CELLULAR_CALL_PATH}:tel_cellular_call",
+    "${CELLULAR_CALL_PATH}/interfaces/innerkits/ims:tel_ims_call_api",
+    "${CELLULAR_CALL_PATH}/interfaces/innerkits/satellite:tel_satellite_call_api",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "call_manager:tel_call_manager_api",
+    "common_event_service:cesfwk_innerkits",
+    "core_service:libtel_common",
+    "core_service:tel_core_service_api",
+    "eventhandler:libeventhandler",
+    "graphic_surface:surface",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "resource_management:global_resmgr",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "telephony_data:tel_telephony_data",
+  ]
+  defines = [
+    "TELEPHONY_LOG_TAG = \"CellularCallFuzzTest\"",
+    "LOG_DOMAIN = 0xD000F00",
+  ]
+
+  cflags = [
+    "-g",
+    "-O0",
+    "-Wno-unused-variable",
+    "-fno-omit-frame-pointer",
+  ]
+  sources = [
+    "${CELLULAR_CALL_PATH}/test/fuzztest/common_fuzzer/addcellularcalltoken_fuzzer.cpp",
+    "registercallmanagercallback_fuzzer.cpp",
+  ]
+}
+
+###############################################################################
+group("fuzztest") {
+  testonly = true
+  deps = []
+  deps += [
+    # deps file
+    ":RegisterCallManagerCallBackFuzzTest",
+  ]
+}
+###############################################################################

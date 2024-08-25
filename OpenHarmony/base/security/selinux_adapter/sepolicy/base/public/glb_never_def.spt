@@ -1,0 +1,18 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+define(`never_write_file', `{ append create link unlink relabelfrom rename setattr write }')
+define(`never_rw_file', `{ never_write_file open read ioctl lock watch watch_mount watch_sb watch_with_perm watch_reads }')
+define(`never_execute_file', `{ execute execute_no_trans}')
+define(`never_rwx_file', `{ never_rw_file never_execute_file }')
+define(`never_write_dir', `{ add_name create link relabelfrom remove_name rename reparent rmdir setattr write }')

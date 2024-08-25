@@ -1,0 +1,122 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("./../usbmgr.gni")
+
+config("usbsrv_private_config") {
+  include_dirs = [ "${usb_manager_path}/interfaces/innerkits/native/include" ]
+}
+
+config("usbsrv_public_config") {
+  include_dirs = [
+    "native/include",
+    "${usb_manager_path}/services/zidl/include",
+    "${usb_manager_path}/utils/native/include",
+    "./../../../../drivers/peripheral/usb/hdi_service/include",
+    "./../../../../drivers/peripheral/usb/utils/include",
+  ]
+}
+
+ohos_shared_library("usbservice") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  install_enable = true
+  sources = [
+    "${usb_manager_path}/services/zidl/src/usb_srv_stub.cpp",
+    "native/src/usb_descriptor_parser.cpp",
+    "native/src/usb_device_manager.cpp",
+    "native/src/usb_function_switch_window.cpp",
+    "native/src/usb_host_manager.cpp",
+    "native/src/usb_port_manager.cpp",
+    "native/src/usb_report_sys_event.cpp",
+    "native/src/usb_right_database.cpp",
+    "native/src/usb_right_db_helper.cpp",
+    "native/src/usb_right_manager.cpp",
+    "native/src/usb_serial_reader.cpp",
+    "native/src/usb_server_event_handler.cpp",
+    "native/src/usb_service.cpp",
+    "native/src/usb_service_subscriber.cpp",
+    "native/src/usbd_bulkcallback_impl.cpp",
+  ]
+
+  if (distributed_notification_enable) {
+    sources += [ "native/src/usb_mass_storage_notification.cpp" ]
+  }
+
+  configs = [
+    "${utils_path}:utils_config",
+    ":usbsrv_private_config",
+  ]
+
+  public_configs = [ ":usbsrv_public_config" ]
+
+  defines = []
+
+  deps = [ "//third_party/cJSON:cjson" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "drivers_interface_usb:libusb_proxy_1.1",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+    "relational_store:native_rdb",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  if (distributed_notification_enable) {
+    external_deps += [
+      "distributed_notification_service:ans_innerkits",
+      "i18n:intl_util",
+      "resource_management:global_resmgr",
+    ]
+    defines += [ "USB_NOTIFICATION_ENABLE" ]
+  }
+
+  if (usb_manager_feature_pop_up_func_switch_model) {
+    defines += [ "USB_FUNC_SWITCH_MODE" ]
+  }
+  subsystem_name = "usb"
+  part_name = "usb_manager"
+}
+
+ohos_prebuilt_etc("usb_service.init") {
+  source = "usb_service.cfg"
+  relative_install_dir = "init"
+  subsystem_name = "usb"
+  part_name = "usb_manager"
+}

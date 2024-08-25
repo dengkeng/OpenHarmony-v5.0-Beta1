@@ -1,0 +1,148 @@
+{
+    "string": [
+        {
+            "name": "delete_record_title",
+            "value": "Delete facial data"
+        },
+        {
+            "name": "enroll_button_content",
+            "value": "START AGAIN"
+        },
+        {
+            "name": "enroll_face_guide_title",
+            "value": "Set up Face Recognition"
+        },
+        {
+            "name": "enroll_info_fail",
+            "value": "Make sure the camera is clean and your face is fully visible. Enroll your face in a well-lit environment (avoid direct sunlight)."
+        },
+        {
+            "name": "enroll_success",
+            "value": "Setup complete"
+        },
+        {
+            "name": "enrolling",
+            "value": "Set up Face Recognition"
+        },
+        {
+            "name": "enrolling_fail",
+            "value": "Setup failed"
+        },
+        {
+            "name": "face_3dguide_info_2",
+            "value": "Face Recognition verifies your identity based on your facial features. To learn more, see the"
+        },
+        {
+            "name": "face_announce_tip1_item2_3d",
+            "value": "2.Face Recognition is less secure than other unlock methods such as Pattern, PIN, and Password."
+        },
+        {
+            "name": "face_checker",
+            "value": "Face Recognition"
+        },
+        {
+            "name": "face_feature_desc",
+            "value": "Feature description"
+        },
+        {
+            "name": "face_guide_2d_announce",
+            "value": "By touching GET STARTED, you agree to the "
+        },
+        {
+            "name": "face_guide_2d_announce_link",
+            "value": "Statement About Face Recognition"
+        },
+        {
+            "name": "face_guide_2d_way",
+            "value": "Before starting, make sure the camera is clean, your face is unobstructed, and the environment is well-lit."
+        },
+        {
+            "name": "face_intro",
+            "value": "Make sure your face is fully in the frame"
+        },
+        {
+            "name": "face_recognition_guide",
+            "value": "Get started"
+        },
+        {
+            "name": "face_recognize_announce_message_01",
+            "value": "Face Recognition is a biometric identification technology that allows your phone to recognize the features of your face. It uses the front camera to capture facial data, and then compares it to pre-stored data to quickly verify your identity. You can use this feature to unlock your device, open locked apps, and more."
+        },
+        {
+            "name": "face_recognize_announce_message_02",
+            "value": "Please note the following when setting up this feature:"
+        },
+        {
+            "name": "face_recognize_announce_message_03",
+            "value": "1.Make sure that the camera lens is clean."
+        },
+        {
+            "name": "face_recognize_announce_message_04",
+            "value": "2.Scan your face in a well-lit environment, avoiding direct sunlight."
+        },
+        {
+            "name": "face_recognize_announce_message_05",
+            "value": "3.Avoid covering your face with items of clothing, hair, sunglasses, masks, or thick makeup."
+        },
+        {
+            "name": "face_recognize_announce_message_06",
+            "value": "4.Make sure your face is completely displayed in the frame. Look straight at the camera, and avoid raising and lowering your head or closing your eyes."
+        },
+        {
+            "name": "face_recognize_announce_message_07",
+            "value": "5.Make sure that no one else appears in the frame."
+        },
+        {
+            "name": "face_recognize_announce_message_08",
+            "value": "Please note the following when using Face Recognition:"
+        },
+        {
+            "name": "face_recognize_announce_message_09",
+            "value": "1.Face Recognition may not work as well in dim, very bright, or backlit environments, or if the angle between your face and the camera is too great."
+        },
+        {
+            "name": "face_recognize_announce_message_10",
+            "value": "3. There is a small chance that your device may be unlocked by people that closely resemble you or by objects that represent close depictions of your likeness."
+        },
+        {
+            "name": "face_recognize_announce_message_11",
+            "value": "4. To prevent Face Recognition from being used without your consent, please exercise caution before allowing other people to use your device."
+        },
+        {
+            "name": "face_recognize_announce_message_12",
+            "value": "5. The functionality of Face Recognition may also be affected in scenarios other than those described above."
+        },
+        {
+            "name": "face_recognize_announce_message_13",
+            "value": "Privacy Statement"
+        },
+        {
+            "name": "face_recognize_announce_message_14_1",
+            "value": "Your"
+        },
+        {
+            "name": "face_recognize_announce_message_14_2",
+            "value": " is rigorously protected. This data is encrypted and stored in an isolated zone on your device, where it will not be copied, and cannot be copied or accessed by any app."
+        },
+        {
+            "name": "face_recognize_announce_message_14_3",
+            "value": " facial data"
+        },
+        {
+            "name": "face_record_cancel",
+            "value": "Cancel"
+        },
+        {
+            "name": "face_record_delete",
+            "value": "Delete"
+        },
+        {
+            "name": "period",
+            "value": "."
+        },
+        {
+            "name": "wether_delete_face_data",
+            "value": "After deletion, features based on facial data will not be available. delete or not?"
+        }
+    ]
+}

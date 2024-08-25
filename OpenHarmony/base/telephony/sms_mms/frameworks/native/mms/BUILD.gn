@@ -1,0 +1,72 @@
+# Copyright (C) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("mms_native_config") {
+  visibility = [ "*:*" ]
+  include_dirs = [
+    "include",
+    "include/utils",
+    "../../../interfaces/innerkits",
+  ]
+}
+
+ohos_source_set("mms_native_source") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "src/mms_address.cpp",
+    "src/mms_attachment.cpp",
+    "src/mms_body.cpp",
+    "src/mms_body_part.cpp",
+    "src/mms_body_part_header.cpp",
+    "src/mms_buffer.cpp",
+    "src/mms_content_param.cpp",
+    "src/mms_content_type.cpp",
+    "src/mms_decode_buffer.cpp",
+    "src/mms_encode_buffer.cpp",
+    "src/mms_encode_string.cpp",
+    "src/mms_header.cpp",
+    "src/mms_header_categ.cpp",
+    "src/mms_msg.cpp",
+    "src/utils/mms_base64.cpp",
+    "src/utils/mms_charset.cpp",
+    "src/utils/mms_quoted_printable.cpp",
+  ]
+
+  include_dirs = [ ":mms_native_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "core_service:libtel_common",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = [
+    "TELEPHONY_LOG_TAG = \"MmsApi\"",
+    "LOG_DOMAIN = 0xD001F06",
+  ]
+
+  public_configs = [ ":mms_native_config" ]
+
+  part_name = "sms_mms"
+  subsystem_name = "telephony"
+}

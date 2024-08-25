@@ -1,0 +1,159 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../thermalmgr.gni")
+
+config("thermalsrv_public_config") {
+  include_dirs = [
+    "native/include/",
+    "native/include/thermal_action",
+    "native/include/thermal_observer",
+    "native/include/thermal_policy",
+    "native/include/thermal_observer/state_machine",
+    "native/include/thermal_action/action",
+    "native/include/thermal_action/action/action_soc",
+    "${thermal_inner_api}/native/include",
+  ]
+}
+
+ohos_shared_library("thermalservice") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  sources = [
+    "native/src/fan_callback.cpp",
+    "native/src/thermal_action/action/action_application_process.cpp",
+    "native/src/thermal_action/action/action_charger.cpp",
+    "native/src/thermal_action/action/action_display.cpp",
+    "native/src/thermal_action/action/action_node.cpp",
+    "native/src/thermal_action/action/action_popup.cpp",
+    "native/src/thermal_action/action/action_shutdown.cpp",
+    "native/src/thermal_action/action/action_soc/action_cpu_big.cpp",
+    "native/src/thermal_action/action/action_soc/action_cpu_boost.cpp",
+    "native/src/thermal_action/action/action_soc/action_cpu_isolate.cpp",
+    "native/src/thermal_action/action/action_soc/action_cpu_lit.cpp",
+    "native/src/thermal_action/action/action_soc/action_cpu_med.cpp",
+    "native/src/thermal_action/action/action_soc/action_gpu.cpp",
+    "native/src/thermal_action/action/action_soc/soc_action_base.cpp",
+    "native/src/thermal_action/action/action_thermal_level.cpp",
+    "native/src/thermal_action/action/action_voltage.cpp",
+    "native/src/thermal_action/action/action_volume.cpp",
+    "native/src/thermal_action/thermal_action_factory.cpp",
+    "native/src/thermal_action/thermal_action_manager.cpp",
+    "native/src/thermal_action/thermal_timer.cpp",
+    "native/src/thermal_callback.cpp",
+    "native/src/thermal_mgr_dumper.cpp",
+    "native/src/thermal_observer/state_machine/charger_state_collection.cpp",
+    "native/src/thermal_observer/state_machine/extend_state_collection.cpp",
+    "native/src/thermal_observer/state_machine/scene_state_collection.cpp",
+    "native/src/thermal_observer/state_machine/screen_state_collection.cpp",
+    "native/src/thermal_observer/state_machine/state_collection_factory.cpp",
+    "native/src/thermal_observer/state_machine/state_machine.cpp",
+    "native/src/thermal_observer/thermal_common_event_receiver.cpp",
+    "native/src/thermal_observer/thermal_observer.cpp",
+    "native/src/thermal_observer/thermal_sensor_info.cpp",
+    "native/src/thermal_observer/thermal_service_subscriber.cpp",
+    "native/src/thermal_policy/fan_fault_detect.cpp",
+    "native/src/thermal_policy/thermal_config_base_info.cpp",
+    "native/src/thermal_policy/thermal_config_sensor_cluster.cpp",
+    "native/src/thermal_policy/thermal_policy.cpp",
+    "native/src/thermal_policy/thermal_srv_config_parser.cpp",
+    "native/src/thermal_service.cpp",
+  ]
+
+  configs = [
+    "${utils_path}:utils_config",
+    "${utils_path}:coverage_flags",
+  ]
+
+  defines = []
+
+  public_configs = [ ":thermalsrv_public_config" ]
+
+  deps = [
+    "${thermal_service_zidl}:thermalmgr_proxy",
+    "${thermal_service_zidl}:thermalmgr_stub",
+    "${utils_path}:thermal_utils",
+  ]
+
+  external_deps = [ "power_manager:power_permission" ]
+  external_deps += [
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "ability_runtime:wantagent_innerkits",
+    "appspawn:appspawn_socket_client",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "drivers_interface_battery:libbattery_proxy_2.0",
+    "drivers_interface_thermal:libthermal_proxy_1.1",
+    "ffrt:libffrt",
+    "hdf_core:libhdi",
+    "hdf_core:libpub_utils",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "image_framework:image_native",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "libxml2:libxml2",
+    "power_manager:power_ffrt",
+    "power_manager:power_sysparam",
+    "power_manager:powermgr_client",
+    "safwk:system_ability_fwk",
+    "time_service:time_client",
+    "window_manager:libdm",
+  ]
+
+  if (has_thermal_audio_framework_part) {
+    defines += [ "HAS_THERMAL_AUDIO_FRAMEWORK_PART" ]
+    external_deps += [ "audio_framework:audio_client" ]
+  }
+
+  if (has_thermal_display_manager_part) {
+    external_deps += [ "display_manager:displaymgr" ]
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.resourceschedule_soc_perf)) {
+    external_deps += [ "soc_perf:socperf_client" ]
+    defines += [ "SOC_PERF_ENABLE" ]
+  }
+
+  if (defined(global_parts_info) &&
+      defined(global_parts_info.powermgr_battery_manager)) {
+    defines += [ "BATTERY_MANAGER_ENABLE" ]
+    external_deps += [ "battery_manager:batterysrv_client" ]
+  }
+
+  if (build_variant == "user") {
+    defines += [ "THERMAL_USER_VERSION" ]
+  }
+
+  subsystem_name = "powermgr"
+  part_name = "thermal_manager"
+}
+
+group("service") {
+  deps = [
+    ":thermalservice",
+    "${thermal_manager_path}/sa_profile:thermalmgr_sa_profile",
+    "native/profile:thermal_service_config",
+  ]
+}

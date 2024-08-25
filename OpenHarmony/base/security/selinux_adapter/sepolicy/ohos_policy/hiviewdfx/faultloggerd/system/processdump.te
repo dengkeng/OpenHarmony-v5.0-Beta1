@@ -1,0 +1,161 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+###################
+## Macro define: ##
+###################
+define(`use_processdump', `
+    allow $1 processdump_exec:file { execute getattr map open read };
+')
+
+define(`processdump_cmd', `
+    allow processdump $1:file { getattr map open read };
+')
+
+########################
+## processdump rules: ##
+########################
+use_processdump({ domain -init -kernel })
+processdump_cmd({
+    app_el1_bundle_public
+    arkcompiler_param
+    ark_writeable_param
+    chip_prod_file
+    data_app_el1_file # remove later
+    data_file
+    data_service_el1_file
+    dev_parameters_file
+    domain
+    exec_attr
+    foundation
+    sys_prod_file
+    system_bin_file
+    system_file
+    system_lib_file
+    system_usr_file
+    vendor_bin_file
+    vendor_file
+    vendor_lib_file
+})
+
+#============= domain =================
+allow domain processdump:process { share sigchld };
+allow domain self:fifo_file { write };
+allow domain system_bin_file:dir { search };
+allow processdump { domain -processdump -kernel }:process { ptrace sigstop };
+allow processdump domain:fd use;
+allow processdump domain:fifo_file { read write };
+allow processdump domain:dir { getattr open read search };
+allow processdump domain:lnk_file { read };
+
+#============= write event to hiview =========
+allow processdump hiview:binder { call transfer };
+allow processdump samgr:binder { call };
+allow processdump hiview:unix_dgram_socket { sendto };
+
+#============= for faultloggerd ===========
+allow processdump faultloggerd_temp_file:file { getattr open read write };
+allow processdump faultloggerd:fd { use };
+allow processdump faultloggerd:unix_stream_socket { connectto };
+allow processdump faultloggerd_socket:sock_file write;
+
+#============= processdump ==============
+allow processdump processdump_exec:file { entrypoint };
+allow processdump processdump:process { fork };
+allow processdump processdump:dir { search };
+allow processdump processdump:lnk_file { read };
+allow processdump processdump:unix_dgram_socket { create connect write };
+allow processdump processdump:unix_stream_socket { create setopt connect write read };
+allow processdump data_local_tmp:file { getattr map open read };
+
+#============ hidumper ==============
+allow processdump hidumper_service:fifo_file ioctl;
+
+#============ normal_hap =================
+allow processdump normal_hap_attr:dir { getattr open read search };
+allow processdump normal_hap_attr:file { getattr open read };
+allow processdump app_el1_bundle_public:dir search;
+allow processdump data_app_el1_file:dir search; # remove later
+
+#============ hap_domain ================
+allow processdump hap_domain:lnk_file { read };
+
+#============= for hdcd ================
+allow processdump hdcd:fd use;
+allow processdump hdcd:fifo_file { read write };
+allow processdump hdcd:file { getattr open read };
+allow processdump hdcd:process ptrace;
+allow processdump hdcd:unix_stream_socket { read write };
+
+#============= devpts && tty ===========
+allow processdump devpts:chr_file { read write };
+allow processdump tty_device:chr_file { read write };
+
+#============= init ================
+allow processdump init:dir { getattr open read search };
+allow processdump init:file { getattr open read };
+allow processdump init:netlink_kobject_uevent_socket { read write };
+allow processdump init:unix_dgram_socket { sendto };
+allow processdump init:unix_stream_socket { read write connectto };
+
+#============ foundation ===========
+allow processdump foundation:dir { getattr open read search };
+allow processdump foundation:binder { call transfer };
+allow processdump sa_foundation_abilityms:samgr_class { get };
+
+#============ data_xxx ==================
+allow processdump data_file:dir search;
+allow processdump data_init_agent:file { append ioctl open read };
+allow processdump data_init_agent:dir search;
+
+#============ dev_xxx ===================
+allow processdump dev_file:dir { search };
+allow processdump dev_null_file:chr_file { read write };
+allow processdump dev_parameters_file:dir { search };
+allow processdump dev_unix_file:dir { search };
+allow processdump dev_unix_socket:dir search;
+allow processdump dev_unix_socket:sock_file write;
+allow processdump dev_unix_socket_file:dir { search };
+
+#============ sys_xxx =================
+allow processdump sys_prod_file:dir { search };
+
+#============ system_xxx =================
+allow processdump system_bin_file:dir search;
+allow processdump system_etc_file:dir { getattr open read search };
+allow processdump system_etc_file:file { getattr open read };
+allow processdump system_file:dir { search };
+allow processdump system_lib_file:dir { search };
+allow processdump system_usr_file:dir { search };
+
+#============ vendor_xxx =================
+allow processdump vendor_file:dir { getattr open read search };
+allow processdump vendor_bin_file:dir search;
+allow processdump vendor_lib_file:dir search;
+
+#============ proc_file & tmpfs & debugfs ===================
+allow processdump proc_file:dir { search };
+allow processdump proc_file:lnk_file { read };
+allow processdump tmpfs:dir { search };
+allow processdump tmpfs:lnk_file { read };
+allow processdump debugfs:dir { search };
+
+#============ chip_prod_file ===================
+allow processdump chip_prod_file:dir { search };
+
+############################
+## neverallow assertions: ##
+############################
+neverallow processdump self:process ptrace;
+neverallow domain processdump:process noatsecure;
+neverallow domain processdump_exec:file execute_no_trans;

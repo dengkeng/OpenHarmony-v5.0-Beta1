@@ -1,0 +1,261 @@
+{
+    "theme": [
+        {
+            "name": "ohos_theme",
+            "value": [
+                {
+                    "name": "bg_color",
+                    "value": "$color:ohos_id_color_background"
+                },
+                {
+                    "name": "focus_color",
+                    "value": "$color:ohos_id_focus_color"
+                },
+                {
+                    "name": "hover_color",
+                    "value": "$color:ohos_id_color_hover"
+                },
+                {
+                    "name": "button_pattern",
+                    "value": "$pattern:ohos_button_pattern"
+                },
+                {
+                    "name": "switch_pattern",
+                    "value": "$pattern:ohos_switch_pattern"
+                },
+                {
+                    "name": "badge_pattern",
+                    "value": "$pattern:ohos_badge_pattern"
+                },
+                {
+                    "name": "calendar_pattern",
+                    "value": "$pattern:ohos_calendar_pattern"
+                },
+                {
+                    "name": "camera_pattern",
+                    "value": "$pattern:ohos_camera_pattern"
+                },
+                {
+                    "name": "video_pattern",
+                    "value": "$pattern:ohos_video_pattern"
+                },
+                {
+                    "name": "list_pattern",
+                    "value": "$pattern:ohos_list_pattern"
+                },
+                {
+                    "name": "list_item_pattern",
+                    "value": "$pattern:ohos_list_item_pattern"
+                },
+                {
+                    "name": "qrcode_pattern",
+                    "value": "$pattern:ohos_qrcode_pattern"
+                },
+                {
+                    "name": "counter_pattern",
+                    "value": "$pattern:ohos_counter_pattern"
+                },
+                {
+                    "name": "checkbox_pattern",
+                    "value": "$pattern:ohos_checkbox_pattern"
+                },
+                {
+                    "name": "radio_pattern",
+                    "value": "$pattern:ohos_radio_pattern"
+                },
+                {
+                    "name": "clock_pattern",
+                    "value": "$pattern:ohos_clock_pattern"
+                },
+                {
+                    "name": "card_pattern",
+                    "value": "$pattern:ohos_card_pattern"
+                },
+                {
+                    "name": "data_panel_pattern",
+                    "value": "$pattern:ohos_data_panel_pattern"
+                },
+                {
+                    "name": "dialog_pattern",
+                    "value": "$pattern:ohos_dialog_pattern"
+                },
+                {
+                    "name": "divider_pattern",
+                    "value": "$pattern:ohos_divider_pattern"
+                },
+                {
+                    "name": "drag_bar_pattern",
+                    "value": "$pattern:ohos_drag_bar_pattern"
+                },
+                {
+                    "name": "close_icon_pattern",
+                    "value": "$pattern:ohos_close_icon_pattern"
+                },
+                {
+                    "name": "focus_animation_pattern",
+                    "value": "$pattern:ohos_focus_animation_pattern"
+                },
+                {
+                    "name": "image_pattern",
+                    "value": "$pattern:ohos_image_pattern"
+                },
+                {
+                    "name": "marquee_pattern",
+                    "value": "$pattern:ohos_marquee_pattern"
+                },
+                {
+                    "name": "navigation_bar_pattern",
+                    "value": "$pattern:ohos_navigation_bar_pattern"
+                },
+                {
+                    "name": "picker_pattern",
+                    "value": "$pattern:ohos_picker_pattern"
+                },
+                {
+                    "name": "piece_pattern",
+                    "value": "$pattern:ohos_piece_pattern"
+                },
+                {
+                    "name": "popup_pattern",
+                    "value": "$pattern:ohos_popup_pattern"
+                },
+                {
+                    "name": "progress_pattern",
+                    "value": "$pattern:ohos_progress_pattern"
+                },
+                {
+                    "name": "rating_pattern",
+                    "value": "$pattern:ohos_rating_pattern"
+                },
+                {
+                    "name": "refresh_pattern",
+                    "value": "$pattern:ohos_refresh_pattern"
+                },
+                {
+                    "name": "scroll_bar_pattern",
+                    "value": "$pattern:ohos_scroll_bar_pattern"
+                },
+                {
+                    "name": "search_pattern",
+                    "value": "$pattern:ohos_search_pattern"
+                },
+                {
+                    "name": "stepper_pattern",
+                    "value": "$pattern:ohos_stepper_pattern"
+                },
+                {
+                    "name": "swiper_pattern",
+                    "value": "$pattern:ohos_swiper_pattern"
+                },
+                {
+                    "name": "tab_pattern",
+                    "value": "$pattern:ohos_tab_pattern"
+                },
+                {
+                    "name": "text_pattern",
+                    "value": "$pattern:ohos_text_pattern"
+                },
+                {
+                    "name": "textfield_pattern",
+                    "value": "$pattern:ohos_textfield_pattern"
+                },
+                {
+                    "name": "text_overlay_pattern",
+                    "value": "$pattern:ohos_text_overlay_pattern"
+                },
+                {
+                    "name": "toast_pattern",
+                    "value": "$pattern:ohos_toast_pattern"
+                },
+                {
+                    "name": "toggle_pattern",
+                    "value": "$pattern:ohos_toggle_pattern"
+                },
+                {
+                    "name": "toolbar_pattern",
+                    "value": "$pattern:ohos_toolbar_pattern"
+                },
+                {
+                    "name": "select_pattern",
+                    "value": "$pattern:ohos_select_pattern"
+                },
+                {
+                    "name": "slider_pattern",
+                    "value": "$pattern:ohos_slider_pattern"
+                },
+                {
+                    "name": "semi_modal_pattern",
+                    "value": "$pattern:ohos_semi_modal_pattern"
+                },
+                {
+                    "name": "grid_pattern",
+                    "value": "$pattern:ohos_grid_pattern"
+                },
+                {
+                    "name": "icon_pattern",
+                    "value": "$pattern:ohos_icon_pattern"
+                },
+                {
+                    "name": "indexer_pattern",
+                    "value": "$pattern:ohos_indexer_pattern"
+                },
+                {
+                    "name": "app_bar_pattern",
+                    "value": "$pattern:ohos_app_bar_pattern"
+                },
+                {
+                    "name": "advanced_pattern",
+                    "value": "$pattern:ohos_advanced_pattern"
+                },
+                {
+                    "name": "form_pattern",
+                    "value": "$pattern:ohos_form_pattern"
+                },
+                {
+                    "name": "side_bar_pattern",
+                    "value": "$pattern:ohos_side_bar_pattern"
+                },
+                {
+                    "name": "pattern_lock_pattern",
+                    "value": "$pattern:ohos_pattern_lock_pattern"
+                },
+                {
+                    "name": "gauge_pattern",
+                    "value": "$pattern:ohos_gauge_pattern"
+                },
+	    	{
+                    "name": "sheet_pattern",
+                    "value": "$pattern:ohos_sheet_pattern"
+                },
+                {
+                    "name": "blur_style_common",
+                    "value": "$pattern:ohos_blur_style_common"
+                },
+                {
+                    "name": "ohos_shadow_pattern",
+                    "value": "$pattern:ohos_shadow_pattern"
+                },
+                {
+                    "name": "linear_layout_pattern",
+                    "value": "$pattern:ohos_linear_layout_pattern"
+                },
+                {
+                    "name": "stack_pattern",
+                    "value": "$pattern:ohos_stack_pattern"
+                },
+                {
+                    "name": "container_modal_pattern",
+                    "value": "$pattern:ohos_container_modal_pattern"
+                },
+                {
+                    "name": "ohos_id_normalbtn_unfocus_bg",
+                    "value": "$color:ohos_id_normalbtn_unfocus_bg"
+                },
+                {
+                    "name": "ohos_id_closebtn_unfocus_bg",
+                    "value": "$color:ohos_id_closebtn_unfocus_bg"
+                }
+            ]
+        }
+    ]
+}

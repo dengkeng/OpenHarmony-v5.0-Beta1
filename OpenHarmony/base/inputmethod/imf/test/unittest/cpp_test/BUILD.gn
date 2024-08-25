@@ -1,0 +1,797 @@
+# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/inputmethod/imf/inputmethod.gni")
+import("//build/test.gni")
+
+config("module_private_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "${inputmethod_path}/services/include",
+    "${inputmethod_path}/test/common",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/include",
+  ]
+}
+
+module_output_path = "imf/cpp"
+
+ohos_unittest("InputMethodControllerTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "./inputmethod_blocklist.txt"
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "src/ime_event_monitor_manager_test.cpp",
+    "src/input_method_controller_test.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodAttachTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_attach_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+ohos_unittest("InputMethodAbilityTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/src/input_method_agent_stub.cpp",
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/src/input_method_core_proxy.cpp",
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/src/input_method_core_stub.cpp",
+    "${inputmethod_path}/services/src/input_control_channel_proxy.cpp",
+    "src/input_method_ability_exception_test.cpp",
+    "src/input_method_ability_test.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "graphic_2d:window_animation",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodServiceTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_service_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodDfxTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_dfx_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/common:inputmethod_common",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hisysevent:libhisyseventmanager",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodPanelTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_panel_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "graphic_2d:window_animation",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodSwitchTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_switch_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/adapter/settings_data_provider:settings_data_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/cJSON:cjson",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodPrivateMemberTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/src/input_method_agent_stub.cpp",
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/src/input_method_core_stub.cpp",
+    "${inputmethod_path}/services/adapter/ime_connection_manager/src/ime_connection.cpp",
+    "${inputmethod_path}/services/src/input_control_channel_proxy.cpp",
+    "src/input_method_private_member_test.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service_static",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_core",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("InputMethodEditorTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/input_method_editor_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("NewImeSwitchTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/newIme_switch_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/services/adapter/settings_data_provider:settings_data_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/cJSON:cjson",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("IdentityCheckerTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "./inputmethod_blocklist.txt"
+  }
+  module_out_path = module_output_path
+
+  sources = [
+    "${inputmethod_path}/services/adapter/ime_connection_manager/src/ime_connection.cpp",
+    "src/identity_checker_test.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/services:inputmethod_service_static",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("TextListenerInnerApiTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/text_listener_inner_api_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("ImeProxyTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/ime_proxy_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "${inputmethod_path}/test/unittest/resource/bundle_dependencies/editorBox:editorBox",
+    "${inputmethod_path}/test/unittest/resource/bundle_dependencies/extImfBundle:extImf",
+    "${inputmethod_path}/test/unittest/resource/ohos_test:copy_ohos_test",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "graphic_2d:window_animation",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("EnableImeDataParseTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  include_dirs = [
+    "${inputmethod_path}/test/unittest/cpp_test/mock",
+    "${inputmethod_path}/services/adapter/settings_data_provider/include",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/include",
+    "${inputmethod_path}/frameworks/native/inputmethod_controller/include",
+  ]
+
+  sources = [
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/src/settings_data_observer.cpp",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/src/settings_data_utils.cpp",
+    "${inputmethod_path}/services/adapter/settings_data_provider/src/enable_ime_data_parser.cpp",
+    "mock/datashare_helper.cpp",
+    "mock/global.cpp",
+    "mock/ime_info_inquirer.cpp",
+    "src/enable_ime_data_parse_test.cpp",
+  ]
+
+  deps = [
+    "${inputmethod_path}/services/json:imf_json_static",
+    "//third_party/cJSON:cjson",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "ability_runtime:dataobs_manager",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("SecurityModeParseTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  include_dirs = [
+    "${inputmethod_path}/test/unittest/cpp_test/mock",
+    "${inputmethod_path}/services/include",
+    "${inputmethod_path}/services/identity_checker/include",
+    "${inputmethod_path}/services/adapter/ime_connection_manager/include",
+    "${inputmethod_path}/services/adapter/settings_data_provider/include",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/include",
+    "${inputmethod_path}/frameworks/native/inputmethod_controller/include",
+    "${inputmethod_path}/frameworks/native/inputmethod_ability/include",
+  ]
+
+  sources = [
+    "${inputmethod_path}/services/adapter/ime_connection_manager/src/ime_connection.cpp",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/src/settings_data_observer.cpp",
+    "${inputmethod_path}/services/adapter/settings_data_provider/common/src/settings_data_utils.cpp",
+    "${inputmethod_path}/services/adapter/settings_data_provider/src/security_mode_parser.cpp",
+    "mock/datashare_helper.cpp",
+    "src/security_mode_parser_test.cpp",
+  ]
+
+  deps = [
+    "${inputmethod_path}/services:inputmethod_service_static",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "ability_runtime:ability_manager",
+    "ability_runtime:dataobs_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("ImeFreezeManagerTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/ime_freeze_manager_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/services:inputmethod_service_static",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_core",
+    "ipc:ipc_single",
+    "os_account:os_account_innerkits",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_unittest("JsonOperateTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/json_operate_test.cpp" ]
+
+  deps = [
+    "${inputmethod_path}/services:inputmethod_service_static",
+    "${inputmethod_path}/services/adapter/settings_data_provider:settings_data_static",
+    "${inputmethod_path}/services/json:imf_json_static",
+    "//third_party/cJSON:cjson",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "bundle_framework:appexecfwk_base",
+    "bundle_framework:appexecfwk_core",
+    "data_share:datashare_common",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+  ]
+}
+
+ohos_unittest("VirtualListenerTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/virtual_listener_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "//third_party/googletest:gmock",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libwm",
+  ]
+}
+ohos_unittest("ImeSystemChannelTest") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "./inputmethod_blocklist.txt"
+  }
+  module_out_path = module_output_path
+
+  sources = [ "src/ime_system_channel_test.cpp" ]
+
+  configs = [ ":module_private_config" ]
+
+  deps = [
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_ability:inputmethod_ability",
+    "${inputmethod_path}/interfaces/inner_api/inputmethod_controller:inputmethod_client_static",
+    "${inputmethod_path}/services:inputmethod_service",
+    "${inputmethod_path}/test/common:inputmethod_test_common",
+    "${inputmethod_path}/test/unittest/cpp_test/common:inputmethod_tdd_util",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "input:libmmi-client",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libwm",
+  ]
+}

@@ -1,0 +1,113 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("../../../../security_component.gni")
+
+sec_comp_root_dir = "../../../.."
+
+ohos_unittest("sec_comp_sdk_test") {
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+  module_out_path = part_name + "/" + part_name
+
+  include_dirs = [
+    "${sec_comp_root_dir}/frameworks/common/include",
+    "${sec_comp_root_dir}/frameworks/security_component/include",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/include",
+  ]
+
+  sources = [
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_caller_authorization.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_client.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_death_recipient.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_dialog_callback.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_dialog_callback_stub.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_kit.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_load_callback.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_proxy.cpp",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_ui_register.cpp",
+    "unittest/src/location_button_test.cpp",
+    "unittest/src/paste_button_test.cpp",
+    "unittest/src/save_button_test.cpp",
+    "unittest/src/sec_comp_kit_test.cpp",
+    "unittest/src/test_common.cpp",
+  ]
+  configs = [ "${sec_comp_root_dir}/config:coverage_flags" ]
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+
+  if (security_component_enhance_enable) {
+    cflags_cc += [ "-DSECURITY_COMPONENT_ENHANCE_ENABLE" ]
+  }
+
+  deps = [
+    "${sec_comp_root_dir}/frameworks:security_component_enhance_adapter_src_set",
+    "${sec_comp_root_dir}/frameworks:security_component_framework_src_set",
+    "${sec_comp_root_dir}/interfaces/inner_api/enhance_kits:security_component_enhance_sdk_src_set",
+  ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("sec_comp_register_callback_test") {
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+  module_out_path = part_name + "/" + part_name
+
+  include_dirs = [
+    "${sec_comp_root_dir}/frameworks/common/include",
+    "${sec_comp_root_dir}/frameworks/security_component/include",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/include",
+  ]
+
+  sources = [
+    "unittest/src/sec_comp_register_callback_test.cpp",
+    "unittest/src/test_common.cpp",
+  ]
+  configs = [ "${sec_comp_root_dir}/config:coverage_flags" ]
+  cflags_cc = [
+    "-DHILOG_ENABLE",
+    "-O0",
+  ]
+
+  if (security_component_enhance_enable) {
+    cflags_cc += [ "-DSECURITY_COMPONENT_ENHANCE_ENABLE" ]
+  }
+
+  deps = [ "${sec_comp_root_dir}/interfaces/inner_api/security_component:libsecurity_component_sdk" ]
+
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+}
+
+group("unittest") {
+  testonly = true
+  deps = [
+    ":sec_comp_register_callback_test",
+    ":sec_comp_sdk_test",
+  ]
+}

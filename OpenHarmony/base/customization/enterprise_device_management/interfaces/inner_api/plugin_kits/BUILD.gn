@@ -1,0 +1,68 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("plugin_kits_config") {
+  include_dirs = [
+    "include",
+    "include/utils",
+    "../common/include",
+    "../../../common/native/include",
+  ]
+}
+
+ohos_shared_library("plugin_kits") {
+  sources = [
+    "./src/iplugin.cpp",
+    "./src/iplugin_manager.cpp",
+    "./src/ipolicy_manager.cpp",
+    "./src/utils/array_map_serializer.cpp",
+    "./src/utils/array_string_serializer.cpp",
+    "./src/utils/bool_serializer.cpp",
+    "./src/utils/cjson_serializer.cpp",
+    "./src/utils/func_code_utils.cpp",
+    "./src/utils/int_serializer.cpp",
+    "./src/utils/json_serializer.cpp",
+    "./src/utils/long_serializer.cpp",
+    "./src/utils/map_string_serializer.cpp",
+    "./src/utils/string_serializer.cpp",
+  ]
+
+  version_script = "libplugin_kits.map"
+
+  public_configs = [ ":plugin_kits_config" ]
+
+  configs = [ "../../../common/config:coverage_flags" ]
+
+  deps = [ "../../../common/native:edm_commom" ]
+
+  external_deps = [
+    "cJSON:cjson",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "jsoncpp:jsoncpp",
+  ]
+
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}

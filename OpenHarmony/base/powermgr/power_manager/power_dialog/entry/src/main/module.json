@@ -1,0 +1,66 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "feature",
+    "srcEntry": "",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "icon": "$media:icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:white",
+        "visible": false,
+        "launchType": "standard",
+        "srcEntry": ""
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "PowerUiExtensionAbility",
+        "srcEntry": "./ets/UiExtensionAbility/PowerUiExtensionAbility.ts",
+        "icon": "$media:icon",
+        "label": "$string:PowerServiceExtAbility_label",
+        "visible": false,
+        "type": "sysDialog/power"
+      },
+      {
+        "name": "ThermalServiceExtAbility_high",
+        "srcEntry": "./ets/ServiceExtAbility/ThermalHighDialogAbility.ts",
+        "icon": "$media:icon",
+        "label": "$string:ThermalServiceExtAbility_high_label",
+        "visible": false,
+        "type": "service"
+      },
+      {
+        "name": "ThermalServiceExtAbility_low",
+        "srcEntry": "./ets/ServiceExtAbility/ThermalLowDialogAbility.ts",
+        "icon": "$media:icon",
+        "label": "$string:ThermalServiceExtAbility_low_label",
+        "visible": false,
+        "type": "service"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "reason": "$string:PowerServiceExtAbility_reason",
+        "name": "ohos.permission.REBOOT",
+        "usedScene": {
+          "abilities": [
+            "PowerUiExtensionAbility"
+          ],
+          "when": "always"
+        }
+      }
+    ]
+  }
+}

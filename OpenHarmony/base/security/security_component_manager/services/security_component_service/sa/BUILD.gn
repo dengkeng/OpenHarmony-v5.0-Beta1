@@ -1,0 +1,124 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+sec_comp_root_dir = "../../.."
+
+config("security_component_service_config") {
+  include_dirs = [
+    "sa_main",
+    "${sec_comp_root_dir}/frameworks/common/include",
+    "${sec_comp_root_dir}/frameworks/enhance_adapter/include",
+    "${sec_comp_root_dir}/frameworks/security_component/include",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/include",
+  ]
+}
+
+ohos_prebuilt_etc("security_component_service.rc") {
+  source = "security_component_service.cfg"
+  relative_install_dir = "init"
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+}
+
+ohos_source_set("security_component_service_src_set") {
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "sa_main",
+    "${sec_comp_root_dir}/frameworks/common/include",
+    "${sec_comp_root_dir}/frameworks/enhance_adapter/include",
+    "${sec_comp_root_dir}/frameworks/security_component/include",
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/include",
+  ]
+
+  sources = [
+    "${sec_comp_root_dir}/interfaces/inner_api/security_component/src/sec_comp_dialog_callback_stub.cpp",
+    "sa_main/app_mgr_death_recipient.cpp",
+    "sa_main/app_state_observer.cpp",
+    "sa_main/delay_exit_task.cpp",
+    "sa_main/first_use_dialog.cpp",
+    "sa_main/sec_comp_dialog_callback_proxy.cpp",
+    "sa_main/sec_comp_entity.cpp",
+    "sa_main/sec_comp_info_helper.cpp",
+    "sa_main/sec_comp_malicious_apps.cpp",
+    "sa_main/sec_comp_manager.cpp",
+    "sa_main/sec_comp_perm_manager.cpp",
+    "sa_main/sec_comp_service.cpp",
+    "sa_main/sec_comp_stub.cpp",
+    "sa_main/sec_event_handler.cpp",
+    "sa_main/window_info_helper.cpp",
+  ]
+
+  cflags_cc = [
+    "-DHILOG_ENABLE",
+    "-fvisibility=hidden",
+  ]
+  cflags = [ "-DHILOG_ENABLE" ]
+
+  deps = [
+    ":security_component_service.rc",
+    "${sec_comp_root_dir}/frameworks:security_component_enhance_adapter_src_set",
+    "${sec_comp_root_dir}/frameworks:security_component_framework_src_set",
+  ]
+
+  configs = [ "${sec_comp_root_dir}/config:coverage_flags" ]
+  public_configs = [ ":security_component_service_config" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_manager",
+    "ability_runtime:runtime",
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "graphic_2d:librender_service_client",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+}
+
+ohos_shared_library("security_component_service") {
+  subsystem_name = "security"
+  part_name = "security_component_manager"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  deps = [
+    ":security_component_service.rc",
+    ":security_component_service_src_set",
+    "${sec_comp_root_dir}/frameworks:security_component_enhance_adapter_src_set",
+    "${sec_comp_root_dir}/frameworks:security_component_framework_src_set",
+  ]
+  external_deps = [ "hilog:libhilog" ]
+  public_configs = [ ":security_component_service_config" ]
+}

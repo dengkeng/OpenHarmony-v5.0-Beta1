@@ -1,0 +1,154 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/features.gni")
+import("//build/ohos.gni")
+import("//build/test.gni")
+
+#####################hydra-fuzz###################
+import("../../../screenlock.gni")
+
+##############################fuzztest##########################################
+screenlockislocked_test = {
+  targetName = "ScreenlockIslockedFuzzTest"
+  configFuzzer = "screenlockislocked_fuzzer"
+  source = "screenlockislocked_fuzzer/screenlockislocked_fuzzer.cpp"
+}
+screenlockboundarycode_test = {
+  targetName = "ScreenlockBoundaryCodeFuzzTest"
+  configFuzzer = "screenlockboundarycode_fuzzer"
+  source = "screenlockboundarycode_fuzzer/screenlockboundarycode_fuzzer.cpp"
+}
+screenlockdump_test = {
+  targetName = "ScreenlockDumpFuzzTest"
+  configFuzzer = "screenlockdump_fuzzer"
+  source = "screenlockdump_fuzzer/screenlockdump_fuzzer.cpp"
+}
+screenlockisscreenlocked_test = {
+  targetName = "ScreenlockIsScreenlockedFuzzTest"
+  configFuzzer = "screenlockisscreenlocked_fuzzer"
+  source = "screenlockisscreenlocked_fuzzer/screenlockisscreenlocked_fuzzer.cpp"
+}
+screenlockissecuremode_test = {
+  targetName = "ScreenlockIsSecureModeFuzzTest"
+  configFuzzer = "screenlockissecuremode_fuzzer"
+  source = "screenlockissecuremode_fuzzer/screenlockissecuremode_fuzzer.cpp"
+}
+screenlocklock_test = {
+  targetName = "ScreenlockLockFuzzTest"
+  configFuzzer = "screenlocklock_fuzzer"
+  source = "screenlocklock_fuzzer/screenlocklock_fuzzer.cpp"
+}
+screenlockonsystemevent_test = {
+  targetName = "ScreenlockOnSystemEventFuzzTest"
+  configFuzzer = "screenlockonsystemevent_fuzzer"
+  source = "screenlockonsystemevent_fuzzer/screenlockonsystemevent_fuzzer.cpp"
+}
+screenlocksendscreenlockevent_test = {
+  targetName = "ScreenlockSendScreenlockEventFuzzTest"
+  configFuzzer = "screenlocksendscreenlockevent_fuzzer"
+  source = "screenlocksendscreenlockevent_fuzzer/screenlocksendscreenlockevent_fuzzer.cpp"
+}
+screenlockunlockscreen_test = {
+  targetName = "ScreenlockUnlockScreenFuzzTest"
+  configFuzzer = "screenlockunlockscreen_fuzzer"
+  source = "screenlockunlockscreen_fuzzer/screenlockunlockscreen_fuzzer.cpp"
+}
+screenlockunlock_test = {
+  targetName = "ScreenlockUnlockFuzzTest"
+  configFuzzer = "screenlockunlock_fuzzer"
+  source = "screenlockunlock_fuzzer/screenlockunlock_fuzzer.cpp"
+}
+screenlocklockscreen_test = {
+  targetName = "ScreenlockLockScreenFuzzTest"
+  configFuzzer = "screenlocklockscreen_fuzzer"
+  source = "screenlocklockscreen_fuzzer/screenlocklockscreen_fuzzer.cpp"
+}
+
+screenlock_fuzztests = [
+  screenlockislocked_test,
+  screenlockboundarycode_test,
+  screenlockdump_test,
+  screenlockisscreenlocked_test,
+  screenlockissecuremode_test,
+  screenlocklock_test,
+  screenlockonsystemevent_test,
+  screenlocksendscreenlockevent_test,
+  screenlockunlockscreen_test,
+  screenlockunlock_test,
+  screenlocklockscreen_test,
+]
+
+foreach(item, screenlock_fuzztests) {
+  ohos_fuzztest(item.targetName) {
+    module_out_path = "screenlock_mgr/screenlock_mgr"
+
+    fuzz_config_file = "${screenlock_mgr_path}/test/fuzztest/screenlockservice_fuzzer/${item.configFuzzer}"
+
+    include_dirs = [
+      "${screenlock_mgr_path}/frameworks/js/napi/include",
+      "${screenlock_mgr_path}/services/include",
+      "${screenlock_mgr_path}/utils/include",
+      "${screenlock_mgr_path}/test/fuzztest/screenlockservice_fuzzer/common",
+    ]
+
+    cflags = [
+      "-g",
+      "-O0",
+      "-Wno-unused-variable",
+      "-fno-omit-frame-pointer",
+    ]
+
+    deps = [
+      "${screenlock_mgr_path}/frameworks/js/napi:screenlock_static",
+      "${screenlock_mgr_path}/interfaces/inner_api:screenlock_client_static",
+      "${screenlock_mgr_path}/services:screenlock_server_static",
+      "${screenlock_mgr_path}/utils:screenlock_utils",
+    ]
+
+    external_deps = [
+      "c_utils:utils",
+      "ffrt:libffrt",
+      "hilog:libhilog",
+      "ipc:ipc_single",
+      "napi:ace_napi",
+      "window_manager:libdm",
+    ]
+
+    sources = [
+      "common/screenlock_service_fuzz_utils.cpp",
+      item.source,
+    ]
+  }
+}
+
+###############################################################################
+group("fuzztest") {
+  testonly = true
+  deps = []
+  deps += [
+    # deps file
+    ":ScreenlockBoundaryCodeFuzzTest",
+    ":ScreenlockDumpFuzzTest",
+    ":ScreenlockIsScreenlockedFuzzTest",
+    ":ScreenlockIsSecureModeFuzzTest",
+    ":ScreenlockIslockedFuzzTest",
+    ":ScreenlockLockFuzzTest",
+    ":ScreenlockLockScreenFuzzTest",
+    ":ScreenlockOnSystemEventFuzzTest",
+    ":ScreenlockSendScreenlockEventFuzzTest",
+    ":ScreenlockUnlockFuzzTest",
+    ":ScreenlockUnlockScreenFuzzTest",
+  ]
+}
+###############################################################################

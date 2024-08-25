@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef ACTION_CPU_BOOST_H
+#define ACTION_CPU_BOOST_H
+
+#include <mutex>
+
+#include "soc_action_base.h"
+
+namespace OHOS {
+namespace PowerMgr {
+class ActionCpuBoost : public IThermalAction, public SocActionBase {
+public:
+    ActionCpuBoost(const std::string& actionName);
+    ~ActionCpuBoost() = default;
+
+    void InitParams(const std::string& params) override;
+    void SetStrict(bool enable) override;
+    void SetEnableEvent(bool enable) override;
+    void AddActionValue(std::string value) override;
+    void Execute() override;
+
+private:
+    uint32_t GetActionValue();
+    uint32_t lastValue_ {UINT_MAX};
+    std::vector<uint32_t> valueList_;
+};
+} // namespace PowerMgr
+} // namespace OHOS
+#endif // ACTION_CPU_BOOST_H

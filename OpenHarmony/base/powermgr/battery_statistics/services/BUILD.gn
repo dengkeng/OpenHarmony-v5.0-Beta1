@@ -1,0 +1,149 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../batterystats.gni")
+
+config("batterystats_public_config") {
+  include_dirs = [
+    "native/include",
+    "${batterystats_service_zidl}/include",
+  ]
+}
+
+ohos_shared_library("batterystats_service") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+
+  sources = [
+    "native/src/battery_stats_core.cpp",
+    "native/src/battery_stats_detector.cpp",
+    "native/src/battery_stats_dumper.cpp",
+    "native/src/battery_stats_listener.cpp",
+    "native/src/battery_stats_parser.cpp",
+    "native/src/battery_stats_service.cpp",
+    "native/src/battery_stats_subscriber.cpp",
+    "native/src/cpu_time_reader.cpp",
+    "native/src/entities/alarm_entity.cpp",
+    "native/src/entities/audio_entity.cpp",
+    "native/src/entities/battery_stats_entity.cpp",
+    "native/src/entities/bluetooth_entity.cpp",
+    "native/src/entities/camera_entity.cpp",
+    "native/src/entities/cpu_entity.cpp",
+    "native/src/entities/flashlight_entity.cpp",
+    "native/src/entities/gnss_entity.cpp",
+    "native/src/entities/idle_entity.cpp",
+    "native/src/entities/phone_entity.cpp",
+    "native/src/entities/screen_entity.cpp",
+    "native/src/entities/sensor_entity.cpp",
+    "native/src/entities/uid_entity.cpp",
+    "native/src/entities/user_entity.cpp",
+    "native/src/entities/wakelock_entity.cpp",
+    "native/src/entities/wifi_entity.cpp",
+  ]
+
+  configs = [
+    "${batterystats_utils_path}:batterystats_utils_config",
+    "${batterystats_utils_path}:coverage_flags",
+  ]
+
+  public_configs = [ ":batterystats_public_config" ]
+
+  deps = [
+    ":batterystats_stub",
+    "${batterystats_inner_api}:batterystats_client",
+    "${batterystats_utils_path}:batterystats_utils",
+  ]
+
+  external_deps = [ "power_manager:power_permission" ]
+  external_deps += [
+    "ability_base:want",
+    "battery_manager:batterysrv_client",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "config_policy:configpolicy_util",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hisysevent:libhisyseventmanager",
+    "ipc:ipc_core",
+    "jsoncpp:jsoncpp",
+    "os_account:libaccountkits",
+    "power_manager:power_sysparam",
+    "safwk:system_ability_fwk",
+  ]
+
+  if (has_batterystats_bluetooth_part) {
+    external_deps += [ "bluetooth:btframework" ]
+  }
+
+  if (has_batterystats_call_manager_part) {
+    external_deps += [ "call_manager:tel_call_manager_api" ]
+  }
+
+  if (has_batterystats_display_manager_part) {
+    external_deps += [ "display_manager:displaymgr" ]
+  }
+
+  if (has_batterystats_wifi_part) {
+    external_deps += [ "wifi:wifi_sdk" ]
+  }
+  if (false) {
+    defines += [ "SYS_MGR_CLIENT_ENABLE" ]
+    public_external_deps = [ "ability_runtime:appkit_native" ]
+  }
+
+  subsystem_name = "powermgr"
+  part_name = "${batterystats_part_name}"
+}
+
+ohos_shared_library("batterystats_stub") {
+  sources = [ "${batterystats_service_zidl}/src/battery_stats_stub.cpp" ]
+
+  configs = [
+    "${batterystats_utils_path}:batterystats_utils_config",
+    "${batterystats_utils_path}:coverage_flags",
+  ]
+
+  public_configs = [ ":batterystats_public_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+  ]
+
+  if (has_batterystats_call_manager_part) {
+    external_deps += [ "call_manager:tel_call_manager_api" ]
+  }
+
+  if (has_batterystats_display_manager_part) {
+    external_deps += [ "display_manager:displaymgr" ]
+  }
+  public_external_deps = [ "ability_runtime:appkit_native" ]
+
+  subsystem_name = "powermgr"
+  part_name = "${batterystats_part_name}"
+}
+
+group("service") {
+  deps = [
+    ":batterystats_service",
+    ":batterystats_stub",
+    "profile:power_average.json",
+  ]
+}

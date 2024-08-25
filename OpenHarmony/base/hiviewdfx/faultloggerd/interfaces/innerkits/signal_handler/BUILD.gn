@@ -1,0 +1,165 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/hiviewdfx/faultloggerd/faultloggerd.gni")
+
+if (defined(ohos_lite)) {
+  shared_library("dfx_signalhandler") {
+    visibility = [ "*:*" ]
+    include_dirs = [
+      "include",
+      "$c_utils_include_path",
+      "$faultloggerd_interfaces_path/common",
+      "$faultloggerd_path/common/cutil",
+      "$faultloggerd_path/common/dfxlog",
+    ]
+    sources = [
+      "dfx_signal_handler.c",
+      "dfx_signalhandler_exception.c",
+      "musl_log.c",
+    ]
+
+    deps = [
+      "$faultloggerd_path/common/cutil:dfx_cutil",
+      "//third_party/bounds_checking_function:libsec_shared",
+    ]
+
+    cflags = [
+      "-fPIC",
+      "-fno-builtin",
+      "-DDFX_NO_PRINT_LOG",
+    ]
+  }
+} else {
+  inherited_configs = [
+    "//build/config/compiler:afdo",
+    "//build/config/compiler:afdo_optimize_size",
+    "//build/config/compiler:compiler",
+    "//build/config/compiler:compiler_arm_fpu",
+    "//build/config/compiler:compiler_arm_thumb",
+    "//build/config/compiler:chromium_code",
+    "//build/config/compiler:default_include_dirs",
+    "//build/config/compiler:default_optimization",
+    "//build/config/compiler:default_stack_frames",
+    "//build/config/compiler:default_symbols",
+    "//build/config/compiler:export_dynamic",
+    "//build/config/compiler:no_exceptions",
+    "//build/config/compiler:no_rtti",
+    "//build/config/compiler:runtime_library",
+    "//build/config/compiler:thin_archive",
+    "//build/config/sanitizers:default_sanitizer_flags",
+  ]
+
+  config("dfx_signal_handler_config") {
+    visibility = [ "*:*" ]
+    include_dirs = [
+      "include",
+      "$faultloggerd_interfaces_path/common",
+    ]
+  }
+
+  config("static_sighandler_config") {
+    include_dirs = [
+      "include",
+      "$faultloggerd_common_path/cutil",
+      "$faultloggerd_common_path/dfxlog",
+      "$faultloggerd_interfaces_path/common",
+    ]
+
+    defines = []
+    configs = []
+    if (is_posix) {
+      configs += [ "//build/config/posix:runtime_library" ]
+    }
+
+    cflags_cc = []
+    libs = []
+
+    defines = [
+      "__GNU_SOURCE=1",  # Necessary for clone().
+      "CHROMIUM_CXX_TWEAK_INLINES",  # Saves binary size.
+    ]
+
+    defines += [
+      "__MUSL__",
+      "_LIBCPP_HAS_MUSL_LIBC",
+      "__BUILD_LINUX_WITH_CLANG",
+      "ENABLE_SIGHAND_MUSL_LOG",
+      "ENABLE_MUSL_CUTIL",
+    ]
+
+    ldflags = [ "-nostdlib" ]
+  }
+
+  ohos_shared_library("dfx_signalhandler") {
+    public_configs = [
+      ":dfx_signal_handler_config",
+      "$faultloggerd_common_path/build:coverage_flags",
+    ]
+    include_dirs = [
+      "$faultloggerd_common_path/cutil",
+      "$faultloggerd_common_path/dfxlog",
+    ]
+    defines = [ "DFX_LOG_HILOG_BASE" ]
+    version_script = "libdfx_signalhandler.map"
+    sources = [
+      "dfx_signal_handler.c",
+      "dfx_signalhandler_exception.c",
+      "musl_log.c",
+    ]
+
+    deps = [
+      "$faultloggerd_common_path/cutil:dfx_cutil",
+      "$faultloggerd_common_path/dfxlog:dfx_hilog_base",
+    ]
+
+    external_deps = [
+      "c_utils:utils",
+      "hilog:libhilog_base",
+    ]
+
+    innerapi_tags = [
+      "chipsetsdk_indirect",
+      "platformsdk_indirect",
+    ]
+    if (use_musl) {
+      install_enable = false
+    } else {
+      install_enable = true
+    }
+
+    install_images = [
+      "system",
+      "updater",
+    ]
+
+    part_name = "faultloggerd"
+    subsystem_name = "hiviewdfx"
+  }
+
+  static_library("dfxsignalhandler") {
+    cflags = [ "-DDFX_SIGNAL_LIBC" ]
+
+    sources = [
+      "dfx_signal_handler.c",
+      "dfx_signalhandler_exception.c",
+      "musl_log.c",
+    ]
+
+    configs -= inherited_configs
+    configs += [
+      "//build/config/compiler:compiler",
+      ":static_sighandler_config",
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+ohos_shared_library("faceauth") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../../../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "../../../common/logs",
+    "../../../common/inc",
+    "../../../common/utils",
+  ]
+
+  sources = [ "src/face_auth_napi.cpp" ]
+
+  deps = [ "../../../frameworks/ipc:faceauth_framework" ]
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+  ]
+  if (defined(global_parts_info.graphic_graphic_2d)) {
+    external_deps += [ "graphic_surface:surface" ]
+  }
+
+  relative_install_dir = "module/useriam"
+
+  subsystem_name = "useriam"
+  part_name = "face_auth"
+}

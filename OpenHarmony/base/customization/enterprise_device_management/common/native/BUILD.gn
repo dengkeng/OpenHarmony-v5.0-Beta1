@@ -1,0 +1,85 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../config/common.gni")
+
+config("edm_commom_public_configs") {
+  include_dirs = [
+    "include",
+    "include/plugin_utils",
+  ]
+}
+
+ohos_shared_library("edm_commom") {
+  sources = [
+    "./src/bundle_manager_utils.cpp",
+    "./src/edm_data_ability_utils.cpp",
+    "./src/edm_permission.cpp",
+    "./src/edm_sys_manager.cpp",
+    "./src/edm_utils.cpp",
+    "./src/plugin_utils/domain_filter_rule.cpp",
+    "./src/plugin_utils/firewall_rule.cpp",
+    "./src/plugin_utils/iptables_utils.cpp",
+    "./src/plugin_utils/message_parcel_utils.cpp",
+    "./src/security_report.cpp",
+    "./src/usb_device_id.cpp",
+  ]
+
+  configs = [
+    ":edm_commom_public_configs",
+    "../../common/config:coverage_flags",
+  ]
+
+  public_configs = [ ":edm_commom_public_configs" ]
+
+  external_deps = [
+    "ability_base:zuri",
+    "bounds_checking_function:libsec_shared",
+    "bundle_framework:appexecfwk_core",
+    "c_utils:utils",
+    "data_share:datashare_consumer",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = []
+  if (os_account_edm_enable) {
+    external_deps += [ "os_account:os_account_innerkits" ]
+    defines += [ "OS_ACCOUNT_EDM_ENABLE" ]
+  }
+
+  if (wifi_edm_enable) {
+    external_deps += [ "wifi:wifi_sdk" ]
+    defines += [ "WIFI_EDM_ENABLE" ]
+  }
+  if (!defined(global_parts_info) ||
+      defined(global_parts_info.security_security_guard)) {
+    external_deps += [ "security_guard:libsg_collect_sdk" ]
+    cflags_cc = [ "-DSECURITY_GUARDE_ENABLE" ]
+  }
+
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}

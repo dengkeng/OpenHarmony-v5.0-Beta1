@@ -1,0 +1,65 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../access_token.gni")
+
+config("token_callback") {
+  visibility = [ ":*" ]
+  include_dirs = [ "include" ]
+}
+
+if (is_standard_system) {
+  ohos_shared_library("libtoken_callback_sdk") {
+    subsystem_name = "security"
+    part_name = "access_token"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    branch_protector_ret = "pac_ret"
+    innerapi_tags = [ "platformsdk" ]
+    if (!use_clang_coverage) {
+      version_script = "libtoken_callback_sdk.map"
+    }
+
+    output_name = "libtoken_callback_sdk"
+
+    public_configs = [ ":token_callback" ]
+
+    configs = [ "${access_token_path}/config:coverage_flags" ]
+
+    include_dirs = [
+      "src",
+      "${access_token_path}/frameworks/privacy/include",
+      "${access_token_path}/frameworks/common/include",
+      "${access_token_path}/interfaces/innerkits/accesstoken/include",
+    ]
+
+    sources = [ "src/token_callback_stub.cpp" ]
+
+    deps = []
+
+    external_deps = [
+      "c_utils:utils",
+      "hilog:libhilog",
+      "ipc:ipc_single",
+    ]
+
+    cflags_cc = [
+      "-DHILOG_ENABLE",
+      "-DDEBUG_API_PERFORMANCE",
+    ]
+  }
+}

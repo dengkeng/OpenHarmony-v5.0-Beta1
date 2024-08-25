@@ -1,0 +1,163 @@
+{
+    "common" : [{
+        "top-sandbox-switch": "ON",
+        "app-base" : [{
+            "sandbox-root" : "/mnt/sandbox/<PackageName>",
+            "sandbox-ns-flags" : [],
+            "mount-paths" : [{
+                    "src-path" : "/system/lib",
+                    "sandbox-path" : "/system/lib",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/platformsdk",
+                    "sandbox-path" : "/system/lib64/platformsdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/ndk",
+                    "sandbox-path" : "/system/lib64/ndk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/module",
+                    "sandbox-path" : "/system/lib64/module",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/chipset-pub-sdk",
+                    "sandbox-path" : "/system/lib64/chipset-pub-sdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/chipset-sdk",
+                    "sandbox-path" : "/system/lib64/chipset-sdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/seccomp",
+                    "sandbox-path" : "/system/lib64/seccomp",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/extensionability",
+                    "sandbox-path" : "/system/lib64/extensionability",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/media",
+                    "sandbox-path" : "/system/lib64/media",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib/ld-musl-aarch64.so.1",
+                    "sandbox-path" : "/system/lib/ld-musl-aarch64.so.1",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/asan/lib64",
+                    "sandbox-path" : "/system/asan/lib64",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/vendor/lib64",
+                    "sandbox-path" : "/vendor/lib64",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/vendor/asan/lib64",
+                    "sandbox-path" : "/vendor/asan/lib64",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }
+            ],
+            "symbol-links" : [{
+                    "target-name" : "/system/lib64",
+                    "link-name" : "/lib64",
+                    "check-action-status": "false"
+                }
+            ]
+        }],
+        "app-resources" : [{
+            "sandbox-root" : "/mnt/sandbox/<PackageName>",
+            "mount-paths" : [],
+            "flags-point" : [],
+            "symbol-links" : []
+        }]
+    }],
+    "individual" : [{
+        "__internal__.com.ohos.render" : [{
+            "sandbox-root" : "/mnt/sandbox/com.ohos.render/<PackageName>",
+            "sandbox-ns-flags" : [ "pid", "net" ],
+            "mount-paths" : [{
+                    "src-path" : "/system/lib",
+                    "sandbox-path" : "/system/lib",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                },{
+                    "src-path" : "/system/lib64/platformsdk",
+                    "sandbox-path" : "/system/lib64/platformsdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/ndk",
+                    "sandbox-path" : "/system/lib64/ndk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/module",
+                    "sandbox-path" : "/system/lib64/module",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/chipset-pub-sdk",
+                    "sandbox-path" : "/system/lib64/chipset-pub-sdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/chipset-sdk",
+                    "sandbox-path" : "/system/lib64/chipset-sdk",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/seccomp",
+                    "sandbox-path" : "/system/lib64/seccomp",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/extensionability",
+                    "sandbox-path" : "/system/lib64/extensionability",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib64/media",
+                    "sandbox-path" : "/system/lib64/media",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/system/lib/ld-musl-aarch64.so.1",
+                    "sandbox-path" : "/system/lib/ld-musl-aarch64.so.1",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }, {
+                    "src-path" : "/vendor/lib64",
+                    "sandbox-path" : "/vendor/lib64",
+                    "sandbox-flags" : [ "bind", "rec" ],
+                    "check-action-status": "false"
+                }
+            ],
+            "symbol-links" : [{
+                    "target-name" : "/system/lib64",
+                    "link-name" : "/lib64",
+                    "check-action-status": "false"
+                }
+            ],
+            "flags-point" : [{
+                "flags": "DLP_MANAGER",
+                "sandbox-root" : "/mnt/sandbox/com.ohos.render/<PackageName>",
+                "mount-paths" : [],
+                "symbol-links" : [{}]
+            }]
+        }]
+    }]
+}

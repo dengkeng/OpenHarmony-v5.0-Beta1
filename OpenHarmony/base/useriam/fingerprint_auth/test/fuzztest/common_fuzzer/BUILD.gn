@@ -1,0 +1,53 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/features.gni")
+import("//build/test.gni")
+
+ohos_source_set("fingerprintauthservice_source_set_fuzzer") {
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "../../../services/src/fingerprint_auth_all_in_one_executor_hdi.cpp",
+    "../../../services/src/fingerprint_auth_driver_hdi.cpp",
+    "../../../services/src/fingerprint_auth_executor_callback_hdi.cpp",
+    "../../../services/src/fingerprint_auth_interface_adapter.cpp",
+    "../../../services/src/fingerprint_auth_service.cpp",
+    "../../../services/src/memory_guard.cpp",
+    "../../../services/src/sa_command_manager.cpp",
+    "../../../services/src/sensor_illumination_manager.cpp",
+    "../../../services/src/service_ex_manager.cpp",
+  ]
+
+  public_configs = [ "../../../services:fingerprintauthservice_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_fingerprint_auth:libfingerprint_auth_proxy_2.0",
+    "hilog:libhilog",
+    "miscdevice:vibrator_interface_native",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+    "user_auth_framework:userauth_executors",
+  ]
+
+  if (use_musl) {
+    if (use_jemalloc && use_jemalloc_dfx_intf) {
+      defines = [ "CONFIG_USE_JEMALLOC_DFX_INTF" ]
+    }
+  }
+
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+
+  subsystem_name = "useriam"
+  part_name = "fingerprint_auth"
+}

@@ -1,0 +1,89 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/security/device_security_level/common/dslm.gni")
+import("//build/ohos.gni")
+
+config("utils_static_config") {
+  include_dirs = [ "include" ]
+}
+
+# utils static lib
+ohos_static_library("utils_static") {
+  sources = [
+    "src/utils_base64.c",
+    "src/utils_datetime.c",
+    "src/utils_hexstring.c",
+    "src/utils_json.c",
+    "src/utils_mem.c",
+    "src/utils_state_machine.c",
+    "src/utils_tlv.c",
+    "src/utils_work_queue.c",
+  ]
+
+  include_dirs = [ "include" ]
+
+  deps = []
+
+  configs = [ "../../common:common_configs" ]
+
+  public_configs = [
+    ":utils_static_config",
+    "../../common:common_lite_configs",
+  ]
+
+  if (defined(ohos_lite)) {
+    sources += [ "src/utils_timer.c" ]
+
+    include_dirs += [
+      "$dslm_common_lib_path/include",
+      "$dslm_common_lib_path/timer_task/include",
+    ]
+
+    if (ohos_kernel_type == "linux" || ohos_kernel_type == "liteos_a") {
+      deps += [
+        "$dslm_common_lib_path/timer_task:ace_kit_timer",
+        "$dslm_hilog_path/featured:hilog_shared",
+        "$dslm_lite_component_path/cJSON:cjson_shared",
+      ]
+    } else if (ohos_kernel_type == "liteos_m") {
+      deps += [
+        "$dslm_common_lib_path/timer_task:ace_kit_timer",
+        "$dslm_hilog_path/featured:hilog_static",
+        "$dslm_lite_component_path/cJSON:cjson_static",
+      ]
+    }
+  } else {
+    sanitize = {
+      integer_overflow = true
+      ubsan = true
+      boundary_sanitize = true
+      cfi = true
+      cfi_cross_dso = true
+      blocklist = "../../cfi_blocklist.txt"
+    }
+    branch_protector_ret = "pac_ret"
+
+    sources += [ "src/utils_timer.cpp" ]
+
+    deps += [ "//third_party/cJSON:cjson" ]
+
+    external_deps = [
+      "c_utils:utils",
+      "hilog:libhilog",
+    ]
+  }
+
+  part_name = "device_security_level"
+  subsystem_name = "security"
+}

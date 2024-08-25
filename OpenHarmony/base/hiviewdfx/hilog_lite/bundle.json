@@ -1,0 +1,73 @@
+{
+    "name": "@ohos/hilog_lite",
+    "description": "Log services for liteos-m and liteos-a kernel.",
+    "optional": "false",
+    "version": "4.0.2",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "homePage": "https://gitee.com/openharmony",
+    "repository": "https://gitee.com/openharmony/hiviewdfx_hilog_lite",
+    "supplier": "Organization: OpenHarmony",
+    "segment": {
+        "destPath": "base/hiviewdfx/hilog_lite"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "hilog_lite",
+        "subsystem": "hiviewdfx",
+        "syscap": [],
+        "adapted_system_type": [
+            "mini",
+            "small"
+        ],
+      "rom": "500KB",
+      "ram": "~500KB",
+        "deps": {
+            "components": [
+                "ace_engine_lite",
+                "battery_lite",
+                "hiview_lite",
+                "samgr_lite",
+                "utils_lite"
+            ],
+            "third_party": [
+                "bounds_checking_function"
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//base/hiviewdfx/hilog_lite/frameworks/mini:hilog_lite",
+                "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_static",
+                "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+                "//base/hiviewdfx/hilog_lite/services/apphilogcat:apphilogcat",
+                "//base/hiviewdfx/hilog_lite/frameworks/js:ace_hilog_kits",
+                "//base/hiviewdfx/hilog_lite/test:hilog_lite_test"
+            ],
+            "inner_kits": [
+                {
+                  "name": "//base/hiviewdfx/hilog_lite/frameworks/mini:hilog_lite",
+                  "header": {
+                    "header_files": [
+                      "hiview_log.h",
+                      "log.h"
+                    ],
+                    "header_base": "//base/hiviewdfx/hilog_lite/interfaces/native/kits/hilog_lite"
+                  }
+                },
+                {
+                    "name": "//base/hiviewdfx/hilog_lite/frameworks/featured:hilog_shared",
+                    "header": {
+                      "header_files": [
+                        "hilog_cp.h",
+                        "hilog_trace.h",
+                        "hiview_log.h",
+                        "log.h"
+                      ],
+                      "header_base": "//base/hiviewdfx/hilog_lite/interfaces/native/innerkits/hilog"
+                    }
+                  }
+            ]
+        }
+    }
+}

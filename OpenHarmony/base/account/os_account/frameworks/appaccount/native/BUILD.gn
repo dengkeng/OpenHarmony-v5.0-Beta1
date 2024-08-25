@@ -1,0 +1,126 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../os_account.gni")
+
+config("app_account_innnerkits_config") {
+  visibility = [ ":*" ]
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  cflags += [ "-pipe" ]
+  cflags_cc = [
+    "-Wdate-time",
+    "-Wformat=2",
+    "-Wfloat-equal",
+    "-Wshadow",
+  ]
+
+  defines = [
+    "ACCOUNT_LOG_TAG = \"AppAccountFwk\"",
+    "LOG_DOMAIN = 0xD001B00",
+  ]
+}
+
+config("app_account_innerkits_public_config") {
+  visibility = [ ":*" ]
+
+  include_dirs = [
+    "${app_account_core_path}/include",
+    "${app_account_extension_path}/include",
+    "${app_account_interfaces_native_path}/include",
+    "${os_account_path}/interfaces/innerkits/appaccount/native/include",
+    "${account_napi_common_path}/include",
+    "${app_account_kits_path}/include",
+    "${os_account_path}/frameworks/common/include",
+    "include",
+    "${common_path}/utils/include",
+    "${innerkits_common}/include",
+  ]
+}
+
+ohos_shared_library("app_account_innerkits") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  sources = [
+    "src/app_account.cpp",
+    "src/app_account_authenticator_callback_proxy.cpp",
+    "src/app_account_authenticator_callback_stub.cpp",
+    "src/app_account_authenticator_stub.cpp",
+    "src/app_account_authorization_extension_callback_client.cpp",
+    "src/app_account_authorization_extension_callback_proxy.cpp",
+    "src/app_account_authorization_extension_callback_service.cpp",
+    "src/app_account_authorization_extension_callback_stub.cpp",
+    "src/app_account_authorization_extension_service.cpp",
+    "src/app_account_authorization_extension_stub.cpp",
+    "src/app_account_common.cpp",
+    "src/app_account_death_recipient.cpp",
+    "src/app_account_event_listener.cpp",
+    "src/app_account_event_stub.cpp",
+    "src/app_account_info.cpp",
+    "src/app_account_manager.cpp",
+    "src/app_account_proxy.cpp",
+    "src/app_account_subscribe_info.cpp",
+    "src/app_account_subscriber.cpp",
+  ]
+
+  configs = [
+    ":app_account_innnerkits_config",
+    "${account_coverage_config_path}:coverage_flags",
+  ]
+
+  public_configs = [ ":app_account_innerkits_public_config" ]
+
+  use_exceptions = true
+
+  if (!use_clang_coverage) {
+    version_script = "libapp_account_innerkits.map"
+  }
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${innerkits_native_path}:libaccountkits",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:app_context",
+    "ability_runtime:runtime",
+    "ability_runtime:service_extension",
+    "ability_runtime:ui_extension",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_napi",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "samgr:samgr_proxy",
+  ]
+
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "account"
+  part_name = "os_account"
+}

@@ -1,0 +1,39 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#####################hydra-fuzz###################
+import("//build/config/features.gni")
+import("//build/test.gni")
+module_output_path = "resource_management/resmgr"
+
+##############################fuzztest##########################################
+ohos_fuzztest("ResmgrFuzzTest") {
+  module_out_path = module_output_path
+
+  fuzz_config_file = "../resmgr_fuzzer"
+
+  include_dirs = [ "../../../interfaces/inner_api/include" ]
+
+  cflags = [
+    "-g",
+    "-O0",
+    "-Wno-unused-variable",
+    "-fno-omit-frame-pointer",
+  ]
+  sources = [ "resmgr_fuzzer.cpp" ]
+
+  deps = [
+    "../../../frameworks/resmgr:global_resmgr",
+    "//third_party/bounds_checking_function:libsec_shared",
+  ]
+}

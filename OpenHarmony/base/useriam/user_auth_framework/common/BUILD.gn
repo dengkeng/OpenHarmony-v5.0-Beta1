@@ -1,0 +1,111 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("iam_log_config") {
+  include_dirs = [ "logs" ]
+}
+
+config("iam_thread_pool_config") {
+  include_dirs = [ "thread_pool" ]
+}
+
+ohos_source_set("iam_thread_pool") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "thread_pool",
+    "logs",
+  ]
+
+  sources = [ "thread_pool/thread_groups.cpp" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  public_configs = [ ":iam_thread_pool_config" ]
+
+  subsystem_name = "useriam"
+  part_name = "user_auth_framework"
+}
+
+config("iam_utils_config") {
+  include_dirs = [ "utils" ]
+}
+
+ohos_source_set("iam_utils") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "utils",
+    "logs",
+  ]
+
+  sources = [
+    "utils/iam_mem.cpp",
+    "utils/iam_time.cpp",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  public_configs = [
+    ":iam_utils_config",
+    ":iam_log_config",
+  ]
+
+  subsystem_name = "useriam"
+  part_name = "user_auth_framework"
+}
+
+config("iam_test_config") {
+  include_dirs = [ "test" ]
+}
+
+ohos_source_set("iam_test") {
+  testonly = true
+  include_dirs = [ "logs" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+
+  public_configs = [ ":iam_test_config" ]
+
+  sources = [ "test/iam_fuzz_test.cpp" ]
+
+  subsystem_name = "useriam"
+  part_name = "user_auth_framework"
+}

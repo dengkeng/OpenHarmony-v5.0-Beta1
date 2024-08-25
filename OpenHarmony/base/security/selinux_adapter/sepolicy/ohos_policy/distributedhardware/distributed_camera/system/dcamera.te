@@ -1,0 +1,268 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#avc:  denied  { call } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:camera_service:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:camera_service:s0 tclass=binder permissive=1
+allow dcamera camera_service:binder { call transfer };
+
+#avc:  denied  { search } for  pid=2040 comm="dcamera" name="/" dev="mmcblk0p11" ino=2 scontext=u:r:dcamera:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow dcamera data_file:dir { search };
+
+#avc:  denied  { bind } for  pid=3250 comm="Fillp_core_0" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { connect } for  pid=2344 comm="Fillp_core_0" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { create } for  pid=3250 comm="Fillp_core_0" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { getattr } for  pid=2344 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { read } for  pid=2040 comm="Fillp_core_94" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { setopt } for  pid=3250 comm="Fillp_core_0" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+#avc:  denied  { write } for  pid=2040 comm="Fillp_core_94" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=udp_socket permissive=1
+allow dcamera dcamera:udp_socket { bind connect create getattr read setopt write };
+
+#avc:  denied  { getopt } for  pid=2051 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { setopt } for  pid=2051 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=unix_dgram_socket permissive=1
+allow dcamera dcamera:unix_dgram_socket { getopt setopt };
+
+#avc:  denied  { call } for  pid=2178 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera_host:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2429 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera_host:s0 tclass=binder permissive=1
+allow dcamera dcamera_host:binder { call transfer };
+
+#avc:  denied  { create } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
+#avc:  denied  { write } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
+#avc:  denied  { nlmsg_read } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
+#avc:  denied  { read } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
+allow dcamera dcamera:netlink_route_socket { create nlmsg_read read write };
+
+#avc:  denied  { search } for  pid=2047 comm="dcamera" name="socket" dev="tmpfs" ino=38 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
+allow dcamera dev_unix_socket:dir { search };
+
+#avc:  denied  { read write } for  pid=2520 comm="sa_main" path="/dev/console" dev="tmpfs" ino=19 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_console_file:s0 tclass=chr_file permissive=0
+allow dcamera dev_console_file:chr_file { read write };
+
+#avc:  denied  { getattr } for  pid=2396 comm="dcamera" path="/dev/dri/renderD128" dev="tmpfs" ino=94 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+#avc:  denied  { read write } for  pid=2396 comm="dcamera" name="renderD128" dev="tmpfs" ino=94 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+#avc:  denied  { open } for  pid=2396 comm="dcamera" path="/dev/dri/renderD128" dev="tmpfs" ino=94 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+#avc:  denied  { ioctl } for  pid=2396 comm="dcamera" path="/dev/dri/renderD128" dev="tmpfs" ino=94 ioctlcmd=0x641f scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+allow dcamera dev_dri_file:chr_file { getattr ioctl open read write };
+
+#avc:  denied  { search } for  pid=2396 comm="dcamera" name="dri" dev="tmpfs" ino=93 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=dir permissive=1
+allow dcamera dev_dri_file:dir { search };
+
+#avc:  denied  { call } for  pid=2464 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dhardware:s0 tclass=binder permissive=1
+allow dcamera dhardware:binder { call };
+
+
+
+#avc:  denied  { call } for  pid=2061 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:allocator_host:s0 tclass=binder permissive=1
+allow dcamera allocator_host:binder { call };
+
+#avc:  denied  { use } for  pid=2033 comm="dcamera" path="/dmabuf:" dev="dmabuf" ino=29931 ioctlcmd=0x6200 scontext=u:r:dcamera:s0 tcontext=u:r:allocator_host:s0 tclass=fd permissive=1
+allow dcamera allocator_host:fd { use };
+
+#avc:  denied  { call } for  pid=2483 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:foundation:s0 tclass=binder permissive=1
+allow dcamera foundation:binder { call };
+
+#avc:  denied  { get } for service=hdf_device_manager pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
+allow dcamera hdf_device_manager:hdf_devmgr_class { get };
+
+#avc:  denied  { get } for service=distributed_camera_provider_service pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:hdf_distributed_camera_provider_service:s0 tclass=hdf_devmgr_class permissive=1
+allow dcamera hdf_distributed_camera_provider_service:hdf_devmgr_class { get };
+
+
+allow dcamera hdf_allocator_service:hdf_devmgr_class { get };
+
+#avc:  denied  { call } for  pid=2040 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:hdf_devmgr:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2464 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:hdf_devmgr:s0 tclass=binder permissive=1
+allow dcamera hdf_devmgr:binder { call transfer };
+
+#avc:  denied  { call } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+allow dcamera media_service:binder { call transfer };
+
+#avc:  denied  { read } for  pid=3521 comm="sa_main" name="u:object_r:accessibility_param:s0" dev="tmpfs" ino=53 scontext=u:r:dcamera:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=0
+allow dcamera accessibility_param:file { read open map };
+
+#avc:  denied  { use } for  pid=514 comm="media_service" path="/dev/ashmem" dev="tmpfs" ino=181 scontext=u:r:dcamera:s0 tcontext=u:r:media_service:s0 tclass=fd permissive=1
+allow dcamera media_service:fd { use };
+
+#avc:  denied  { get } for service=3002 pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_media_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_media_service:samgr_class { get };
+
+#avc:  denied  { get } for service=3901 pid=2042 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
+allow dcamera sa_param_watcher:samgr_class { get };
+
+#avc: denied  { get } for service=4700 pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_softbus_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_softbus_service:samgr_class { get };
+
+#avc:  denied  { add } for service=4803 pid=2068 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_dcamera_source_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_dcamera_source_service:samgr_class { add get_remote };
+
+#avc:  denied  { get_remote } for service=4804 pid=2068 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=1
+#avc:  denied  { add } for service=4804 pid=2068 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_dcamera_sink_service:samgr_class { add get_remote };
+
+#avc:  denied  { get } for service=5100 pid=2068 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_device_service_manager:s0 tclass=samgr_class permissive=1
+allow dcamera sa_device_service_manager:samgr_class { get };
+
+#avc:  denied  { get } for service=3008 pid=2475 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_camera_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_camera_service:samgr_class { get };
+
+#avc:  denied  { get } for service=401 pid=2490 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_bms:s0 tclass=samgr_class permissive=1
+allow dcamera sa_foundation_bms:samgr_class { get };
+
+#avc:  denied  { get } for service=4607 pid=1562 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_dms:s0 tclass=samgr_class permissive=1
+allow dcamera sa_foundation_dms:samgr_class { get };
+
+#avc:  denied  { get } for service=4606 pid=3551 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_wms:s0 tclass=samgr_class permissive=1
+allow dcamera sa_foundation_wms:samgr_class { get };
+
+#avc:  denied  { read } for  pid=2433 comm="THREAD_POOL" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { setopt } for  pid=2047 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { shutdown } for  pid=2061 comm="THREAD_POOL" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+#avc:  denied  { write } for  pid=2047 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+allow dcamera softbus_server:tcp_socket { read setopt write shutdown };
+
+#avc:  denied  { call } for  pid=2047 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2061 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=binder permissive=1
+allow dcamera softbus_server:binder { call transfer };
+
+#avc:  denied  { use } for  pid=586 comm="THREAD_POOL"  scontext=u:r:dcamera:s0 tcontext=u:r:softbus_server:s0 tclass=fd permissive=1
+allow dcamera softbus_server:fd { use };
+
+#avc:  denied  { read } for  pid=4773 comm="dcamera" name="online" dev="sysfs" ino=29986 scontext=u:r:dcamera:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=4773 comm="dcamera" path"sys/devices/system/cpu/" name="online" dev="sysfs" ino=29986 scontext=u:r:dcamera:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=1
+allow dcamera sysfs_devices_system_cpu:file { read open };
+
+#avc:  denied  { read } for  pid=2020 comm="sa_main" name="u:object_r:ohos_dev_param:s0" dev="tmpfs" ino=30 scontext=u:r:dcamera:s0 tcontext=u:object_r:ohos_dev_param:s0 tclass=file permissive=0
+allow dcamera ohos_dev_param:file { read };
+
+#avc:  denied  { get } for service=3503 pid=2648 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_accesstoken_manager_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_accesstoken_manager_service:samgr_class { get };
+
+#avc:  denied  { node_bind } for  pid=2166 comm="Fillp_core_210" scontext=u:r:dcamera:s0 tcontext=u:object_r:node:s0 tclass=udp_socket permissive=1
+allow dcamera node:udp_socket { node_bind };
+allow dcamera init:binder { call transfer };
+debug_only(`
+    allow dcamera sh:binder { call transfer };
+')
+
+#avc:  denied  { get } for service=4803 pid=560 scontext=u:r:hidumper_service:s0 tcontext=u:object_r:sa_dcamera_source_service:s0 tclass=samgr_class permissive=0
+# avc:  denied  { get } for service=4804 pid=560 scontext=u:r:hidumper_service:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=0
+allow hidumper_service sa_dcamera_source_service:samgr_class { get };
+allow hidumper_service sa_dcamera_sink_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4801 pid=2892 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=0
+allow dcamera sa_dhardware_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=3030 comm="sa_main" name="bin" dev="sdd72" ino=12 scontext=u:r:dcamera:s0 tcontext=u:object_r:vendor_bin_file:s0 tclass=dir permissive=1
+allow dcamera vendor_bin_file:dir { search };
+
+#avc:  denied  { call } for  pid=571 comm="msdp" scontext=u:r:dcamera:s0 tcontext=u:r:accesstoken_service:s0 tclass=binder permissive=1
+allow dcamera accesstoken_service:binder { call };
+
+#avc:  denied  { get } for service=4802 pid=3227 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_devicemanager_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_foundation_devicemanager_service:samgr_class { get };
+
+#avc:  denied  { call } for  pid=2169 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:device_manager:s0 tclass=binder permissive=0
+#avc:  denied  { transfer } for  pid=2712 comm="IPC_1_2732" scontext=u:r:dcamera:s0 tcontext=u:r:device_manager:s0 tclass=binder permissive=1
+allow dcamera device_manager:binder { call transfer };
+
+#avc:  denied  { get } for pid=1380 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:sa_av_codec_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_av_codec_service:samgr_class { get };
+
+#avc:  denied  { call } for pid=6252 comm="SrcDevHandler" scontext=u:r:dcamera:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=0
+#avc:  denied  { transfer } for pid=4125 comm="ohos.dharfware." scontext=u:r:dcamera:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=0
+allow dcamera av_codec_service:binder { call transfer };
+
+#avc:  denied  { call } for pid=1544 comm="IPC_3_2014" scontext=u:r:foundation:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=0
+#avc:  denied  { call } for pid=1453 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=0
+allow foundation dcamera:binder { call transfer };
+
+#avc:  denied  { call } for pid=1380 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:dhardware:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for pid=1380 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:dhardware:s0 tclass=binder permissive=1
+allow av_codec_service dhardware:binder { call transfer };
+allow av_codec_service dcamera:binder { call transfer };
+
+allow dcamera sysfs_devices_system_cpu:file { read getattr };
+allow dcamera arkcompiler_param:file { map open read };
+allow dcamera ark_writeable_param:file { map open read };
+
+allow dcamera av_codec_service:fd { use };
+allow dcamera_host chip_prod_file:dir { search };
+
+#avc: denied  { call transfer } for pid=4202 comm="DRPC_4_6734" scontext=u:r:dcamera:s0 tcontext=u:r:dslm_service:s0 tclass=binder permissive=1;
+#avc: denied  { call transfer } for pid=3591 comm="dslm_service" scontext=u:r:dslm_service:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=1;
+#avc: denied  { call transfer } for pid=4202 comm="IPC_2_2923" scontext=u:r:camera_service:s0 tcontext=u:r:av_codec_service:s0 tclass=binder permissive=1;
+allow dcamera dslm_service:binder { call transfer };
+allow dslm_service dcamera:binder { call transfer };
+allow camera_service av_codec_service:binder { call transfer };
+
+#avc: denied  { write } for pid=5006 comm="sa_main" path="/dev/kmsg" dev = "tmpfs" ino=116 scontext=u:r:dcamera:s0 tcontext=u:r:dev_kmsg_file:s0 tclass=chr_file permissive=1;
+#avc: denied  { write } for pid=4861 comm="hdf_devhost" path="/dev/kmsg" dev = "tmpfs" ino=116 scontext=u:r:dcamera_host:s0 tcontext=u:r:dev_kmsg_file:s0 tclass=chr_file permissive=1;
+#avc: denied  { write } for pid=4861 comm="IPC_1_4881" name= dev = "tmpfs" ino=116 scontext=u:r:dcamera_host:s0 tcontext=u:r:chip_prod_file:s0 tclass=file permissive=1;
+#avc: denied  { get } for service=3511 pid=4213 scontext=u:r:dcamera:s0 tcontext=u:r:sa_device_security_level_manager_service:s0 tclass=samgr_class permissive=0;
+allow  dcamera dev_kmsg_file:chr_file { open write };
+allow  dcamera_host dev_kmsg_file:chr_file { open write };
+allow  dcamera_host chip_prod_file:file { open getattr write read };
+allow  dcamera sa_device_security_level_manager_service:samgr_class{ get };
+allow accessibility sa_powermgr_powermgr_service:samgr_class { get };
+
+allow dcamera dev_ashmem_file:chr_file { read open map };
+allow normal_hap sa_dhardware_service:samgr_class { get };
+allow normal_hap dhardware:binder { call };
+
+
+
+allow dcamera bootevent_param:file { map open read };
+allow dcamera bootevent_samgr_param:file { map open read };
+allow dcamera build_version_param:file { map open read };
+allow dcamera const_allow_mock_param:file { map open read };
+allow dcamera const_allow_param:file { map open read };
+allow dcamera const_build_param:file { map open read };
+allow dcamera const_display_brightness_param:file { map open read };
+allow dcamera const_param:file { map open read };
+allow dcamera const_postinstall_fstab_param:file { map open read };
+allow dcamera const_postinstall_param:file { map open read };
+allow dcamera const_product_param:file { map open read };
+allow dcamera dcamera_host:binder { transfer };
+allow dcamera debug_param:file { map open read };
+allow dcamera default_param:file { map open read };
+allow dcamera distributedsche_param:file { map open read };
+allow dcamera hilog_param:file { map open read };
+allow dcamera hw_sc_build_os_param:file { map open read };
+allow dcamera hw_sc_build_param:file { map open read };
+allow dcamera hw_sc_param:file { map open read };
+allow dcamera init_param:file { map open read };
+allow dcamera init_svc_param:file { map open read };
+allow dcamera input_pointer_device_param:file { map open read };
+allow dcamera net_param:file { map open read };
+allow dcamera net_tcp_param:file { map open read };
+allow dcamera ohos_boot_param:file { map open read };
+allow dcamera ohos_param:file { map open read };
+allow dcamera param_watcher:binder { call transfer };
+allow dcamera persist_param:file { map open read };
+allow dcamera persist_sys_param:file { map open read };
+allow dcamera security_param:file { map open read };
+allow dcamera startup_param:file { map open read };
+allow dcamera sys_param:file { map open read };
+allow dcamera system_bin_file:dir { search };
+allow dcamera sys_usb_param:file { map open read };
+allow dcamera tracefs:dir { search };
+allow dcamera tracefs_trace_marker_file:file { open write };
+allow dcamera sys_prod_file:dir { search };
+allow dcamera chip_prod_file:dir { search };
+allow dcamera data_data_file:dir { search write add_name search };
+allow dcamera data_data_file:file { create append open ioctl getattr };
+allow camera_service hdf_distributed_camera_provider_service:hdf_devmgr_class { get };
+allow dcamera_host render_service:binder { transfer };
+allow dcamera_host normal_hap_attr:binder { transfer };
+allow dcamera_host av_codec_service:binder { call transfer };
+allowxperm dcamera data_data_file:file ioctl { 0x5413 };

@@ -1,0 +1,42 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../systemres.gni")
+
+ohos_app_scope("main_app_res") {
+  app_profile = "AppScope/app.json"
+  sources = [ "AppScope/resources" ]
+}
+
+ohos_resources("main_res") {
+  sources = [ "main/resources" ]
+  deps = [ ":main_app_res" ]
+  hap_profile = "./main/module.json"
+}
+
+ohos_hap("systemres_hap") {
+  deps = [ ":main_res" ]
+  hap_profile = "./main/module.json"
+  hap_name = "SystemResources"
+  module_install_dir = "app/ohos.global.systemres"
+  certificate_profile = "./SystemResources.p7b"
+  subsystem_name = "global"
+  part_name = "system_resources"
+  if (defined(sign_hap_py_path)) {
+    certificate_profile = "${certificate_profile_path}"
+    key_alias = "OHSystemResources"
+    private_key_path = "OHSystemResources"
+    compatible_version = "9"
+  }
+}

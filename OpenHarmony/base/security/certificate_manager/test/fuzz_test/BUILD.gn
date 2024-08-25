@@ -1,0 +1,70 @@
+# Copyright (C) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+
+#################################group#########################################
+group("fuzztest") {
+  testonly = true
+  if (os_level == "standard") {
+    deps = [
+      "./cmabort_fuzzer:fuzztest",
+      "./cmfinish_fuzzer:fuzztest",
+      "./cmgetappcert_fuzzer:fuzztest",
+      "./cmgetappcertlist_fuzzer:fuzztest",
+      "./cmgetauthorizedapplist_fuzzer:fuzztest",
+      "./cmgetcertinfo_fuzzer:fuzztest",
+      "./cmgetcertlist_fuzzer:fuzztest",
+      "./cmgetusercertinfo_fuzzer:fuzztest",
+      "./cmgetusercertlist_fuzzer:fuzztest",
+      "./cmgrantappcertificate_fuzzer:fuzztest",
+      "./cminit_fuzzer:fuzztest",
+      "./cminstallappcert_fuzzer:fuzztest",
+      "./cminstallusertrustedcert_fuzzer:fuzztest",
+      "./cmisauthorizedapp_fuzzer:fuzztest",
+      "./cmremovegrantedapp_fuzzer:fuzztest",
+      "./cmsendrequest_fuzzer:fuzztest",
+      "./cmsetcertstatus_fuzzer:fuzztest",
+      "./cmsetusercertstatus_fuzzer:fuzztest",
+      "./cmuninstallappcert_fuzzer:fuzztest",
+      "./cmuninstallusertrustedcert_fuzzer:fuzztest",
+      "./cmupdate_fuzzer:fuzztest",
+    ]
+
+    deps += [
+      "./cmipcserviceabort_fuzzer:fuzztest",
+      "./cmipcservicefinish_fuzzer:fuzztest",
+      "./cmipcservicegetappcert_fuzzer:fuzztest",
+      "./cmipcservicegetappcertlist_fuzzer:fuzztest",
+      "./cmipcservicegetauthorizedapplist_fuzzer:fuzztest",
+      "./cmipcservicegetcertificateinfo_fuzzer:fuzztest",
+      "./cmipcservicegetcertificatelist_fuzzer:fuzztest",
+      "./cmipcservicegetusercertinfo_fuzzer:fuzztest",
+      "./cmipcservicegetusercertlist_fuzzer:fuzztest",
+      "./cmipcservicegrantappcertificate_fuzzer:fuzztest",
+      "./cmipcserviceinit_fuzzer:fuzztest",
+      "./cmipcserviceinstallappcert_fuzzer:fuzztest",
+      "./cmipcserviceinstallusercert_fuzzer:fuzztest",
+      "./cmipcserviceisauthorizedapp_fuzzer:fuzztest",
+      "./cmipcserviceremovegrantedapp_fuzzer:fuzztest",
+      "./cmipcservicesetcertstatus_fuzzer:fuzztest",
+      "./cmipcservicesetusercertstatus_fuzzer:fuzztest",
+      "./cmipcserviceuninstallallappcert_fuzzer:fuzztest",
+      "./cmipcserviceuninstallallusercert_fuzzer:fuzztest",
+      "./cmipcserviceuninstallappcert_fuzzer:fuzztest",
+      "./cmipcserviceuninstallusercert_fuzzer:fuzztest",
+      "./cmipcserviceupdate_fuzzer:fuzztest",
+      "./cmonremoterequest_fuzzer:fuzztest",
+    ]
+  }
+}

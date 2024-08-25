@@ -1,0 +1,76 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../access_token.gni")
+
+config("setproc_config") {
+  visibility = [ ":*" ]
+  include_dirs = [ "include" ]
+}
+
+if (is_standard_system) {
+  ohos_static_library("libtoken_setproc") {
+    subsystem_name = "security"
+    part_name = "access_token"
+    output_name = "libtoken_setproc"
+
+    public_configs = [ ":setproc_config" ]
+
+    cflags = [ "-Wall" ]
+
+    include_dirs = [ "src" ]
+
+    sources = [ "src/token_setproc.c" ]
+  }
+
+  ohos_shared_library("libtokensetproc_shared") {
+    subsystem_name = "security"
+    part_name = "access_token"
+    output_name = "libtokensetproc_shared"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    branch_protector_ret = "pac_ret"
+    innerapi_tags = [ "platformsdk" ]
+    public_configs = [ ":setproc_config" ]
+
+    cflags = [ "-Wall" ]
+
+    include_dirs = [ "src" ]
+
+    sources = [ "src/token_setproc.c" ]
+  }
+
+  ohos_static_library("libperm_setproc") {
+    subsystem_name = "security"
+    part_name = "access_token"
+    output_name = "libperm_setproc"
+    sanitize = {
+      cfi = true
+      cfi_cross_dso = true
+      debug = false
+    }
+    branch_protector_ret = "pac_ret"
+
+    public_configs = [ ":setproc_config" ]
+
+    cflags = [ "-Wall" ]
+
+    include_dirs = [ "src" ]
+
+    sources = [ "src/perm_setproc.cpp" ]
+  }
+}

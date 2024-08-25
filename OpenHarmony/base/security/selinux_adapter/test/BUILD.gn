@@ -1,0 +1,126 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("../selinux.gni")
+
+config("selinux_unittest_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "../interfaces/policycoreutils/include",
+    "unittest/common",
+    "$THIRD_PARTY_DIR/selinux/libselinux/include",
+    "$THIRD_PARTY_DIR/googletest/include",
+  ]
+  cflags = [
+    "-D_GNU_SOURCE",
+    "-w",
+  ]
+}
+
+ohos_unittest("hap_restorecon_unittest") {
+  subsystem_name = "security"
+  part_name = "selinux_adapter"
+  module_out_path = part_name + "/" + part_name
+  public_configs = [ ":selinux_unittest_config" ]
+  sources = [
+    "../interfaces/policycoreutils/src/hap_restorecon.cpp",
+    "../interfaces/policycoreutils/src/sehap_contexts_trie.cpp",
+    "unittest/common/test_common.cpp",
+    "unittest/hap_restorecon/unit_test.cpp",
+  ]
+  deps = [
+    "$THIRD_PARTY_DIR/selinux:libselinux",
+    "../:libselinux_error_static",
+    "../:libselinux_hilog_static",
+  ]
+  cflags = [ "-DSELINUX_TEST" ]
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+}
+
+ohos_unittest("paraperm_checker_unittest") {
+  subsystem_name = "security"
+  part_name = "selinux_adapter"
+  module_out_path = part_name + "/" + part_name
+  public_configs = [ ":selinux_unittest_config" ]
+  sources = [
+    "unittest/common/test_common.cpp",
+    "unittest/paraperm_checker/unit_test.cpp",
+  ]
+  deps = [ "$THIRD_PARTY_DIR/selinux:libselinux" ]
+  external_deps = [
+    "c_utils:utils",
+    "selinux_adapter:libparaperm_checker",
+  ]
+}
+
+ohos_unittest("service_checker_unittest") {
+  subsystem_name = "security"
+  part_name = "selinux_adapter"
+  module_out_path = part_name + "/" + part_name
+  public_configs = [ ":selinux_unittest_config" ]
+  sources = [
+    "unittest/common/test_common.cpp",
+    "unittest/service_checker/unit_test.cpp",
+  ]
+  external_deps = [
+    "c_utils:utils",
+    "selinux_adapter:libservice_checker",
+  ]
+}
+
+ohos_unittest("parameter_static_unittest") {
+  subsystem_name = "security"
+  part_name = "selinux_adapter"
+  module_out_path = part_name + "/" + part_name
+  public_configs = [ ":selinux_unittest_config" ]
+  sources = [
+    "../interfaces/policycoreutils/src/selinux_map.c",
+    "../interfaces/policycoreutils/src/selinux_share_mem.c",
+    "unittest/common/test_common.cpp",
+    "unittest/parameter_static/unit_test.cpp",
+  ]
+  deps = [ "$THIRD_PARTY_DIR/selinux:libselinux" ]
+  external_deps = [ "c_utils:utils" ]
+}
+
+ohos_unittest("selinux_common_unittest") {
+  subsystem_name = "security"
+  part_name = "selinux_adapter"
+  module_out_path = part_name + "/" + part_name
+  public_configs = [ ":selinux_unittest_config" ]
+  sources = [
+    "unittest/common/test_common.cpp",
+    "unittest/selinux_common_test/unit_test.cpp",
+  ]
+  deps = [
+    "../:libselinux_hilog_static",
+    "../:libselinux_klog_static",
+    "//third_party/selinux:libselinux",
+  ]
+  external_deps = [ "hilog:libhilog" ]
+}
+
+group("unittest") {
+  testonly = true
+  deps = [
+    ":hap_restorecon_unittest",
+    ":parameter_static_unittest",
+    ":paraperm_checker_unittest",
+    ":selinux_common_unittest",
+    ":service_checker_unittest",
+  ]
+}

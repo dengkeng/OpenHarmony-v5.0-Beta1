@@ -1,0 +1,92 @@
+{
+    "name": "@ohos/huks",
+    "description": "The provider of key and certificate manangement capbility, which belongs to security subsystem",
+    "version": "4.0.2",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "base/security/huks"
+    },
+    "dirs":{},
+    "scripts": {
+      "install": "DEST_PATH=${DEP_BUNDLE_BASE}/base/security/huks && mkdir -p $DEST_PATH && cp -r ./* $DEST_PATH"
+    },
+    "author": {},
+    "homePage": "https://gitee.com/openharmony",
+    "repository": "https://gitee.com/openharmony/security_huks",
+    "supplier": "Organization: OpenHarmony",
+    "component": {
+      "name": "huks",
+      "subsystem": "security",
+      "syscap": [
+          "SystemCapability.Security.Huks.Extension",
+          "SystemCapability.Security.Huks.Core",
+          "SystemCapability.Security.Cipher"
+          ],
+      "features": [],
+      "adapted_system_type": [
+          "standard",
+          "small",
+          "mini"
+        ],
+      "hisysevent_config": [
+          "//base/security/huks/hisysevent.yaml"
+        ],
+      "rom": "5120KByte",
+      "ram": "4828KByte",
+      "deps": {
+        "components": [
+          "ability_base",
+          "access_token",
+          "bundle_framework",
+          "c_utils",
+          "common_event_service",
+          "hisysevent",
+          "hitrace",
+          "hilog",
+          "hilog_lite",
+          "ipc",
+          "json",
+          "napi",
+          "os_account",
+          "safwk",
+          "samgr",
+          "user_auth_framework",
+          "drivers_interface_user_auth",
+          "drivers_interface_huks",
+          "openssl",
+          "bounds_checking_function",
+          "mbedtls",
+          "cJSON"
+        ]
+      },
+      "build": {
+        "group_type": {
+          "base_group": [],
+          "fwk_group": [
+            "//base/security/huks:fwk_group"
+          ],
+          "service_group": [
+            "//base/security/huks:service_group"
+          ]
+        },
+        "inner_api": [
+          {
+            "name": "//base/security/huks/interfaces/inner_api/huks_standard/main:libhukssdk",
+            "header": {
+              "header_files": [
+                "hks_api.h",
+                "hks_param.h",
+                "hks_type.h"
+              ],
+              "header_base": "//base/security/huks/interfaces/inner_api/huks_standard/main/include"
+            }
+          }
+        ],
+        "test": [
+          "//base/security/huks:huks_sdk_test",
+          "//base/security/huks/test/fuzz_test:fuzztest"
+        ]
+      }
+    }
+  }

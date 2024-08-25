@@ -1,0 +1,58 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow memmgrservice bootevent_param:file { map open read };
+allow memmgrservice bootevent_samgr_param:file { map open read };
+allow memmgrservice build_version_param:file { map open read };
+allow memmgrservice const_allow_mock_param:file { map open read };
+allow memmgrservice const_allow_param:file { map open read };
+allow memmgrservice const_build_param:file { map open read };
+allow memmgrservice const_display_brightness_param:file { map open read };
+allow memmgrservice const_param:file { map open read };
+allow memmgrservice const_postinstall_fstab_param:file { map open read };
+allow memmgrservice const_postinstall_param:file { map open read };
+allow memmgrservice const_product_param:file { map open read };
+allow memmgrservice debug_param:file { map open read };
+allow memmgrservice default_param:file { map open read };
+allow memmgrservice distributedsche_param:file { map open read };
+allow memmgrservice hilog_param:file { map open read };
+allow memmgrservice hw_sc_build_os_param:file { map open read };
+allow memmgrservice hw_sc_build_param:file { map open read };
+allow memmgrservice hw_sc_param:file { map open read };
+allow memmgrservice init_param:file { map open read };
+allow memmgrservice init_svc_param:file { map open read };
+allow memmgrservice input_pointer_device_param:file { map open read };
+allow memmgrservice memmgrservice:capability { sys_ptrace };
+allow memmgrservice net_param:file { map open read };
+allow memmgrservice net_tcp_param:file { map open read };
+allow memmgrservice ohos_boot_param:file { map open read };
+allow memmgrservice ohos_param:file { map open read };
+allow memmgrservice param_watcher:binder { call transfer };
+allow memmgrservice persist_param:file { map open read };
+allow memmgrservice persist_param:parameter_service { set };
+allow memmgrservice persist_sys_param:file { map open read };
+allow memmgrservice proc_file:file { read };
+allow memmgrservice sa_bgtaskmgr:samgr_class { get };
+allow memmgrservice sa_memory_manager_service:samgr_class { add };
+allow memmgrservice sa_param_watcher:samgr_class { get };
+allow memmgrservice security_param:file { map open read };
+allow memmgrservice startup_param:file { map open read };
+allow memmgrservice sys_param:file { map open read };
+allow memmgrservice system_bin_file:dir { search };
+allow memmgrservice sys_usb_param:file { map open read };
+allow memmgrservice tracefs:dir { search };
+allow memmgrservice tracefs_trace_marker_file:file { open write };
+allow memmgrservice media_service:binder { call };
+allow memmgrservice render_service:binder { call };
+allow memmgrservice sa_resource_schedule:samgr_class { get };
+allow memmgrservice resource_schedule_service:binder { call };

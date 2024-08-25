@@ -1,0 +1,93 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow media_service accesstoken_service:binder { call };
+allow media_service bootanimation:binder { call transfer };
+allow media_service bootevent_param:file { map open read };
+allow media_service bootevent_samgr_param:file { map open read };
+allow media_service build_version_param:file { map open read };
+allow media_service const_allow_mock_param:file { map open read };
+allow media_service const_allow_param:file { map open read };
+allow media_service const_build_param:file { map open read };
+allow media_service const_display_brightness_param:file { map open read };
+allow media_service const_param:file { map open read };
+allow media_service const_postinstall_fstab_param:file { map open read };
+allow media_service const_postinstall_param:file { map open read };
+allow media_service const_product_param:file { map open read };
+allow media_service data_app_el1_file:file { getattr };
+allow media_service data_data_file:dir { search };
+allow media_service data_file:dir { search };
+allow media_service data_media:dir { search };
+allow media_service data_service_el2_hmdfs:file { getattr read write };
+allow media_service debug_param:file { map open read };
+allow media_service default_param:file { map open read };
+allow media_service dev_ashmem_file:chr_file { open };
+allow media_service dev_dri_file:chr_file { getattr ioctl open read write };
+allow media_service dev_dri_file:dir { search };
+allow media_service dev_unix_socket:dir { search };
+allow media_service dhardware:binder { call transfer };
+allow media_service allocator_host:binder { call };
+allow media_service allocator_host:fd { use };
+allow media_service distributedsche_param:file { map open read };
+allow media_service dscreen:binder { call transfer };
+allow media_service hdf_devmgr:binder { call };
+allow media_service hdf_allocator_service:hdf_devmgr_class { get };
+allow media_service hilog_param:file { map open read };
+allow media_service hmdfs:file { getattr read read write };
+allow media_service hw_sc_build_os_param:file { map open read };
+allow media_service hw_sc_build_param:file { map open read };
+allow media_service hw_sc_param:file { map open read };
+allow media_service init_param:file { map open read };
+allow media_service init_svc_param:file { map open read };
+allow media_service init:unix_stream_socket { connectto };
+allow media_service input_pointer_device_param:file { map open read };
+allow media_service media_service:unix_dgram_socket { getopt setopt };
+allow media_service native_socket:sock_file { write };
+allow media_service net_param:file { map open read };
+allow media_service net_tcp_param:file { map open read };
+allow media_service normal_hap_attr:binder { call transfer };
+allow media_service ohos_boot_param:file { map open read };
+allow media_service ohos_param:file { map open read };
+allow media_service audio_server:unix_stream_socket { connectto };
+allow media_service param_watcher:binder { call transfer };
+allow media_service persist_param:file { map open read };
+allow media_service persist_sys_param:file { map open read };
+allow media_service proc_file:file { open read };
+allow media_service render_service:binder { call };
+allow media_service sa_accesstoken_manager_service:samgr_class { get };
+allow media_service sa_device_service_manager:samgr_class { get };
+allow media_service sa_media_service:samgr_class { add };
+allow media_service sa_net_conn_manager:samgr_class { get };
+allow media_service sa_param_watcher:samgr_class { get };
+allow media_service security_param:file { map open read };
+allow media_service startup_param:file { map open read };
+allow media_service sys_param:file { map open read };
+allow media_service system_basic_hap_attr:binder { call transfer };
+allow media_service system_bin_file:dir { search };
+allow media_service system_core_hap_attr:binder { call transfer };
+allow media_service system_core_hap_attr:fd { use };
+allow media_service system_lib_file:dir { open read };
+allow media_service sys_usb_param:file { map open read };
+allow media_service tracefs:dir { search };
+allow media_service tracefs_trace_marker_file:file { open write };
+allowxperm media_service dev_dri_file:chr_file ioctl { 0x641f };
+allow media_service sys_prod_file:dir { search };
+allow media_service chip_prod_file:dir { search };
+allow media_service vendor_etc_file:dir { search };
+allow media_service sys_prod_file:file { map open read getattr };
+allow media_service chip_prod_file:file { map open read getattr };
+allow media_service vendor_etc_file:file { map open read getattr };
+allow media_service system_file:file { map open read getattr };
+allow media_service data_app_el1_file:file { map open read getattr };
+allow media_service sa_memory_manager_service:samgr_class { get };
+allow media_service memmgrservice:binder { call transfer };

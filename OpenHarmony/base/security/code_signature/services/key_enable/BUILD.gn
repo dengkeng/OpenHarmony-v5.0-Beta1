@@ -1,0 +1,127 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../code_signature.gni")
+
+common_deps = [ "utils:libkey_enable_utils" ]
+common_external_deps = [
+  "hilog:hilog_rust",
+  "hisysevent:hisysevent_rust",
+  "ylong_json:lib",
+]
+
+config("key_enable_rust_interface_config") {
+  include_dirs = [ "include" ]
+}
+
+ohos_rust_executable("key_enable") {
+  sources = [ "src/main.rs" ]
+  deps = common_deps
+  external_deps = common_external_deps
+  if (!ohos_indep_compiler_enable) {
+    deps += [
+      "${rust_openssl_dir}/openssl:lib",
+      "//third_party/rust/crates/cxx:lib",
+    ]
+    external_deps += [ "c_utils:utils_rust" ]
+  }
+  crate_name = "key_enable"
+  crate_type = "bin"
+  subsystem_name = "security"
+  part_name = "code_signature"
+  if (build_variant == "root") {
+    rustenv = [ "code_signature_debuggable=on" ]
+  } else {
+    rustenv = [ "code_signature_debuggable=off" ]
+  }
+}
+
+ohos_rust_shared_ffi("key_enable_lib") {
+  sources = [ "src/lib.rs" ]
+  deps = common_deps
+  external_deps = common_external_deps
+  if (!ohos_indep_compiler_enable) {
+    deps += [
+      "${rust_openssl_dir}/openssl:lib",
+      "//third_party/rust/crates/cxx:lib",
+    ]
+    external_deps += [ "c_utils:utils_rust" ]
+  }
+  crate_name = "key_enable"
+  subsystem_name = "security"
+  part_name = "code_signature"
+  if (build_variant == "root") {
+    rustenv = [ "code_signature_debuggable=on" ]
+  } else {
+    rustenv = [ "code_signature_debuggable=off" ]
+  }
+}
+
+ohos_prebuilt_etc("trusted_cert_path") {
+  if (code_signature_support_openharmony_ca) {
+    if (code_signature_support_oh_release_app) {
+      source = "config/openharmony/release/trusted_cert_path.json"
+    } else {
+      source = "config/openharmony/dev/trusted_cert_path.json"
+    }
+  } else {
+    source = "config/trusted_cert_path.json"
+  }
+  part_name = "code_signature"
+  subsystem_name = "security"
+  relative_install_dir = "security"
+}
+
+ohos_prebuilt_etc("trusted_cert_path_test") {
+  if (defined(sign_hap_py_path)) {
+    source = "config/trusted_cert_path_test.json"
+  } else {
+    source = "config/not_sign_hap_py_path/trusted_cert_path_test.json"
+  }
+  part_name = "code_signature"
+  subsystem_name = "security"
+  relative_install_dir = "security"
+}
+
+ohos_prebuilt_etc("key_enable.cfg") {
+  if (code_signature_enable_xpm_mode == 1) {
+    source = "cfg/enable_xpm/level1/key_enable.cfg"
+  } else if (code_signature_enable_xpm_mode == 2) {
+    source = "cfg/enable_xpm/level2/key_enable.cfg"
+  } else if (code_signature_enable_xpm_mode == 3) {
+    source = "cfg/enable_xpm/level3/key_enable.cfg"
+  } else if (code_signature_enable_xpm_mode == 4) {
+    source = "cfg/enable_xpm/level4/key_enable.cfg"
+  } else if (code_signature_enable_xpm_mode == 5) {
+    source = "cfg/enable_xpm/level5/key_enable.cfg"
+  } else {
+    source = "cfg/disable_xpm/key_enable.cfg"
+  }
+  relative_install_dir = "init"
+  subsystem_name = "security"
+  part_name = "code_signature"
+}
+
+group("key_enable_targets") {
+  deps = []
+  if (host_os == "linux" && !is_asan) {
+    deps += [
+      ":key_enable",
+      ":key_enable.cfg",
+      ":key_enable_lib",
+      ":trusted_cert_path",
+      ":trusted_cert_path_test",
+    ]
+  }
+}

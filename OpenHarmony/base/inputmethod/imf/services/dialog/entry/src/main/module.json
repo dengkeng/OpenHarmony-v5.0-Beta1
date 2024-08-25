@@ -1,0 +1,37 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/MyAbilityStage.ts",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [],
+    "extensionAbilities": [
+      {
+        "name": "InputMethod",
+        "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
+        "description": "$string:ServiceExtAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:ServiceExtAbility_label",
+        "visible": false,
+        "type": "service"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.CONNECT_IME_ABILITY"
+      },
+      {
+        "name": "ohos.permission.SYSTEM_FLOAT_WINDOW"
+      }
+    ]
+  }
+}

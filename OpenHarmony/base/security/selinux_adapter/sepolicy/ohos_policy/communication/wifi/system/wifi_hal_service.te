@@ -1,0 +1,105 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow wifi_hal_service data_file:dir { search };
+allow wifi_hal_service data_log:file { read write };
+allow wifi_hal_service data_service_el1_file:dir { add_name getattr remove_name search write };
+allow wifi_hal_service data_service_el1_file:file { create read write open getattr ioctl rename };
+allow wifi_hal_service data_service_el1_file:sock_file { create unlink };
+allow wifi_hal_service dev_mgr_file:chr_file { getattr };
+allow wifi_hal_service dev_unix_socket:dir { search };
+allow wifi_hal_service dev_unix_socket:sock_file { write };
+allow wifi_hal_service faultloggerd:fd { use };
+allow wifi_hal_service faultloggerd:unix_stream_socket { connectto };
+allow wifi_hal_service hiview:binder { call };
+allow wifi_hal_service kernel:system { module_request };
+allow wifi_hal_service node:udp_socket { node_bind };
+allow wifi_hal_service port:udp_socket { name_bind };
+allow wifi_hal_service sh_exec:file { execute execute_no_trans map read open };
+allow wifi_hal_service system_bin_file:dir { search };
+allow wifi_hal_service system_bin_file:file { execute execute_no_trans getattr map read open };
+allow wifi_hal_service system_bin_file:lnk_file { read };
+allow wifi_hal_service tty_device:chr_file { open read write };
+allow wifi_hal_service vendor_etc_file:dir { search };
+allow wifi_hal_service vendor_etc_file:file { open read };
+allow wifi_hal_service vendor_lib_file:dir { search };
+allow wifi_hal_service vendor_lib_file:file { execute getattr map open read };
+allow wifi_hal_service wifi_hal_service:capability { net_admin net_raw };
+allow wifi_hal_service wifi_hal_service_exec:file { entrypoint execute map read };
+allow wifi_hal_service wifi_hal_service:netlink_generic_socket { bind create getattr read setopt write };
+allow wifi_hal_service wifi_hal_service:netlink_route_socket { bind create nlmsg_write read write };
+allow wifi_hal_service wifi_hal_service:packet_socket { bind create ioctl read setopt write };
+allow wifi_hal_service wifi_hal_service:udp_socket { bind connect create ioctl read write };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { ioctl };
+allow wifi_hal_service hdf_devmgr:binder { call };
+allow wifi_hal_service data_local:dir { search };
+allow wifi_hal_service wifi_host:binder { call transfer };
+allow wifi_hal_service wifi_manager_service:dir { search };
+allow wifi_hal_service wifi_manager_service:file { open read };
+allow wifi_hal_service wifi_manager_service:process { signal };
+allow wifi_hal_service data_service_file:dir { search };
+allow wifi_hal_service sa_cert_manager_service:samgr_class { get };
+allow wifi_hal_service sa_accesstoken_manager_service:samgr_class { get };
+allow wifi_hal_service hdf_wlan_interface_service:hdf_devmgr_class { get };
+allow wifi_hal_service sa_device_service_manager:samgr_class { get };
+allow wifi_hal_service cert_manager_service:binder { call };
+allow wifi_hal_service huks_service:binder { call };
+allowxperm wifi_hal_service wifi_hal_service:packet_socket ioctl { 0x8927 0x8933 };
+allowxperm wifi_hal_service wifi_hal_service:udp_socket ioctl { 0x8913 0x8914 0x8915 0x8924 0x8927 0x8b0d 0x8bf7 0x8933 0x8910 0x8916 0x891c };
+allowxperm wifi_hal_service wifi_hal_service:unix_dgram_socket ioctl { 0x8933 0x5411 };
+allow wifi_hal_service musl_param:file { read };
+allow wifi_hal_service data_service_el1_file:file { append };
+allow wifi_hal_service musl_param:file { open };
+allow wifi_hal_service musl_param:file { map };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { setattr };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { bind };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { sendto };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { read };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { getopt };
+allow wifi_hal_service wifi_hal_service:unix_dgram_socket { ioctl };
+allow wifi_hal_service dev_hdfwifi:chr_file { read open write getattr ioctl };
+allow wifi_hal_service data_service_el1_file:sock_file { write setattr getattr unlink};
+allow wifi_hal_service data_service_el1_file:dir { create search write getattr add_name };
+allow wifi_hal_service data_local_tmp:dir { getattr read };
+allow wifi_hal_service sys_file:file { read write open };
+allow wifi_hal_service wifi_hal_service:udp_socket { ioctl setopt };
+
+# avc:  denied  { rmdir } for  pid=10994 comm="WpaMainThread" name="wpa" dev="mmcblk0p14" ino=2248 scontext=u:r:wifi_hal_service:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+allow wifi_hal_service data_service_el1_file:dir { rmdir };
+
+# avc:  denied  { unlink } for  pid=478 comm="wifi_hal_servic" name="wifi_mgr_pid.pid" dev="mmcblk0p14" ino=1468 scontext=u:r:wifi_hal_service:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+allow wifi_hal_service data_service_el1_file:file { unlink };
+
+# avc:  denied  { read write } for  pid=478 comm="wifi_hal_servic" path="/dev/console" dev="tmpfs" ino=40 scontext=u:r:wifi_hal_service:s0 tcontext=u:object_r:dev_console_file:s0 tclass=chr_file permissive=1
+allow wifi_hal_service dev_console_file:chr_file { read write };
+
+# avc:  denied  { call } for  pid=1009 comm="IPC_0_1136" scontext=u:r:wifi_hal_service:s0 tcontext=u:r:wifi_manager_service:s0 tclass=binder permissive=1
+allow wifi_hal_service wifi_manager_service:binder { call };
+
+# avc:  denied  { nlmsg_read } for  pid=1006 comm="IPC_0_1130" scontext=u:r:wifi_hal_service:s0 tcontext=u:r:wifi_hal_service:s0 tclass=netlink_route_socket permissive=1
+allow wifi_hal_service wifi_hal_service:netlink_route_socket { nlmsg_read };
+
+#avc:  denied  { get } for service=hdf_device_manager pid=481 scontext=u:r:wifi_hal_service:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=0
+allow wifi_hal_service hdf_device_manager:hdf_devmgr_class { get };
+
+#avc:  denied  { get } for service=wpa_interface_service pid=481 scontext=u:r:wifi_hal_service:s0 tcontext=u:object_r:hdf_wpa_interface_service:s0 tclass=hdf_devmgr_class permissive=0
+allow wifi_hal_service hdf_wpa_interface_service:hdf_devmgr_class { get };
+
+#avc:  denied  { sendto } for  pid=499 comm="wifi_hal_servic" path=002F646174612F736572766963652F656C312F7075626C69632F776966692F736F636B6574732F7770612F776C616E30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 scontext=u:r:wifi_hal_service:s0 tcontext=u:r:wifi_host:s0 tclass=unix_dgram_socket permissive=1
+allow wifi_hal_service wifi_host:unix_dgram_socket { sendto };
+
+allow wifi_hal_service netmanager:binder { call };
+allow wifi_hal_service sa_dhcp_client:samgr_class { add get };
+allow wifi_hal_service sa_dhcp_server:samgr_class { add get };
+
+allow wifi_hal_service hdf_hostapd_interface_service:hdf_devmgr_class { get };

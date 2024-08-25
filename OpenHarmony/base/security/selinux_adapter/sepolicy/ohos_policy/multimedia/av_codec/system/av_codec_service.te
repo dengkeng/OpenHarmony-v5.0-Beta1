@@ -1,0 +1,132 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type av_codec_service, sadomain, domain;
+type sa_av_codec_service, sa_service_attr;
+
+debug_only(`
+    allow av_codec_service sh:binder { call transfer };
+    allow av_codec_service sh:fd { use };
+')
+
+allow av_codec_service av_codec_service:unix_dgram_socket { getopt setopt };
+allow av_codec_service data_file:file { read getattr };
+allow av_codec_service dev_ashmem_file:chr_file { open };
+allow av_codec_service param_watcher:binder { call transfer };
+allow av_codec_service system_bin_file:dir { search };
+allow av_codec_service system_lib_file:dir { open read };
+allow av_codec_service tracefs:dir { search };
+allow av_codec_service tracefs_trace_marker_file:file { open write };
+allow av_codec_service sa_param_watcher:samgr_class { get };
+allow av_codec_service allocator_host:binder { call };
+allow av_codec_service allocator_host:fd { use };
+allow av_codec_service dev_dri_file:chr_file { ioctl open read write };
+allow av_codec_service dev_dri_file:dir { search };
+allow av_codec_service hdf_allocator_service:hdf_devmgr_class { get };
+allow av_codec_service hdf_devmgr:binder { call };
+allow av_codec_service sa_device_service_manager:samgr_class { get };
+allow av_codec_service data_test_media_file:file { write read getattr };
+allow av_codec_service system_core_hap_attr:fd { use };
+allow av_codec_service system_basic_hap_attr:fd { use };
+allow av_codec_service system_basic_hap_attr:binder { transfer call };
+allow av_codec_service system_basic_hap_data_file_attr:file { getattr read write };
+allow av_codec_service normal_hap_data_file_attr:file { read getattr };
+allow av_codec_service normal_hap_data_file:file { write };
+allow av_codec_service sa_av_codec_service:samgr_class { add get_remote };
+allow av_codec_service debug_param:file { map open read };
+allow av_codec_service dev_console_file:chr_file { read write };
+allow av_codec_service dev_file:dir { getattr };
+allow av_codec_service dev_unix_socket:dir { search };
+allow av_codec_service hilog_param:file { map open read };
+allow av_codec_service musl_param:file { map open read };
+allow av_codec_service sysfs_devices_system_cpu:file { getattr open read };
+
+# avc:  denied  { call } for  pid=564 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:render_service:s0 tclass=binder permissive=1
+allow av_codec_service render_service:binder { call };
+
+# avc:  denied  { connect } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { create } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { getattr } for  pid=546 comm="av_codec_servic" laddr=192.168.20.74 lport=53692 faddr=183.134.45.132 fport=443 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { getopt } for  pid=546 comm="av_codec_servic" laddr=192.168.20.74 lport=53692 faddr=183.134.45.132 fport=443 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { read } for  pid=546 comm="av_codec_servic" path="socket:" dev="sockfs" ino=30257 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { setopt } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+# avc:  denied  { write } for  pid=546 comm="av_codec_servic" path="socket:" dev="sockfs" ino=30257 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=tcp_socket permissive=1
+allow av_codec_service av_codec_service:tcp_socket { connect create getattr getopt read setopt write };
+
+# avc:  denied  { bind } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=udp_socket permissive=1
+# avc:  denied  { create } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=udp_socket permissive=1
+# avc:  denied  { read } for  pid=546 comm="av_codec_servic" lport=53204 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=udp_socket permissive=1
+# avc:  denied  { write } for  pid=546 comm="av_codec_servic" lport=53204 scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=udp_socket permissive=1
+allow av_codec_service av_codec_service:udp_socket { bind create read write };
+
+# avc:  denied  { connectto } for  pid=546 comm="av_codec_servic" path="/dev/unix/socket/dnsproxyd" scontext=u:r:av_codec_service:s0 tcontext=u:r:netsysnative:s0 tclass=unix_stream_socket permissive=1
+allow av_codec_service netsysnative:unix_stream_socket { connectto };
+
+# avc:  denied  { node_bind } for  pid=546 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:object_r:node:s0 tclass=udp_socket permissive=1
+allow av_codec_service node:udp_socket { node_bind };
+
+# avc:  denied  { name_connect } for  pid=546 comm="av_codec_servic" dest=443 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:port:s0 tclass=tcp_socket permissive=1
+allow av_codec_service port:tcp_socket { name_connect };
+
+# avc:  denied  { getattr } for  pid=548 comm="omx_msg_hdl" path="/proc/version" dev="proc" ino=4026532114 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:proc_version_file:s0 tclass=file permissive=1
+# avc:  denied  { open } for  pid=548 comm="omx_msg_hdl" path="/proc/version" dev="proc" ino=4026532114 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:proc_version_file:s0 tclass=file permissive=1
+# avc:  denied  { read } for  pid=548 comm="omx_msg_hdl" name="version" dev="proc" ino=4026532114 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:proc_version_file:s0 tclass=file permissive=1
+allow av_codec_service proc_version_file:file { getattr open read };
+
+# avc:  denied  { open } for  pid=548 comm="omx_msg_hdl" path="/sys/firmware/devicetree/base/compatible" dev="sysfs" ino=15 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:sys_file:s0 tclass=file permissive=1
+# avc:  denied  { read } for  pid=548 comm="omx_msg_hdl" name="compatible" dev="sysfs" ino=15 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:sys_file:s0 tclass=file permissive=1
+allow av_codec_service sys_file:file { open read };
+
+# avc:  denied  { map } for  pid=577 comm="IPC_2_1400" path="/dev/__parameters__/u:object_r:sys_param:s0" dev="tmpfs" ino=60 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
+# avc:  denied  { open } for  pid=577 comm="IPC_2_1400" path="/dev/__parameters__/u:object_r:sys_param:s0" dev="tmpfs" ino=60 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
+# avc:  denied  { read } for  pid=577 comm="IPC_2_1400" name="u:object_r:sys_param:s0" dev="tmpfs" ino=60 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
+allow av_codec_service sys_param:file { map open read };
+
+# avc:  denied  { search } for  pid=548 comm="av_codec_servic" name="etc" dev="mmcblk0p8" ino=16 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=dir permissive=1
+allow av_codec_service vendor_etc_file:dir { search };
+
+# avc:  denied  { getattr } for  pid=548 comm="av_codec_servic" path="/vendor/etc/hdfconfig/hdf_default.hcb" dev="mmcblk0p8" ino=36 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=file permissive=1
+# avc:  denied  { open } for  pid=548 comm="av_codec_servic" path="/vendor/etc/hdfconfig/hdf_default.hcb" dev="mmcblk0p8" ino=36 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=file permissive=1
+# avc:  denied  { read } for  pid=548 comm="av_codec_servic" name="hdf_default.hcb" dev="mmcblk0p8" ino=36 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=file permissive=1
+allow av_codec_service vendor_etc_file:file { getattr open read };
+
+# avc:  denied  { call } for  pid=1648 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+# avc:  denied  { transfer } for  pid=1648 comm="IPC_3_1816" scontext=u:r:av_codec_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+allow av_codec_service codec_host:binder { call transfer };
+
+# avc:  denied  { get } for service=codec_component_manager_service pid=2561 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:hdf_codec_component_manager_service:s0 tclass=hdf_devmgr_class permissive=0
+allow av_codec_service hdf_codec_component_manager_service:hdf_devmgr_class { get };
+
+# avc:  denied  { search } for  pid=1648 comm="IPC_3_1816" name="/" dev="mmcblk0p14" ino=3 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow av_codec_service data_file:dir { search };
+
+allow av_codec_service normal_hap_attr:binder { call transfer };
+
+# avc:  denied  { transfer } for  pid=595 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:render_service:s0 tclass=binder permissive=0
+allow av_codec_service render_service:binder { transfer };
+
+allow av_codec_service render_service:fd { use };
+allow av_codec_service dev_mpp:chr_file { open read write ioctl };
+allowxperm av_codec_service dev_mpp:chr_file ioctl { 0x7601 };
+
+allow av_codec_service dev_rga:chr_file { open read write ioctl };
+allowxperm av_codec_service dev_rga:chr_file ioctl { 0x601b 0x5017 };
+
+allow av_codec_service media_service:binder { call transfer };
+allow av_codec_service system_core_hap_attr:binder { call transfer };
+
+# avc_audit_slow:260] avc: denied { call } for pid=1654, comm="/system/bin/sa_main"  scontext=u:r:av_codec_service:s0 tcontext=u:r:drm_service:s0 tclass=binder permissive=1
+allow av_codec_service drm_service:binder { call };
+
+allow av_codec_service dhardware:binder { call transfer };
+allow av_codec_service dscreen:binder { call transfer };

@@ -1,0 +1,12 @@
+{
+    "process": "telephony",
+    "systemability": [
+        {
+            "name": 4014,
+            "libpath": "libtel_ims.z.so",
+            "run-on-create": true,
+            "distributed": false,
+            "dump_level": 1
+        }
+    ]
+}

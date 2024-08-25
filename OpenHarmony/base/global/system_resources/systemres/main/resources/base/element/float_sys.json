@@ -1,0 +1,248 @@
+{
+    "float": [
+        {
+            "name": "alpha_primary",
+            "value": "0.9"
+        },
+        {
+            "name": "alpha_secondary",
+            "value": "0.6"
+        },
+        {
+            "name": "alpha_tertiary",
+            "value": "0.4"
+        },
+        {
+            "name": "alpha_fourth",
+            "value": "0.2"
+        },
+        {
+            "name": "alpha_fifth",
+            "value": "0.1"
+        },
+        {
+            "name": "alpha_sixth",
+            "value": "0.05"
+        },
+        {
+            "name": "alpha_disable",
+            "value": "0.4"
+        },
+        {
+            "name": "alert_container_max_width",
+            "value": "400vp"
+        },
+        {
+            "name": "alert_container_shape",
+            "value": "$float:corner_radius_level16"
+        },
+        {
+            "name": "alert_container_border_width",
+            "value": "$float:border_none"
+        },
+        {
+            "name": "alert_title_primary_height",
+            "value": "56vp"
+        },
+        {
+            "name": "alert_title_padding_left",
+            "value": "$float:padding_level12"
+        },
+        {
+            "name": "alert_title_padding_top",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "alert_title_padding_right",
+            "value": "$float:padding_level12"
+        },
+        {
+            "name": "alert_title_padding_bottom",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "alert_title_secondary_height",
+            "value": "72vp"
+        },
+        {
+            "name": "alert_title_alignment",
+            "value": "$float:alignment_center"
+        },
+        {
+            "name": "alert_button_horizontal_space",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "alert_button_vertical_space",
+            "value": "$float:padding_level2"
+        },
+        {
+            "name": "alert_left_padding_horizontal",
+            "value": "$float:padding_level8"
+        },
+        {
+            "name": "alert_right_padding_horizontal",
+            "value": "$float:padding_level8"
+        },
+        {
+            "name": "alert_left_padding_vertical",
+            "value": "$float:padding_level8"
+        },
+        {
+            "name": "alert_right_padding_vertical",
+            "value": "$float:padding_level8"
+        },
+        {
+            "name": "interactive_disable",
+            "value": "$float:alpha_disable"
+        },
+        {
+            "name": "alert_button_top_padding",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "alert_button_bottom_padding_horizontal",
+            "value": "$float:padding_level8"
+        },
+        {
+            "name": "alert_button_bottom_padding_vertical",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "alert_content_default_padding",
+            "value": "$float:padding_level12"
+        },
+        {
+            "name": "alert_divider_height",
+            "value": "24.0vp"
+        },
+        {
+            "name": "alert_divider_width",
+            "value": "$float:border_medium"
+        },
+        {
+            "name": "alert_button_style",
+            "value": "2.0"
+        },
+        {
+            "name": "titlebar_title_primary_size",
+            "value": "$float:Title_L"
+        },
+        {
+            "name": "titlebar_title_secondary_size",
+            "value": "26.0fp"
+        },
+        {
+            "name": "titlebar_title_tertiary_size",
+            "value": "$float:Title_S"
+        },
+        {
+            "name": "titlebar_title_tertiary_weight",
+            "value": "$float:font_weight_bold"
+        },
+        {
+            "name": "titlebar_subheader_size",
+            "value": "$float:Subtitle_S"
+        },
+        {
+            "name": "titlebar_subheader_weight",
+            "value": "$float:font_weight_regular"
+        },
+        {
+            "name": "titlebar_padding_left",
+            "value": "$float:padding_level0"
+        },
+        {
+            "name": "titlebar_padding_top",
+            "value": "$float:padding_level2"
+        },
+        {
+            "name": "titlebar_padding_right",
+            "value": "$float:padding_level0"
+        },
+        {
+            "name": "titlebar_padding_bottom",
+            "value": "$float:padding_level2"
+        },
+        {
+            "name": "titlebar_icon_background_space_horizontal",
+            "value": "$float:padding_level4"
+        },
+        {
+            "name": "titlebar_icon_padding_horizontal",
+            "value": "$float:padding_level7"
+        },
+        {
+            "name": "titlebar_title_margin_left",
+            "value": "$float:margin_left"
+        },
+        {
+            "name": "titlebar_title_margin_right",
+            "value": "$float:margin_right"
+        },
+        {
+            "name": "titlebar_icon_width",
+            "value": "24.0vp"
+        },
+        {
+            "name": "titlebar_icon_height",
+            "value": "24.0vp"
+        },
+        {
+            "name": "titlebar_icon_disable_alpha",
+            "value": "$float:interactive_disable"
+        },
+        {
+            "name": "titlebar_icon_background_height",
+            "value": "40.0vp"
+        },
+        {
+            "name": "titlebar_icon_background_width",
+            "value": "40.0vp"
+        },
+        {
+            "name": "titlebar_icon_background_shape",
+            "value": "$float:corner_radius_level10"
+        },
+        {
+            "name": "titlebar_icon_background_focus_outline_weight",
+            "value": "$float:outline_extra_larger"
+        },
+        {
+            "name": "titlebar_icon_background_disable_alpha",
+            "value": "$float:interactive_disable"
+        },
+        {
+            "name": "titlebar_default_height",
+            "value": "56.0vp"
+        },
+        {
+            "name": "titlebar_emphasize_height",
+            "value": "112.0vp"
+        },
+        {
+            "name": "titlebar_emphasize_twolines_height",
+            "value": "137.0vp"
+        },
+        {
+            "name": "ohos_id_dialog_background_shadow_on",
+            "value": "$float:ohos_id_default_shadow_none"
+        },
+        {
+            "name": "ohos_id_dialog_background_shadow_off",
+            "value": "$float:ohos_id_default_shadow_none"
+        },
+        {
+            "name": "margin_level1",
+            "value": "16.0vp"
+        },
+        {
+            "name": "margin_level2",
+            "value": "24.0vp"
+        },
+        {
+            "name": "margin_level3",
+            "value": "32.0vp"
+        }
+    ]
+  }

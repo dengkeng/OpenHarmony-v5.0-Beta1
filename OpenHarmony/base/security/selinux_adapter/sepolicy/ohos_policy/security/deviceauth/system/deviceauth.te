@@ -1,0 +1,33 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+init_daemon_domain(deviceauth_service);
+
+binder_call(deviceauth_service, samgr);
+allow deviceauth_service dev_unix_socket:dir { search };
+allow deviceauth_service data_file:dir { search };
+allow deviceauth_service system_bin_file:dir { search };
+allow deviceauth_service data_service_file:dir { search };
+allow deviceauth_service data_service_el1_file:dir { search };
+allow deviceauth_service data_service_el1_public_deviceauthService_file:dir { add_name create open read remove_name search write rmdir getattr setattr };
+allow deviceauth_service data_service_el1_public_deviceauthService_file:file { create getattr ioctl open read setattr unlink write };
+allow deviceauth_service deviceauth_service:unix_dgram_socket { getopt setopt };
+allow deviceauth_service accesstoken_service:binder { call };
+allow deviceauth_service foundation:binder { call transfer};
+allow deviceauth_service softbus_server:binder { call transfer };
+allow deviceauth_service accountmgr:binder { call };
+allow deviceauth_service huks_service:binder { call };
+allow deviceauth_service devinfo_private_param:file { map open read};
+allow deviceauth_service sa_foundation_cesfwk_service:samgr_class { get };
+allow deviceauth_service data_service_el2_file:dir { add_name create search write };
+allow deviceauth_service data_service_el2_file:file { create getattr ioctl open read setattr write };

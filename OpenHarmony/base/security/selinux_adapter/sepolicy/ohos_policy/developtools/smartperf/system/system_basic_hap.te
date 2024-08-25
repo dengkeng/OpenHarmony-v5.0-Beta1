@@ -1,0 +1,30 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+allow system_basic_hap_attr dev_unix_socket:dir { search };
+allow system_basic_hap_attr multimodalinput:unix_stream_socket { read };
+allow system_basic_hap_attr proc_file:file { open read };
+allow system_basic_hap_attr proc_stat_file:file { open read };
+allow system_basic_hap_attr render_service:unix_stream_socket { read };
+allow system_basic_hap_attr sa_net_conn_manager:samgr_class { get };
+allow system_basic_hap_attr sys_file:file { open read };
+allow system_basic_hap_attr sysfs_devices_system_cpu:dir { open read };
+allow system_basic_hap_attr system_basic_hap_attr:udp_socket { read };
+allow system_basic_hap_attr system_basic_hap_data_file_attr:dir { search };
+allow system_basic_hap_attr system_basic_hap_data_file_attr:file { lock };
+allow system_basic_hap_attr system_usr_file:dir { search };
+allow system_basic_hap_attr vendor_file:dir { search };
+developer_only(`
+allow system_basic_hap_attr SP_daemon:binder { call };
+')
+

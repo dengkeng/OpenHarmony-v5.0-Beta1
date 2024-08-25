@@ -1,0 +1,176 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+import("../../../../../os_account.gni")
+
+module_output_path = "os_account/services/domain_account"
+
+config("domain_account_service_config_unittest") {
+  visibility = [ ":*" ]
+
+  include_dirs = []
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+
+  defines = [
+    "ACCOUNT_LOG_TAG = \"DomainAccountFwk\"",
+    "LOG_DOMAIN = 0xD001B00",
+  ]
+}
+
+config("domain_account_amgr_mock_config") {
+  include_dirs = [
+    "${domain_account_framework_path}/include",
+    "${domain_account_interfaces_native_path}/include",
+    "${os_account_dfx_path}/hitrace_adapter",
+    "${services_path}/accountmgr/include",
+    "${services_path}/accountmgr/include/account_iam",
+    "${services_path}/accountmgr/include/domain_account",
+    "${services_path}/accountmgr/include/ability_manager_adapter",
+    "${services_path}/accountmgr/test/unittest/domain_account/mock",
+    "${common_path}/log/include",
+    "${domain_account_framework_path}/test/moduletest/include",
+    "${common_path}/perf_stat/include",
+    "${innerkits_common}/include",
+    "${innerkits_path}/include",
+  ]
+}
+
+ohos_unittest("DomainAccountInnerServiceCovTest") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "${os_account_path}/cfi_blocklist.txt"
+  }
+
+  cflags_cc = []
+  module_out_path = module_output_path
+
+  sources = [
+    "${domain_account_framework_path}/test/moduletest/src/mock_domain_plugin.cpp",
+    "${os_account_dfx_path}/hitrace_adapter/hitrace_adapter.cpp",
+    "${services_path}/accountmgr/src/account_event_provider.cpp",
+    "${services_path}/accountmgr/src/domain_account/domain_account_plugin_death_recipient.cpp",
+    "${services_path}/accountmgr/src/domain_account/domain_has_domain_info_callback.cpp",
+    "${services_path}/accountmgr/src/domain_account/inner_domain_account_manager.cpp",
+    "${services_path}/accountmgr/src/domain_account/status_listener_death_recipient.cpp",
+    "${services_path}/accountmgr/src/domain_account/status_listener_manager.cpp",
+    "${services_path}/accountmgr/test/unittest/domain_account/mock/mock_domain_account_callback_stub.cpp",
+    "${services_path}/accountmgr/test/unittest/domain_account/mock/mock_inner_os_account_manager.cpp",
+    "${services_path}/accountmgr/test/unittest/domain_account/mock/mock_musl.cpp",
+    "domain_account_manager_inner_service_test.cpp",
+  ]
+  configs = [
+    ":domain_account_amgr_mock_config",
+    "${services_path}/accountmgr/test:accountmgr_test_config",
+    "${services_path}/accountmgr/:ability_manager_config",
+    "${account_coverage_config_path}:coverage_flags",
+  ]
+
+  deps = [
+    "${account_iam_framework_path}:account_iam_innerkits",
+    "${common_path}:libaccount_common",
+    "${domain_account_framework_path}:domain_account_innerkits",
+    "${os_account_innerkits_native_path}:os_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_runtime:wantagent_innerkits",
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "json:nlohmann_json_static",
+    "kv_store:distributeddata_inner",
+    "samgr:samgr_proxy",
+  ]
+  if (has_ces_part) {
+    cflags_cc += [ "-DHAS_CES_PART" ]
+    external_deps += [ "common_event_service:cesfwk_innerkits" ]
+  }
+  if (has_hiviewdfx_hisysevent_part) {
+    cflags_cc += [ "-DHAS_HISYSEVENT_PART" ]
+    external_deps += [ "hisysevent:libhisysevent" ]
+  }
+  if (has_user_auth_part) {
+    cflags_cc += [ "-DHAS_USER_AUTH_PART" ]
+    external_deps += [ "user_auth_framework:userauth_client" ]
+  }
+  if (has_hiviewdfx_hitrace_part) {
+    external_deps += [ "hitrace:hitrace_meter" ]
+    cflags_cc += [ "-DHAS_HITRACE_PART" ]
+  }
+
+  part_name = "os_account"
+}
+
+ohos_unittest("domain_account_plugin_proxy_test") {
+  branch_protector_ret = "pac_ret"
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+
+  module_out_path = module_output_path
+
+  include_dirs = [ "${domain_account_interfaces_native_path}/include" ]
+  sources = [
+    "${services_path}/accountmgr/src/domain_account/domain_account_plugin_proxy.cpp",
+    "${services_path}/accountmgr/src/domain_account/domain_has_domain_info_callback.cpp",
+    "domain_account_plugin_proxy_test.cpp",
+  ]
+  configs = [
+    ":domain_account_service_config_unittest",
+    "${account_coverage_config_path}:coverage_flags",
+  ]
+
+  deps = [
+    "${common_path}:libaccount_common",
+    "${domain_account_framework_path}:domain_account_innerkits",
+    "${services_path}/accountmgr:accountmgr",
+    "//third_party/googletest:gmock_main",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "os_account:os_account_innerkits",
+  ]
+}
+
+group("unittest") {
+  testonly = true
+
+  deps = [
+    ":DomainAccountInnerServiceCovTest",
+    ":domain_account_plugin_proxy_test",
+  ]
+}

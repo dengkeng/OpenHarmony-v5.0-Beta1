@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "NotificationServiceExtAbility_desc",
+      "value": "NotificationDialog"
+    },
+    {
+      "name": "NotificationServiceExtAbility_label",
+      "value": "NotificationDialog"
+    },
+    {
+      "name": "period",
+      "value": "."
+    },
+    {
+      "name": "comma",
+      "value": ", "
+    },
+    {
+      "name": "whether_to_allow",
+      "value": "Allow \""
+    },
+    {
+      "name": "quotes",
+      "value": "\""
+    },
+    {
+      "name": "reason",
+      "value": "These may include banner notifications, lock screen notifications, notification sounds, and more. You can change this in Settings."
+    },
+    {
+      "name": "ALLOW",
+      "value": "ALLOW"
+    },
+    {
+      "name": "BAN",
+      "value": "BAN"
+    },
+    {
+      "name": "group_label_notification",
+      "value": " to send notifications?"
+    }
+  ]
+}

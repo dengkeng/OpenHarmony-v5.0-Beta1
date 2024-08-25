@@ -1,0 +1,204 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+
+ohos_unittest("iam_services_test") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../../../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "inc",
+    "mocks",
+    "../../../services/base/inc",
+    "../../../services/core/inc",
+    "../../../services/core/src",
+    "../../../services/context/inc",
+    "../../../services/context/src",
+    "../../../services/ipc/inc",
+    "../../../services/remote_connect/inc",
+    "../../../frameworks/js/napi/user_auth/inc",
+    "../../../frameworks/native/ipc/inc",
+    "../../../frameworks/native/ipc/common_defines",
+    "../inner_api/mocks",
+  ]
+
+  sources = [
+    "../../../services/base/src/finite_state_machine_builder.cpp",
+    "../../../services/base/src/finite_state_machine_impl.cpp",
+    "../../../services/base/src/relative_timer.cpp",
+    "../../../services/base/src/thread_handler_impl.cpp",
+    "../../../services/context/src/base_context.cpp",
+    "../../../services/context/src/context_appstate_observer.cpp",
+    "../../../services/context/src/context_callback_impl.cpp",
+    "../../../services/context/src/context_death_recipient.cpp",
+    "../../../services/context/src/context_factory.cpp",
+    "../../../services/context/src/context_helper.cpp",
+    "../../../services/context/src/context_pool_impl.cpp",
+    "../../../services/context/src/enroll_context.cpp",
+    "../../../services/context/src/identify_context.cpp",
+    "../../../services/context/src/remote_auth_context.cpp",
+    "../../../services/context/src/remote_auth_invoker_context.cpp",
+    "../../../services/context/src/remote_iam_callback.cpp",
+    "../../../services/context/src/simple_auth_context.cpp",
+    "../../../services/context/src/trace.cpp",
+    "../../../services/context/src/ui_extension_ability_connection.cpp",
+    "../../../services/context/src/widget_client.cpp",
+    "../../../services/context/src/widget_context.cpp",
+    "../../../services/context/src/widget_context_callback_impl.cpp",
+    "../../../services/context/src/widget_json.cpp",
+    "../../../services/core/src/auth_event_listener_manager.cpp",
+    "../../../services/core/src/auth_widget_helper.cpp",
+    "../../../services/core/src/authentication_impl.cpp",
+    "../../../services/core/src/credential_info_impl.cpp",
+    "../../../services/core/src/enrolled_info_impl.cpp",
+    "../../../services/core/src/enrollment_impl.cpp",
+    "../../../services/core/src/hdi_message_callback_service.cpp",
+    "../../../services/core/src/identification_impl.cpp",
+    "../../../services/core/src/remote_auth_service.cpp",
+    "../../../services/core/src/remote_executor_proxy.cpp",
+    "../../../services/core/src/remote_executor_stub.cpp",
+    "../../../services/core/src/remote_msg_util.cpp",
+    "../../../services/core/src/resource_node_impl.cpp",
+    "../../../services/core/src/resource_node_pool_impl.cpp",
+    "../../../services/core/src/resource_node_utils.cpp",
+    "../../../services/core/src/schedule_node_builder.cpp",
+    "../../../services/core/src/schedule_node_helper.cpp",
+    "../../../services/core/src/schedule_node_impl.cpp",
+    "../../../services/core/src/secure_user_info_impl.cpp",
+    "../../../services/core/src/system_param_manager.cpp",
+    "../../../services/core/src/template_cache_manager.cpp",
+    "../../../services/core/src/update_pin_param_impl.cpp",
+    "../../../services/core/src/user_idm_database_impl.cpp",
+    "../../../services/core/src/user_idm_session_controller_impl.cpp",
+    "../../../services/core/src/user_info_impl.cpp",
+    "../../../services/core/src/widget_schedule_node_impl.cpp",
+    "../../../services/ipc/src/co_auth_service.cpp",
+    "../../../services/ipc/src/executor_messenger_service.cpp",
+    "../../../services/ipc/src/publish_event_adapter_mock.cpp",
+    "../../../services/ipc/src/user_auth_service.cpp",
+    "../../../services/ipc/src/user_idm_service.cpp",
+    "../../../services/remote_connect/src/device_manager_util.cpp",
+    "../../../services/remote_connect/src/remote_connect_listener.cpp",
+    "../../../services/remote_connect/src/remote_connect_listener_manager.cpp",
+    "../../../services/remote_connect/src/remote_connect_manager.cpp",
+    "../../../services/remote_connect/src/socket_factory.cpp",
+    "../../../services/remote_connect/src/soft_bus_base_socket.cpp",
+    "../../../services/remote_connect/src/soft_bus_client_socket.cpp",
+    "../../../services/remote_connect/src/soft_bus_manager.cpp",
+    "../../../services/remote_connect/src/soft_bus_message.cpp",
+    "../../../services/remote_connect/src/soft_bus_server_socket.cpp",
+    "../../../services/remote_connect/src/soft_bus_socket_listener.cpp",
+    "../../../services/remote_connect/src/system_ability_listener.cpp",
+    "mocks/mock_ipc_common.cpp",
+    "mocks/mock_iuser_auth_interface.cpp",
+    "src/attributes_test.cpp",
+    "src/auth_widget_helper_test.cpp",
+    "src/authentication_impl_test.cpp",
+    "src/co_auth_service_test.cpp",
+    "src/co_auth_stub_test.cpp",
+    "src/context_appstate_observer_test.cpp",
+    "src/context_callback_impl_test.cpp",
+    "src/context_factory_test.cpp",
+    "src/context_pool_test.cpp",
+    "src/credential_info_test.cpp",
+    "src/enroll_context_test.cpp",
+    "src/enrolled_info_test.cpp",
+    "src/enrollment_impl_test.cpp",
+    "src/executor_messenger_service_test.cpp",
+    "src/identification_impl_test.cpp",
+    "src/identify_context_test.cpp",
+    "src/ipc_common_test.cpp",
+    "src/relative_timer_test.cpp",
+    "src/resource_node_pool_test.cpp",
+    "src/resource_node_test.cpp",
+    "src/resource_node_utils_test.cpp",
+    "src/schedule_node_helper_test.cpp",
+    "src/schedule_node_test.cpp",
+    "src/secure_user_info_test.cpp",
+    "src/simple_auth_context_test.cpp",
+    "src/state_machine_test.cpp",
+    "src/ui_extension_ability_connection_test.cpp",
+    "src/update_pin_param_test.cpp",
+    "src/user_auth_service_test.cpp",
+    "src/user_auth_stub_test.cpp",
+    "src/user_idm_database_test.cpp",
+    "src/user_idm_service_test.cpp",
+    "src/user_idm_session_controller_test.cpp",
+    "src/user_idm_stub_test.cpp",
+    "src/user_info_test.cpp",
+    "src/widget_client_test.cpp",
+    "src/widget_context_callback_impl_test.cpp",
+    "src/widget_context_test.cpp",
+    "src/widget_json_test.cpp",
+    "src/widget_schedule_node_impl_test.cpp",
+  ]
+
+  deps = [
+    "../../../common:iam_utils",
+    "../../../frameworks/native/client:userauth_client",
+    "../../../frameworks/native/common:attributes",
+    "../../../frameworks/native/common:dfx",
+    "../../../frameworks/native/ipc:userauth_service_ipc",
+    "//third_party/googletest:gmock",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "ability_base:zuri",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:app_manager",
+    "ability_runtime:extension_manager",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "device_manager:devicemanagersdk",
+    "drivers_interface_user_auth:libuser_auth_proxy_2.0",
+    "dsoftbus:softbus_client",
+    "hdf_core:libhdi",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbeget_proxy",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "os_account:os_account_innerkits",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  configs = [
+    "../../../common:iam_log_config",
+    "../../../common:iam_utils_config",
+  ]
+
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+
+  module_out_path = "useriam/user_auth_framework"
+
+  subsystem_name = "useriam"
+  part_name = "user_auth_framework"
+}

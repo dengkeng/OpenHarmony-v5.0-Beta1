@@ -1,0 +1,123 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../wallpaper.gni")
+
+config("ability_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "${wallpaper_path}/frameworks/native/include",
+    "${wallpaper_path}/frameworks/kits/extension/include",
+    "${ability_runtime_services_path}/common/include",
+  ]
+
+  cflags = []
+  if (target_cpu == "arm") {
+    cflags += [ "-DBINDER_IPC_32BIT" ]
+  }
+  defines = [
+    "APP_LOG_TAG = \"Ability\"",
+    "LOG_DOMAIN = 0xD002200",
+  ]
+}
+
+ohos_shared_library("wallpaperextensionability") {
+  cflags = [
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-fvisibility=hidden",
+    "-Os",
+  ]
+
+  include_dirs = [
+    "${wallpaper_path}/frameworks/native/include",
+    "${wallpaper_path}/frameworks/kits/extension/include",
+  ]
+
+  sources = [
+    "${wallpaper_path}/frameworks/kits/extension/src/js_wallpaper_extension_ability.cpp",
+    "${wallpaper_path}/frameworks/kits/extension/src/js_wallpaper_extension_context.cpp",
+    "${wallpaper_path}/frameworks/kits/extension/src/wallpaper_extension_ability.cpp",
+    "${wallpaper_path}/frameworks/kits/extension/src/wallpaper_extension_context.cpp",
+  ]
+
+  configs = [ ":ability_config" ]
+
+  deps = [ "${wallpaper_path}/frameworks/native:wallpapermanager" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_context_native",
+    "ability_runtime:ability_manager",
+    "ability_runtime:app_context",
+    "ability_runtime:extensionkit_native",
+    "ability_runtime:napi_common",
+    "ability_runtime:runtime",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "ipc:ipc_napi",
+    "ipc:ipc_single",
+    "napi:ace_napi",
+    "player_framework:media_client",
+    "window_manager:libwm",
+  ]
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    boundary_sanitize = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "theme"
+  part_name = "wallpaper_mgr"
+}
+
+ohos_shared_library("wallpaper_extension_module") {
+  cflags = [
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-fvisibility=hidden",
+    "-Os",
+  ]
+
+  sources = [ "${wallpaper_path}/frameworks/kits/extension/src/wallpaper_extension_module_loader.cpp" ]
+
+  configs = [ ":ability_config" ]
+
+  deps = [ ":wallpaperextensionability" ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "ability_runtime:runtime",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    boundary_sanitize = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  relative_install_dir = "extensionability/"
+  subsystem_name = "theme"
+  part_name = "wallpaper_mgr"
+}

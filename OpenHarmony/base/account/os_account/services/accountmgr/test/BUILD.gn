@@ -1,0 +1,50 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//build/test.gni")
+import("../../../os_account.gni")
+
+config("accountmgr_test_config") {
+  include_dirs = [ "mock/include" ]
+
+  defines = [
+    "ACCOUNT_LOG_TAG = \"AccountMgrServiceTest\"",
+    "LOG_DOMAIN = 0xD001B00",
+  ]
+
+  if (has_user_idm_part) {
+    cflags_cc = [ "-DHAS_USER_IDM_PART" ]
+  }
+  if (target_cpu == "arm64") {
+    defines += [ "_ARM64_" ]
+  }
+  configs = []
+}
+
+group("unittest") {
+  testonly = true
+
+  deps = [
+    "unittest/common:unittest",
+    "unittest/domain_account:unittest",
+    "unittest/ohos_account:unittest",
+    "unittest/os_account:unittest",
+  ]
+  if (has_user_auth_part) {
+    deps += [ "unittest/account_iam:unittest" ]
+  }
+  if (has_app_account_part) {
+    deps += [ "unittest/app_account:unittest" ]
+  }
+}

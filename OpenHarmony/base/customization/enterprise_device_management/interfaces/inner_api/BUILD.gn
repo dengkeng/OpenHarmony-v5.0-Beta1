@@ -1,0 +1,112 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../common/config/common.gni")
+
+config("edmservice_kits_config") {
+  include_dirs = [
+    "../../common/native/include",
+    "account_manager/include",
+    "application_manager/include",
+    "bluetooth_manager/include",
+    "browser/include",
+    "bundle_manager/include",
+    "common/include",
+    "datetime_manager/include",
+    "device_control/include",
+    "device_info/include",
+    "device_settings/include",
+    "location_manager/include",
+    "network_manager/include",
+    "restrictions/include",
+    "security_manager/include",
+    "system_manager/include",
+    "usb_manager/include",
+    "wifi_manager/include",
+  ]
+}
+
+ohos_shared_library("edmservice_kits") {
+  public_configs = [ ":edmservice_kits_config" ]
+
+  sources = [
+    "./account_manager/src/account_manager_proxy.cpp",
+    "./application_manager/src/application_manager_proxy.cpp",
+    "./bluetooth_manager/src/bluetooth_manager_proxy.cpp",
+    "./browser/src/browser_proxy.cpp",
+    "./bundle_manager/src/bundle_manager_proxy.cpp",
+    "./common/src/edm_load_callback.cpp",
+    "./common/src/edm_load_manager.cpp",
+    "./common/src/ent_info.cpp",
+    "./common/src/enterprise_device_mgr_proxy.cpp",
+    "./datetime_manager/src/datetime_manager_proxy.cpp",
+    "./device_control/src/device_control_proxy.cpp",
+    "./device_info/src/device_info_proxy.cpp",
+    "./device_settings/src/device_settings_proxy.cpp",
+    "./device_settings/src/power_policy.cpp",
+    "./location_manager/src/location_manager_proxy.cpp",
+    "./network_manager/src/network_manager_proxy.cpp",
+    "./restrictions/src/restrictions_proxy.cpp",
+    "./security_manager/src/security_manager_proxy.cpp",
+    "./system_manager/src/system_manager_proxy.cpp",
+    "./usb_manager/src/usb_manager_proxy.cpp",
+    "./wifi_manager/src/wifi_manager_proxy.cpp",
+  ]
+
+  innerapi_tags = [ "platformsdk" ]
+
+  configs = [ "../../common/config:coverage_flags" ]
+
+  version_script = "libedmservice_kits.map"
+
+  deps = [ "../../common/native:edm_commom" ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = []
+
+  if (os_account_edm_enable) {
+    external_deps += [ "os_account:os_account_innerkits" ]
+    defines += [ "OS_ACCOUNT_EDM_ENABLE" ]
+  }
+
+  if (netmanager_base_edm_enable) {
+    external_deps += [ "netmanager_base:net_conn_manager_if" ]
+    defines += [ "NETMANAGER_BASE_EDM_ENABLE" ]
+  }
+
+  if (wifi_edm_enable) {
+    external_deps += [ "wifi:wifi_sdk" ]
+    defines += [ "WIFI_EDM_ENABLE" ]
+  }
+
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}

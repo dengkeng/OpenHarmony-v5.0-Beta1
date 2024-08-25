@@ -1,0 +1,50 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type hdf_devmgr, sadomain, domain;
+type hdf_ext_devmgr, sadomain, domain;
+type sa_hdf_ext_devmgr, sa_service_attr;
+
+type blue_host, hdfdomain, domain;
+type a2dp_host, hdfdomain, domain;
+type sample_host, hdfdomain, domain;
+type light_host, hdfdomain, domain;
+type dcamera_host, hdfdomain, domain;
+type face_auth_host, hdfdomain, domain;
+type pin_auth_host, hdfdomain, domain;
+type user_auth_host, hdfdomain, domain;
+type fingerprint_auth_host, hdfdomain, domain;
+type partitionslot_host, hdfdomain, domain;
+type codec_host, hdfdomain, domain;
+type wifi_host, hdfdomain, domain;
+type audio_host, hdfdomain, domain;
+type camera_host, hdfdomain, domain;
+type clearplay_host, hdfdomain, domain;
+type input_user_host, hdfdomain, domain;
+type motion_host, hdfdomain, domain;
+type riladapter_host, hdfdomain, domain;
+type sensor_host, hdfdomain, domain;
+type usb_host, hdfdomain, domain;
+type vibrator_host, hdfdomain, domain;
+type power_host, hdfdomain, domain;
+type location_host, hdfdomain, domain;
+
+type hdf_geofence_intf_service, hdf_service_attr;
+type hdf_cellfence_interface_service, hdf_service_attr;
+type hdf_cellbatching_interface_service, hdf_service_attr;
+type hdf_wififence_interface_service, hdf_service_attr;
+type debugfs_usb, fs_attr, debugfs_attr;
+type hdf_devmgr_exec, exec_attr, file_attr, system_file_attr;
+type dev_hdf_kevent, dev_attr;
+type dev_hdfwifi, dev_attr;
+type intell_voice_host, hdfdomain, domain;

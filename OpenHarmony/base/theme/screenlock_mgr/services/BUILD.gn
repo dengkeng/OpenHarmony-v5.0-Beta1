@@ -1,0 +1,141 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../screenlock.gni")
+
+config("screenlock_mgr_service_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "include",
+    "${screenlock_mgr_path}/frameworks/native/include",
+    "${screenlock_mgr_path}/interfaces/inner_api/include",
+    "${screenlock_mgr_path}/utils/include",
+    "${resourceschedule_ffrt_path}/interfaces/kits",
+  ]
+}
+
+ohos_shared_library("screenlock_server") {
+  if (factory == true) {
+    cflags_cc = [ "-DCONFIG_FACTORY_MODE" ]
+  }
+
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    boundary_sanitize = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "src/command.cpp",
+    "src/dump_helper.cpp",
+    "src/screenlock_callback_proxy.cpp",
+    "src/screenlock_get_info_callback.cpp",
+    "src/screenlock_manager_stub.cpp",
+    "src/screenlock_system_ability.cpp",
+    "src/screenlock_system_ability_proxy.cpp",
+  ]
+
+  public_configs = [ ":screenlock_mgr_service_config" ]
+
+  cflags = [
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-fvisibility=hidden",
+    "-Os",
+  ]
+
+  deps = [ "${screenlock_mgr_path}/utils:screenlock_utils" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "ffrt:libffrt",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "os_account:os_account_innerkits",
+    "safwk:system_ability_fwk",
+    "user_auth_framework:userauth_client",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+
+  innerapi_tags = [ "platformsdk" ]
+  subsystem_name = "theme"
+  part_name = "screenlock_mgr"
+}
+
+ohos_static_library("screenlock_server_static") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    boundary_sanitize = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "src/command.cpp",
+    "src/dump_helper.cpp",
+    "src/screenlock_callback_proxy.cpp",
+    "src/screenlock_get_info_callback.cpp",
+    "src/screenlock_manager_stub.cpp",
+    "src/screenlock_system_ability.cpp",
+    "src/screenlock_system_ability_proxy.cpp",
+  ]
+
+  public_configs = [ ":screenlock_mgr_service_config" ]
+
+  include_dirs = [
+    "${screenlock_mgr_path}/frameworks/native/include",
+    "${screenlock_mgr_path}/utils/include",
+  ]
+
+  deps = [ "${screenlock_mgr_path}/utils:screenlock_utils" ]
+
+  external_deps = [
+    "ability_base:want",
+    "ability_runtime:ability_manager",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libtokenid_sdk",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "eventhandler:libeventhandler",
+    "ffrt:libffrt",
+    "hicollie:libhicollie",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+    "os_account:os_account_innerkits",
+    "safwk:system_ability_fwk",
+    "user_auth_framework:userauth_client",
+    "window_manager:libdm",
+    "window_manager:libwm",
+  ]
+
+  subsystem_name = "theme"
+  part_name = "screenlock_mgr"
+}

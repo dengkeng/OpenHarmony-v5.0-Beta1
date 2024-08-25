@@ -1,0 +1,148 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../pin_auth.gni")
+
+config("pinauth_config") {
+  include_dirs = [
+    "client/inc",
+    "../interfaces/inner_api",
+    "scrypt/inc",
+  ]
+}
+
+config("pinauth_ipc_config") {
+  include_dirs = [
+    "ipc/inc",
+    "ipc/common_defines",
+  ]
+}
+
+ohos_source_set("pinauth_framework_source_set") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  sources = [
+    "client/src/inputer_data_impl.cpp",
+    "client/src/inputer_get_data_service.cpp",
+    "client/src/pinauth_register_impl.cpp",
+    "scrypt/src/scrypt.cpp",
+  ]
+
+  deps = [ ":pinauth_ipc" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "openssl:libcrypto_shared",
+    "samgr:samgr_proxy",
+    "user_auth_framework:userauth_client",
+  ]
+
+  defines = [
+    "PINAUTH_LOG_TAG = \"PinAuth\"",
+    "LOG_DOMAIN = 0xD002422",
+  ]
+
+  if (customization_enterprise_device_management_enable) {
+    external_deps += [ "enterprise_device_management:edmservice_kits" ]
+    defines += [ "CUSTOMIZATION_ENTERPRISE_DEVICE_MANAGEMENT_ENABLE" ]
+  }
+
+  configs = [
+    "../common:iam_log_config",
+    "../common:iam_utils_config",
+    ":pinauth_ipc_config",
+  ]
+
+  public_configs = [ ":pinauth_config" ]
+
+  remove_configs = [ "//build/config/compiler:no_exceptions" ]
+
+  subsystem_name = "useriam"
+  part_name = "pin_auth"
+}
+
+ohos_shared_library("pinauth_framework") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    blocklist = "../cfi_blocklist.txt"
+    debug = false
+  }
+  branch_protector_ret = "pac_ret"
+  deps = [ ":pinauth_framework_source_set" ]
+
+  external_deps = [ "hilog:libhilog" ]
+
+  if (use_musl) {
+    version_script = "pin_auth_framework_map"
+  }
+
+  public_configs = [ ":pinauth_config" ]
+
+  subsystem_name = "useriam"
+  innerapi_tags = [ "platformsdk_indirect" ]
+  part_name = "pin_auth"
+}
+
+ohos_source_set("pinauth_ipc") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    blocklist = "../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+  include_dirs = [
+    "ipc/inc",
+    "ipc/common_defines",
+  ]
+
+  sources = [
+    "ipc/src/inputer_get_data_proxy.cpp",
+    "ipc/src/inputer_get_data_stub.cpp",
+    "ipc/src/inputer_set_data_proxy.cpp",
+    "ipc/src/inputer_set_data_stub.cpp",
+    "ipc/src/pin_auth_proxy.cpp",
+    "ipc/src/pin_auth_stub.cpp",
+  ]
+
+  configs = [ "../common:iam_log_config" ]
+  public_configs = [ ":pinauth_ipc_config" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+    "user_auth_framework:userauth_client",
+  ]
+
+  subsystem_name = "useriam"
+  part_name = "pin_auth"
+}

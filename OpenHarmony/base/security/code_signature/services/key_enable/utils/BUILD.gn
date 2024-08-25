@@ -1,0 +1,51 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../code_signature.gni")
+
+ohos_static_library("libkey_enable_utils") {
+  sources = [
+    "src/cert_path.cpp",
+    "src/key_enable_adapter.cpp",
+    "src/key_utils.cpp",
+    "src/unlock_event_helper.cpp",
+  ]
+  include_dirs = [
+    "include",
+    "${code_signature_root_dir}/interfaces/innerkits/local_code_sign/include",
+  ]
+
+  deps = [ "${code_signature_root_dir}/interfaces/innerkits/local_code_sign:liblocal_code_sign_sdk" ]
+
+  public_configs = [ "${code_signature_root_dir}:common_public_config" ]
+  configs = [ "${code_signature_root_dir}:common_utils_config" ]
+
+  external_deps = [
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "init:libbegetutil",
+    "samgr:samgr_proxy",
+  ]
+
+  defines = []
+  if (code_signature_screenlock_mgr_enable) {
+    defines += [ "SCREENLOCK_MANAGER_ENABLED" ]
+    external_deps += [ "screenlock_mgr:screenlock_client" ]
+  }
+
+  subsystem_name = "security"
+  part_name = "code_signature"
+}

@@ -1,0 +1,372 @@
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/inputmethod/imf/inputmethod.gni")
+
+#####################hydra-fuzz###################
+import("//build/config/features.gni")
+import("//build/ohos.gni")
+import("//build/test.gni")
+group("system_ability_stub_fuzztest") {
+  testonly = true
+  deps = [
+    ":DisplayOptionalInputMethodFuzzTest",
+    ":GetCurrentInputmethodFuzzTest",
+    ":GetCurrentInputmethodSubtypeFuzzTest",
+    ":HideCurrentInputDeprecatedFuzzTest",
+    ":HideCurrentInputFuzzTest",
+    ":ListCurrentInputmethodSubtypeFuzzTest",
+    ":ListInputmethodFuzzTest",
+    ":ListInputmethodSubtypeFuzzTest",
+    ":PanelStatusChangeFuzzTest",
+    ":ReleaseInputFuzzTest",
+    ":SetCoreAndAgentFuzzTest",
+    ":ShowCurrentInputDeprecatedFuzzTest",
+    ":ShowCurrentInputFuzzTest",
+    ":StartInputFuzzTest",
+    ":StopInputFuzzTest",
+    ":StopInputSessionFuzzTest",
+    ":SwitchInputMethodFuzzTest",
+    ":UpdateListenEventFlagFuzzTest",
+  ]
+}
+
+common_external_deps = [
+  "ability_runtime:ability_manager",
+  "access_token:libaccesstoken_sdk",
+  "bundle_framework:appexecfwk_core",
+  "data_share:datashare_common",
+  "data_share:datashare_consumer",
+  "hilog:libhilog",
+  "input:libmmi-client",
+]
+
+common_deps = [
+  "${inputmethod_path}/services/adapter/settings_data_provider:settings_data_static",
+  "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common:imf_sa_stub_fuzztest_common_static",
+  "//third_party/cJSON:cjson",
+]
+
+##############################fuzztest##########################################
+ohos_fuzztest("GetCurrentInputmethodFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/getcurrentinputmethod_fuzzer"
+
+  sources = [ "getcurrentinputmethod_fuzzer/getcurrentinputmethod_fuzzer.cpp" ]
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/getcurrentinputmethod_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("GetCurrentInputmethodSubtypeFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/getcurrentinputmethodsubtype_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/getcurrentinputmethodsubtype_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "getcurrentinputmethodsubtype_fuzzer/getcurrentinputmethodsubtype_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("HideCurrentInputFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/hidecurrentinput_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/hidecurrentinput_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "hidecurrentinput_fuzzer/hidecurrentinput_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("HideCurrentInputDeprecatedFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/hidecurrentinputdeprecated_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/hidecurrentinputdeprecated_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [
+    "hidecurrentinputdeprecated_fuzzer/hidecurrentinputdeprecated_fuzzer.cpp",
+  ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ListCurrentInputmethodSubtypeFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listcurrentinputmethodsubtype_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listcurrentinputmethodsubtype_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "listcurrentinputmethodsubtype_fuzzer/listcurrentinputmethodsubtype_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ListInputmethodFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listinputmethod_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listinputmethod_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "listinputmethod_fuzzer/listinputmethod_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ListInputmethodSubtypeFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listinputmethodsubtype_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/listinputmethodsubtype_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources =
+      [ "listinputmethodsubtype_fuzzer/listinputmethodsubtype_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("PanelStatusChangeFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/panelstatuschange_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/panelstatuschange_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "panelstatuschange_fuzzer/panelstatuschange_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ReleaseInputFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/releaseinput_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/releaseinput_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "releaseinput_fuzzer/releaseinput_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("SetCoreAndAgentFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/setcoreandagent_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/setcoreandagent_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "setcoreandagent_fuzzer/setcoreandagent_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ShowCurrentInputFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/showcurrentinput_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/showcurrentinput_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "showcurrentinput_fuzzer/showcurrentinput_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("ShowCurrentInputDeprecatedFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/showcurrentinputdeprecated_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/showcurrentinputdeprecated_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [
+    "showcurrentinputdeprecated_fuzzer/showcurrentinputdeprecated_fuzzer.cpp",
+  ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("StartInputFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/startinput_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/startinput_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "startinput_fuzzer/startinput_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("StopInputFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/stopinput_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/stopinput_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "stopinput_fuzzer/stopinput_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("StopInputSessionFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/stopinputsession_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/stopinputsession_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "stopinputsession_fuzzer/stopinputsession_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("UpdateListenEventFlagFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/updatelisteneventflag_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/updatelisteneventflag_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "updatelisteneventflag_fuzzer/updatelisteneventflag_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("SwitchInputMethodFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/switchinputmethod_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/switchinputmethod_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [ "switchinputmethod_fuzzer/switchinputmethod_fuzzer.cpp" ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}
+
+ohos_fuzztest("DisplayOptionalInputMethodFuzzTest") {
+  module_out_path = "imf/imf"
+
+  fuzz_config_file = "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/displayoptionalinputmethod_fuzzer"
+
+  include_dirs = [
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/displayoptionalinputmethod_fuzzer",
+    "${inputmethod_path}/test/fuzztest/systemabilitystubfuzztest/common",
+  ]
+
+  sources = [
+    "displayoptionalinputmethod_fuzzer/displayoptionalinputmethod_fuzzer.cpp",
+  ]
+
+  deps = common_deps
+
+  external_deps = common_external_deps
+}

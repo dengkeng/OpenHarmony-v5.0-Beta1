@@ -1,0 +1,19 @@
+{
+  global:
+    extern "C++" {
+      OHOS::HiviewDFX::Get*;
+      OHOS::HiviewDFX::PrintBacktrace*;
+      OHOS::HiviewDFX::BacktraceLocalThread::BacktraceLocalThread*;
+      OHOS::HiviewDFX::BacktraceLocalThread::Unwind*;
+      OHOS::HiviewDFX::BacktraceLocalThread::GetFrames*;
+      OHOS::HiviewDFX::BacktraceLocalThread::~BacktraceLocalThread*;
+      OHOS::HiviewDFX::BacktraceLocalThread::GetFormattedStr*;
+      OHOS::HiviewDFX::DfxGetKernelStack*;
+    };
+    extern "C" {
+      PrintTrace*;
+      GetTrace*;
+    };
+  local:
+    *;
+};

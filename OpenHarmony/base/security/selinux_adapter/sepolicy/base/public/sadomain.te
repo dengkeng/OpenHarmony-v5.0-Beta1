@@ -1,0 +1,38 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow sadomain samain_exec:file read_file_perms;
+allow sadomain samain_exec:file { entrypoint execute };
+allow sadomain samgr:binder { call transfer };
+
+allow sadomain system_profile_file:file read_file_perms;
+
+# add mmap permission for sa
+allow sadomain system_file:file { map open read getattr};
+allow sadomain sys_prod_file:file { map open read getattr};
+allow sadomain vendor_file:file { map open read getattr};
+allow sadomain chip_prod_file:file { map open read getattr};
+allow sadomain data_app_el1_file:file { map open read getattr};
+
+allow sadomain sa_dataobs_mgr_service_service:binder { call };
+allow sadomain sa_dataobs_mgr_service_service:samgr_class { get };
+# neverallow
+# only samgr can be the mgr for binder.
+neverallow { domain -samgr } self:binder set_context_mgr;
+# let every sa join sadomain
+# TODO:remove hdfdomain after SA dynamic loading support.
+neverallow { domain -sadomain -init -ark_aot_compiler -hap_domain -hdfdomain -samgr_binder_violator -key_enable developer_only(`-bm -uitest -edm') debug_only(`-edm') } samgr:binder transfer;
+
+neverallow { sadomain hap_domain } dev_tee_file:chr_file { open read append write ioctl };
+
+neverallow { sadomain hap_domain } dev_iio_file:chr_file { open read append write ioctl };

@@ -1,0 +1,98 @@
+# Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+config("enterprise_admin_config") {
+  include_dirs = [ "../../common/native/include" ]
+}
+
+config("enterprise_admin_public_config") {
+  include_dirs = [ "include" ]
+}
+
+ohos_shared_library("enterprise_admin_extension") {
+  sources = [
+    "./src/enterprise_admin_extension.cpp",
+    "./src/enterprise_admin_extension_context.cpp",
+    "./src/enterprise_admin_stub.cpp",
+    "./src/enterprise_admin_stub_impl.cpp",
+    "./src/js_enterprise_admin_extension.cpp",
+    "./src/js_enterprise_admin_extension_context.cpp",
+  ]
+
+  configs = [
+    ":enterprise_admin_config",
+    "../../common/config:coverage_flags",
+  ]
+
+  version_script = "libenterprise_admin_extension.map"
+
+  public_configs = [ ":enterprise_admin_public_config" ]
+
+  external_deps = [
+    "ability_runtime:ability_context_native",
+    "ability_runtime:app_context",
+    "ability_runtime:extensionkit_native",
+    "ability_runtime:runtime",
+    "access_token:libaccesstoken_sdk",
+    "c_utils:utils",
+    "eventhandler:libeventhandler",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "napi:ace_napi",
+  ]
+
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}
+
+ohos_shared_library("enterprise_admin_extension_module") {
+  include_dirs = [ "include" ]
+
+  sources = [ "./src/enterprise_admin_extension_module_loader.cpp" ]
+
+  configs = [
+    "../../common/config:coverage_flags",
+    "//build/config/gcc:symbol_visibility_hidden",
+  ]
+  deps = [ ":enterprise_admin_extension" ]
+
+  external_deps = [
+    "ability_runtime:abilitykit_native",
+    "hilog:libhilog",
+    "napi:ace_napi",
+  ]
+
+  relative_install_dir = "extensionability/"
+  sanitize = {
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+    integer_overflow = true
+    ubsan = true
+  }
+  branch_protector_ret = "pac_ret"
+  subsystem_name = "customization"
+  part_name = "enterprise_device_management"
+}

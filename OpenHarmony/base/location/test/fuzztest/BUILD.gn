@@ -1,0 +1,44 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//base/location/config.gni")
+import("//build/test.gni")
+group("fuzztest") {
+  testonly = true
+  deps = [
+    "locator/cachedlocationcallbackhost_fuzzer:CachedLocationCallbackHostFuzzTest",
+    "locator/checkmessage_fuzzer:CheckMessageFuzzTest",
+    "locator/countrycodecallbackhost_fuzzer:CountryCodeCallbackHostFuzzTest",
+    "locator/countrycodemanager_fuzzer:CountryCodeManagerFuzzTest",
+    "locator/fusioncontroller_fuzzer:FusionControllerFuzzTest",
+    "locator/geoconvertproxy_fuzzer:GeoConvertProxyFuzzTest",
+    "locator/geoconvertservice_fuzzer:GeoconvertServiceFuzzTest",
+    "locator/gnss_fuzzer:GnssFuzzTest",
+    "locator/gnssability_fuzzer:GnssAbilityFuzzTest",
+    "locator/gnssstatuscallbackhost_fuzzer:GnssStatusCallbackHostFuzzTest",
+    "locator/locationconfigmanager_fuzzer:LocationConfigManagerFuzzTest",
+    "locator/locationswitchcallbackhost_fuzzer:LocationSwitchCallbackHostFuzzTest",
+    "locator/locator_fuzzer:LocatorFuzzTest",
+    "locator/locatorabilitystub_fuzzer:LocatorAbilityStubFuzzTest",
+    "locator/locatorbackgroundproxy_fuzzer:LocatorBackgroundProxyFuzzTest",
+    "locator/locatorcallbackhost_fuzzer:LocatorCallbackHostFuzzTest",
+    "locator/locatorcallbackstub_fuzzer:LocatorCallbackStubFuzzTest",
+    "locator/locatoreventmanager_fuzzer:LocatorEventManagerFuzzTest",
+    "locator/networkability_fuzzer:NetworkAbilityFuzzTest",
+    "locator/networkcallbackhost_fuzzer:NetworkCallbackHostFuzzTest",
+    "locator/nmeamessagecallbackhost_fuzzer:NmeaMessageCallbackHostFuzzTest",
+    "locator/passiveability_fuzzer:PassiveAbilityFuzzTest",
+    "locator/reportmanager_fuzzer:ReportManagerFuzzTest",
+    "locator/requestmanager_fuzzer:RequestManagerFuzzTest",
+  ]
+}

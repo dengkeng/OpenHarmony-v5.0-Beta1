@@ -1,0 +1,104 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow multimodalinput accessibility_param:file { read };
+allow multimodalinput arkcompiler_param:file { read open map };
+allow multimodalinput audio_server:binder { call };
+allow multimodalinput bootanimation:fd { use };
+allow multimodalinput data_file:dir { search };
+allow multimodalinput data_init_agent:dir { search };
+allow multimodalinput data_init_agent:file { open read append ioctl };
+allow multimodalinput data_log:dir { search write add_name create };
+allow multimodalinput data_log:file { create open read write ioctl };
+allow multimodalinput data_multimodalinput:dir { add_name create getattr open read remove_name search watch write };
+allow multimodalinput data_multimodalinput:file { create open read rename unlink write setattr getattr ioctl };
+allow multimodalinput data_service_file:dir { search };
+allow multimodalinput data_service_el1_file:dir { search };
+allow multimodalinput data_service_el1_file:file { open read };
+allow multimodalinput dev_ashmem_file:chr_file { open };
+allow multimodalinput dev_console_file:chr_file { open read write getattr ioctl };
+allow multimodalinput dev_dri_file:dir { search };
+allow multimodalinput dev_dri_file:chr_file { open read write getattr ioctl };
+allow multimodalinput dev_kmsg_file:chr_file { open write };
+allow multimodalinput dev_input_file:chr_file { ioctl };
+allow multimodalinput dev_input_file:dir { watch open read search getattr };
+allow multimodalinput dev_unix_socket:dir { search };
+allow multimodalinput dev_unix_socket:sock_file { write };
+allow multimodalinput distributeddata:binder { call };
+allow multimodalinput distributeddata:fd { use };
+allow multimodalinput allocator_host:binder { call };
+allow multimodalinput allocator_host:fd { use };
+allow multimodalinput hdf_allocator_service:hdf_devmgr_class { get };
+allow multimodalinput faultloggerd_socket:sock_file { write };
+allow multimodalinput faultloggerd:unix_stream_socket { connectto };
+allow multimodalinput foundation:binder { call transfer };
+allow multimodalinput hdf_devmgr:binder { call };
+allow multimodalinput input_pointer_device_param:parameter_service { set };
+allow multimodalinput multimodalinput:netlink_kobject_uevent_socket { bind create getattr setopt read };
+#allow multimodalinput multimodalinput:process { ptrace };
+allow multimodalinput musl_param:file { map open read };
+allow multimodalinput param_watcher:binder { call transfer };
+binder_call(multimodalinput, powermgr);
+allow multimodalinput render_service:binder { call transfer };
+allow multimodalinput render_service:fd { use };
+allow multimodalinput resource_schedule_service:binder { call };
+allow multimodalinput rootfs:chr_file { write };
+allow multimodalinput sa_audio_policy_service:samgr_class { get };
+allow multimodalinput sa_device_service_manager:samgr_class { get };
+allow multimodalinput sa_distributeddata_service:samgr_class { get };
+allow multimodalinput sa_foundation_dms:samgr_class { get };
+allow multimodalinput sa_foundation_wms:samgr_class { get };
+allow multimodalinput sa_multimodalinput_service:samgr_class { get };
+allow multimodalinput sa_render_service:samgr_class { get };
+allow multimodalinput sys_file:dir { open read };
+allow multimodalinput sys_file:file { getattr open read };
+allow multimodalinput system_bin_file:dir { search };
+allow multimodalinput system_bin_file:file { execute execute_no_trans map read open };
+allow multimodalinput tracefs:dir { search };
+allow multimodalinput tracefs:file { open write };
+allow multimodalinput tracefs_trace_marker_file:file { open write };
+allow multimodalinput tty_device:chr_file { read write };
+allow multimodalinput vendor_etc_file:dir { search };
+allow multimodalinput vendor_etc_file:file { getattr open read };
+allow multimodalinput data_file:dir { remove_name };
+allow multimodalinput data_multimodalinput:file { lock };
+allow multimodalinput sysfs_devices_system_cpu:file { open read getattr };
+allow multimodalinput data_file:sock_file { setattr create unlink };
+# avc:  denied  { get } for service=3299 pid=722 scontext=u:r:multimodalinput:s0 tcontext=u:object_r:sa_foundation_cesfwk_service:s0 tclass=samgr_class permissive=1
+allow multimodalinput sa_foundation_cesfwk_service:samgr_class { get };
+allow multimodalinput sa_foundation_appms:samgr_class { get };
+allow multimodalinput normal_hap_attr:binder { call };
+allow multimodalinput normal_hap_attr:fd { use };
+allow init data_multimodalinput:file { getattr };
+allow multimodalinput system_fonts_file:dir { read open search };
+allow multimodalinput system_fonts_file:file { read open getattr map };
+allow multimodalinput sa_powermgr_powermgr_service:samgr_class { get };
+allow normal_hap_attr multimodalinput:unix_stream_socket { read write };
+allow normal_hap_attr sa_multimodalinput_service:samgr_class { get };
+allow normal_hap_attr multimodalinput:fd { use };
+allow system_basic_hap_attr multimodalinput:unix_stream_socket { read };
+allow system_basic_hap_attr multimodalinput:unix_stream_socket { read write };
+allow system_core_hap_attr multimodalinput:unix_stream_socket { read };
+allow init data_multimodalinput:dir { create getattr open read relabelfrom relabelto search setattr write };
+# avc:  denied  { read } scontext=u:r:useriam:s0 tcontext=u:r:multimodalinput:s0 tclass=unix_stream_socket permissive=1
+allow useriam multimodalinput:unix_stream_socket { read };
+# avc:  denied  { get } scontext=u:r:useriam:s0 tcontext=u:object_r:sa_multimodalinput_service:s0 tclass=samgr_class permissive=1
+allow useriam sa_multimodalinput_service:samgr_class { get };
+allowxperm multimodalinput data_log:file ioctl { 0x5413 };
+allowxperm multimodalinput dev_dri_file:chr_file ioctl { 0x641f };
+allowxperm multimodalinput dev_input_file:chr_file ioctl { 0x4503 0x4560 0x4542 0x4548 0x456f 0x450a 0x4559 0x4568 0x455a 0x455b 0x4577 0x4545 0x4549 0x454a 0x4550 0x4551 };
+allowxperm multimodalinput data_multimodalinput:file ioctl { 0x5413 };
+debug_only(`
+    allow multimodalinput sh:binder { call };
+')
+

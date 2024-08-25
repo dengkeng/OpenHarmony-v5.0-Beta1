@@ -1,0 +1,84 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+# sa lib
+ohos_source_set("dslm_ohos_cred_obj") {
+  sanitize = {
+    integer_overflow = true
+    ubsan = true
+    boundary_sanitize = true
+    cfi = true
+    cfi_cross_dso = true
+    blocklist = "../../../cfi_blocklist.txt"
+  }
+  branch_protector_ret = "pac_ret"
+
+  sources = [
+    "../common/dslm_ohos_request.c",
+    "../common/dslm_ohos_verify.c",
+    "../common/external_interface_adapter.c",
+    "../common/hks_adapter.c",
+    "impl/dslm_ohos_init.c",
+  ]
+
+  include_dirs = [
+    "impl",
+    "../common",
+    "../../common",
+    "../../include",
+    "../../../common/include",
+    "../../../interfaces/inner_api/include",
+    "../../../services/include",
+  ]
+
+  deps = [
+    "../../../baselib/utils:utils_static",
+    "../../common:oem_common_obj",
+  ]
+
+  configs = [ "../../../common:common_configs" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "device_auth:deviceauth_sdk",
+    "hilog:libhilog",
+    "huks:libhukssdk",
+  ]
+
+  part_name = "device_security_level"
+  subsystem_name = "security"
+}
+
+declare_args() {
+  device_security_level_feature_cred_level = 1
+}
+
+ohos_prebuilt_etc("dslm_ohos_cred_file") {
+  if (device_security_level_feature_cred_level == 5) {
+    source = "dslm_finger_sl5.cfg"
+  } else if (device_security_level_feature_cred_level == 4) {
+    source = "dslm_finger_sl4.cfg"
+  } else if (device_security_level_feature_cred_level == 3) {
+    source = "dslm_finger_sl3.cfg"
+  } else if (device_security_level_feature_cred_level == 2) {
+    source = "dslm_finger_sl2.cfg"
+  } else {
+    source = "dslm_finger.cfg"
+  }
+
+  output = "dslm_finger.cfg"
+  part_name = "device_security_level"
+  subsystem_name = "security"
+}

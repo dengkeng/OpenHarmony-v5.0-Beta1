@@ -1,0 +1,142 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow audio_host audio_host:netlink_kobject_uevent_socket { getattr bind create setopt };
+allow audio_host bootevent_param:file { map open read };
+allow audio_host bootevent_samgr_param:file { map open read };
+allow audio_host build_version_param:file { map open read };
+allow audio_host const_allow_mock_param:file { map open read };
+allow audio_host const_allow_param:file { map open read };
+allow audio_host const_build_param:file { map open read };
+allow audio_host const_display_brightness_param:file { map open read };
+allow audio_host const_param:file { map open read };
+allow audio_host const_postinstall_fstab_param:file { map open read };
+allow audio_host const_postinstall_param:file { map open read };
+allow audio_host const_product_param:file { map open read };
+allow audio_host data_log:dir { search };
+allow audio_host debug_param:file { map open read };
+allow audio_host default_param:file { map open read };
+allow audio_host dev_hdf_kevent:chr_file { getattr ioctl open read write };
+allow audio_host dev_input_file:dir { search };
+allow audio_host distributedsche_param:file { map open read };
+allow audio_host hdf_audio_hdi_pnp_service:hdf_devmgr_class { add };
+allow audio_host hilog_param:file { map open read };
+allow audio_host hw_sc_build_os_param:file { map open read };
+allow audio_host hw_sc_build_param:file { map open read };
+allow audio_host hw_sc_param:file { map open read };
+allow audio_host init_param:file { map open read };
+allow audio_host init_svc_param:file { map open read };
+allow audio_host input_pointer_device_param:file { map open read };
+allow audio_host net_param:file { map open read };
+allow audio_host net_tcp_param:file { map open read };
+allow audio_host ohos_boot_param:file { map open read };
+allow audio_host ohos_param:file { map open read };
+allow audio_host persist_param:file { map open read };
+allow audio_host persist_sys_param:file { map open read };
+allow audio_host samgr:binder { call };
+allow audio_host security_param:file { map open read };
+allow audio_host startup_param:file { map open read };
+allow audio_host sys_param:file { map open read };
+allow audio_host sys_usb_param:file { map open read };
+allowxperm audio_host dev_hdf_kevent:chr_file ioctl { 0x6203 };
+allow audio_host dev_input_file:chr_file { read open };
+allow audio_host data_service_file:dir { search read };
+allow audio_host data_service_el1_file:dir { search };
+allow audio_host data_udev:dir { search };
+allow audio_host sys_file:file { open read getattr };
+allow audio_host dev_hdf_audio_control:chr_file { getattr };
+allow audio_host dev_mgr_file:chr_file { getattr read write open ioctl };
+allow audio_host dev_bus:dir { search };
+allow audio_host dev_bus_usb_file:dir { search };
+allow audio_host dev_bus_usb_file:chr_file { getattr read open };
+allow audio_host musl_param:file { open read map };
+allow audio_host audio_server:binder { transfer call };
+allow audio_host dev_dma_heap_file:dir { search };
+allow audio_host dev_dma_heap_file:chr_file { read open ioctl };
+allowxperm audio_host dev_snd_file:chr_file ioctl { 0x4801 0x4132 0x4142 };
+allow audio_host hdf_device_manager:hdf_devmgr_class { get };
+allow audio_host hdf_audio_hdi_service:hdf_devmgr_class { add };
+allow audio_host dev_unix_socket:dir { search };
+allow audio_host hdf_audio_hdi_a2dp_service:hdf_devmgr_class { add };
+allow audio_host hdf_devmgr:binder { call transfer };
+allow audio_host chip_prod_file:dir { search };
+allow audio_host chip_prod_file:file { read open getattr };
+allow audio_host data_file:dir { search };
+allow audio_host data_file:file { map open read append write };
+allow audio_host dev_hdf_audio_render:chr_file { getattr ioctl open read write };
+allow audio_host devpts:chr_file { read write };
+allow audio_host hdcd:fd { use };
+allow audio_host hdf_audio_hdi_usb_service:hdf_devmgr_class { add get };
+allow audio_host hdf_audio_manager_service:hdf_devmgr_class { add };
+allow audio_host hdf_effect_model_service:hdf_devmgr_class { add };
+allow audio_host sa_device_service_manager:samgr_class { get };
+allow audio_host audio_host:netlink_kobject_uevent_socket { read };
+allow audio_host data_init_agent:dir { search };
+allow audio_host data_init_agent:file { open read append };
+allow audio_host dev_hdf_kevent:chr_file { ioctl };
+allow audio_host system_bin_file:dir { search };
+allow audio_host system_bin_file:file { execute execute_no_trans map read open };
+allow audio_host vendor_etc_file:dir { search };
+allow audio_host vendor_etc_file:file { getattr open read };
+allow audio_host vendor_lib_file:dir { search };
+allow audio_host vendor_lib_file:file { getattr open read };
+allow audio_host data_file:file { ioctl };
+allow audio_host dev_hdf_audio_capture:chr_file { getattr ioctl open read write };
+allow audio_host dev_hdf_audio_control:chr_file { getattr ioctl open read write };
+allow audio_host dev_snd_file:chr_file { ioctl };
+allow audio_host dev_snd_file:dir { search };
+allow audio_host dev_console_file:chr_file { read write };
+allow audio_host dev_unix_socket:sock_file { write };
+allowxperm audio_host dev_snd_file:chr_file ioctl { 0x4143 };
+allowxperm audio_host dev_hdf_audio_render:chr_file ioctl { 0x6201 };
+allowxperm audio_host dev_hdf_kevent:chr_file ioctl { 0x6201 0x6202 };
+allowxperm audio_host data_file:file ioctl { 0x5413 };
+allowxperm audio_host dev_hdf_audio_capture:chr_file ioctl { 0x6201 };
+allowxperm audio_host dev_hdf_audio_control:chr_file ioctl { 0x6201 };
+debug_only(`
+    allow audio_host sh:fd { use };
+    allow audio_host sh:binder { transfer };
+')
+
+# avc:  denied  { add } for service=intell_voice_trigger_manager_service pid=1070 scontext=u:r:audio_host:s0 tcontext=u:object_r:default_hdf_service:s0 tclass=hdf_devmgr_class permissive=1
+allow audio_host hdf_intell_voice_trigger_manager_service:hdf_devmgr_class { add };
+
+# avc:  denied  { read } for  pid=1070 comm="audio_host" name="usb" dev="tmpfs" ino=453 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_bus_usb_file:s0 tclass=dir permissive=0
+# avc:  denied  { open } for  pid=1118 comm="audio_host" path="/dev/bus/usb" dev="tmpfs" ino=453 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_bus_usb_file:s0 tclass=dir permissive=0
+allow audio_host dev_bus_usb_file:dir { open read };
+
+# avc:  denied  { ioctl } for  pid=1054 comm="audio_host" path="/dev/soundtrigger_dma_drv" dev="tmpfs" ino=552 ioctlcmd=0x5302 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_soundtrigger:s0 tclass=chr_file permissive=0
+# avc:  denied  { open } for  pid=1064 comm="audio_host" path="/dev/soundtrigger_dma_drv" dev="tmpfs" ino=552 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_soundtrigger:s0 tclass=chr_file permissive=0
+# avc:  denied  { read write } for  pid=1102 comm="audio_host" name="soundtrigger_socdsp_lp_pcm_drv" dev="tmpfs" ino=553 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_soundtrigger:s0 tclass=chr_file permissive=1
+allow audio_host dev_soundtrigger:chr_file { open ioctl read write };
+allowxperm audio_host dev_soundtrigger:chr_file ioctl { 0x5302 };
+
+# avc:  denied  { call } for  pid=1042 comm="audio_host" scontext=u:r:audio_host:s0 tcontext=u:r:intell_voice_service:s0 tclass=binder permissive=0
+# avc:  denied  { transfer } for  pid=1054 comm="IPC_4_2058" scontext=u:r:audio_host:s0 tcontext=u:r:intell_voice_service:s0 tclass=binder permissive=0
+allow audio_host intell_voice_service:binder { transfer call };
+
+# avc:  denied  { use } for  pid=596 comm="IPC_2_7119" path="/dev/ashmem" dev="tmpfs" ino=581 scontext=u:r:audio_host:s0 tcontext=u:r:intell_voice_service:s0 tclass=fd permissive=0
+allow audio_host intell_voice_service:fd { use };
+
+# avc:  denied  { write } for  pid=1075 comm="IPC_0_1111" name="oeminfo_nvm" dev="tmpfs" ino=757 scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_file:s0 tclass=sock_file permissive=0
+allow audio_host dev_file:sock_file { write };
+
+# avc:  denied  { ioctl } for  pid=1063 comm="IPC_0_1116" path="/dev/hifi_misc" dev="tmpfs" ino=583 ioctlcmd=0x417e scontext=u:r:audio_host:s0 tcontext=u:object_r:dev_hifi_misc:s0 tclass=chr_file permissive=0
+allow audio_host dev_hifi_misc:chr_file { ioctl };
+allowxperm audio_host dev_hifi_misc:chr_file ioctl { 0x417e };
+
+# avc:  denied  { search } for  pid=1102 comm="IPC_0_1127" name="lib64" dev="sdd85" ino=83 scontext=u:r:audio_host:s0 tcontext=u:object_r:sys_prod_file:s0 tclass=dir permissive=1
+allow audio_host sys_prod_file:dir { search };
+
+# /sys/class/switch
+allow audio_host sysfs_switch:file { open read getattr };

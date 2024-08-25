@@ -1,0 +1,162 @@
+# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../batterymgr.gni")
+
+config("batteryd_private_config") {
+  include_dirs = [ "include" ]
+}
+
+ohos_executable("charger") {
+  install_enable = true
+  defines = [
+    "ENABLE_INIT_LOG",
+    "DIFF_PATCH_SDK",
+  ]
+
+  sources = [
+    "src/animation_config.cpp",
+    "src/battery_backlight.cpp",
+    "src/battery_config.cpp",
+    "src/battery_led.cpp",
+    "src/battery_thread.cpp",
+    "src/battery_vibrate.cpp",
+    "src/charger.cpp",
+    "src/charger_animation.cpp",
+    "src/charger_graphic_engine.cpp",
+    "src/charger_thread.cpp",
+    "src/dev/drm_driver.cpp",
+    "src/dev/fbdev_driver.cpp",
+    "src/dev/graphic_dev.cpp",
+    "src/power_supply_provider.cpp",
+  ]
+
+  configs = [
+    ":batteryd_private_config",
+    "./../utils:coverage_flags",
+  ]
+
+  external_deps = [
+    "cJSON:cjson",
+    "c_utils:utils",
+    "config_policy:configpolicy_util",
+    "drivers_interface_battery:libbattery_proxy_2.0",
+    "drivers_interface_input:libinput_proxy_1.0",
+    "init:libbegetutil",
+    "ipc:ipc_core",
+    "json:nlohmann_json_static",
+    "jsoncpp:jsoncpp",
+    "libpng:libpng",
+  ]
+
+  if (has_drivers_interface_display_part && has_drivers_interface_light_part &&
+      has_graphic_surface_part && has_ui_lite_part) {
+    defines += [ "ENABLE_CHARGER" ]
+    external_deps += [
+      "drivers_interface_display:display_composer_idl_headers",
+      "drivers_interface_display:libdisplay_composer_hdi_impl",
+      "drivers_interface_light:liblight_proxy_1.0",
+      "graphic_surface:buffer_handle",
+      "libdrm:libdrm",
+      "ui_lite:libupdater_layout",
+    ]
+  } else {
+    sources = []
+    sources += [ "src/charger.cpp" ]
+  }
+
+  part_name = "battery_manager"
+}
+
+group("charger_group") {
+  deps = [ ":charger" ]
+}
+
+group("charger_animation") {
+  deps = [ "sa_profile:animation_config" ]
+}
+
+group("resources_service") {
+  deps = [
+    "resources:charger_font",
+    "resources:device.charge.group.cfg",
+    "resources:init.charger.cfg",
+    "resources:resources_config",
+    "resources:resources_config1",
+    "resources:resources_config10",
+    "resources:resources_config11",
+    "resources:resources_config12",
+    "resources:resources_config13",
+    "resources:resources_config14",
+    "resources:resources_config15",
+    "resources:resources_config16",
+    "resources:resources_config17",
+    "resources:resources_config18",
+    "resources:resources_config19",
+    "resources:resources_config2",
+    "resources:resources_config20",
+    "resources:resources_config21",
+    "resources:resources_config22",
+    "resources:resources_config23",
+    "resources:resources_config24",
+    "resources:resources_config25",
+    "resources:resources_config26",
+    "resources:resources_config27",
+    "resources:resources_config28",
+    "resources:resources_config29",
+    "resources:resources_config3",
+    "resources:resources_config30",
+    "resources:resources_config31",
+    "resources:resources_config32",
+    "resources:resources_config33",
+    "resources:resources_config34",
+    "resources:resources_config35",
+    "resources:resources_config36",
+    "resources:resources_config37",
+    "resources:resources_config38",
+    "resources:resources_config39",
+    "resources:resources_config4",
+    "resources:resources_config40",
+    "resources:resources_config41",
+    "resources:resources_config42",
+    "resources:resources_config43",
+    "resources:resources_config44",
+    "resources:resources_config45",
+    "resources:resources_config46",
+    "resources:resources_config47",
+    "resources:resources_config48",
+    "resources:resources_config49",
+    "resources:resources_config5",
+    "resources:resources_config50",
+    "resources:resources_config51",
+    "resources:resources_config52",
+    "resources:resources_config53",
+    "resources:resources_config54",
+    "resources:resources_config55",
+    "resources:resources_config56",
+    "resources:resources_config57",
+    "resources:resources_config58",
+    "resources:resources_config59",
+    "resources:resources_config6",
+    "resources:resources_config60",
+    "resources:resources_config61",
+    "resources:resources_config62",
+    "resources:resources_config63",
+    "resources:resources_config64",
+    "resources:resources_config65",
+    "resources:resources_config7",
+    "resources:resources_config8",
+    "resources:resources_config9",
+  ]
+}

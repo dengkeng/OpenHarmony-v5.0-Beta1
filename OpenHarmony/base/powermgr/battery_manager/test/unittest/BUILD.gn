@@ -1,0 +1,263 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/test.gni")
+import("../../batterymgr.gni")
+
+###############################################################################
+config("module_private_config") {
+  include_dirs = [
+    "include",
+    "${battery_service_native}/include",
+    "${battery_service_zidl}/include",
+    "${battery_inner_api}/native/include",
+    "${battery_manager_path}/test/utils",
+    "//third_party/json/single_include",
+    "//third_party/jsoncpp/include",
+  ]
+}
+
+config("module_mock_private_config") {
+  include_dirs = [ "mock/include" ]
+}
+
+##############################unittest##########################################
+ohos_unittest("test_battery") {
+  module_out_path = "${module_output_path}"
+  defines = [ "GTEST" ]
+
+  sources = [
+    "${battery_manager_path}/test/utils/test_utils.cpp",
+    "src/battery_callback_test.cpp",
+    "src/battery_config_test.cpp",
+    "src/battery_dump_test.cpp",
+    "src/battery_info_test.cpp",
+    "src/battery_light_test.cpp",
+    "src/battery_notify_test.cpp",
+    "src/battery_service_test.cpp",
+    "src/battery_srv_stub_test.cpp",
+  ]
+
+  configs = [
+    "${battery_utils}:utils_config",
+    ":module_private_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [
+    "${battery_inner_api}:batterysrv_client",
+    "${battery_service_zidl}:batterysrv_stub",
+    "${battery_service}:batteryservice",
+    "//third_party/googletest:gtest_main",
+    "//third_party/jsoncpp:jsoncpp",
+  ]
+
+  external_deps = [
+    "ability_base:want",
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libprivacy_sdk",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "drivers_interface_battery:libbattery_proxy_2.0",
+    "drivers_interface_light:liblight_proxy_1.0",
+    "hdf_core:libhdi",
+    "hilog:libhilog",
+    "ipc:ipc_single",
+  ]
+}
+
+### test exceptions when Remote() return nullptr
+ohos_unittest("test_battery_proxy_mock_iremoteobject") {
+  module_out_path = "${module_output_path}"
+
+  sources = [
+    "${battery_service}/zidl/src/battery_srv_proxy.cpp",
+    "mock/source/mock_peer_holder.cpp",
+    "src/battery_srv_proxy_mock_test.cpp",
+  ]
+
+  configs = [
+    ":module_mock_private_config",
+    ":module_private_config",
+    "${battery_utils}:utils_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+### test exceptions when MessageParcel::WriteInterfaceToken() return false
+ohos_unittest("test_battery_proxy_mock_messageparcel_write_error") {
+  module_out_path = "${module_output_path}"
+
+  sources = [
+    "${battery_service}/zidl/src/battery_srv_proxy.cpp",
+    "mock/source/mock_message_parcel.cpp",
+    "src/battery_srv_proxy_mock_test.cpp",
+  ]
+
+  configs = [
+    ":module_mock_private_config",
+    ":module_private_config",
+    "${battery_utils}:utils_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+### test exceptions when SendRequest() return value not equal ERR_OK
+ohos_unittest("test_battery_proxy_mock_sendrequest_error") {
+  module_out_path = "${module_output_path}"
+  defines = [ "ENABLE_REMOTE_INTERFACE" ]
+
+  sources = [
+    "${battery_service}/zidl/src/battery_srv_proxy.cpp",
+    "mock/source/mock_remote_object.cpp",
+    "src/battery_srv_proxy_mock_test.cpp",
+  ]
+
+  configs = [
+    ":module_mock_private_config",
+    ":module_private_config",
+    "${battery_utils}:utils_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+### test exceptions when read reply MessageParcel error
+ohos_unittest("test_battery_proxy_mock_parcel_read_error") {
+  module_out_path = "${module_output_path}"
+
+  sources = [
+    "${battery_service}/zidl/src/battery_srv_proxy.cpp",
+    "mock/source/mock_parcel.cpp",
+    "src/battery_srv_proxy_mock_test.cpp",
+  ]
+
+  configs = [
+    ":module_mock_private_config",
+    ":module_private_config",
+    "${battery_utils}:utils_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [ "//third_party/googletest:gtest_main" ]
+
+  external_deps = [
+    "ability_base:base",
+    "ability_base:want",
+    "c_utils:utils",
+    "common_event_service:cesfwk_innerkits",
+    "hilog:libhilog",
+    "hisysevent:libhisysevent",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+}
+
+ohos_unittest("test_batterywakeup") {
+  module_out_path = "${module_output_path}"
+
+  sources = [
+    "${battery_manager_path}/test/utils/test_utils.cpp",
+    "src/battery_plugged_wakeup_test.cpp",
+  ]
+
+  configs = [
+    "${battery_utils}:utils_config",
+    ":module_private_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [
+    "${battery_service}:batteryservice",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "drivers_interface_battery:libbattery_proxy_2.0",
+    "drivers_interface_light:liblight_proxy_1.0",
+    "hdf_core:libhdi",
+    "hilog:libhilog",
+    "ipc:ipc_core",
+    "power_manager:powermgr_client",
+  ]
+}
+
+ohos_unittest("test_mock_battery_config") {
+  module_out_path = "${module_output_path}"
+
+  sources = [
+    "mock/source/mock_json.cpp",
+    "src/battery_config_mock_test.cpp",
+  ]
+
+  configs = [
+    "${battery_utils}:utils_config",
+    ":module_private_config",
+    "${battery_utils}:coverage_flags",
+  ]
+
+  deps = [
+    "${battery_inner_api}:batterysrv_client",
+    "${battery_service}:batteryservice",
+    "//third_party/googletest:gtest_main",
+  ]
+
+  external_deps = [
+    "config_policy:configpolicy_util",
+    "hilog:libhilog",
+  ]
+}

@@ -1,0 +1,113 @@
+# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type devattest_service, sadomain, domain;
+type devattest_service_exec, system_file_attr, exec_attr, file_attr;
+
+init_daemon_domain(devattest_service);
+
+#avc:  denied  { search } for  pid=324 comm="IPC_0_424" name="/" dev="mmcblk0p12" ino=3 scontext=u:r:devattest_service:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=0
+allow devattest_service data_file:dir { search };
+allow devattest_service data_service_file:dir { search };
+allow devattest_service data_service_el1_file:dir { search };
+allow devattest_service data_service_el1_public_device_attest:dir { search getattr add_name open read remove_name write create };
+allow devattest_service data_service_el1_public_device_attest:file { append map open read create write getattr setattr unlink lock ioctl rename };
+
+allow devattest_service netsysnative:unix_stream_socket { connectto read write };
+allow devattest_service port:tcp_socket { name_connect };
+allow devattest_service devattest_service:tcp_socket { connect create read setopt write getopt getattr };
+allow devattest_service devattest_service:udp_socket { create bind connect getattr read write };
+
+allow devattest_service accesstoken_service:binder { call };
+allow devattest_service foundation:binder { call transfer };
+allow devattest_service netmanager:binder { call transfer };
+allow devattest_service softbus_server:binder { call };
+
+allow devattest_service accessibility_param:file { read };
+allow devattest_service dev_unix_socket:dir { search };
+
+allow devattest_service node:udp_socket { node_bind };
+allow devattest_service port:udp_socket { name_bind };
+#avc:  denied  { connectto } for  pid=320 comm="IPC_1_566" path="/dev/unix/socket/paramservice" scontext=u:r:devattest_service:s0 tcontext=u:r:kernel:s0 tclass=unix_stream_socket permissive=0
+allow devattest_service kernel:unix_stream_socket { connectto };
+
+allow devattest_service devattest_service:netlink_route_socket { create nlmsg_read read write };
+allow devattest_service devattest_service:packet_socket { bind create read write };
+allow devattest_service devattest_service:udp_socket { bind create ioctl setopt getopt read write };
+allow devattest_service devattest_service:unix_dgram_socket { ioctl getopt setopt };
+
+allow devattest_service paramservice_socket:sock_file { write create setattr getattr relabelto };
+allow devattest_service xts_devattest_authresult_param:file { map open read };
+allow devattest_service xts_devattest_authresult_param:parameter_service { set };
+
+allow devattest_service sa_devattest_service:samgr_class { add };
+allow devattest_service sa_net_conn_manager:samgr_class { get };
+allow devattest_service sa_accesstoken_manager_service:samgr_class { add get };
+allow devattest_service sa_foundation_bms:samgr_class { get };
+
+allow devattest_service devinfo_private_param:file { map open read };
+
+allow devattest_service hilog_param:file { map open read };
+
+allow devattest_service normal_hap_attr:binder { call transfer };
+allow devattest_service system_basic_hap_attr:binder { call transfer };
+allow devattest_service system_core_hap_attr:binder { call transfer };
+
+#avc:  denied  { open } for  pid=326 comm="IPC_2_436" path="/dev/__parameters__/u:object_r:musl_param:s0" dev="tmpfs" ino=62 scontext=u:r:devattest_service:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+#avc:  denied  { map } for  pid=324 comm="devattest_servi" path="/dev/__parameters__/u:object_r:musl_param:s0" dev="tmpfs" ino=62 scontext=u:r:devattest_service:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+allow devattest_service musl_param:file { open read map };
+
+#avc:  denied  { search } for  pid=324 comm="devattest_servi" name="/" dev="tracefs" ino=1 scontext=u:r:devattest_service:s0 tcontext=u:object_r:tracefs:s0 tclass=dir permissive=0
+allow devattest_service tracefs:dir { search };
+
+#avc:  denied  { get } for service=3203 pid=324 scontext=u:r:devattest_service:s0 tcontext=u:object_r:sa_foundation_ans:s0 tclass=samgr_class permissive=0
+allow devattest_service sa_foundation_ans:samgr_class { get };
+
+#avc:  denied  { read } for  pid=320 comm="IPC_1_566" name="u:object_r:persist_param:s0" dev="tmpfs" ino=58 scontext=u:r:devattest_service:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
+#avc:  denied  { open } for  pid=1587 comm="SaInit0" path="/dev/__parameters__/u:object_r:persist_param:s0" dev="tmpfs" ino=58 scontext=u:r:devattest_service:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
+#avc:  denied  { map } for  pid=1601 comm="SaInit2" path="/dev/__parameters__/u:object_r:persist_param:s0" dev="tmpfs" ino=58 scontext=u:r:devattest_service:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
+allow devattest_service persist_param:file { read open map };
+
+#avc:  denied  { get } for service=200 pid=1587 scontext=u:r:devattest_service:s0 tcontext=u:object_r:sa_accountmgr:s0 tclass=samgr_class permissive=0
+allow devattest_service sa_accountmgr:samgr_class { get };
+
+#avc:  denied  { search } for  pid=2016 comm="devattest_servi" name="usr" dev="mmcblk0p7" ino=3033 scontext=u:r:devattest_service:s0 tcontext=u:object_r:system_usr_file:s0 tclass=dir permissive=0
+allow devattest_service system_usr_file:dir { search };
+
+#avc:  denied  { read } for  pid=2249 comm="sa_main" name="u:object_r:debug_param:s0" dev="tmpfs" ino=60 scontext=u:r:devattest_service:s0 tcontext=u:object_r:debug_param:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=2249 comm="sa_main" path="/dev/__parameters__/u:object_r:debug_param:s0" dev="tmpfs" ino=60 scontext=u:r:devattest_service:s0 tcontext=u:object_r:debug_param:s0 tclass=file permissive=1
+#avc:  denied  { map } for  pid=2249 comm="sa_main" path="/dev/__parameters__/u:object_r:debug_param:s0" dev="tmpfs" ino=60 scontext=u:r:devattest_service:s0 tcontext=u:object_r:debug_param:s0 tclass=file permissive=1
+allow devattest_service debug_param:file { read open map };
+
+#avc:  denied  { write } for  pid=2249 comm="devattest_servi" name="trace_marker" dev="tracefs" ino=17126 scontext=u:r:devattest_service:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=2249 comm="devattest_servi" path="/sys/kernel/debug/tracing/trace_marker" dev="tracefs" ino=17126 scontext=u:r:devattest_service:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
+allow devattest_service tracefs_trace_marker_file:file { write open };
+
+#avc:  denied  { call } for  pid=2249 comm="devattest_servi" scontext=u:r:devattest_service:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
+#avc:  denied  { transfer } for  pid=2249 comm="devattest_servi" scontext=u:r:devattest_service:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
+allow devattest_service param_watcher:binder { call transfer };
+
+#avc:  denied  { getattr } for  pid=2249 comm="devattest_servi" path="/system/usr/ohos_locale_config/supported_regions.xml" dev="mmcblk0p7" ino=3040 scontext=u:r:devattest_service:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=1
+allow devattest_service system_usr_file:file { getattr };
+
+#avc:  denied  { get } for service=3901 pid=1588 scontext=u:r:devattest_service:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=0
+allow devattest_service sa_param_watcher:samgr_class { get };
+
+#avc:  denied  { call } for  pid=1588 comm="SaInit0" scontext=u:r:devattest_service:s0 tcontext=u:r:accountmgr:s0 tclass=binder permissive=0
+allow devattest_service accountmgr:binder { call };
+
+#avc:  denied  { get } for service=3510 pid=1486 scontext=u:r:devattest_service:s0 tcontext=u:object_r:sa_huks_service:s0 tclass=samgr_class permissive=0
+allow devattest_service huks_service:binder { call };
+allow devattest_service sa_huks_service:samgr_class { get };
+
+allow devattest_service sysfs_devices_system_cpu:file { open read getattr};

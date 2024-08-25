@@ -1,0 +1,14 @@
+{
+  global:
+    extern "C" {
+      FaultLogger*;
+      Request*;
+      CheckConnectStatus;
+      StartListen*;
+      SendFileDescriptorToSocket*;
+      RecvMsgCredFromSocket*;
+      ReportDumpStats*;
+    };
+  local:
+    *;
+};

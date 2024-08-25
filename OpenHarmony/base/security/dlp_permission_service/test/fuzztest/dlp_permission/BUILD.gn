@@ -1,0 +1,112 @@
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../dlp_permission_service.gni")
+
+group("fuzztest") {
+  testonly = true
+  deps = []
+
+  deps += [
+    "fuzzer/cancelretentionstate_fuzzer:CancelRetentionStateFuzzTest",
+    "fuzzer/cleansandboxconfig_fuzzer:CleanSandboxConfigFuzzTest",
+    "fuzzer/clearunreservedsandbox_fuzzer:ClearUnreservedSandboxFuzzTest",
+    "fuzzer/dlpfile_fuzzer:DlpFileFuzzTest",
+    "fuzzer/generatecert_fuzzer:GenerateCertFuzzTest",
+    "fuzzer/getdlpfilevisitrecord_fuzzer:GetDlpFileVisitRecordFuzzTest",
+    "fuzzer/getdlpgatheringpolicy_fuzzer:GetDlpGatheringPolicyFuzzTest",
+    "fuzzer/getdlpsupportfiletype_fuzzer:GetDlpSupportFileTypeFuzzTest",
+    "fuzzer/getmdmpolicy_fuzzer:GetMDMPolicyFuzzTest",
+    "fuzzer/getretentionsandboxlist_fuzzer:GetRetentionSandboxListFuzzTest",
+    "fuzzer/getsandboxconfig_fuzzer:GetSandboxConfigFuzzTest",
+    "fuzzer/getsandboxexternalauthorization_fuzzer:GetSandboxExternalAuthorizationFuzzTest",
+    "fuzzer/installdlpsandbox_fuzzer:InstallDlpSandboxFuzzTest",
+    "fuzzer/isdlpfeatureprovided_fuzzer:IsDlpFeatureProvidedFuzzTest",
+    "fuzzer/isindlpsandbox_fuzzer:IsInDlpSandboxFuzzTest",
+    "fuzzer/parsecert_fuzzer:ParseCertFuzzTest",
+    "fuzzer/parsedlpheader_fuzzer:ParseDlpHeaderFuzzTest",
+    "fuzzer/querydlpfileaccess_fuzzer:QueryDlpFileAccessFuzzTest",
+    "fuzzer/querydlpfilecopyablebytokenid_fuzzer:QueryDlpFileCopyableByTokenIdFuzzTest",
+    "fuzzer/registerdlpsandboxchangecallback_fuzzer:RegisterDlpSandboxChangeCallbackFuzzTest",
+    "fuzzer/registeropendlpfilecallback_fuzzer:RegisterOpenDlpFileCallbackFuzzTest",
+    "fuzzer/removemdmpolicy_fuzzer:RemoveMDMPolicyFuzzTest",
+    "fuzzer/setmdmpolicy_fuzzer:SetMDMPolicyFuzzTest",
+    "fuzzer/setretentionstate_fuzzer:SetRetentionStateFuzzTest",
+    "fuzzer/setsandboxconfig_fuzzer:SetSandboxConfigFuzzTest",
+    "fuzzer/uninstalldlpsandbox_fuzzer:UninstallDlpSandboxFuzzTest",
+    "fuzzer/unregisterdlpsandboxchangecallback_fuzzer:UnRegisterDlpSandboxChangeCallbackFuzzTest",
+    "fuzzer/unregisteropendlpfilecallback_fuzzer:UnRegisterOpenDlpFileCallbackFuzzTest",
+    "stub_fuzzer/cancelretentionstatestub_fuzzer:CancelRetentionStateStubFuzzTest",
+    "stub_fuzzer/cleansandboxconfigstub_fuzzer:CleanSandboxConfigStubFuzzTest",
+    "stub_fuzzer/clearunreservedsandboxstub_fuzzer:ClearUnreservedSandboxStubFuzzTest",
+    "stub_fuzzer/generatecertstub_fuzzer:GenerateCertStubFuzzTest",
+    "stub_fuzzer/getdlpfilevisitrecordstub_fuzzer:GetDlpFileVisitRecordStubFuzzTest",
+    "stub_fuzzer/getdlpgatheringpolicystub_fuzzer:GetDlpGatheringPolicyStubFuzzTest",
+    "stub_fuzzer/getdlpsupportfiletypestub_fuzzer:GetDlpSupportFileTypeStubFuzzTest",
+    "stub_fuzzer/getmdmpolicystub_fuzzer:GetMDMPolicyStubFuzzTest",
+    "stub_fuzzer/getretentionsandboxliststub_fuzzer:GetRetentionSandboxListStubFuzzTest",
+    "stub_fuzzer/getsandboxconfigstub_fuzzer:GetSandboxConfigStubFuzzTest",
+    "stub_fuzzer/getsandboxexternalauthorizationstub_fuzzer:GetSandboxExternalAuthorizationStubFuzzTest",
+    "stub_fuzzer/installdlpsandboxstub_fuzzer:InstallDlpSandboxStubFuzzTest",
+    "stub_fuzzer/isdlpfeatureprovidedstub_fuzzer:IsDlpFeatureProvidedStubFuzzTest",
+    "stub_fuzzer/isindlpsandboxstub_fuzzer:IsInDlpSandboxStubFuzzTest",
+    "stub_fuzzer/parsecertstub_fuzzer:ParseCertStubFuzzTest",
+    "stub_fuzzer/querydlpfileaccessstub_fuzzer:QueryDlpFileAccessStubFuzzTest",
+    "stub_fuzzer/querydlpfilecopyablebytokenidstub_fuzzer:QueryDlpFileCopyableByTokenIdStubFuzzTest",
+    "stub_fuzzer/registerdlpsandboxchangecallbackstub_fuzzer:RegisterDlpSandboxChangeCallbackStubFuzzTest",
+    "stub_fuzzer/registeropendlpfilecallbackstub_fuzzer:RegisterOpenDlpFileCallbackStubFuzzTest",
+    "stub_fuzzer/removemdmpolicystub_fuzzer:RemoveMDMPolicyStubFuzzTest",
+    "stub_fuzzer/setmdmpolicystub_fuzzer:SetMDMPolicyStubFuzzTest",
+    "stub_fuzzer/setretentionstatestub_fuzzer:SetRetentionStateStubFuzzTest",
+    "stub_fuzzer/setsandboxconfigstub_fuzzer:SetSandboxConfigStubFuzzTest",
+    "stub_fuzzer/uninstalldlpsandboxstub_fuzzer:UninstallDlpSandboxStubFuzzTest",
+    "stub_fuzzer/unregisterdlpsandboxchangecallbackstub_fuzzer:UnRegisterDlpSandboxChangeCallbackStubFuzzTest",
+    "stub_fuzzer/unregisteropendlpfilecallbackstub_fuzzer:UnRegisterOpenDlpFileCallbackStubFuzzTest",
+  ]
+}
+
+config("napi_fuzz_config") {
+  include_dirs = [
+    "${dlp_root_dir}/services/dlp_permission/sa/sa_common",
+    "${dlp_root_dir}/interfaces/inner_api/dlp_permission/include",
+  ]
+  cflags = [
+    "-g",
+    "-O0",
+    "-Wno-unused-variable",
+    "-fno-omit-frame-pointer",
+  ]
+  configs = [ "${dlp_root_dir}/config:coverage_flags" ]
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+}
+
+config("stub_fuzz_config") {
+  include_dirs = []
+  configs = [ ":napi_fuzz_config" ]
+  include_dirs += [
+    "${dlp_root_dir}/frameworks/common/include",
+    "${dlp_root_dir}/frameworks/dlp_permission/include",
+    "${dlp_root_dir}/services/dlp_permission/sa/adapt",
+    "${dlp_root_dir}/services/dlp_permission/sa/callback/dlp_sandbox_change_callback/",
+    "${dlp_root_dir}/services/dlp_permission/sa/callback/open_dlp_file_callback/",
+    "${dlp_root_dir}/services/dlp_permission/sa/mock",
+    "${dlp_root_dir}/services/dlp_permission/sa/sa_main",
+    "${dlp_root_dir}/services/dlp_permission/sa/storage/include",
+  ]
+}
+
+config("stub_fuzz_need_skip_timer_config") {
+  cflags_cc = []
+  configs = [ ":stub_fuzz_config" ]
+  cflags_cc += [ "-DDLP_FUZZ_TEST" ]
+}

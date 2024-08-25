@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "permission_filter.h"
+
+#include "ans_inner_errors.h"
+#include "ans_log_wrapper.h"
+#include "bundle_manager_helper.h"
+#include "notification_preferences.h"
+
+namespace OHOS {
+namespace Notification {
+void PermissionFilter::OnStart()
+{}
+
+void PermissionFilter::OnStop()
+{}
+
+ErrCode PermissionFilter::OnPublish(const std::shared_ptr<NotificationRecord> &record)
+{
+    bool isForceControl = false;
+    bool enable = false;
+    ErrCode result =
+        NotificationPreferences::GetInstance().GetNotificationsEnabledForBundle(record->bundleOption, enable);
+    if (result == ERR_ANS_PREFERENCES_NOTIFICATION_BUNDLE_NOT_EXIST) {
+        result = ERR_OK;
+        std::shared_ptr<BundleManagerHelper> bundleManager = BundleManagerHelper::GetInstance();
+        if (bundleManager != nullptr) {
+            enable = bundleManager->CheckApiCompatibility(record->bundleOption);
+        }
+    }
+
+    sptr<NotificationSlot> slot;
+    NotificationConstant::SlotType slotType = record->request->GetSlotType();
+    result = NotificationPreferences::GetInstance().GetNotificationSlot(record->bundleOption, slotType, slot);
+    if (result == ERR_OK) {
+        if (slot != nullptr) {
+            isForceControl = slot->GetForceControl();
+        } else {
+            result = ERR_ANS_PREFERENCES_NOTIFICATION_SLOT_ENABLED;
+            ANS_LOGE("Type[%{public}d] slot does not exist", slotType);
+        }
+    }
+
+    if (result == ERR_OK) {
+        if (!enable && !isForceControl) {
+            ANS_LOGE("Enable notifications for bundle is OFF");
+            return ERR_ANS_NOT_ALLOWED;
+        }
+
+        if (record->notification->GetBundleName() != record->notification->GetCreateBundle()) {
+            // Publish as bundle
+        }
+    }
+    return result;
+}
+}  // namespace Notification
+}  // namespace OHOS
