@@ -1,0 +1,184 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//arkcompiler/ets_frontend/es2panda/es2abc_config.gni")
+import("//build/ohos.gni")
+import("//build/ohos/ace/ace.gni")
+import("//commonlibrary/ets_utils/ets_utils_config.gni")
+import("//foundation/arkui/ace_engine/ace_config.gni")
+import("//foundation/arkui/ace_engine/build/ace_gen_obj.gni")
+
+# compile .ts to .js.
+action("build_ts_js") {
+  script = "$util_module/build_ts_js.py"
+  outFile_Path = target_out_dir + "/" + current_cpu
+  args = [
+    "--dst-file",
+    rebase_path(target_out_dir + "/util_js.js"),
+    "--module-path",
+    rebase_path("/commonlibrary/ets_utils/js_util_module/util"),
+    "--out-file",
+    rebase_path(outFile_Path + "/util_js.js"),
+    "--out-filePath",
+    rebase_path(outFile_Path),
+    "--relative-path",
+    rebase_path("//", root_build_dir),
+  ]
+  outputs = [ target_out_dir + "/util_js.js" ]
+}
+
+# compile .js to .abc.
+es2abc_gen_abc("gen_util_abc") {
+  extra_visibility = [ ":*" ]
+  src_js = rebase_path(target_out_dir + "/util_js.js")
+  dst_file = rebase_path(target_out_dir + "/util.abc")
+  in_puts = [ target_out_dir + "/util_js.js" ]
+  out_puts = [ target_out_dir + "/util.abc" ]
+  extra_args = [ "--module" ]
+  extra_dependencies = [ ":build_ts_js" ]
+}
+
+abc_output_path = get_label_info(":util_abc", "target_out_dir")
+
+gen_obj("util_js") {
+  input = "$target_out_dir/util_js.js"
+  if (use_mac || use_mingw_win || use_ios || use_linux) {
+    util_obj_path = abc_output_path + "/util.c"
+  } else {
+    util_obj_path = abc_output_path + "/util.o"
+  }
+  output = util_obj_path
+  snapshot_dep = [ ":build_ts_js" ]
+}
+
+gen_obj("util_abc") {
+  input = "$target_out_dir/util.abc"
+  if (use_mac || use_mingw_win || use_ios || use_linux) {
+    util_obj_path = abc_output_path + "/util_abc.c"
+  } else {
+    util_obj_path = abc_output_path + "/util_abc.o"
+  }
+  output = util_obj_path
+  snapshot_dep = [ ":gen_util_abc" ]
+}
+
+util_sources = [
+  "js_base64.cpp",
+  "js_stringdecoder.cpp",
+  "js_textdecoder.cpp",
+  "js_textencoder.cpp",
+  "js_types.cpp",
+  "js_uuid.cpp",
+  "native_module_util.cpp",
+]
+
+if (is_arkui_x) {
+  util_sources += [ "$platform_root/default/util_helper.cpp" ]
+  if (target_os == "android") {
+    util_sources += [ "$platform_root/android/jni_helper.cpp" ]
+  } else {
+    util_sources += [ "$platform_root/default/jni_helper.cpp" ]
+  }
+} else {
+  util_sources += [ "$platform_root/ohos/util_helper.cpp" ]
+  util_sources += [ "$platform_root/default/jni_helper.cpp" ]
+}
+
+ohos_shared_library("util") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  deps = [ ":util_static" ]
+  external_deps = [ "hilog:libhilog" ]
+  subsystem_name = "commonlibrary"
+  part_name = "ets_utils"
+  relative_install_dir = "module"
+}
+
+ohos_source_set("util_static") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "//third_party/icu/icu4c/source/common",
+    "//third_party/icu/icu4c/source",
+    "//third_party/node/src",
+    "//third_party/openssl",
+    "//third_party/openssl/include",
+    platform_root,
+    ets_util_path,
+  ]
+  configs = [
+    "$icu_root:icu_config",
+    "$napi_root:ace_napi_config",
+  ]
+  sources = util_sources
+
+  deps = [
+    ":gen_obj_src_util_abc",
+    ":gen_obj_src_util_js",
+    "//third_party/icu/icu4c:shared_icuuc",
+    "//third_party/openssl:libcrypto_shared",
+  ]
+
+  if (is_arkui_x) {
+    include_dirs += [
+      "$plugins_root/hilog/include",
+      "$plugins_root/interfaces",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    ]
+
+    configs += [ "$plugins_root/util:util_plugin_config" ]
+
+    defines = [ "__ARKUI_CROSS__" ]
+
+    deps -= [ "//third_party/icu/icu4c:shared_icuuc" ]
+
+    if (target_os == "android") {
+      defines += [ "ANDROID_PLATFORM" ]
+    }
+    if (target_os == "ios") {
+      defines += [ "IOS_PLATFORM" ]
+    }
+    deps += [
+      "$plugins_root/interfaces/native:ace_plugin_util_${target_os}",
+      "$plugins_root/libs/icu:icu_${target_os}",
+      "$plugins_root/libs/napi:napi_${target_os}",
+      "$plugins_root/libs/securec:sec_${target_os}",
+    ]
+  } else {
+    external_deps = [ "napi:ace_napi" ]
+    if (is_standard_system) {
+      external_deps += [ "hilog:libhilog" ]
+    } else {
+      external_deps += [
+        "c_utils:utils",
+        "hilog:libhilog",
+      ]
+    }
+    external_deps += [ "bounds_checking_function:libsec_shared" ]
+  }
+
+  subsystem_name = "commonlibrary"
+  part_name = "ets_utils"
+}
+
+group("util_packages") {
+  deps = [ ":util" ]
+}

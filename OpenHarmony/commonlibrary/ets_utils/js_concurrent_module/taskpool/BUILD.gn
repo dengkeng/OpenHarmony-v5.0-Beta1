@@ -1,0 +1,195 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//commonlibrary/ets_utils/ets_utils_config.gni")
+
+taskpool_sources = [
+  "native_module_taskpool.cpp",
+  "sequence_runner.cpp",
+  "task.cpp",
+  "task_group.cpp",
+  "task_manager.cpp",
+  "task_queue.cpp",
+  "task_runner.cpp",
+  "taskpool.cpp",
+  "thread.cpp",
+  "worker.cpp",
+]
+
+concurrent_helper_sources = [ "../common/helper/napi_helper.cpp" ]
+
+concurrent_platform_sources = []
+
+if (is_ohos) {
+  concurrent_platform_sources += [ "$platform_root/ohos/qos_helper.cpp" ]
+} else {
+  concurrent_platform_sources += [ "$platform_root/default/qos_helper.cpp" ]
+}
+
+if (target_os == "ios" || (!is_arkui_x && is_mac)) {
+  concurrent_platform_sources += [ "$platform_root/ios/process_helper.cpp" ]
+} else {
+  concurrent_platform_sources += [ "$platform_root/default/process_helper.cpp" ]
+}
+
+ohos_shared_library("taskpool") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "include",
+    js_concurrent_module_common,
+    platform_root,
+    ets_util_path,
+  ]
+  sources = taskpool_sources
+  sources += concurrent_helper_sources
+  sources += concurrent_platform_sources
+
+  defines = []
+  if (is_ohos) {
+    defines += [ "OHOS_PLATFORM" ]
+  } else if (is_mingw) {
+    defines += [ "WINDOWS_PLATFORM" ]
+  } else if (target_os == "android") {
+    defines += [ "ANDROID_PLATFORM" ]
+  } else if (target_os == "ios") {
+    defines += [ "IOS_PLATFORM" ]
+  } else if (is_mac && target_os != "android") {
+    defines += [ "MAC_PLATFORM" ]
+  }
+
+  deps = [ "${ets_util_path}/js_sys_module/timer:timer" ]
+
+  external_deps = [
+    "bounds_checking_function:libsec_shared",
+    "napi:ace_napi",
+  ]
+
+  if (is_ohos && is_standard_system && !is_arkui_x && current_cpu == "arm64") {
+    defines += [ "ENABLE_TASKPOOL_FFRT" ]
+    external_deps += [
+      "bundle_framework:appexecfwk_base",
+      "bundle_framework:appexecfwk_core",
+      "c_utils:utils",
+      "ffrt:libffrt",
+      "ipc:ipc_core",
+      "samgr:samgr_proxy",
+    ]
+  }
+
+  if (is_ohos && is_standard_system && !is_arkui_x &&
+      defined(global_parts_info) &&
+      defined(global_parts_info.resourceschedule_qos_manager)) {
+    defines += [ "ENABLE_QOS" ]
+    external_deps += [ "qos_manager:qos" ]
+  }
+
+  if (is_linux && current_toolchain == host_toolchain) {
+    external_deps += [ "innerkits:libhilog_linux" ]
+    defines = [
+      "LINUX_PLATFORM",
+      "PREVIEW",
+    ]
+  } else {
+    external_deps += [ "hilog:libhilog" ]
+  }
+
+  external_deps += [ "hitrace:hitrace_meter" ]
+
+  subsystem_name = "commonlibrary"
+  part_name = "ets_utils"
+
+  relative_install_dir = "module"
+}
+
+ohos_source_set("taskpool_static") {
+  branch_protector_ret = "pac_ret"
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
+  include_dirs = [
+    "include",
+    js_concurrent_module_common,
+    platform_root,
+    ets_util_path,
+  ]
+
+  sources = taskpool_sources
+  sources += concurrent_helper_sources
+  sources += concurrent_platform_sources
+
+  deps = [ "${ets_util_path}/js_sys_module/timer:timer" ]
+  defines = []
+
+  external_deps = [ "hilog:libhilog" ]
+
+  if (is_ohos && is_standard_system && !is_arkui_x && current_cpu == "arm64") {
+    defines += [ "ENABLE_TASKPOOL_FFRT" ]
+    external_deps += [
+      "bundle_framework:appexecfwk_base",
+      "bundle_framework:appexecfwk_core",
+      "c_utils:utils",
+      "ffrt:libffrt",
+      "ipc:ipc_core",
+      "samgr:samgr_proxy",
+    ]
+  }
+
+  if (is_arkui_x) {
+    sources -= concurrent_helper_sources
+    deps -= [ "${ets_util_path}/js_sys_module/timer:timer" ]
+    include_dirs += [
+      "$plugins_root/hilog/include",
+      "$plugins_root/interfaces",
+      "//base/hiviewdfx/hilog/interfaces/native/innerkits/include",
+    ]
+    defines += [ "__ARKUI_CROSS__" ]
+    deps += [
+      "$plugins_root/libs/napi:napi_${target_os}",
+      "$plugins_root/libs/securec:sec_${target_os}",
+      "$plugins_root/libs/uv:uv_${target_os}",
+      "$sys_module/timer:timer_static",
+    ]
+    if (target_os == "android") {
+      defines += [ "ANDROID_PLATFORM" ]
+    }
+    if (target_os == "ios") {
+      defines += [ "IOS_PLATFORM" ]
+    }
+  } else {
+    external_deps += [
+      "bounds_checking_function:libsec_shared",
+      "hitrace:hitrace_meter",
+      "napi:ace_napi",
+    ]
+    if (is_ohos && is_standard_system && defined(global_parts_info) &&
+        defined(global_parts_info.resourceschedule_qos_manager)) {
+      defines += [ "ENABLE_QOS" ]
+      external_deps += [ "qos_manager:qos" ]
+    }
+  }
+
+  subsystem_name = "commonlibrary"
+  part_name = "ets_utils"
+}
+
+group("taskpool_packages") {
+  deps = [ ":taskpool" ]
+}
